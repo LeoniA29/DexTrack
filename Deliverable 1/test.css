@@ -1,0 +1,59 @@
+.content-left {
+    width: 50%;
+    height:200px;
+    float:left;
+    background: #c9e4f9;
+
+
+}
+
+.content-right {
+    width: 50%;
+    height:200px;
+    float:left;
+    background: #fcf5ed;
+}
+.section-content {
+    width: 60%;
+    height:200px;
+    margin: 0 auto;
+    background-color:#FFA500 ;
+
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+    position: relative;
+    background-color: #73C4CF;
+    overflow: hidden;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  /* Centered section inside the top navigation */
+  .topnav-centered {
+    float: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* Right-aligned section inside the top navigation */
+  .topnav-right {
+    float: right;
+  }
