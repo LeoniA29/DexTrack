@@ -1,0 +1,32 @@
+body {
+    font-family: 'Lexend Deca';
+}
+
+.section-content {
+    width: 65%;
+    padding: 10px;
+    height: 500px;
+    margin: 0 auto;
+}
+.centerDiv {
+    background:#fcf5ed;
+    border-radius: 25px;
+    height:350px;
+}
+.div1 {
+
+    width: 50%;
+    height:100%;
+    float:left;
+}
+.div2 {
+    text-align: center;
+    width: 50%;
+    height:100%;
+    float:left;
+}
+.content {
+    
+
+
+}
