@@ -1,0 +1,99 @@
+body {
+    margin: 0;
+    font-family:'Montserrat';
+}
+.header {
+    text-align: center;
+    height: 100px;
+    margin: 0 auto;
+    margin-top: 60px;
+    font-size: 20pt;
+}
+.navbar {
+    height:50px;
+    overflow: auto;
+    background: #7ec4cf;
+}
+.navbar a {
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .topnav a.active {
+    background-color: #04AA6D;
+    color: white;
+  }
+
+.section-content {
+    width: 980px;
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media only screen and (min-width: 1920px) {
+    .section-content {
+        margin-left:auto;
+        margin-right:auto;
+        width:980px
+    }
+}
+@media only screen and (max-width: 1024px) {
+    .section-content {
+        margin-left:auto;
+        margin-right:auto;
+        width:692px
+    }
+}
+@media only screen and (max-width: 675px) {
+    .section-content {
+        margin-left:auto;
+        margin-right:auto;
+        width:87.5%;
+    }
+}
+.section-router {
+    margin-top:140px;
+    padding-bottom:156px
+}
+
+/*#7ec4cf;
+#fcf5ed; */
+
+.centerDiv {
+    display: flex;
+    flex-direction: row;
+    background: #c2eaf0;
+    border-radius: 25px;
+    height:400px;
+}
+.div1 {
+    width: 50%;
+    height:100%;
+    text-align: center;
+
+}
+.div2 {
+    text-align: center;
+    width: 50%;
+    height:100%;
+    float:right;
+}
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+.content {
+    
+
+
+}
