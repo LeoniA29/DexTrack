@@ -1,0 +1,23 @@
+
+.content-left {
+    width: 50%;
+    height:200px;
+    float:left;
+    background: #c9e4f9;
+
+
+}
+
+.content-right {
+    width: 50%;
+    height:200px;
+    float:left;
+    background: #fcf5ed;
+}
+.section-content {
+    width: 60%;
+    height:200px;
+    margin: 0 auto;
+    background-color:#FFA500 ;
+
+}
