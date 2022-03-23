@@ -75,7 +75,6 @@ section {
     padding-left: 50px;
 }
 
-
 .video_content {
     display: flex;
     width: 50%;
@@ -91,7 +90,6 @@ section {
 .video_content iframe {
     width: 660px;
     height: 450px;
-
 }
 
 .titlestart {
@@ -108,9 +106,9 @@ section {
 }
 
 .image_content img {
-    display: flex;
+    object-fit: contain;
     width: 100%;
-    height: auto;
+    display: flex;
 }
 
 .texttitle p {
@@ -174,6 +172,7 @@ button:hover {
 }
 
 @media screen and (max-width: 1024px) {
+
 
 }
 
