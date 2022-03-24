@@ -1,0 +1,515 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap'); 
+
+
+body {
+    color: black;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #FFFFFF;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* main */
+
+main {
+    display: block;
+}
+
+section {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.sections div {
+    z-index: 2;
+}
+
+/* nav */
+
+img[id="logo"] {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: auto;
+    height: 60px;
+    z-index: 2;
+    padding: 20px;
+    margin-left: 20px;
+}
+
+img[id="blob1"]{
+    position: absolute;
+    width: 75%;
+    height: auto;
+    z-index: 1;
+    margin-top: 100px;
+    margin-left: -350px;
+}
+
+.nav_bar, .nav_pages, .about_info, .about_products{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+}
+
+.nav_pages{
+    list-style: none;
+}
+
+.nav_pages li, .nav_pages button { 
+    font-weight: 600;
+    font-size: 20px;
+    padding: 0 1.5em;
+}
+
+li, a, button{
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+    text-decoration: none;
+}
+
+.nav_pages li a {
+    transition: all 0.5s ease 0s;
+}
+
+.nav_bar button {
+    background-color:#2C68AD;
+    padding: 10px 30px;
+}
+
+.nav_bar a#pull
+{display: none;
+}
+
+.nav_pages:before, .nav_pages:after
+{content: " ";display: table;
+}
+
+.nav_pages:after 
+{clear: both;
+}
+
+.menu {
+    display: none;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: #101010;
+}
+
+
+
+/* content */
+
+.content {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    display: flex;
+}
+.content_1 {
+    background-color: #F2F2F2;
+}
+
+.content_bg {
+    width: 70% !important;
+}
+
+.text_bg {
+    padding-left: 0px;
+    width: 40%
+}
+
+.content_diabetes {
+    padding-top: 180px;
+    padding-bottom: 180px;
+    background-size: contain;
+    background-color: #C4D9ED;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: auto;
+}
+
+.diabetes1 {
+    background-image: url("rsc/bg_content3.png");
+}
+
+.diabetes2 {
+    background-image: url("rsc/bg_content4.png");
+}
+
+.gestational_diabetes {
+    background-image: url("rsc/bg_content5.png");
+}
+
+.content_1 .texttitle {
+    padding-right: 50px;
+}
+.texttitle {
+    width: 50%;
+    height: 100%;
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    font-family: Lexend Deca;
+    padding-left: 50px;
+}
+
+
+.video_content {
+    display: flex;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.video_content video {
+    width: 100%;
+    height: 100%;
+}
+
+.video_content iframe {
+    width: 660px;
+    height: 450px;
+
+}
+
+.titlestart {
+    padding-bottom: 8px;
+    font-style: bold;
+    font-size: 3.3vh;
+}
+
+.image_content {
+    display: flex;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.image_content img {
+    display: flex;
+    width: 100%;
+    height: auto;
+}
+
+.texttitle p {
+    text-align: left;
+    font-size: 2.5vh;
+}
+
+.subtitle {
+    color: #2D68AD;
+    text-align: left;
+    font-size: 2.8vh;
+}
+
+#top_button {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #e13d45;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50px;
+}
+  
+#top_button:hover {
+    background-color: #555;
+}
+
+button {
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.5s ease 0s;
+    padding: 10px 50px;
+    color: #FFFFFF;
+}
+
+button{
+    font-size: 2vh;
+    background-color: #FB6E59;
+    padding: 10px 20px;
+}
+
+button:hover {
+    background-color: grey;
+}
+
+/*
+• Phone: 375 x 812 (iPhone X, portrait)
+• Tablet: 1024 x 768 (iPad, landscape)
+• Desktop: 1920 × 1080 (monitor, landscape)
+*/
+@media screen and (min-width: 1920px) {
+
+
+}
+
+@media screen and (max-width: 1024px) {
+    /* vk */
+    .nav_pages {
+        position: absolute;
+        right: -100%;
+        padding-left: 0;
+        background-color: #fff;
+        width: 100%;
+        border-radius: 10px;
+        transition: 0.3s;
+    }
+    
+    .nav_pages li {
+        display: none;
+    }
+        
+    .menu {
+        display: block;
+        cursor: pointer;
+        padding: 2em;
+    }
+    
+    .about_info, .about_products {
+        margin: auto 50px;
+        flex-direction: column-reverse;
+    }
+
+    .about_profiles h3 {
+        margin-top: 75px;
+    }
+
+    .lables {
+        margin: 200px auto 50px;
+    }
+
+}
+
+@media screen and (max-width: 375px) {
+
+    .titlestart {
+        font-size: 1.5vh;
+        padding-bottom: 0px;
+    }
+    .texttitle {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+    .texttitle p {
+        font-size: 1.3vh;
+        padding-bottom: 3px;
+    }
+    .subtitle {
+        font-size: 1.3vh;
+    }
+    button {
+        font-size: 1.3vh;
+    }
+    .content_bg {
+        width: 100% !important;
+    }
+    .text_bg {
+        width: 50% !important;
+    }
+    .content_diabetes {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    .video_content iframe {
+        width: 180px;
+        height: 130px;
+    }
+    .content_left {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .content_right {
+        display: flex;
+        flex-direction: column;
+    }
+
+}
+
+
+/* hover */
+button:hover {
+    background-color: grey;
+}
+
+.nav_pages li a:hover {
+    
+    color: grey;
+    text-decoration-line: underline;
+}
+
+/* section 1 */
+
+.about_info {
+    text-align: left;
+    margin: 25px 50px;
+}
+
+.text {
+    font-size: 15px;
+    padding: 1em 3em;
+}
+
+.text h2 {
+    font-size: 75px;
+    font-weight: bolder;
+    letter-spacing:1px;
+    color: #2C68AD;
+    line-height: 80px;
+    margin: auto;
+}
+
+.text p {
+    font-size: 15px;
+}
+
+.text button{
+    font-size: 15px;
+    background-color: #FB6E59;
+    padding: 10px 35px;
+}
+
+.vector {
+    margin-left: 50px;
+    margin-right: auto;
+    padding: 1em;
+}
+
+.vector img {
+    width: 95%;
+    height: auto;
+}
+
+
+/* section 2 */
+
+.about_products {
+    margin: 50px 100px;
+}
+
+.vector2 {
+    margin: auto;
+    padding: 1em;
+}
+
+.vector2 img {
+    width: 400px;
+    height: auto;
+}
+
+.text2 {
+    margin: auto;
+    padding: 3em;
+}
+
+.text2 p {
+    text-align: left;
+    font-size: 15px;
+    line-height: 30px;
+}
+
+/* section 3 */
+
+.about_profiles {
+    margin: 50px;
+    text-align: center;
+    background-image: url("rscv/blob2.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 700px;
+}
+
+.about_profiles h3{
+    margin-top: -75px;
+}
+
+.cards {
+    margin: 0px auto -40px;
+    text-align: center;
+    list-style: none;
+  }
+
+.cards li{
+    display: inline-block;
+    min-width: 5em; 
+    padding: 1em;
+    margin: 20px;
+}
+
+.cards img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 3px solid #FB6E59;
+    padding: 0.25em;
+}
+
+.cards h4 {
+    font-size: 20px;
+    line-height: 5px;
+}
+
+.cards p {
+    font-size: 12px;
+}
+
+/* footer */
+footer {
+    padding: 2em;
+    text-align: center;
+    background-color:#2C68AD;
+    color: #FFFFFF;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+/* headings */
+
+.labels {  
+    font-size: 60px;
+    font-weight: bolder;
+    text-shadow: 1px 0 #2C68AD;
+    letter-spacing:2px;
+    color: #2C68AD;
+    text-align: center;
+    margin: 100px 50px;
+}
+
+.labels:after{
+    content: '';
+    display: block;
+    position: relative;
+    width: 10%;
+    border-bottom: 5px solid #FB6E59;
+    margin: 10px auto;
+    margin-bottom: -50px;
+}
+
+h3, h3 a{
+    font-size: 15px;
+    word-spacing: 2px;
+    padding: 5px 0px;
+    text-justify: inter-word;
+}
