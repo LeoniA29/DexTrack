@@ -18,6 +18,7 @@ section {
 }
 
 .sections div {
+    /* for blob behind navbar logo */
     z-index: 2;
 }
 
@@ -79,14 +80,6 @@ li, a, button{
 {display: none;
 }
 
-.nav_pages:before, .nav_pages:after
-{content: " ";display: table;
-}
-
-.nav_pages:after 
-{clear: both;
-}
-
 .menu {
     display: none;
 }
@@ -121,7 +114,13 @@ h3 {
     text-justify: inter-word;
 }
 
-/* about-diabetes things*/
+p {
+    text-align: left;
+    font-size: 2vh;
+    line-height: 25px;
+}
+
+/* About Diabetes*/
 
 .content {
     width: 100%;
@@ -169,6 +168,7 @@ h3 {
 .content_1 .texttitle {
     padding-right: 50px;
 }
+
 .texttitle {
     width: 50%;
     height: 100%;
@@ -194,9 +194,9 @@ h3 {
 }
 
 .video_content iframe {
-    width: 660px;
-    height: 450px;
-
+    width: 100%;
+    height: 350px;
+    object-fit: contain;
 }
 
 .titlestart {
@@ -216,8 +216,6 @@ h3 {
     width: 100%;
     object-fit: contain;
 }
-
-
 
 .subtitle {
     color: #2D68AD;
@@ -241,46 +239,24 @@ h3 {
     border-radius: 50px;
 }
   
-#top_button:hover {
-    background-color: #555;
-}
 
 
+/* About DexTrack */
 
-button:hover {
-    background-color: grey;
-}
 
-/* hover */
-button:hover {
-    background-color: grey;
-}
-
-.nav_pages li a:hover {
-    
-    color: grey;
-    text-decoration-line: underline;
-}
-
-p {
-    text-align: left;
-    font-size: 2.5vh;
-    font-style: light;
-    line-height: 25px;
-}
-/* section 1 */
+/* DexTrack Info */ 
 
 .about_info {
     text-align: left;
     margin: 25px 50px;
 }
 
-.text {
+.info_text {
     font-size: 15px;
     padding: 1em 3em;
 }
 
-.text h2 {
+.info_text h2 {
     font-size: 75px;
     font-weight: bolder;
     letter-spacing:1px;
@@ -289,46 +265,40 @@ p {
     margin: auto;
 }
 
-.text button{
-    font-size: 15px;
-    background-color: #FB6E59;
-    padding: 10px 35px;
-}
-
-.vector {
+.info_vector {
     margin-left: 50px;
     margin-right: auto;
     padding: 1em;
 }
 
-.vector img {
+.info_vector img {
     width: 95%;
     height: auto;
 }
 
 
-/* section 2 */
+/* Products */
 
 .about_products {
     margin: 50px 100px;
 }
 
-.vector2 {
+.product_vector {
     margin: auto;
     padding: 1em;
 }
 
-.vector2 img {
+.product_vector img {
     width: 400px;
     height: auto;
 }
 
-.text2 {
+.product_text {
     margin: auto;
     padding: 3em;
 }
 
-/* section 3 */
+/* Profiles */
 
 .about_profiles {
     margin: 50px;
@@ -343,20 +313,20 @@ p {
     margin-top: -75px;
 }
 
-.cards {
+.profile_cards {
     margin: 0px auto -40px;
     text-align: center;
     list-style: none;
   }
 
-.cards li{
+.profile_cards li{
     display: inline-block;
     min-width: 5em; 
     padding: 1em;
     margin: 20px;
 }
 
-.cards img {
+.profile_cards img {
     border-radius: 50%;
     width: 150px;
     height: 150px;
@@ -365,7 +335,7 @@ p {
     padding: 0.25em;
 }
 
-.cards h4 {
+.profile_cards h4 {
     font-size: 20px;
     line-height: 5px;
 }
@@ -402,15 +372,28 @@ footer {
     margin-bottom: -50px;
 }
 
+/* hovers */
 
-
-@media screen and (min-width: 1920px) {
-
-
+#top_button:hover {
+    background-color: #555;
 }
 
+.nav_bar button:hover {
+    background-color:#FB6E59;
+}
+
+button:hover {
+    background-color:#2C68AD;
+}
+
+.nav_pages li a:hover {
+    color: #2C68AD;
+}
+
+/* media screens */
+
 @media screen and (max-width: 1024px) {
-    /* vk */
+    /* navbar */
     .nav_pages {
         position: absolute;
         right: -100%;
@@ -430,24 +413,33 @@ footer {
         cursor: pointer;
         padding: 2em;
     }
+
+    /* About DexTrack */
     
     .about_info, .about_products {
         margin: auto 50px;
         flex-direction: column-reverse;
     }
 
+    .about_products {
+        text-align: center;
+        justify-content: center;
+    }
+
     .about_profiles h3 {
         margin-top: 75px;
     }
 
-    .lables {
+    .labels {
         margin: 200px auto 50px;
     }
+
 
 }
 
 @media screen and (max-width: 375px) {
 
+    /* About Diabetes */
     .titlestart {
         font-size: 1.5vh;
         padding-bottom: 0px;
@@ -490,4 +482,8 @@ footer {
         flex-direction: column;
     }
 
+    /* About DexTrack */
+    
 }
+
+
