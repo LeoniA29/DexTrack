@@ -483,7 +483,35 @@ button:hover {
     }
 
     /* About DexTrack */
+
+    img[id="logo"] {
+        height: 50px;
+    }
+
+    .about_info, .about_products{
+        margin-left: -20px;
+        margin-right: -20px;
+    }
+
+    .product_vector img {
+        width: 70%;
+    }
+
+    .info_text h2 {
+        font-size: 40px;
+        line-height: 40px;
+    }
+
+    .about_profiles {
+        background-image: none;
+    }
     
+    .about_profiles h3 {
+        font-size: 12px;
+    }
+
+    
+
 }
 
 
