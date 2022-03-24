@@ -187,7 +187,6 @@ li, a, button{
 }
 
 .titlestart {
-    padding-bottom: 8px;
     font-style: bold;
     font-size: 3.3vh;
 }
@@ -202,7 +201,7 @@ li, a, button{
 .image_content img {
     display: flex;
     width: 100%;
-    height: auto;
+    object-fit: contain;
 }
 
 .texttitle p {
