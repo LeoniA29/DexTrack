@@ -19,11 +19,17 @@
       
     }
 
-// Function for Read More button
-    function scrollReadMore() {
+// Function for Read More button for About Diabetes Page
+    function scrollReadMore1() {
 
-      window.scrollTo({top: 450, behavior: 'smooth'});
+        window.scrollTo({top: 600, behavior: 'smooth'});
 
     }
 
-    
+// Function for Read More button for About DexTrack Page
+
+    function scrollReadMore2() {
+
+        window.scrollTo({top: 850, behavior: 'smooth'});
+
+    }
