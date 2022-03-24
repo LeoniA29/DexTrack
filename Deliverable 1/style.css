@@ -116,7 +116,7 @@ h3 {
 
 p {
     text-align: left;
-    font-size: 2vh;
+    font-size: 2.5vh;
     line-height: 25px;
 }
 
@@ -319,7 +319,6 @@ p {
 
 .profile_cards {
     margin: 0px auto -40px;
-    text-align: center;
     list-style: none;
   }
 
@@ -342,6 +341,11 @@ p {
 .profile_cards h4 {
     font-size: 20px;
     line-height: 5px;
+    text-align: center;
+}
+
+.profile_cards p {
+    text-align: center;
 }
 
 /* footer */
