@@ -208,6 +208,7 @@ li, a, button{
 .texttitle p {
     text-align: left;
     font-size: 2.5vh;
+    font-style: light;
 }
 
 .subtitle {
