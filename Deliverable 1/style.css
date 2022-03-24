@@ -1,6 +1,8 @@
-@charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap'); 
+/* body structure */
 
+header, body, footer {
+    font-family: Lexend Deca;
+}
 
 body {
     color: black;
@@ -8,13 +10,6 @@ body {
     padding: 0;
     width: 100%;
     background-color: #FFFFFF;
-    font-family: 'Montserrat', sans-serif;
-}
-
-/* main */
-
-main {
-    display: block;
 }
 
 section {
@@ -26,7 +21,7 @@ section {
     z-index: 2;
 }
 
-/* nav */
+/* navigation bar */
 
 img[id="logo"] {
     top: 0;
@@ -66,7 +61,7 @@ img[id="blob1"]{
 }
 
 li, a, button{
-    font-family: 'Montserrat', sans-serif;
+    font-family: Lexend Deca;
     color: black;
     text-decoration: none;
 }
@@ -106,9 +101,27 @@ li, a, button{
     background-color: #101010;
 }
 
+/* overlap between the 2 html */
 
+button {
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.5s ease 0s;
+    color: #FFFFFF;
+    font-size: 2vh;
+    background-color: #FB6E59;
+    padding: 10px 20px;
+}
 
-/* content */
+h3 {
+    font-size: 20px;
+    word-spacing: 2px;
+    padding: 5px 0px;
+    text-justify: inter-word;
+}
+
+/* about-diabetes things*/
 
 .content {
     width: 100%;
@@ -204,11 +217,7 @@ li, a, button{
     object-fit: contain;
 }
 
-.texttitle p {
-    text-align: left;
-    font-size: 2.5vh;
-    font-style: light;
-}
+
 
 .subtitle {
     color: #2D68AD;
@@ -236,30 +245,165 @@ li, a, button{
     background-color: #555;
 }
 
-button {
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.5s ease 0s;
-    padding: 10px 50px;
-    color: #FFFFFF;
-}
 
-button{
-    font-size: 2vh;
-    background-color: #FB6E59;
-    padding: 10px 20px;
-}
 
 button:hover {
     background-color: grey;
 }
 
-/*
-• Phone: 375 x 812 (iPhone X, portrait)
-• Tablet: 1024 x 768 (iPad, landscape)
-• Desktop: 1920 × 1080 (monitor, landscape)
-*/
+/* hover */
+button:hover {
+    background-color: grey;
+}
+
+.nav_pages li a:hover {
+    
+    color: grey;
+    text-decoration-line: underline;
+}
+
+p {
+    text-align: left;
+    font-size: 2.5vh;
+    font-style: light;
+    line-height: 25px;
+}
+/* section 1 */
+
+.about_info {
+    text-align: left;
+    margin: 25px 50px;
+}
+
+.text {
+    font-size: 15px;
+    padding: 1em 3em;
+}
+
+.text h2 {
+    font-size: 75px;
+    font-weight: bolder;
+    letter-spacing:1px;
+    color: #2C68AD;
+    line-height: 80px;
+    margin: auto;
+}
+
+.text button{
+    font-size: 15px;
+    background-color: #FB6E59;
+    padding: 10px 35px;
+}
+
+.vector {
+    margin-left: 50px;
+    margin-right: auto;
+    padding: 1em;
+}
+
+.vector img {
+    width: 95%;
+    height: auto;
+}
+
+
+/* section 2 */
+
+.about_products {
+    margin: 50px 100px;
+}
+
+.vector2 {
+    margin: auto;
+    padding: 1em;
+}
+
+.vector2 img {
+    width: 400px;
+    height: auto;
+}
+
+.text2 {
+    margin: auto;
+    padding: 3em;
+}
+
+/* section 3 */
+
+.about_profiles {
+    margin: 50px;
+    text-align: center;
+    background-image: url("rsc/blob2.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 700px;
+}
+
+.about_profiles h3{
+    margin-top: -75px;
+}
+
+.cards {
+    margin: 0px auto -40px;
+    text-align: center;
+    list-style: none;
+  }
+
+.cards li{
+    display: inline-block;
+    min-width: 5em; 
+    padding: 1em;
+    margin: 20px;
+}
+
+.cards img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 3px solid #FB6E59;
+    padding: 0.25em;
+}
+
+.cards h4 {
+    font-size: 20px;
+    line-height: 5px;
+}
+
+/* footer */
+footer {
+    padding: 2em;
+    text-align: center;
+    background-color:#2C68AD;
+    color: #FFFFFF;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+/* headings */
+
+.labels {  
+    font-size: 60px;
+    font-weight: bolder;
+    text-shadow: 1px 0 #2C68AD;
+    letter-spacing:2px;
+    color: #2C68AD;
+    text-align: center;
+    margin: 100px 50px;
+}
+
+.labels:after{
+    content: '';
+    display: block;
+    position: relative;
+    width: 10%;
+    border-bottom: 5px solid #FB6E59;
+    margin: 10px auto;
+    margin-bottom: -50px;
+}
+
+
+
 @media screen and (min-width: 1920px) {
 
 
@@ -331,6 +475,7 @@ button:hover {
     .content_diabetes {
         padding-top: 50px;
         padding-bottom: 50px;
+        background-size: auto 100%;
     }
     .video_content iframe {
         width: 180px;
@@ -345,171 +490,4 @@ button:hover {
         flex-direction: column;
     }
 
-}
-
-
-/* hover */
-button:hover {
-    background-color: grey;
-}
-
-.nav_pages li a:hover {
-    
-    color: grey;
-    text-decoration-line: underline;
-}
-
-/* section 1 */
-
-.about_info {
-    text-align: left;
-    margin: 25px 50px;
-}
-
-.text {
-    font-size: 15px;
-    padding: 1em 3em;
-}
-
-.text h2 {
-    font-size: 75px;
-    font-weight: bolder;
-    letter-spacing:1px;
-    color: #2C68AD;
-    line-height: 80px;
-    margin: auto;
-}
-
-.text p {
-    font-size: 15px;
-}
-
-.text button{
-    font-size: 15px;
-    background-color: #FB6E59;
-    padding: 10px 35px;
-}
-
-.vector {
-    margin-left: 50px;
-    margin-right: auto;
-    padding: 1em;
-}
-
-.vector img {
-    width: 95%;
-    height: auto;
-}
-
-
-/* section 2 */
-
-.about_products {
-    margin: 50px 100px;
-}
-
-.vector2 {
-    margin: auto;
-    padding: 1em;
-}
-
-.vector2 img {
-    width: 400px;
-    height: auto;
-}
-
-.text2 {
-    margin: auto;
-    padding: 3em;
-}
-
-.text2 p {
-    text-align: left;
-    font-size: 15px;
-    line-height: 30px;
-}
-
-/* section 3 */
-
-.about_profiles {
-    margin: 50px;
-    text-align: center;
-    background-image: url("rscv/blob2.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 700px;
-}
-
-.about_profiles h3{
-    margin-top: -75px;
-}
-
-.cards {
-    margin: 0px auto -40px;
-    text-align: center;
-    list-style: none;
-  }
-
-.cards li{
-    display: inline-block;
-    min-width: 5em; 
-    padding: 1em;
-    margin: 20px;
-}
-
-.cards img {
-    border-radius: 50%;
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border: 3px solid #FB6E59;
-    padding: 0.25em;
-}
-
-.cards h4 {
-    font-size: 20px;
-    line-height: 5px;
-}
-
-.cards p {
-    font-size: 12px;
-}
-
-/* footer */
-footer {
-    padding: 2em;
-    text-align: center;
-    background-color:#2C68AD;
-    color: #FFFFFF;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-/* headings */
-
-.labels {  
-    font-size: 60px;
-    font-weight: bolder;
-    text-shadow: 1px 0 #2C68AD;
-    letter-spacing:2px;
-    color: #2C68AD;
-    text-align: center;
-    margin: 100px 50px;
-}
-
-.labels:after{
-    content: '';
-    display: block;
-    position: relative;
-    width: 10%;
-    border-bottom: 5px solid #FB6E59;
-    margin: 10px auto;
-    margin-bottom: -50px;
-}
-
-h3, h3 a{
-    font-size: 15px;
-    word-spacing: 2px;
-    padding: 5px 0px;
-    text-justify: inter-word;
 }
