@@ -143,6 +143,10 @@ p {
     width: 40%
 }
 
+.titlepage {
+    margin-top: 100px;
+}
+
 .content_diabetes {
     padding-top: 180px;
     padding-bottom: 180px;
