@@ -76,11 +76,7 @@ li, a, button {
     padding: 10px 30px;
 }
 
-.nav_bar a#pull {
-    display: none;
-}
-
-.menu {
+.nav_bar a#pull, .menu {
     display: none;
 }
 
@@ -105,13 +101,6 @@ button {
     font-size: 2vh;
     background-color: #FB6E59;
     padding: 10px 20px;
-}
-
-h3 {
-    font-size: 20px;
-    word-spacing: 2px;
-    padding: 5px 0px;
-    text-justify: inter-word;
 }
 
 p {
@@ -368,6 +357,13 @@ footer {
     margin-bottom: -50px;
 }
 
+h3 {
+    font-size: 20px;
+    word-spacing: 2px;
+    padding: 5px 0px;
+    text-justify: inter-word;
+}
+
 /* hovers */
 
 #top_button:hover {
@@ -400,7 +396,7 @@ button:hover {
     background-color: #e13d45;
     color: white;
     cursor: pointer;
-    padding: 15px;
+    padding: 0.75em;
     border-radius: 50px;
 }
 
@@ -409,6 +405,7 @@ button:hover {
 @media screen and (max-width: 1024px) {
     
     /* navbar */
+    /* note: the current menu of the navbar is static, javascript not implemented yet */
     .nav_pages {
         position: absolute;
         right: -100%;
@@ -439,6 +436,10 @@ button:hover {
     .about_products {
         text-align: center;
         justify-content: center;
+    }
+
+    .about_profiles {
+        background-image: none;
     }
 
     .about_profiles h3 {
@@ -509,12 +510,12 @@ button:hover {
     /* About DexTrack */
 
     img[id="logo"] {
+        padding-left: 0;
         height: 50px;
     }
 
     .about_info, .about_products{
-        margin-left: -20px;
-        margin-right: -20px;
+        margin: auto -20px 50px;
     }
 
     .product_vector img {
@@ -526,13 +527,11 @@ button:hover {
         line-height: 40px;
     }
 
-    .about_profiles {
-        background-image: none;
+    .profile_cards{
+        padding-left: 0;
     }
-    
+
     .about_profiles h3 {
         font-size: 12px;
     }
 }
-
-
