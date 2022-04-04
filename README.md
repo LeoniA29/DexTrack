@@ -21,6 +21,11 @@ Style.css:
 Fonts:
 - Lexend Deca from Google Fonts
 
+Languages in this project:
+- HTML
+- CSS
+- JS
+
 
 
 
