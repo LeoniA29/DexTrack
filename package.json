@@ -1,0 +1,22 @@
+{
+  "name": "dextrack",
+  "version": "1.0.0",
+  "description": "Health app made for diabetes patients to connect with their clinicians with just one tap.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeoniA29/DexTrack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeoniA29/DexTrack/issues"
+  },
+  "homepage": "https://github.com/LeoniA29/DexTrack#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
