@@ -23,7 +23,7 @@ app.use(express.json()) // needed if POST data is in JSON format
 app.use(express.urlencoded({ extended: false })) // only needed for URL-encoded input
 
 // link to our router
-const peopleRouter = require('./routes/peopleRouter')
+const peopleRouter = require('./routes/patientRouter')
 
 // the demo routes are added to the end of the '/people' path
 app.use('/people', peopleRouter)
@@ -37,3 +37,5 @@ app.get('/', (req, res) => {
 app.listen(process.env.PORT || 3000, () => {
     console.log('The DexTrack app is running!')
 })
+
+require('./models')
