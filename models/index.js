@@ -10,7 +10,7 @@ variable.
 mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    dbName: 'demo'
+    dbName: 'DexTrack'
 })
 // Exit on error
 const db = mongoose.connection.on('error', err => {
