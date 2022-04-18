@@ -3,10 +3,10 @@ const express = require('express')
 // create our Router object
 const peopleRouter = express.Router()
 
-// require our controller
+// import people controller functions
 const peopleController = require('../controllers/peopleController')
 
-// add a route to handle the GET request for all demo data
+// add a route to handle the GET request for all people data
 peopleRouter.get('/', peopleController.getAllPeopleData)
 
 // add a route to handle the GET request for one data instance

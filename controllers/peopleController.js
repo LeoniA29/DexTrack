@@ -1,36 +1,35 @@
-// link to model
+// import people model
 const peopleData = require('../models/peopleModel')
 
-// handle request to get all data
+// handle request to get all people data instances
 const getAllPeopleData = (req, res) => {
-    res.send(peopleData) // send data to browser
+    res.render('allData', { data: peopleData })
 }
 
 // handle request to get one data instance
 const getDataById = (req, res) => {
     // search the database by ID
-    const data = peopleData.find(data => data.id === req.params.id)
+    const data = peopleData.find((data) => data.id === req.params.id)
 
     // return data if this ID exists
     if (data) {
-        res.send(data)
+        res.render('oneData', { oneItem: data })
     } else {
         // You can decide what to do if the data is not found.
         // Currently, an empty list will be returned.
-        res.send([])
+        res.sendStatus(404)
     }
 }
 
-// add an object to the database
-const insertData = (req,res) => {
-    // push the incoming JSON object to the array. (Note, we are not validating the data - should fix this later.)
-    peopleData.push(req.body)
-    // return the updated database
-    res.send(peopleData)
+const insertData = (req, res) => {
+    const { id, first_name, last_name } = req.body
+    peopleData.push({ id, first_name, last_name })
+    return res.redirect('back')
 }
 
+// exports an object, which contain functions imported by router
 module.exports = {
     getAllPeopleData,
     getDataById,
-    insertData
+    insertData,
 }
