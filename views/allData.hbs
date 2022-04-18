@@ -2,11 +2,11 @@
 <ul>
 {{!-- loops over the data set --}}
 {{#each data}}
-    <li><a href="/people/{{this._id}}">{{this.givenName}} {{this.familyName}} {{this.screenName}}</a></li>
+    <li><a href="/patient/{{this._id}}">{{this.givenName}} {{this.familyName}} {{this.screenName}}</a></li>
 {{/each}}
 </ul>
 
-<form action="/people" method="POST">
+<form action="/patient" method="POST">
     <input type="text" placeholder="Given name" name="givenName" />
     <input type="text" placeholder="Family name" name="familyName" />
     <input type="text" placeholder="Screen name" name="screenName" />
