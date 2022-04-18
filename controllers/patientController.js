@@ -14,7 +14,7 @@ const getAllPatientData = async (req, res, next) => {
 // handle request to get one data instance
 const getDataById = async(req, res, next) => {
     try {
-        const patient = await Patient.findById(req.params.author_id).lean()
+        const patient = await Patient.findById(req.params.Patient_id).lean()
         if (!patient) {
             // no patient found in database
             return res.sendStatus(404)
@@ -29,7 +29,7 @@ const getDataById = async(req, res, next) => {
 // trying to insertData into database
 const insertData = (req, res) => {
     var newPatient = new Patient(req.body)
-    newData.save()
+    newPatient.save()
     return res.redirect('back')
 }
 
@@ -37,5 +37,5 @@ const insertData = (req, res) => {
 module.exports = {
     getAllPatientData,
     getDataById,
-    //insertData,
+    insertData,
 }

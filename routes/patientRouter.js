@@ -13,7 +13,7 @@ patientRouter.get('/', patientController.getAllPatientData)
 patientRouter.get('/:Patient_id', patientController.getDataById)
 
 // add a new JSON object to the database
-//patientRouter.post('/', patientController.insertData)
+patientRouter.post('/', patientController.insertData)
 
 // export the router
 module.exports = patientRouter
