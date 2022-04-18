@@ -16,7 +16,7 @@ const getDataById = async(req, res, next) => {
     try {
         const patient = await Patient.findById(req.params.author_id).lean()
         if (!patient) {
-            // no author found in database
+            // no patient found in database
             return res.sendStatus(404)
         }
         // found person
@@ -35,7 +35,7 @@ const insertData = (req, res) => {
 
 // exports an object, which contain functions imported by router
 module.exports = {
-    getAllPeopleData,
+    getAllPatientData,
     getDataById,
-    insertData,
+    //insertData,
 }

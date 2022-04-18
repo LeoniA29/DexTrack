@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: false })) // only needed for URL-encoded 
 const peopleRouter = require('./routes/patientRouter')
 
 // the demo routes are added to the end of the '/people' path
-app.use('/people', peopleRouter)
+app.use('/patient', peopleRouter)
 
 // Tells the app to send the string: "Our demo app is working!" when you hit the '/' endpoint.
 app.get('/', (req, res) => {
