@@ -9,7 +9,7 @@ const clinicianController = require('../controllers/clinicianController')
 
 // sample patient routes
 inputRouter.get('/patient', patientController.getAllPatients)
-inputRouter.get('/patient/:patient', patientController.getPatientById)
+inputRouter.get('/patient/:patient_id', patientController.getPatientById)
 inputRouter.post('/patient', patientController.insertPatient)
 
 // sample clinician routes
