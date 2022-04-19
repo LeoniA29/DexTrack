@@ -33,9 +33,15 @@ const insertData = (req, res) => {
     return res.redirect('back')
 }
 
+// render register patient hbs
+const registerPatient = (req, res) => {
+    return res.render('patientRegister')
+}
+
 // exports an object, which contain functions imported by router
 module.exports = {
     getAllPatientData,
     getDataById,
     insertData,
+    registerPatient,
 }
