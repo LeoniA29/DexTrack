@@ -1,17 +1,22 @@
-// add our router
 const express = require('express')
+
+// create our Router object
 const inputRouter = express.Router()
 
-// express-validator, to validate user data in forms
-const expressValidator = require('express-validator')
+// import people controller functions
+const patientController = require('../controllers/patientController')
+const clinicianController = require('../controllers/clinicianController')
 
-// connect to controller
-const inputController = require('../controllers/inputController.js')
+// sample patient routes
+inputRouter.get('/patient', patientController.getAllPatients)
+inputRouter.get('/patient/:patient', patientController.getPatientById)
+inputRouter.post('/patient', patientController.insertPatient)
 
-// process routes by calling controller functions
-inputRouter.get('/', (req, res) => foodController.getAllFoods(req, res))
-inputRouter.get('/foods/:id', (req, res) => foodController.getOneFood(req, res))
-inputRouter.post('/search', expressValidator.body('foodName').isAlpha().optional({checkFalsy: true}), (req, res) => foodController.searchFoods(req, res))  // includes validation of user input
+// sample clinician routes
+inputRouter.get('/clinician', clinicianController.getAllClinicians)
+inputRouter.get('/clinician/:clinician_id', clinicianController.getClinicianById)
+inputRouter.post('/clinician', clinicianController.insertClinician)
+
 
 // export the router
-module.exports = foodRouter
+module.exports = inputRouter

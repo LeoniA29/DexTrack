@@ -4,7 +4,9 @@
   "description": "Health app made for diabetes patients to connect with their clinicians with just one tap.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "prettier": "prettier --single-quote --no-semi --tab-width 4 --write **/*.js *.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,11 @@
   "homepage": "https://github.com/LeoniA29/DexTrack#readme",
   "dependencies": {
     "express": "^4.17.3",
-    "express-handlebars": "^6.0.4"
+    "express-handlebars": "^6.0.4",
+    "mongoose": "^6.3.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0",
+    "prettier": "^2.6.2"
   }
 }
