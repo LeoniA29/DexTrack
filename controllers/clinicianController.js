@@ -30,25 +30,12 @@ const insertClinician= (req, res) => {
     return res.redirect('back')
 }
 
-const registerPatient= (req, res) => {
-    return res.render('registerPatient')
-}
-
-const insertPatient= (req, res) => {
-    var newData = new Patient(req.body)
-    /* use validation in-between */
-    newData.save()    
-    return res.redirect('back')
-}
-
 
 // exports an object, which contain functions imported by router
 module.exports = {
     getClinicianById,
     getAllClinicians,
-    insertClinician,
-    registerPatient,
-    insertPatient,
+    insertClinician
 }
 
 

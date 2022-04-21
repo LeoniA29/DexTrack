@@ -6,6 +6,7 @@ const express = require('express')
 const app = express()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const hbs = exphbs.create({
     defaultlayout: 'main',
     extname: 'hbs',
@@ -29,6 +30,9 @@ app.engine('hbs', hbs.engine)
 
 =======
 // configure Handlebars
+=======
+// configure Handlebars
+>>>>>>> parent of 80d8163 (update patient schema and register patient function)
 app.engine(
     'hbs',
     exphbs.engine({
@@ -36,7 +40,10 @@ app.engine(
         extname: 'hbs',
     })
 )
+<<<<<<< HEAD
 >>>>>>> ecfd7a40401f8f5a7bc3089d6a57c439b6ea339c
+=======
+>>>>>>> parent of 80d8163 (update patient schema and register patient function)
 // set Handlebars view engine
 app.set('view engine', 'hbs')
 
@@ -47,6 +54,7 @@ app.use(express.json()) // needed if POST data is in JSON format
 app.use(express.urlencoded({ extended: false })) // only needed for URL-encoded input
 
 // link to our router
+<<<<<<< HEAD
 const patientRouter = require('./routes/patientRouter')
 <<<<<<< HEAD
 const clinicianRouter = require('./routes/clinicianRouter')
@@ -59,6 +67,12 @@ app.use('/home/clinician', clinicianRouter)
 // the demo routes are added to the end of the '/people' path
 app.use('/patient', patientRouter)
 >>>>>>> ecfd7a40401f8f5a7bc3089d6a57c439b6ea339c
+=======
+const inputRouter = require('./routes/inputRouter')
+
+// the demo routes are added to the end of the '/home' path
+app.use('/home', inputRouter)
+>>>>>>> parent of 80d8163 (update patient schema and register patient function)
 
 // Tells the app to send the string: "Our demo app is working!" when you hit the '/' endpoint.
 app.get('/', (req, res) => {
