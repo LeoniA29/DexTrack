@@ -17,13 +17,6 @@ const insertPatientData= (req, res) => {
     return res.redirect('back')
 }
 
-const insertPatient= (req, res) => {
-    var newData = new Patient(req.body)
-    /* use validation in-between */
-    newData.save()    
-    return res.redirect('back')
-}
-
 const getPatientById = async(req, res, next) => {
     try {
     const patient = await Patient.findById(req.params.patient_id).lean()
@@ -36,14 +29,15 @@ const getPatientById = async(req, res, next) => {
     } catch (err) {
     return next(err)
     }
-   }
+}
+
+
    
 // exports an object, which contain functions imported by router
 module.exports = {
     getAllPatients,
-    insertPatient,
     insertPatientData,
-    getPatientById
+    getPatientById,
 }
 
 

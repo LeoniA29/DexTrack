@@ -5,14 +5,27 @@ const express = require('express')
 // Set your app up as an express app
 const app = express()
 
+const hbs = exphbs.create({
+    defaultlayout: 'main',
+    extname: 'hbs',
+
+    // create custom helpers
+    helpers: {
+        //selected: function(val1, val2) {
+        //    return val1 == val2 ? 'selected' : '';
+        //},
+
+
+    }
+    
+
+
+
+});
+
 // configure Handlebars
-app.engine(
-    'hbs',
-    exphbs.engine({
-        defaultlayout: 'main',
-        extname: 'hbs',
-    })
-)
+app.engine('hbs', hbs.engine)
+
 // set Handlebars view engine
 app.set('view engine', 'hbs')
 
@@ -23,10 +36,12 @@ app.use(express.json()) // needed if POST data is in JSON format
 app.use(express.urlencoded({ extended: false })) // only needed for URL-encoded input
 
 // link to our router
-const inputRouter = require('./routes/inputRouter')
+const patientRouter = require('./routes/patientRouter')
+const clinicianRouter = require('./routes/clinicianRouter')
 
 // the demo routes are added to the end of the '/home' path
-app.use('/home', inputRouter)
+app.use('/home/patient', patientRouter)
+app.use('/home/clinician', clinicianRouter)
 
 // Tells the app to send the string: "Our demo app is working!" when you hit the '/' endpoint.
 app.get('/', (req, res) => {
