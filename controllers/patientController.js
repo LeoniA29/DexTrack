@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 const Patient = require('../models/patient')
 const PatientData = require('../models/patientData')
 
@@ -50,6 +51,8 @@ module.exports = {
 
    
 =======
+=======
+>>>>>>> ecfd7a40401f8f5a7bc3089d6a57c439b6ea339c
 // import patient model
 const Patient = require('../models/Patient')
 
@@ -97,4 +100,7 @@ module.exports = {
     insertData,
     registerPatient,
 }
+<<<<<<< HEAD
+>>>>>>> ecfd7a40401f8f5a7bc3089d6a57c439b6ea339c
+=======
 >>>>>>> ecfd7a40401f8f5a7bc3089d6a57c439b6ea339c

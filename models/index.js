@@ -1,6 +1,7 @@
 // Load envioronment variables
 if (process.env.NODE_ENV !== 'production') {
 <<<<<<< HEAD
+<<<<<<< HEAD
  require('dotenv').config()
 }
 const mongoose = require('mongoose')
@@ -25,6 +26,8 @@ require('./patient')
 require('./clinician')
 require('./patientData')
 =======
+=======
+>>>>>>> ecfd7a40401f8f5a7bc3089d6a57c439b6ea339c
     require('dotenv').config()
 }
 const mongoose = require('mongoose')
@@ -46,5 +49,9 @@ const db = mongoose.connection.on('error', err => {
 db.once('open', async () => {
     console.log(`Mongo connection started on ${db.host}:${db.port}`)
 })
+<<<<<<< HEAD
+require('./Patient')
+>>>>>>> ecfd7a40401f8f5a7bc3089d6a57c439b6ea339c
+=======
 require('./Patient')
 >>>>>>> ecfd7a40401f8f5a7bc3089d6a57c439b6ea339c

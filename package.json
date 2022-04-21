@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
     "prettier": "prettier --single-quote --no-semi --tab-width 4 --write **/*.js *.js"
@@ -16,13 +17,21 @@
     "start": "node app.js",
     "prettier": "prettier --single-quote --no-semi --tab-width 4 --write **/*.js *.js"
 >>>>>>> ecfd7a40401f8f5a7bc3089d6a57c439b6ea339c
+=======
+    "start": "node app.js",
+    "prettier": "prettier --single-quote --no-semi --tab-width 4 --write **/*.js *.js"
+>>>>>>> ecfd7a40401f8f5a7bc3089d6a57c439b6ea339c
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.3",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "express-handlebars": "^6.0.4",
+=======
+    "express-handlebars": "^6.0.3",
+>>>>>>> ecfd7a40401f8f5a7bc3089d6a57c439b6ea339c
 =======
     "express-handlebars": "^6.0.3",
 >>>>>>> ecfd7a40401f8f5a7bc3089d6a57c439b6ea339c
