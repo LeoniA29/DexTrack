@@ -10,9 +10,6 @@ const getAllPatients = async (req, res, next) => {
     }
    }
 
-
-
-
 const insertPatient= (req, res) => {
     var newData = new Patient(req.body)
     /* use validation in-between */
@@ -29,15 +26,34 @@ const getPatientById = async(req, res, next) => {
     return res.sendStatus(404)
     }
     
-    return res.render('oneData', { oneItem: patient })
+    return res.render('onePatient', { oneItem: patient })
 
     } catch (err) {
     return next(err)
     }
 }
 
+const getGlucosePage=(req,res) =>{
+    const patient =  Patient.findById(req.params.patient_id).lean()
+    return res.render('insertGlucose', { oneItem: patient })
+}
+
+const getInsulinPage=(req,res) =>{
+    const patient =  Patient.findById(req.params.patient_id).lean()
+    return res.render('insertInsulin', { oneItem: patient })
+}
+const getStepsPage=(req,res) =>{
+    const patient =  Patient.findById(req.params.patient_id).lean()
+    return res.render('insertSteps', { oneItem: patient })
+}
+const getWeightPage=(req,res) =>{
+    const patient =  Patient.findById(req.params.patient_id).lean()
+    return res.render('insertWeight', { oneItem: patient })
+}
+
+
 const insertPatientData= (req, res) => {
-    
+
     const ObjectId = require('mongodb').ObjectId
     var newData = new PatientData(req.body)
     newData.save()
@@ -58,15 +74,20 @@ const insertPatientData= (req, res) => {
             }
         }
     )
-    return res.redirect('back');
+    return res.redirect('/patient/'+ req.params.patient_id);
 }
    
+
 // exports an object, which contain functions imported by router
 module.exports = {
     getAllPatients,
     insertPatient,
     insertPatientData,
-    getPatientById
+    getPatientById,
+    getGlucosePage,
+    getInsulinPage,
+    getStepsPage,
+    getWeightPage
 }
 
 

@@ -1,20 +1,21 @@
 <h1>Displaying one item</h1>
 {{#with oneItem}}
 <ul>
-    <li>{{this._id}}</li>
     <li>{{this.first_name}}</li>
     <li>{{this.last_name}}</li>
-    <li>{{this.dob}}</li>
-    <li>{{this.address}}</li>
-    <li>{{this.screen_name}}</li>
-    <li>{{this.email}}</li>
-    <li>{{this.short_bio}}</li>
 </ul>
 
+<li><a href="/patient/{{this._id}}/insertGlucose">glucose</a></li>
+<li><a href="/patient/{{this._id}}/insertInsulin">insulin</a></li>
+<li><a href="/patient/{{this._id}}/insertSteps">steps</a></li>
+<li><a href="/patient/{{this._id}}/insertWeight">weight</a></li>
 
+{{!--
 <form action="/patient/{{this._id}}" method="POST">
     <input type="text" placeholder="Enter data" name="input_data" />
     <input type="text" placeholder="Comment" name="comment" />
     <input type="submit" />
 </form>
+--}}
+
 {{/with}}

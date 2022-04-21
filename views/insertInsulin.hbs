@@ -1,0 +1,8 @@
+<h1>Displaying insert insulin page</h1>
+{{#with oneItem}}
+<form action= "{{this._id}}" method="POST">
+    <input type="text" placeholder="Enter data" name="input_data" />
+    <input type="text" placeholder="Comment" name="comment" />
+    <input type="submit" />
+</form>
+{{/with}}
