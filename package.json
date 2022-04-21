@@ -1,9 +1,10 @@
 {
-  "name": "dextrack",
+  "name": "demo",
   "version": "1.0.0",
-  "description": "Health app made for diabetes patients to connect with their clinicians with just one tap.",
+  "description": "",
   "main": "app.js",
   "scripts": {
+<<<<<<< HEAD
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
     "prettier": "prettier --single-quote --no-semi --tab-width 4 --write **/*.js *.js"
@@ -11,16 +12,20 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LeoniA29/DexTrack.git"
+=======
+    "start": "node app.js",
+    "prettier": "prettier --single-quote --no-semi --tab-width 4 --write **/*.js *.js"
+>>>>>>> ecfd7a40401f8f5a7bc3089d6a57c439b6ea339c
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/LeoniA29/DexTrack/issues"
-  },
-  "homepage": "https://github.com/LeoniA29/DexTrack#readme",
   "dependencies": {
     "express": "^4.17.3",
+<<<<<<< HEAD
     "express-handlebars": "^6.0.4",
+=======
+    "express-handlebars": "^6.0.3",
+>>>>>>> ecfd7a40401f8f5a7bc3089d6a57c439b6ea339c
     "mongoose": "^6.3.0"
   },
   "devDependencies": {
