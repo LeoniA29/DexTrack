@@ -6,3 +6,16 @@ header, footer {
     background-color: lightgray;
     text-align: center;
 }
+
+.input_cards {
+    margin: 0px auto;
+    list-style: none;
+    
+}
+
+.input_cards li {
+    display: inline-block;
+    min-width: 5em; 
+    padding: 1em;
+    margin: auto;
+}

@@ -1,14 +1,25 @@
-<h1>Displaying one item</h1>
+
 {{#with oneItem}}
+<h1>Hi, {{this.first_name}} </h1>
 <ul>
-    <li>{{this.first_name}}</li>
-    <li>{{this.last_name}}</li>
+    {{!-- <li>{{this.input_data.[0]._id}}</li> 
+    <li>{{this.input_data.[0].entry}}</li> --}}
+    {{#each this.input_data}}
+        <li>{{this.entry}} {{this.comment}}</li>
+    {{/each}}
 </ul>
 
+
+
+<ul class="input_cards">
 <li><a href="/patient/{{this._id}}/insertGlucose">glucose</a></li>
 <li><a href="/patient/{{this._id}}/insertInsulin">insulin</a></li>
+</ul>
+
+<ul class="input_cards">
 <li><a href="/patient/{{this._id}}/insertSteps">steps</a></li>
 <li><a href="/patient/{{this._id}}/insertWeight">weight</a></li>
+</ul>
 
 {{!--
 <form action="/patient/{{this._id}}" method="POST">

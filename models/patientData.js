@@ -1,12 +1,7 @@
 const mongoose = require('mongoose')
 const schema = new mongoose.Schema({
  input_data: String,
- comment: String,
- entry_type: {
-     type: String,
-     enum: ['glucose', 'weight', 'insulin', 'steps']
- }
- 
+ comment: String, 
 })
 
 const PatientData = mongoose.model('PatientData', schema)

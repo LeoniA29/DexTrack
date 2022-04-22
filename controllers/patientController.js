@@ -55,16 +55,16 @@ const getWeightPage=(req,res) =>{
 const insertPatientData= (req, res) => {
 
     const ObjectId = require('mongodb').ObjectId
-    var newData = new PatientData(req.body)
-    newData.save()
+    // var newData = new PatientData(req.body)
+    // newData.save()
 
     var id1 = req.params.patient_id
-    var id2 = newData.id
+    // var id2 = newData.id
     var objectId1 = new ObjectId(id1)
-    var objectId2 = new ObjectId(id2)
+    // var objectId2 = new ObjectId(id2)
 
     Patient.findByIdAndUpdate(objectId1,
-        {$push: {data_inputs: objectId2}},
+        {$push: {input_data: req.body}},
         {safe: true, upsert: true},
         function(err, doc) {
             if(err){
