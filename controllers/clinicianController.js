@@ -31,16 +31,36 @@ const insertClinician= (req, res) => {
     return res.redirect('back')
 }
 
-// trying to insertPatient into database
-const insertPatient = (req, res) => {
-    var newPatient = new Patient(req.body)
-    newPatient.save()
-    return res.redirect('back')
-}
 
 // render register patient hbs
 const registerPatient = (req, res) => {
     return res.render('patientRegister')
+}
+
+// trying to insertPatient into database and link to clinician
+const insertPatient= (req, res) => {
+
+    const ObjectId = require('mongodb').ObjectId
+    // var newData = new PatientData(req.body)
+    // newData.save()
+
+    var id1 = req.params.patient_id
+    // var id2 = newData.id
+    var objectId1 = new ObjectId(id1)
+    // var objectId2 = new ObjectId(id2)
+
+    Patient.findByIdAndUpdate(objectId1,
+        {$push: {input_data: req.body}},
+        {safe: true, upsert: true},
+        function(err, doc) {
+            if(err){
+            console.log(err);
+            }else{
+            //do stuff
+            }
+        }
+    )
+    return res.redirect('/patient/'+ req.params.patient_id);
 }
 
 // exports an object, which contain functions imported by router
