@@ -47,8 +47,8 @@ const schema = new mongoose.Schema({
   // array of objects for the patient defined in the schema below
  clincian_notes: [note],
  threshold_list: [threshold],
- // input_data: [data],]
- input_data: Array
+ // input_data: [data],
+ input_data: [{ entry: String, comment: String, createdAt:{type: Date, default: Date.now}}]
 })
 
 const Patient = mongoose.model('Patient', schema)

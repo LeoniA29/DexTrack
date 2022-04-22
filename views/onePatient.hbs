@@ -5,7 +5,14 @@
     {{!-- <li>{{this.input_data.[0]._id}}</li> 
     <li>{{this.input_data.[0].entry}}</li> --}}
     {{#each this.input_data}}
-        <li>{{this.entry}} {{this.comment}}</li>
+    
+        {{#if (isTodaysDate this.createdAt) }}
+            <li>{{this.entry}} {{this.comment}}</li>
+        {{else}}
+        {{!-- display nothing --}}
+        {{/if}}
+
+
     {{/each}}
 </ul>
 

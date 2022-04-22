@@ -1,4 +1,5 @@
 const exphbs = require('express-handlebars')
+var currentTime = new Date();
 
 // Import express
 const express = require('express')
@@ -11,6 +12,9 @@ app.engine(
     exphbs.engine({
         defaultlayout: 'main',
         extname: 'hbs',
+        helpers: {
+            isTodaysDate: x=> x.getDate()==currentTime.getDate()
+        }
     })
 )
 // set Handlebars view engine
