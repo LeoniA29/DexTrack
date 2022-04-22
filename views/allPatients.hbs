@@ -1,13 +1,17 @@
 <h1>Displaying all patients</h1>
 <ul>
 {{!-- loops over the data set --}}
+<button onclick="location.href='/home/clinician/register'" type="button">Register Patient</button>
+<br><br>
 {{#each data}}
     <li><a href="/home/patient/{{this._id}}">{{this.first_name}} {{this.last_name}}</a></li>
 {{/each}}
 </ul>
 
+{{!-- 
 <form action="/home/patient" method="POST">
     <input type="text" placeholder="First name" name="first_name" />
     <input type="text" placeholder="Last name" name="last_name" />
     <input type="submit" />
 </form>
+--}}

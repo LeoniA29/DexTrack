@@ -1,4 +1,5 @@
 const Clinician = require('../models/clinician')
+const Patient = require('../models/patient')
 
 const getAllClinicians = async (req, res, next) => {
  try {
@@ -30,12 +31,25 @@ const insertClinician= (req, res) => {
     return res.redirect('back')
 }
 
+// trying to insertPatient into database
+const insertPatient = (req, res) => {
+    var newPatient = new Patient(req.body)
+    newPatient.save()
+    return res.redirect('back')
+}
+
+// render register patient hbs
+const registerPatient = (req, res) => {
+    return res.render('patientRegister')
+}
 
 // exports an object, which contain functions imported by router
 module.exports = {
     getClinicianById,
     getAllClinicians,
-    insertClinician
+    insertClinician,
+    insertPatient,
+    registerPatient,
 }
 
 
