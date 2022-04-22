@@ -4,28 +4,52 @@
 <ul>
     {{!-- <li>{{this.input_data.[0]._id}}</li> 
     <li>{{this.input_data.[0].entry}}</li> --}}
-    {{#each this.input_data}}
+    <ul class="input_cards"></ul>
     
-        {{#if (isTodaysDate this.createdAt) }}
-            <li>{{this.entry}} {{this.comment}}</li>
-        {{else}}
-        {{!-- display nothing --}}
+        
+        <li><a href="/patient/{{this._id}}/insertGlucose">glucose</a></li>
+        {{#each this.input_data}}
+        {{#if (isTodaysDate this) }}
+            {{#if (isGlucose this)}}
+                {{this.entry}} {{this.comment}}
+            {{/if}}
         {{/if}}
+        {{/each}}
+        <br>
+        <br>
 
+        <li><a href="/patient/{{this._id}}/insertInsulin">insulin</a></li>
+        {{#each this.input_data}}
+        {{#if (isTodaysDate this) }}
+            {{#if (isInsulin this)}}
+                {{this.entry}} {{this.comment}}
+            {{/if}}
+        {{/if}}
+        {{/each}}
+        <br>
+        <br>
 
-    {{/each}}
-</ul>
+        <li><a href="/patient/{{this._id}}/insertSteps">steps</a></li>
+        {{#each this.input_data}}
+         {{#if (isTodaysDate this) }}
+            {{#if (isSteps this)}}
+                {{this.entry}} {{this.comment}}
+            {{/if}}
+        {{/if}}
+        {{/each}}
+        <br>
+        <br>
 
+        <li><a href="/patient/{{this._id}}/insertWeight">weight</a></li>
+        {{#each this.input_data}}
+        {{#if (isTodaysDate this) }}
+            {{#if (isWeight this)}}  
+                {{this.entry}} {{this.comment}}
+            {{/if}}
+        {{/if}}
+        {{/each}}
 
-
-<ul class="input_cards">
-<li><a href="/patient/{{this._id}}/insertGlucose">glucose</a></li>
-<li><a href="/patient/{{this._id}}/insertInsulin">insulin</a></li>
-</ul>
-
-<ul class="input_cards">
-<li><a href="/patient/{{this._id}}/insertSteps">steps</a></li>
-<li><a href="/patient/{{this._id}}/insertWeight">weight</a></li>
+    </ul>
 </ul>
 
 {{!--

@@ -13,7 +13,11 @@ app.engine(
         defaultlayout: 'main',
         extname: 'hbs',
         helpers: {
-            isTodaysDate: x=> x.getDate()==currentTime.getDate()
+            isTodaysDate: x=> x.createdAt.getDate()==currentTime.getDate(),
+            isGlucose: g=> g.data_type=='glucose',
+            isInsulin: i=> i.data_type=='insulin',
+            isWeight: w=> w.data_type=='weight',
+            isSteps: s=> s.data_type=='steps'
         }
     })
 )
