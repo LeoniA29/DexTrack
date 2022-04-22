@@ -1,8 +1,8 @@
-<h1>Displaying all patients</h1>
+<h1>List of all DexTrack patients</h1>
+<h2>Please select your name</h2>
+
 <ul>
 {{!-- loops over the data set --}}
-<button onclick="location.href='/home/clinician/register'" type="button">Register Patient</button>
-<br><br>
 {{#each data}}
     <li><a href="/home/patient/{{this._id}}">{{this.first_name}} {{this.last_name}}</a></li>
 {{/each}}
