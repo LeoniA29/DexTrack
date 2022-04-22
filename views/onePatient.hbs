@@ -7,7 +7,7 @@
     <ul class="input_cards"></ul>
     
         
-        <li><a href="/patient/{{this._id}}/insertGlucose">glucose</a></li>
+        <li><a href="/patient/{{this._id}}/insertGlucose"> glucose</a></li>
         {{#each this.input_data}}
         {{#if (isTodaysDate this) }}
             {{#if (isGlucose this)}}
@@ -61,3 +61,6 @@
 --}}
 
 {{/with}}
+
+
+
