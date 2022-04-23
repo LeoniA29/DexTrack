@@ -1,5 +1,6 @@
 const exphbs = require('express-handlebars')
 var currentTime = new Date();
+// console.log(currentTime.getDate())
 
 // Import express
 const express = require('express')
@@ -13,7 +14,9 @@ app.engine(
         defaultlayout: 'main',
         extname: 'hbs',
         helpers: {
-            isTodaysDate: x=> x.createdAt.getDate()==currentTime.getDate(),
+            isTodaysDate: x=> {
+                // console.log(x.createdAt.getDate())
+                x.createdAt.getDate()==currentTime.getDate()},
             isGlucose: g=> g.data_type=='glucose',
             isInsulin: i=> i.data_type=='insulin',
             isWeight: w=> w.data_type=='weight',
@@ -34,8 +37,8 @@ app.use(express.urlencoded({ extended: false })) // only needed for URL-encoded 
 const clinicianRouter = require('./routes/clinicianRouter')
 const patientRouter = require('./routes/patientRouter')
 
-app.use('/clinician', clinicianRouter)
-app.use('/patient', patientRouter)
+app.use('/home/clinician', clinicianRouter)
+app.use('/home/patient', patientRouter)
 
 // Tells the app to send the string: "Our demo app is working!" when you hit the '/' endpoint.
 app.get('/', (req, res) => {

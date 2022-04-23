@@ -74,7 +74,7 @@ const insertPatientData= (req, res) => {
             }
         }
     )
-    return res.redirect('/patient/'+ req.params.patient_id);
+    return res.redirect('/home/patient/'+ req.params.patient_id);
 }
    
 

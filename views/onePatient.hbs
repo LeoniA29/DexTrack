@@ -7,7 +7,7 @@
     <ul class="input_cards"></ul>
     
         
-        <li><a href="/patient/{{this._id}}/insertGlucose"> glucose</a></li>
+        <li><a href="/home/patient/{{this._id}}/insertGlucose"> glucose</a></li>
         {{#each this.input_data}}
         {{#if (isTodaysDate this) }}
             {{#if (isGlucose this)}}
@@ -18,7 +18,7 @@
         <br>
         <br>
 
-        <li><a href="/patient/{{this._id}}/insertInsulin">insulin</a></li>
+        <li><a href="/home/patient/{{this._id}}/insertInsulin">insulin</a></li>
         {{#each this.input_data}}
         {{#if (isTodaysDate this) }}
             {{#if (isInsulin this)}}
@@ -29,7 +29,7 @@
         <br>
         <br>
 
-        <li><a href="/patient/{{this._id}}/insertSteps">steps</a></li>
+        <li><a href="/home/patient/{{this._id}}/insertSteps">steps</a></li>
         {{#each this.input_data}}
          {{#if (isTodaysDate this) }}
             {{#if (isSteps this)}}
@@ -40,7 +40,7 @@
         <br>
         <br>
 
-        <li><a href="/patient/{{this._id}}/insertWeight">weight</a></li>
+        <li><a href="/home/patient/{{this._id}}/insertWeight">weight</a></li>
         {{#each this.input_data}}
         {{#if (isTodaysDate this) }}
             {{#if (isWeight this)}}  
@@ -53,7 +53,7 @@
 </ul>
 
 {{!--
-<form action="/patient/{{this._id}}" method="POST">
+<form action="home/patient/{{this._id}}" method="POST">
     <input type="text" placeholder="Enter data" name="input_data" />
     <input type="text" placeholder="Comment" name="comment" />
     <input type="submit" />
