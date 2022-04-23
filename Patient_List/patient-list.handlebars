@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="clinician_styles.css">
+</head>
+<body>
+     <header>
+          // doctor tab, corner right-up
+          <div class="top-right-btn">
+               <a class="home" href="patient-list.hbs"><img src="home-alt.png" alt="Home icon"></a>
+               <a class="dr-pic"><img src="dr-pic.png" alt="Dr pic"></a>
+               <a class="dr-name">Dr. Alice Brown<img src="chevron-down.png" alt="Drop icon"></a>
+          </div>
+          // patient list
+          <h1 id="page_title">Patient List</h1>
+          <div class="patient-li">
+               <a class="search"><img src="search.png" alt="Search icon"></a>
+               <a class="Sort-by">Sort by<img src="chevron-down.png" alt="Drop icon"></a>
+               <div class="pat-data">
+                    {{{body}}}
+               </div>
+          </div>
+          // patient comments
+          <h2 id="sec-title">Patient comments</h2>
+          <div class="com-li">
+               <div class="com-data">
+                    {{{body}}}
+               </div>
+          </div>
+          <a class="add-patient" href="patient-form.hbs"><img src="add-patient.png" alt="New patient symbol"></a>
+          <main>
+               <section>
+                    <form></form>
+                    <ol>
+                         <li></li>
+                    </ol>
+          </main>
+     </header>
+</body>
+</html>
