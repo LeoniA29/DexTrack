@@ -1,0 +1,9 @@
+<h1>Displaying insert steps page</h1>
+{{#with oneItem}}
+<form action= "{{this._id}}" method="POST">
+    <input type="text" placeholder="Enter data" name="entry" />
+    <input type="text" placeholder="Comment" name="comment" />
+    <input type="hidden" name="data_type" value="steps" /> 
+    <input type="submit" />
+</form>
+{{/with}}

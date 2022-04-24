@@ -1,4 +1,5 @@
 const exphbs = require('express-handlebars')
+var currentTime = new Date();
 
 // Import express
 const express = require('express')
@@ -11,6 +12,11 @@ const hbs = exphbs.create({
 
     // create custom helpers
     helpers: {
+        isTodaysDate: x=> x.createdAt.getDate()==currentTime.getDate(),
+        isGlucose: g=> g.data_type=='glucose',
+        isInsulin: i=> i.data_type=='insulin',
+        isWeight: w=> w.data_type=='weight',
+        isSteps: s=> s.data_type=='steps'
         //selected: function(val1, val2) {
         //    return val1 == val2 ? 'selected' : '';
         //},
@@ -39,8 +45,8 @@ const patientRouter = require('./routes/patientRouter')
 const clinicianRouter = require('./routes/clinicianRouter')
 
 // the demo routes are added to the end of the '/home' path
-app.use('/home/patient', patientRouter)
-app.use('/home/clinician', clinicianRouter)
+app.use('/patient', patientRouter)
+app.use('/clinician', clinicianRouter)
 
 // Tells the app to send the string: "Our demo app is working!" when you hit the '/' endpoint.
 app.get('/', (req, res) => {

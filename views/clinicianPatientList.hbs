@@ -1,0 +1,17 @@
+<h1>Displaying patient list of clinician</h1>
+{{#with oneItem}}
+
+<h1>Hi Dr.{{first_name}} {{last_name}},</h1>
+<p>this is the list of all your patients </p>
+
+{{#if patient_list}}
+    {{#each patient_list}}
+            {{patient_list}}
+    {{/each}}
+{{else}}
+    <p>you have no patient, please register a patient</p>
+{{/if}}
+
+<button onclick="location.href='{{_id}}/register'" type="button">Register New Patient</button>
+
+{{/with}}

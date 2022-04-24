@@ -1,0 +1,66 @@
+
+{{#with oneItem}}
+<h1>Hi, {{this.first_name}} </h1>
+<ul>
+    {{!-- <li>{{this.input_data.[0]._id}}</li> 
+    <li>{{this.input_data.[0].entry}}</li> --}}
+    <ul class="input_cards"></ul>
+    
+        
+        <li><a href="/patient/{{this._id}}/insertGlucose"> glucose</a></li>
+        {{#each this.input_data}}
+        {{#if (isTodaysDate this) }}
+            {{#if (isGlucose this)}}
+                {{this.entry}} {{this.comment}}
+            {{/if}}
+        {{/if}}
+        {{/each}}
+        <br>
+        <br>
+
+        <li><a href="/patient/{{this._id}}/insertInsulin">insulin</a></li>
+        {{#each this.input_data}}
+        {{#if (isTodaysDate this) }}
+            {{#if (isInsulin this)}}
+                {{this.entry}} {{this.comment}}
+            {{/if}}
+        {{/if}}
+        {{/each}}
+        <br>
+        <br>
+
+        <li><a href="/patient/{{this._id}}/insertSteps">steps</a></li>
+        {{#each this.input_data}}
+         {{#if (isTodaysDate this) }}
+            {{#if (isSteps this)}}
+                {{this.entry}} {{this.comment}}
+            {{/if}}
+        {{/if}}
+        {{/each}}
+        <br>
+        <br>
+
+        <li><a href="/patient/{{this._id}}/insertWeight">weight</a></li>
+        {{#each this.input_data}}
+        {{#if (isTodaysDate this) }}
+            {{#if (isWeight this)}}  
+                {{this.entry}} {{this.comment}}
+            {{/if}}
+        {{/if}}
+        {{/each}}
+
+    </ul>
+</ul>
+
+{{!--
+<form action="/patient/{{this._id}}" method="POST">
+    <input type="text" placeholder="Enter data" name="input_data" />
+    <input type="text" placeholder="Comment" name="comment" />
+    <input type="submit" />
+</form>
+--}}
+
+{{/with}}
+
+
+

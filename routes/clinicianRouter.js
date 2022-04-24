@@ -9,10 +9,10 @@ const clinicianController = require('../controllers/clinicianController')
 
 // sample clinician routes
 clinicianRouter.get('/', clinicianController.getAllClinicians)
-clinicianRouter.get('/register', clinicianController.registerPatient)
-clinicianRouter.get('/:clinician_id', clinicianController.getClinicianById)
+clinicianRouter.get('/:clinician_id/register', clinicianController.registerPatient)
+clinicianRouter.get('/:clinician_id', clinicianController.getClinicianPatientList)
 clinicianRouter.post('/', clinicianController.insertClinician)
-clinicianRouter.post('/register', clinicianController.insertPatient)
+clinicianRouter.post('/:clinician_id/register', clinicianController.insertPatient)
 
 
 // export the router

@@ -63,6 +63,22 @@ const insertPatient= (req, res) => {
     return res.redirect('/patient/'+ req.params.patient_id);
 }
 
+// render patient list hbs
+const getClinicianPatientList =  async (req, res, next) => {
+    try {
+        const clinician = await Clinician.findById(req.params.clinician_id).lean()
+        if (!clinician) {
+            // no clinician found in database
+            return res.sendStatus(404)
+        }
+        
+        return res.render('clinicianPatientList', { oneItem: clinician })
+    
+    } catch (err) {
+        return next(err)
+    }
+}
+
 // exports an object, which contain functions imported by router
 module.exports = {
     getClinicianById,
@@ -70,6 +86,7 @@ module.exports = {
     insertClinician,
     insertPatient,
     registerPatient,
+    getClinicianPatientList,
 }
 
 
