@@ -1,37 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/css/styles.css">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<title>Library App</title>
-=======
-<title>DexTrack</title>
->>>>>>> ecfd7a40401f8f5a7bc3089d6a57c439b6ea339c
-=======
-<title>DexTrack</title>
->>>>>>> ecfd7a40401f8f5a7bc3089d6a57c439b6ea339c
+<head> 
+    <meta charset="UTF-8"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Clinician App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
-<body>
-    <header>
-        <p>This HTML is coming from main.hbs</p>
-    </header>
-    <main>
-        {{{body}}}
-    </main>
-    <footer>
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <p>This app was created during tutorial 6.</p>
-=======
-        <p>This app does something.</p>
->>>>>>> ecfd7a40401f8f5a7bc3089d6a57c439b6ea339c
-=======
-        <p>This app does something.</p>
->>>>>>> ecfd7a40401f8f5a7bc3089d6a57c439b6ea339c
+<body> 
+    <header> 
+
+        <!-- Navigation bar at top of webpage -->
+        <div class="navbar">
+            <div class="dropdown">
+                <button class="dropbtn">Dr. Alice Brown <i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="#">Sign out</a>
+                </div>
+            </div>
+            <div class="icons">
+                <a class="active" href="#"><img src="/house-solid.svg" width="28" height="28" class="change-color"></a>
+                <a href="#"><img src="/circle-half-stroke-solid.svg" width="28" height="28" class="change-color"></a>
+                <a><i class="vl"></i></a>
+                <a href="#"><img src="/circle-user-regular.svg" width="28" height="28" class="change-color"></a>
+            </div>
+        </div>
+    </header> 
+
+    <main> 
+
+        {{{body}}} 
+
+    </main> 
+
+    <!-- Footer with copyright claim to the product -->
+    <footer> 
+        <h6> © 2022 DexTrack, all rights reserved</h6> 
     </footer>
+
 </body>
 </html>
