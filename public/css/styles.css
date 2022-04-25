@@ -1,8 +1,301 @@
-body {
-    font-family: "Verdana", "Geneva", "Tahoma", sans-serif;
+/* body structure */
+
+header, body, footer {
+    font-family: Lexend Deca;
 }
 
-header, footer {
-    background-color: lightgray;
+body {
+    color: black;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #FFFFFF;
+}
+
+.navbar {
+    width: 100%;
+    overflow: auto;
+}
+
+section {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.leftcolumn {
+    float: left;
+  }
+
+.rightcolumn {
+    float: left;
+}
+  
+@media screen and (max-width: 800px) {
+    .leftcolumn, .rightcolumn {
+      width: 100%;
+      padding: 0;
+    }
+  }
+
+/* patient profile */
+
+.profile {
+    background-color:#E6F2FE;
+    margin-left: 80px;
+    margin-right: 80px;
+    border-radius:  36px;
+    border: 0px;
+}
+
+.col {
+    float: left;
+    width: 20%;
+    line-height: 30px;
+}
+
+.row {
+    margin-left: 90px;
+    padding: 20px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+span.attribute {
+    font-size: 14px;
+}
+
+
+/* patient log */
+
+.logs {
+    background-color:#F2F2F2;
+    overflow: scroll;
+    float: left;
+    width: 65%;
+    height: 650px;
+    border-radius: 36px;
+    margin-left: 80px;
+    border: 0px;
+}
+
+.logs h3 {
+    font-size: 22px;
+    color: #2C68AD;
+    font-weight: 400;
+    margin-left: 30px;
+    margin-top: 0px;
+    background: #F2F2F2;
+}
+
+.date {
+    margin-left: 30px;
+}
+
+.date h4 {
+    font-size: 16px;
+    font-weight: 400;
+    float: left;
     text-align: center;
 }
+
+.entries {
+    margin-left: 65px;
+    overflow: auto;
+    height: 550px;
+}
+
+.entry {
+    padding: 16px;
+    margin-bottom: 20px;
+    width: 760px;
+    height: 130px;
+    border-radius: 36px;
+    border-width: 3px;
+    background: white;
+}
+
+.data {
+    font-family: Lexend Deca;
+    font-size: 16px;
+    float: left;
+    width: 25%;
+    line-height: 40px;
+    text-align: left;
+    margin-left: 30px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content h4 {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropbtn:hover .dropdown-content {
+    display: block;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%
+}
+
+.sticky + .content {
+    padding-top: 102px;
+}
+
+
+/* graphs */
+
+.graphs {
+    float: right;
+    width: 25%;
+    margin-right: 41px;
+}
+
+.card{
+    border-radius: 23px;
+    border-width: 3px;
+    height: 168px;
+    width: 320px;
+    background: black;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+
+/* navigation bar */
+
+.icons {
+    float: right;
+    padding-top: 20px;
+}
+.icons a {
+    margin-right: 20px;
+}
+
+.change-color {
+    filter: invert(33%) sepia(95%) saturate(583%) hue-rotate(178deg) brightness(89%) contrast(89%);
+  } 
+
+@media screen and (max-width: 500px) {
+    .navbar a {
+      float: none;
+      display: block;
+    }
+}
+
+.dropdown {
+    overflow: hidden;
+    float: right;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+
+.dropdown .dropbtn {
+    font-size: 20px;
+    color: #FCF5ED;
+    background: #2C68AD;
+    padding: 3px 20px 3px 20px;
+    border: 0px;
+    border-radius:  36px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    font-family: inherit; /* Important for vertical align on mobile phones */
+    margin: 0; /* Important for vertical align on mobile phones */
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+  /* breadcrumb */
+
+  ul.breadcrumb {
+      padding: 10px 16px;
+      list-style: none;
+      margin-left: 80px;
+  }
+
+  ul.breadcrumb li {
+    display: inline;
+    color: #2C68AD;
+    font-size: 30px;
+    font-weight:400;
+  }
+
+  ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: #2C68AD;
+    content: ">\00a0";
+    font-weight:500;
+  }
+
+  ul.breadcrumb li a {
+    text-decoration: underline;
+    color: #2C68AD;
+    font-weight: 500;
+  }
+
+
+  /* headings */
+
+  h6 {
+    font-size: 15px;
+    font-weight: 400;
+}
+
+  /* footer */
+
+footer {
+    padding: 5em;
+    text-align: center;
+    background-color:#2C68AD;
+    color: #FFFFFF;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+  
