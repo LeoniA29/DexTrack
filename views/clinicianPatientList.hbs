@@ -1,17 +1,24 @@
 <h1>Displaying patient list of clinician</h1>
-{{#with oneItem}}
+{{#with clinicianItem}}
 
 <h1>Hi Dr.{{first_name}} {{last_name}},</h1>
 <p>this is the list of all your patients </p>
 
-{{#if patient_list}}
-    {{#each patient_list}}
-            {{patient_list}}
-    {{/each}}
-{{else}}
-    <p>you have no patient, please register a patient</p>
-{{/if}}
+{{/with}}
 
-<button onclick="location.href='{{_id}}/register'" type="button">Register New Patient</button>
+{{#with patientItem}}
+    {{#if this}}
+    <p>you have patients</p>
+        {{#each this}}
+            <li><a href="{{this._id}}/{{this}}">{{this.first_name}}{{this.last_name}}</a></li>
+        {{/each}}
+    {{else}}
+        <p>you have no patient, please register a patient {{patientItem}}</p>
+    {{/if}}
+{{/with}}
+
+{{#with clinicianItem}}
+<br>
+<button onclick="location.href='/clinician/{{_id}}/register'" type="button">Register New Patient</button>
 
 {{/with}}

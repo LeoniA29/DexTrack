@@ -17,8 +17,9 @@ const getClinicianById = async(req, res, next) => {
  // no author found in database
  return res.sendStatus(404)
  }
- // found person
- return res.render('oneData', { oneItem: clinician })
+ // found person and get patient list
+
+ return res.render('oneData', { oneItem: clinician})
  } catch (err) {
  return next(err)
  }
@@ -31,26 +32,26 @@ const insertClinician= (req, res) => {
     return res.redirect('back')
 }
 
-
 // render register patient hbs
 const registerPatient = (req, res) => {
-    return res.render('patientRegister')
+    const clinician = Clinician.findById(req.params.clinician_id).lean()
+    return res.render('patientRegister', { oneItem: clinician})
 }
 
 // trying to insertPatient into database and link to clinician
 const insertPatient= (req, res) => {
 
     const ObjectId = require('mongodb').ObjectId
-    // var newData = new PatientData(req.body)
-    // newData.save()
 
-    var id1 = req.params.patient_id
-    // var id2 = newData.id
-    var objectId1 = new ObjectId(id1)
-    // var objectId2 = new ObjectId(id2)
+    var newPatient = new Patient(req.body)
+    newPatient.save()  
+    var input_Patient = newPatient._id
 
-    Patient.findByIdAndUpdate(objectId1,
-        {$push: {input_data: req.body}},
+    var clinician = req.params.clinician_id
+    var object_clinician = new ObjectId(clinician)
+
+    Clinician.findByIdAndUpdate(object_clinician,
+        {$push: {patient_list: input_Patient}},
         {safe: true, upsert: true},
         function(err, doc) {
             if(err){
@@ -60,7 +61,7 @@ const insertPatient= (req, res) => {
             }
         }
     )
-    return res.redirect('/patient/'+ req.params.patient_id);
+    return res.redirect('/clinician/'+ req.params.clinician_id);
 }
 
 // render patient list hbs
@@ -71,8 +72,20 @@ const getClinicianPatientList =  async (req, res, next) => {
             // no clinician found in database
             return res.sendStatus(404)
         }
-        
-        return res.render('clinicianPatientList', { oneItem: clinician })
+
+        var patients = clinician.patient_list
+        var patientList = [];
+
+        for (var i in patients) {
+            patientID = patients[i]._id.toString()
+            const patient = await Patient.findById(patientID).lean()
+            patientList.push(patient)
+            //console.log(patients[i]._id.toString())
+
+        }
+        console.log(patientList)
+
+        return res.render('clinicianPatientList', { clinicianItem: clinician, patientItem: patientList})
     
     } catch (err) {
         return next(err)

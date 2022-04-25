@@ -29,7 +29,18 @@ const data = new mongoose.Schema({
    }
 });
 
-const schema = new mongoose.Schema({
+const data_set = new mongoose.Schema({
+   set_date: Date,
+   glucose_data: { 
+      type: data, 
+      default: null
+   },
+   steps_data: data,
+   weight_data: data,
+   insulin_data: data,
+});
+
+const patient = new mongoose.Schema({
  first_name: String,
  last_name: String,
  email: String,
@@ -45,13 +56,13 @@ const schema = new mongoose.Schema({
  postcode: String,
  // this is unique from the clinician to each patient
  clinician_message: String,
-  // array of objects for the patient defined in the schema below
+// array of objects for the patient defined in the schema below
  clincian_notes: [note],
  threshold_list: [threshold],
  //input_data: [data],
+ //input_data: [data_set]
  input_data: [{ entry: String, comment: String, data_type: String, createdAt:{type: Date, default: Date.now}}]
 })
 
-
-const Patient = mongoose.model('Patient', schema)
+const Patient = mongoose.model('Patient', patient)
 module.exports = Patient
