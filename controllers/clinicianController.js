@@ -51,7 +51,7 @@ const insertPatient= (req, res) => {
     var object_clinician = new ObjectId(clinician)
 
     Clinician.findByIdAndUpdate(object_clinician,
-        {$push: {patient_list: input_Patient}},
+        {$push: {patient_list: newPatient}},
         {safe: true, upsert: true},
         function(err, doc) {
             if(err){

@@ -10,7 +10,7 @@
     {{#if this}}
     <p>you have patients</p>
         {{#each this}}
-            <li><a href="{{this._id}}/{{this}}">{{this.first_name}}{{this.last_name}}</a></li>
+            <li><a href="{{this._id}}/{{this}}">{{this.first_name}} {{this.last_name}}</a></li>
         {{/each}}
     {{else}}
         <p>you have no patient, please register a patient {{patientItem}}</p>
