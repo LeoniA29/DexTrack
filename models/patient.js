@@ -19,13 +19,11 @@ const threshold = new mongoose.Schema({
 
 // schema for data input
 const data = new mongoose.Schema({
-   data_entry: Number,
-   data_comment: String,
+   entry: Number,
+   comment: String,
    data_date: Date,
-   data_type: {
-      type: String,
-      enum: ['glucose', 'insulin', 'weight', 'steps']
-   }
+   data_type: String,
+   createdAt:{type: Date, default: Date.now}
 });
 
 const schema = new mongoose.Schema({
@@ -47,7 +45,6 @@ const schema = new mongoose.Schema({
   // array of objects for the patient defined in the schema below
  clincian_notes: [note],
  threshold_list: [threshold],
- // input_data: [data],
  input_data: [{ entry: String, comment: String, data_type: String, createdAt:{type: Date, default: Date.now}}]
  // change to non-default for time 
 })
