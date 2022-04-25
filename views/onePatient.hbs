@@ -1,71 +1,61 @@
 
-{{#with oneItem}}
+<h2>{{todaysDay}} {{todaysDate}} {{todaysMonth}} </h2>
+
+{{#with oneItem}} 
 <h1>Hi, {{this.first_name}} </h1>
+{{/with}}
 
     {{!-- <li>{{this.input_data.[0]._id}}</li> 
     <li>{{this.input_data.[0].entry}}</li> --}}
+
+    
     <div class="inputContainer">
     
         <div class="Glucose">
+            {{#with oneItem}} 
             <a href="/home/patient/{{this._id}}/insertGlucose"> <img id="glucoseFilled" src="/Glucose_Filled.png" align="center"></a>
-        {{#each this.input_data}}
-        {{#if (isTodaysDate this) }}
-            {{#if (isGlucose this)}}
-                 <h2>{{this.entry}}</h2>
-            {{/if}}
-        {{/if}}
-        {{/each}}
+            {{/with}}
+
+            {{#with twoItem}}
+                <h2>{{this.glucose_data.data_entry}}</h2>
+            {{/with}}
         </div>
 
         <div class="Exercise">
+            {{#with oneItem}} 
             <a href="/home/patient/{{this._id}}/insertSteps"> <img id="exerciseFilled" src="/Exercise_Filled.png" align="center"></a>
-            
-        {{#each this.input_data}}
-        {{#if (isTodaysDate this) }}
-            {{#if (isSteps this)}}
-                    <h2>{{this.entry}}</h2>
-            {{/if}}
-        {{/if}}
-        {{/each}}
+            {{/with}}
+
+            {{#with twoItem}}
+                    <h2>{{this.steps_data.data_entry}}</h2>
+            {{/with}}
+    
         </div>
 
         <div class="Weight">
+            {{#with oneItem}} 
             <a href="/home/patient/{{this._id}}/insertWeight"> <img id="weightFilled" src="/Weight_Filled.png" align="center"> </a>
-            
-        {{#each this.input_data}}
-         {{#if (isTodaysDate this) }}
-            {{#if (isWeight this)}}
-                <h2>{{this.entry}}</h2>
-            {{/if}}
-        {{/if}}
-        {{/each}}
+            {{/with}}
+
+            {{#with twoItem}}
+                <h2>{{this.weight_data.data_entry}}</h2>
+                {{/with}}
+
         </div>
 
         <div class="Insulin">
-            <a href="/home/patient/{{this._id}}/insertInsulin"><img id="insulinFilled" src="/Insulin_Filled.png" align="center"></a>
-        
-            
-        {{#each this.input_data}}
-        {{#if (isTodaysDate this) }}
-            {{#if (isInsulin this)}}  
-                <h2>{{this.entry}}</h2>
-            {{/if}}
-        {{/if}}
-        {{/each}}
+            {{#with oneItem}} 
+            <a href="/home/patient/{{this._id}}/insertInsulin"><img id="insulinFilled" src="/Insulin_Filled.png" align="center"> </a>
+            {{/with}}
+
+            {{#with twoItem}}
+                <h2>{{this.insulin_data.data_entry}}</h2>
+            {{/with}}
         </div>
 
     
-</div>
+    </div>
 
-{{!--
-<form action="home/patient/{{this._id}}" method="POST">
-    <input type="text" placeholder="Enter data" name="input_data" />
-    <input type="text" placeholder="Comment" name="comment" />
-    <input type="submit" />
-</form>
---}}
-
-{{/with}}
 
 
 

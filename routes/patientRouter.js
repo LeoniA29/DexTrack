@@ -7,13 +7,8 @@ const patientRouter = express.Router()
 const patientController = require('../controllers/patientController')
 
 
-// sample patient routes
 patientRouter.get('/', patientController.getAllPatients)
 patientRouter.get('/:patient_id', patientController.getPatientById)
-patientRouter.post('/', patientController.insertPatient)
-
-// patientRouter.post('/:patient_id', patientController.insertPatientData)
-
 
 patientRouter.get('/:patient_id/insertGlucose', patientController.getGlucosePage)
 patientRouter.post('/:patient_id/insertGlucose', patientController.insertPatientData)

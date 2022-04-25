@@ -5,14 +5,3 @@
     <li><a href="/home/patient/{{this._id}}">{{this.first_name}} {{this.last_name}}</a></li>
 {{/each}}
 </ul>
-
-<form action="home/patient" method="POST">
-    <input type="text" placeholder="First name" name="first_name" />
-    <input type="text" placeholder="Last name" name="last_name" />
-    <input type="text" placeholder="Date of Birth" name="dob" />
-    <input type="text" placeholder="Address" name="address" />
-    <input type="text" placeholder="Email" name="email" />
-    <input type="text" placeholder="Username" name="screen_name" />
-    <input type="text" placeholder="Short Bio" name="short_bio" />
-    <input type="submit" />
-</form>

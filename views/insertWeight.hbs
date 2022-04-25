@@ -1,8 +1,8 @@
 <h1>Displaying insert weight page</h1>
 {{#with oneItem}}
-<form action= "{{this._id}}" method="POST">
-    <input type="text" placeholder="Enter data" name="entry" />
-    <input type="text" placeholder="Comment" name="comment" />
+<form method="POST">
+    <input type="text" placeholder="Enter data" name="data_entry" />
+    <input type="text" placeholder="Comment" name="data_comment" />
     <input type="hidden" name="data_type" value="weight" /> 
     <input type="submit" />
 </form>
