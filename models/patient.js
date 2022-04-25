@@ -49,6 +49,7 @@ const schema = new mongoose.Schema({
  threshold_list: [threshold],
  // input_data: [data],
  input_data: [{ entry: String, comment: String, data_type: String, createdAt:{type: Date, default: Date.now}}]
+ // change to non-default for time 
 })
 
 const Patient = mongoose.model('Patient', schema)

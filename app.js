@@ -1,5 +1,5 @@
 const exphbs = require('express-handlebars')
-var currentTime = new Date();
+// var currentTime = new Date();
 // console.log(currentTime.getDate())
 
 // Import express
@@ -14,9 +14,11 @@ app.engine(
         defaultlayout: 'main',
         extname: 'hbs',
         helpers: {
-            isTodaysDate: x=> {
+            isTodaysDate: function(x) {
                 // console.log(x.createdAt.getDate())
-                x.createdAt.getDate()==currentTime.getDate()},
+                var currentTime = new Date();
+                return (x.createdAt.getDate()==currentTime.getDate())
+            },
             isGlucose: g=> g.data_type=='glucose',
             isInsulin: i=> i.data_type=='insulin',
             isWeight: w=> w.data_type=='weight',
@@ -32,6 +34,8 @@ app.use(express.static('public'))
 // Set up to handle POST requests
 app.use(express.json()) // needed if POST data is in JSON format
 app.use(express.urlencoded({ extended: false })) // only needed for URL-encoded input
+
+app.use(express.static(__dirname + "/resources"));
 
 // link to our routers
 const clinicianRouter = require('./routes/clinicianRouter')

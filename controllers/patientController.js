@@ -1,5 +1,6 @@
 const Patient = require('../models/patient')
 const PatientData = require('../models/patientData')
+const todaysDate = new Date();
 
 const getAllPatients = async (req, res, next) => {
     try {
@@ -33,8 +34,16 @@ const getPatientById = async(req, res, next) => {
     }
 }
 
-const getGlucosePage=(req,res) =>{
-    const patient =  Patient.findById(req.params.patient_id).lean()
+const getGlucosePage= async(req,res) =>{
+    const patient =  await Patient.findById(req.params.patient_id).lean()
+    
+    for (var i in patient.input_data){
+        var inputs = patient.input_data[i] 
+        if ( (inputs.createdAt.getDate() == todaysDate.getDate()) && (inputs.data_type == "glucose") ) {
+            return res.redirect('/home/patient/'+ req.params.patient_id)
+        }
+    }
+    
     return res.render('insertGlucose', { oneItem: patient })
 }
 
@@ -44,7 +53,7 @@ const getInsulinPage=(req,res) =>{
 }
 const getStepsPage=(req,res) =>{
     const patient =  Patient.findById(req.params.patient_id).lean()
-    return res.render('insertSteps', { oneItem: patient })
+    return res.render('insertSteps', { oneItem: patient})
 }
 const getWeightPage=(req,res) =>{
     const patient =  Patient.findById(req.params.patient_id).lean()

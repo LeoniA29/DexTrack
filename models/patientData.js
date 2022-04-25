@@ -1,7 +1,9 @@
 const mongoose = require('mongoose')
 const schema = new mongoose.Schema({
- input_data: String,
- comment: String, 
+    entry: String, 
+    comment: String, 
+    data_type: String, 
+    createdAt:{type: Date, default: Date.now}
 })
 
 const PatientData = mongoose.model('PatientData', schema)
