@@ -1,10 +1,36 @@
-<h1>Displaying all data</h1>
-
-<button onclick="location.href='/patient/register'" type="button">Register Patient</button>
-         
-<ul>
-{{!-- loops over the data set --}}
-{{#each data}}
-    <li><a href="/patient/{{this._id}}">{{this.givenName}} {{this.familyName}} {{this.screenName}}</a></li>
-{{/each}}
+<h1>Displaying all data</h1> 
+ 
+<ul> 
+    {{#each data}} 
+    <li> <a href="/people/{{this.id}}">{{this.first_name}}, {{this.last_name}}</a></li> 
+    {{/each}}
 </ul>
+
+<form action="/action_page.php">
+  <input type="text" id="id" name="id" value="id"><br>
+  <input type="text" id="first_name" name="first_name" value="first_name"><br>
+  <input type="text" id="last_name" name="last_name" value="last_name"><br>
+  <button id="submit">submit</button>
+</form> 
+<script>
+    const button = document.getElementById('submit');
+
+    button.addEventListener('click',async _ => {
+        try {
+            let data = {
+                id:document.getElementById('id').value,
+                first_name:document.getElementById('first_name').value,
+                last_name:document.getElementById('last_name').value
+            };
+            const response=await fetch('', {
+                method:"post",
+                headers: {'Content-Type':'application/json'},
+                body:JSON.stringify(data),
+
+            });
+            console.log('Submitted',response)
+        } catch(err) {
+            console.error(`Error: ${err}`);
+        }
+    });
+</script>
