@@ -4,15 +4,13 @@ const express = require('express')
 const clinicianRouter = express.Router()
 
 // import people controller functions
+const patientController = require('../controllers/patientController')
 const clinicianController = require('../controllers/clinicianController')
-
 
 // sample clinician routes
 clinicianRouter.get('/', clinicianController.getAllClinicians)
-clinicianRouter.get('/register', clinicianController.registerPatient)
 clinicianRouter.get('/:clinician_id', clinicianController.getClinicianById)
 clinicianRouter.post('/', clinicianController.insertClinician)
-clinicianRouter.post('/register', clinicianController.insertPatient)
 
 
 // export the router

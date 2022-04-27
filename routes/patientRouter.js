@@ -6,10 +6,22 @@ const patientRouter = express.Router()
 // import people controller functions
 const patientController = require('../controllers/patientController')
 
-// sample patient routes
-patientRouter.get('/', patientController.getAllPatientData)
+
+patientRouter.get('/', patientController.getAllPatients)
 patientRouter.get('/:patient_id', patientController.getPatientById)
+
+patientRouter.get('/:patient_id/insertGlucose', patientController.getGlucosePage)
+patientRouter.post('/:patient_id/insertGlucose', patientController.insertPatientData)
+
+patientRouter.get('/:patient_id/insertInsulin', patientController.getInsulinPage)
+patientRouter.post('/:patient_id/insertInsulin', patientController.insertPatientData)
+
+patientRouter.get('/:patient_id/insertSteps', patientController.getStepsPage)
+patientRouter.post('/:patient_id/insertSteps', patientController.insertPatientData)
+
+patientRouter.get('/:patient_id/insertWeight', patientController.getWeightPage)
+patientRouter.post('/:patient_id/insertWeight', patientController.insertPatientData)
+
 
 // export the router
 module.exports = patientRouter
-
