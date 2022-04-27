@@ -29,11 +29,12 @@ const getPatientById = async(req, res, next) => {
         }
 
         if ( patient.input_data[i].set_date.getDate() == todaysDate.getDate() ) {
-            return res.render('onePatient', { oneItem: patient, twoItem: patient.input_data[i]} )
+            return res.render('patientDashboard', { oneItem: patient, twoItem: patient.input_data[i]} )
         }
 
     }
 
+    
     const patientData = new DataSet({set_date: todaysDate})
 
     var id1 = req.params.patient_id
@@ -53,7 +54,7 @@ const getPatientById = async(req, res, next) => {
     // console.log("new dataset for today")
     const n = patient.input_data.length
     // console.log(n)
-    return res.render('onePatient', { oneItem: patient, twoItem: patient.input_data[n]})
+    return res.render('test', { oneItem: patient, twoItem: patient.input_data[n]})
 
     } catch (err) {
     return next(err)
@@ -62,54 +63,28 @@ const getPatientById = async(req, res, next) => {
 
 const getGlucosePage= async (req,res) =>{
     const patient = await Patient.findById(req.params.patient_id).lean()
-    
-
+    /*
     for (i in patient.input_data) {
-        
          if ( (patient.input_data[i].set_date.getDate() == todaysDate.getDate()) && (patient.input_data[i].glucose_data != null) ) {
-        
             return res.redirect('/home/patient/'+ req.params.patient_id)
         }
     }
-
+    */
     return res.render('insertGlucose', { oneItem: patient })
 }
 
 const getInsulinPage= async(req,res) =>{
     const patient =  await Patient.findById(req.params.patient_id).lean()
-
-    for (i in patient.input_data) {
-        
-        if ( (patient.input_data[i].set_date.getDate() == todaysDate.getDate()) && (patient.input_data[i].insulin_data != null) ) {
-           
-           return res.redirect('/home/patient/'+ req.params.patient_id)
-       }
-   }
-
     return res.render('insertInsulin', { oneItem: patient })
 }
 
 const getStepsPage= async(req,res) =>{
     const patient = await Patient.findById(req.params.patient_id).lean()
-    for (i in patient.input_data) {
-        
-        if ( (patient.input_data[i].set_date.getDate() == todaysDate.getDate()) && (patient.input_data[i].steps_data != null) ) {
-           
-           return res.redirect('/home/patient/'+ req.params.patient_id)
-       }
-   }
     return res.render('insertSteps', { oneItem: patient})
 }
 
 const getWeightPage= async(req,res) =>{
     const patient =  await Patient.findById(req.params.patient_id).lean()
-    for (i in patient.input_data) {
-        
-        if ( (patient.input_data[i].set_date.getDate() == todaysDate.getDate()) && (patient.input_data[i].weight_data != null) ) {
-           
-           return res.redirect('/home/patient/'+ req.params.patient_id)
-       }
-   }
     return res.render('insertWeight', { oneItem: patient })
 }
 
@@ -119,7 +94,6 @@ const insertPatientData= async(req, res) => {
     var id1 = req.params.patient_id
     var objectId1 = new ObjectId(id1)
 
-    
     const patient = await Patient.findById(req.params.patient_id).lean()
 
     var newData = new Data(req.body)

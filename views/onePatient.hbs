@@ -1,10 +1,11 @@
 
-<h2>{{todaysDay}} {{todaysDate}} {{todaysMonth}} </h2>
+<div class="dashboardInformation">
+<h2 id="date">{{todaysDay}}, {{todaysDate}} {{todaysMonth}} </h2>
 
 {{#with oneItem}} 
-<h1>Hi, {{this.first_name}} </h1>
+<h1 id ="welcome">Hi, {{this.first_name}} </h1>
 {{/with}}
-
+</div>
     {{!-- <li>{{this.input_data.[0]._id}}</li> 
     <li>{{this.input_data.[0].entry}}</li> --}}
 
@@ -55,6 +56,8 @@
 
     
     </div>
+
+    
 
 
 

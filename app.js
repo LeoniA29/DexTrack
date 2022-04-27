@@ -23,6 +23,10 @@ app.engine(
             },
             todaysMonth: function() {
                 return (months[new Date().getMonth()])
+            },
+
+            filledToday: function(x) {
+                return (x!=null)
             }
 
         }
