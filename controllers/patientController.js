@@ -111,6 +111,7 @@ const insertPatientData= async(req, res) => {
                 Patient.updateOne(
                 { _id: objectId1, "input_data._id": objectId2 },
                 {$set: {"input_data.$.glucose_data": newData}},
+                {safe: true, upsert: true},
                 function(err, doc) {
                     if(err){
                         console.log(err);
@@ -127,6 +128,7 @@ const insertPatientData= async(req, res) => {
                 Patient.updateOne(
                 { _id: objectId1, "input_data._id": objectId2},
                 { $set: {"input_data.$.steps_data": newData}},
+                {safe: true, upsert: true},
                 function(err, doc) {
                     if(err){
                         console.log(err);
@@ -143,6 +145,7 @@ const insertPatientData= async(req, res) => {
                 Patient.updateOne(
                 { _id: objectId1, "input_data._id": objectId2},
                 { $set: {"input_data.$.weight_data": newData}},
+                {safe: true, upsert: true},
                 function(err, doc) {
                      if(err){
                         console.log(err);
@@ -159,6 +162,7 @@ const insertPatientData= async(req, res) => {
                 Patient.updateOne(
                 {_id: objectId1,"input_data._id": objectId2},
                 {$set: {"input_data.$.insulin_data": newData}},
+                {safe: true, upsert: true},
                 function(err, doc) {
                     if(err){
                         console.log(err);
