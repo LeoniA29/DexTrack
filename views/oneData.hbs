@@ -181,12 +181,34 @@
 
         <div class="rightcolumn">
             <section class="message">
-                <label for="messagePatient"><h4>Message to Patient</h4></label>
-                <input type="text" placeholder="Your message here." name="msg">
+                <h4>Message to Patient</h4>
+                <p class="prev-msg"><strong style="font-size:11px; color: #E6F2FE;">Previous message:<br></strong>Keep up the spirit! aksdjfh alsdfj aldfkj aslfdkj alfdskj afldjk afldkj fdlasj lafdkj lafdkj lafdkj l afdkjlfdasjl fadlskjflads lkfdaj </p>
+                <textarea type="text" placeholder="New message here." rows="5"></textarea>
+                <button class="send"><a href="#"  style="color: white; text-decoration: none;">Send</a></button>
             </section>
         </div>
     </div>
-    
+
+    <section class="patientComments">
+        <h4>Clinician notes</h4>
+        <div class="comments clinician-notes">
+            <div class="sticky-bar clinician-notes">
+                <div class="sort new-notes">
+                    <button class="dropbtn">Add new notes</button>
+                </div>
+            </div>
+            <div class="cntr">
+                <div class="patient">
+                    <div class="row">
+                        <div class="data"><span class="attribute">Date/Time</span><br><strong>20 March, 11am</strong></div>
+                        <div class="data"><span class="attribute">Notes</span><br><strong>I feel bloated.</strong></div>
+                        <div class="toggle-down"><a href="#"><img src="/chevron-down-solid.svg" height="30px"></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </section>
+
  </div>
  
 {{/with}}
