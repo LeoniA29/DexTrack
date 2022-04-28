@@ -633,15 +633,3 @@ span.attribute {
     font-size: 15px;
     font-weight: 400;
 }
-
-  /* footer */
-
-footer {
-    padding: 5em;
-    text-align: center;
-    background-color:#2C68AD;
-    color: #FFFFFF;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-  

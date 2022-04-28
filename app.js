@@ -42,8 +42,7 @@ app.use(express.urlencoded({ extended: false })) // only needed for URL-encoded 
 
 app.use(express.static(__dirname + "/resources"));
 app.use(express.static(__dirname + "/views"));
-app.use(express.static('public'))
-app.use(express.static(__dirname + "/rsc"))
+app.use(express.static(__dirname + "/public"));
 
 // link to our routers
 const clinicianRouter = require('./routes/clinicianRouter')
