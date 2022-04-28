@@ -21,7 +21,8 @@ const threshold = new mongoose.Schema({
 const data = new mongoose.Schema({
    data_entry: String,
    data_comment: String,
-   data_type: String
+   data_type: String,
+   data_hex: String
 });
 
 

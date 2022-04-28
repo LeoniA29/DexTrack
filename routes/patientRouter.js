@@ -7,7 +7,7 @@ const patientRouter = express.Router()
 const patientController = require('../controllers/patientController')
 
 
-patientRouter.get('/', patientController.getAllPatients)
+patientRouter.get('/', patientController.getAllPatients) // remove later
 patientRouter.get('/:patient_id', patientController.getPatientById)
 
 patientRouter.get('/:patient_id/insertGlucose', patientController.getGlucosePage)
@@ -21,7 +21,6 @@ patientRouter.post('/:patient_id/insertSteps', patientController.insertPatientDa
 
 patientRouter.get('/:patient_id/insertWeight', patientController.getWeightPage)
 patientRouter.post('/:patient_id/insertWeight', patientController.insertPatientData)
-
 
 // export the router
 module.exports = patientRouter

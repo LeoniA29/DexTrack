@@ -1,8 +1,7 @@
 
 <div class="dashboardInformation">
-<h2 id="date">{{todaysDay}}, {{todaysDate}} {{todaysMonth}} </h2>
-
-<h1 id ="welcome">Hi, {{oneItem.first_name}} </h1>
+    <h2 id="date">{{todaysDay}}, {{todaysDate}} {{todaysMonth}} </h2>
+    <h1 id ="welcome">Hi, {{oneItem.first_name}} </h1>
 </div>
 
     <div class="inputContainer">
@@ -12,7 +11,7 @@
                     <img id="glucoseFilled" src="/Glucose_Filled.png" align="center">
                     <h2>{{twoItem.glucose_data.data_entry}}</h2>
                 {{else}}
-                    <a href="/home/patient/{{oneItem._id}}/insertGlucose"> <img id="glucoseEmpty" src="/Glucose_Empty.png" align="center"></a>
+                    <a href="/patient/{{oneItem._id}}/insertGlucose"> <img id="glucoseEmpty" src="/Glucose_Empty.png" align="center"></a>
                 {{/if}}
         </div>
 
@@ -21,9 +20,8 @@
                     <img id="stepsFilled" src="/Exercise_Filled.png" align="center">
                     <h2>{{twoItem.steps_data.data_entry}}</h2>
                 {{else}}
-                    <a href="/home/patient/{{oneItem._id}}/insertSteps"> <img id="stepsEmpty" src="/Exercise_Empty.png" align="center"></a>
+                    <a href="/patient/{{oneItem._id}}/insertSteps"> <img id="stepsEmpty" src="/Exercise_Empty.png" align="center"></a>
                 {{/if}}
-    
         </div>
 
         <div class="Weight">
@@ -31,7 +29,7 @@
                     <img id="weightFilled" src="/Weight_Filled.png" align="center">
                     <h2>{{twoItem.weight_data.data_entry}}</h2>
                 {{else}}
-                    <a href="/home/patient/{{oneItem._id}}/insertWeight"> <img id="weightEmpty" src="/Weight_Empty.png" align="center"></a>
+                    <a href="/patient/{{oneItem._id}}/insertWeight"> <img id="weightEmpty" src="/Weight_Empty.png" align="center"></a>
                 {{/if}}
         </div>
 
@@ -40,7 +38,7 @@
                     <img id="insulinFilled" src="/Insulin_Filled.png" align="center">
                     <h2>{{twoItem.insulin_data.data_entry}}</h2>
                 {{else}}
-                    <a href="/home/patient/{{oneItem._id}}/insertInsulin"> <img id="insulinEmpty" src="/Insulin_Empty.png" align="center"></a>
+                    <a href="/patient/{{oneItem._id}}/insertInsulin"> <img id="insulinEmpty" src="/Insulin_Empty.png" align="center"></a>
                 {{/if}}
         </div>
 
