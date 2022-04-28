@@ -1,5 +1,7 @@
 // import patient model
-const Patient = require('../models/patient')
+const {Patient, DataSet, Data} = require('../models/patient')
+const todaysDate = new Date();
+
 
 // handle request to get all people data instances
 const getAllPatients = async (req, res, next) => {

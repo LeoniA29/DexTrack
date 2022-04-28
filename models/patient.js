@@ -1,4 +1,3 @@
-const {Double} = require('mongodb')
 const mongoose = require('mongoose')
 
 // schema for notes
@@ -9,60 +8,72 @@ const note = new mongoose.Schema({
 
 // schema for threshold
 const threshold = new mongoose.Schema({
-   th_low: String,
-   th_high: String,
-   th_required: Boolean,
-   th_type: {
+   low: Number,
+   high: Number,
+   required: Boolean,
+   type: {
       type: String,
       enum: ['glucose', 'insulin', 'weight', 'steps']
    }
 });
 
-// schema for data input
+// schema for data 
 const data = new mongoose.Schema({
    data_entry: String,
    data_comment: String,
-   data_date: Date,
-   data_type: {
-      type: String,
-      enum: ['glucose', 'insulin', 'weight', 'steps']
-   }
+   data_type: String
 });
 
+
+// schema for data set
 const data_set = new mongoose.Schema({
    set_date: Date,
+   // created_date :{type: Date, default: Date.now},
    glucose_data: { 
       type: data, 
       default: null
    },
-   steps_data: data,
-   weight_data: data,
-   insulin_data: data,
+   steps_data: { 
+      type: data, 
+      default: null
+   },
+   weight_data: { 
+      type: data, 
+      default: null
+   },
+   insulin_data: { 
+      type: data, 
+      default: null
+   }
 });
 
-const patient = new mongoose.Schema({
- first_name: String,
- last_name: String,
- email: String,
- sex: {
-    type: String,
-    enum: ['Female','Male','Prefer not to answer'],
-    default: 'Prefer not to answer'
- },
- dob: Date,
- phone: String,
- occupation: String,
- address: String,
- postcode: String,
- // this is unique from the clinician to each patient
- clinician_message: String,
-// array of objects for the patient defined in the schema below
- clincian_notes: [note],
- threshold_list: [threshold],
- //input_data: [data],
- //input_data: [data_set]
- input_data: [{ entry: String, comment: String, data_type: String, createdAt:{type: Date, default: Date.now}}]
-})
+// schema for patient
+// patient collection 
+const schema = new mongoose.Schema({
+   first_name: String,
+   last_name: String,
+   email: String,
+   sex: {
+      type: String,
+      enum: ['Female','Male','Prefer not to answer'],
+      default: 'Prefer not to answer'
+   },
+   dob: Date,
+   phone: String,
+   occupation: String,
+   address: String,
+   postcode: String,
+   // this is unique from the clinician to each patient
+   clinician_message: String,
+  // array of objects for the patient defined in the schema below
+   clincian_notes: [note],
+   threshold_list: [threshold],
+   input_data: [data_set]
+  })
 
-const Patient = mongoose.model('Patient', patient)
-module.exports = Patient
+
+const Patient = mongoose.model('Patient', schema)
+const Data = mongoose.model('Data', data)
+const DataSet = mongoose.model('DataSet', data_set)
+
+module.exports = {Patient, DataSet, Data}

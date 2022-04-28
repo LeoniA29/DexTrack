@@ -16,7 +16,18 @@ const hbs = exphbs.create({
         isGlucose: g=> g.data_type=='glucose',
         isInsulin: i=> i.data_type=='insulin',
         isWeight: w=> w.data_type=='weight',
-        isSteps: s=> s.data_type=='steps'
+        isSteps: s=> s.data_type=='steps',
+
+        getEntry: function(patientData, options) {
+
+            let out = "<ul>";
+
+            for (let i=1; i < 3; i++) {
+                out = out + "<li>" + options.fn(patientData[i]) + "</li>";
+            }
+            return out + "</ul>";
+
+        },
         //selected: function(val1, val2) {
         //    return val1 == val2 ? 'selected' : '';
         //},

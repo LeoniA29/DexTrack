@@ -1,24 +1,49 @@
 <h1>Displaying patient list of clinician</h1>
-{{#with clinicianItem}}
 
-<h1>Hi Dr.{{first_name}} {{last_name}},</h1>
+<h1>Hi Dr.{{clinicianItem.first_name}} {{clinicianItem.last_name}},</h1>
 <p>this is the list of all your patients </p>
-
-{{/with}}
-
-{{#with patientItem}}
-    {{#if this}}
+{{#if patientItem}}
     <p>you have patients</p>
-        {{#each this}}
-            <li><a href="{{this._id}}/{{this}}">{{this.first_name}} {{this.last_name}}</a></li>
+        {{#each patientItem}}
+            <li>
+                <a href="{{../clinicianItem._id}}/{{_id}}">{{first_name}} {{last_name}}</a>
+                {{!-- 
+                {{#getEntry patientData}}
+                    {{glucose_data.data_entry}}
+                    {{steps_data.data_entry}}
+                    {{weight_data.data_entry}}
+                    {{insulin_data.data_entry}}
+
+                {{/getEntry}}
+                --}}
+                {{@index}}
+                (get people index)
+                {{#with ../patientData.[0]}}
+                    <li>Glucose: {{glucose_data.data_entry}} </li>
+                    <li>Steps: {{steps_data.data_entry}} </li>
+                    <li>Weight: {{weight_data.data_entry}} </li>
+                    <li>Insulin Shot: {{insulin_data.data_entry}} </li>
+                {{/with}}
+
+
+                {{#each (lookup patientData key)}}
+                    {{key}}
+
+                {{/each}}
+            </li>
         {{/each}}
+
     {{else}}
         <p>you have no patient, please register a patient {{patientItem}}</p>
-    {{/if}}
-{{/with}}
+{{/if}}
 
-{{#with clinicianItem}}
+{{#each testData}}
+    <p>{{this.[0].first_name}} {{this.[0].last_name}}</p>
+
+{{/each}}
+    
+
+
 <br>
-<button onclick="location.href='/clinician/{{_id}}/register'" type="button">Register New Patient</button>
+<button onclick="location.href='/clinician/{{clinicianItem._id}}/register'" type="button">Register New Patient</button>
 
-{{/with}}
