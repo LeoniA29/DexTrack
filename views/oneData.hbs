@@ -1,3 +1,20 @@
+<!-- Navigation bar at top of webpage -->
+<div class="navbar">
+    <div class="dropdown">
+        <button class="dropbtn">Dr. Alice Brown <img src="/chevron-down.png"></button>
+        <div class="dropdown-content">
+            <a href="#">Patient comments</a>
+            <a href="#">Sign out</a>
+        </div>
+    </div>
+    <div class="icons">
+        <a href="#"><img src="/house-solid.svg" width="28" height="28" class="change-color"></a>
+        <a href="#"><img src="/circle-half-stroke-solid.svg" width="28" height="28" class="change-color"></a>
+        <a><img src="/Line.png" height="28"></a>
+        <a href="#"><img src="/circle-user-regular.svg" width="28" height="28" class="change-color"></a>
+    </div>
+</div>
+
 {{#with oneItem}}
 
 <ul class="breadcrumb">
@@ -9,25 +26,31 @@
     
      <!-- Each section corresponds to each segment of the patient information in the webpage -->
     <section class="profile">
-        <div class="row">
-            <div class="col"><span class="attribute">Sex</span><br><strong>{{this.sex}}</strong></div>
-            <div class="col"><span class="attribute">Date of birth</span><br><strong>{{this.dob}}</strong></div>
-            <div class="col"><span class="attribute">Email</span><br><strong>{{this.email}}</strong></div>
-            <div class="col"><span class="attribute">Phone number</span><br><strong>{{this.phone}}</strong></div>
-            <div class="col"><span class="attribute">Marital state</span><br><strong>{{this.marital}}</strong></div>
+        <div class="col">
+            <div><span class="attribute">Sex</span><br><strong>{{this.sex}}</strong></div>
+            <div><span class="attribute">Occupation</span><br><strong>{{this.occupation}}</strong></div>
         </div>
-        <div class="row">
-            <div class="col"><span class="attribute">Occupation</span><br><strong>{{this.occupation}}</strong></div>
-            <div class="col"><span class="attribute">Insurance</span><br><strong>{{this.insurance}}</strong></div>
-            <div class="col"><span class="attribute">Address</span><br><strong>{{this.address}}</strong></div>
-            <div class="col"><span class="attribute">Postcode</span><br><strong>{{this.postcode}}</strong></div>
-            <div class="col"><span class="attribute">Registered on</span><br><strong>{{this.regisDate}}</strong></div>
+        <div class="col">
+            <div><span class="attribute">Date of birth</span><br><strong>{{this.dob}}</strong></div>
+            <div><span class="attribute">Insurance</span><br><strong>{{this.insurance}}</strong></div>
+        </div>
+        <div class="col">
+            <div><span class="attribute">Email</span><br><strong>{{this.email}}</strong></div>
+            <div><span class="attribute">Address</span><br><strong>{{this.address}}</strong></div>
+        </div>
+        <div class="col">
+            <div><span class="attribute">Phone number</span><br><strong>{{this.phone}}</strong></div>
+            <div><span class="attribute">Postcode</span><br><strong>{{this.postcode}}</strong></div>
+        </div>
+        <div class="col">
+            <div><span class="attribute">Marital state</span><br><strong>{{this.marital}}</strong></div>
+            <div><span class="attribute">Registered on</span><br><strong>{{this.regisDate}}</strong></div>
         </div>
     </section>
 
-    <div class="row2">
+    <section class="row-2">
         <div class="leftcolumn">
-            <section class="logs">
+            <div class="segment">
                 <h3>Patient logs</h3>
                 <div class="date">
                     <h4><strong>20</strong><br>MON</h4>
@@ -44,73 +67,12 @@
                             </div>
                             <img src="/chevron-down-solid.svg" height="30px">
                         </button>
-                        <button class="accordion" style="border-color:#E13D45;">
-                            <div class="data">
-                                <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
-                            </div>
-                            <div class="data">
-                                <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
-                            </div>
-                            <div class="data">
-                                <span class="attribute">Comment</span><br><strong>I feel fine.</strong>
-                            </div>
-                            <img src="/chevron-down-solid.svg" height="30px">
-                        </button>
-                        <button class="accordion" style="border-color:#E13D45;">
-                            <div class="data">
-                                <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
-                            </div>
-                            <div class="data">
-                                <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
-                            </div>
-                            <div class="data">
-                                <span class="attribute">Comment</span><br><strong>I feel fine.</strong>
-                            </div>
-                            <img src="/chevron-down-solid.svg" height="30px">
-                        </button>
-                        <button class="accordion" style="border-color:#E13D45;">
-                            <div class="data">
-                                <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
-                            </div>
-                            <div class="data">
-                                <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
-                            </div>
-                            <div class="data">
-                                <span class="attribute">Comment</span><br><strong>I feel fine.</strong>
-                            </div>
-                            <img src="/chevron-down-solid.svg" height="30px">
-                        </button>
-                        <button class="accordion" style="border-color:#E13D45;">
-                            <div class="data">
-                                <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
-                            </div>
-                            <div class="data">
-                                <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
-                            </div>
-                            <div class="data">
-                                <span class="attribute">Comment</span><br><strong>I feel fine.</strong>
-                            </div>
-                            <img src="/chevron-down-solid.svg" height="30px">
-                        </button>
-                        <button class="accordion" style="border-color:#E13D45;">
-                            <div class="data">
-                                <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
-                            </div>
-                            <div class="data">
-                                <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
-                            </div>
-                            <div class="data">
-                                <span class="attribute">Comment</span><br><strong>I feel fine.</strong>
-                            </div>
-                            <img src="/chevron-down-solid.svg" height="30px">
-                        </button>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
-
         <div class="rightcolumn">
-            <section class="graphs">
+            <div class="graphs">
                 <div class="card">
                     <img src="/graph1.png" width="320px" height="auto">
                 </div>
@@ -123,17 +85,17 @@
                 <div class="card">
                     <img src="/graph4.png" width="320px" height="auto">
                 </div>
-            </section>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <div class="row3">
+    <section class="row-3">
         <div class="leftcolumn">
-            <section class="thresholds">
+            <div class="segment" id="thresholds">
                 <h3>Patient thresholds</h3>
                 <div class="threshold">
                     <h4 style="color:#E13D45;">Blood glucose level</h4>
-                    <div class="container-1">
+                    <div class="container">
                         <div class="upper">
                             <span class="attribute">Upper bound</span><br><strong>180 mol/L</strong>
                         </div>
@@ -144,7 +106,7 @@
                 </div>
                 <div class="threshold">
                     <h4 style="color:#6F62D0;">Weight</h4>
-                    <div class="container-2">
+                    <div class="container">
                         <div class="upper">
                             <span class="attribute">Upper bound</span><br><strong>70 kg</strong>
                         </div>
@@ -155,7 +117,7 @@
                 </div>
                 <div class="threshold">
                     <h4 style="color:#FF9D47;">Dose of insulin</h4>
-                    <div class="container-3">
+                    <div class="container">
                         <div class="upper">
                             <span class="attribute">Upper bound</span><br><strong>1 dose</strong>
                         </div>
@@ -166,7 +128,7 @@
                 </div>
                 <div class="threshold">
                     <h4 style="color:#55B48B;">Exercise</h4>
-                    <div class="container-4">
+                    <div class="container">
                         <div class="upper">
                             <span class="attribute">Upper bound</span><br><strong>20,000 steps</strong>
                         </div>
@@ -176,17 +138,19 @@
                     </div>
                 </div>
                 <button class="edit"><a href="#" style="color: white; text-decoration:none; font-weight: 500;">Edit</a></button>
-            </section>
+            </div>
         </div>
 
         <div class="rightcolumn">
-            <section class="message">
+            <div class="message">
                 <h4>Message to Patient</h4>
-                <p class="prev-msg"><strong style="font-size:11px; color: #E6F2FE;">Previous message:<br></strong>Keep up the spirit! aksdjfh alsdfj aldfkj aslfdkj alfdskj afldjk afldkj fdlasj lafdkj lafdkj lafdkj l afdkjlfdasjl fadlskjflads lkfdaj </p>
+                <div class="prev-msg"><strong style="font-size:11px; color: #E6F2FE;">Previous message:<br></strong>Keep up the spirit!</div>
                 <textarea type="text" placeholder="New message here." rows="5"></textarea>
                 <button class="send"><a href="#"  style="color: white; text-decoration: none;">Send</a></button>
-            </section>
+            </div>
         </div>
+    </section>
+    
     </div>
 
     <section class="patientComments">
@@ -198,12 +162,10 @@
                 </div>
             </div>
             <div class="cntr">
-                <div class="patient">
-                    <div class="row">
-                        <div class="data"><span class="attribute">Date/Time</span><br><strong>20 March, 11am</strong></div>
-                        <div class="data"><span class="attribute">Notes</span><br><strong>I feel bloated.</strong></div>
-                        <div class="toggle-down"><a href="#"><img src="/chevron-down-solid.svg" height="30px"></a></div>
-                    </div>
+                <div class="entry">
+                    <div class="data"><span class="attribute">Date/Time</span><br><strong>20 March, 11am</strong></div>
+                    <div class="data"><span class="attribute">Notes</span><br><strong>I feel bloated.</strong></div>
+                    <div class="toggle-down"><a href="#"><img src="/chevron-down-solid.svg" height="30px"></a></div>
                 </div>
             </div>
         </div>
