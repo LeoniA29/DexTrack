@@ -1,0 +1,143 @@
+{{!--<h1>Displaying patient list of clinician</h1>
+<h1>Hi Dr.{{clinicianItem.first_name}} {{clinicianItem.last_name}},</h1>
+ <p>this is the list of all your patients </p>
+{{#if patientItem}}
+    <p>you have patients</p>
+        {{#each patientItem}}
+            <li>
+                <a href="{{../clinicianItem._id}}/{{_id}}">{{first_name}} {{last_name}}</a>
+                {{#getEntry patientData}}
+                    {{glucose_data.data_entry}}
+                    {{steps_data.data_entry}}
+                    {{weight_data.data_entry}}
+                    {{insulin_data.data_entry}}
+
+                {{/getEntry}}
+                {{@index}}
+                (get people index)
+                {{#with ../patientData.[0]}}
+                    <li>Glucose: {{glucose_data.data_entry}} </li>
+                    <li>Steps: {{steps_data.data_entry}} </li>
+                    <li>Weight: {{weight_data.data_entry}} </li>
+                    <li>Insulin Shot: {{insulin_data.data_entry}} </li>
+                {{/with}}
+
+
+                {{#each (lookup patientData key)}}
+                    {{key}}
+
+                {{/each}}
+            </li>
+        {{/each}}
+
+    {{else}}
+        <p>you have no patient, please register a patient {{patientItem}}</p>
+{{/if}}
+
+{{#each testData}}
+    <p>{{this.[0].first_name}} {{this.[0].last_name}}</p>
+
+{{/each}}--}}
+
+        <!-- Navigation bar at top of webpage -->
+        <div class="navbar">
+            <div class="dropdown">
+                <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}} <img src="/chevron-down.png"></button>
+                <div class="dropdown-content">
+                    <a href="#">Sign out</a>
+                </div>
+            </div>
+            <div class="icons">
+                <a href="#"><img src="/house-solid.svg" width="28" height="28" class="change-color"></a>
+                <a href="#"><img src="/circle-half-stroke-solid.svg" width="28" height="28" class="change-color"></a>
+                <a><img src="/Line.png" height="28"></i></a>
+                <a href="#"><img src="/circle-user-regular.svg" width="28" height="28" class="change-color"></a>
+            </div>
+        </div>
+    
+<ul class="breadcrumb">
+  <li>Displaying Patient List of Clinician </li>
+</ul>
+<!-- Toggle new patient form -->
+<button id="add_button" onclick="location.href='/clinician/{{clinicianItem._id}}/register'" type="button">Register New Patient</button>
+
+<div class="sections">
+    
+     <!-- Each section corresponds to each segment of the patient information in the webpage -->
+    <section class="patientList">
+        <div class="sticky-bar">
+            <div class="sort">
+                <button class="dropbtn">Sort by <img src="/chevron-down.png"></button>
+                <div class="sort-by">
+                    <a href="#">Name ascending</a>
+                    <a href="#">Name descending</a>
+                </div>
+            </div>
+            <div class="search-bar">
+                <label for="searchbar"><img src="/magnifying-glass-solid.svg" height="16px" class="change-color"></label>
+                <input type="text" placeholder="Search" name="search">
+            </div>
+        </div>
+        {{#if testData}}
+        <div class="patients">
+            {{#each testData}}
+                <button class="patient">
+                    <div class="row">
+                        <div class="col"><span class="attribute">Patient</span><br><strong>{{this.[0].first_name}} {{this.[0].last_name}}</strong></div>
+                        {{#with this.[1]}}
+                            <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong>{{glucose_data.data_entry}} nmol/L</strong></div>
+                            <div class="col"><span class="attribute">Weight</span><br><strong>{{weight_data.data_entry}} kg</strong></div>
+                            <div class="col"><span class="attribute">Dose of Insulin</span><br><strong>{{insulin_data.data_entry}} dose</strong></div>
+                            <div class="col"><span class="attribute">Exercise</span><br><strong>{{steps_data.data_entry}} steps</strong></div>
+                        {{/with}}
+                    </div>
+                </button>
+            {{/each}}
+        </div>
+            {{else}}
+        {{/if}}
+
+    </section>
+
+    <section class="patientComments">
+        <h4>Patient comments</h4>
+        <div class="comments">
+            <div class="sticky-bar"></div>
+            <div class="cntr">
+                <div class="patient">
+                    <div class="row">
+                        <div class="data"><span class="attribute">Date/Time</span><br><strong>20 March, 11am</strong></div>
+                        <div class="data"><span class="attribute">Patient</span><br><strong>Ana Sergawa</strong></div>
+                        <div class="data"><span class="attribute">Comment</span><br><strong>I feel bloated.</strong></div>
+                        <a href="#"><img src="/chevron-down-solid.svg" height="30px"></a>
+                    </div>
+                </div>
+                <div class="patient">
+                    <div class="row">
+                        <div class="data"><span class="attribute">Date/Time</span><br><strong>20 March, 11am</strong></div>
+                        <div class="data"><span class="attribute">Patient</span><br><strong>Ana Sergawa</strong></div>
+                        <div class="data"><span class="attribute">Comment</span><br><strong>I feel bloated.</strong></div>
+                        <a href="#"><img src="/chevron-down-solid.svg" height="30px"></a>
+                    </div>
+                </div>
+                <div class="patient">
+                    <div class="row">
+                        <div class="data"><span class="attribute">Date/Time</span><br><strong>20 March, 11am</strong></div>
+                        <div class="data"><span class="attribute">Patient</span><br><strong>Ana Sergawa</strong></div>
+                        <div class="data"><span class="attribute">Comment</span><br><strong>I feel bloated.</strong></div>
+                        <a href="#"><img src="/chevron-down-solid.svg" height="30px"></a>
+                    </div>
+                </div>
+                <div class="patient">
+                    <div class="row">
+                        <div class="data"><span class="attribute">Date/Time</span><br><strong>20 March, 11am</strong></div>
+                        <div class="data"><span class="attribute">Patient</span><br><strong>Ana Sergawa</strong></div>
+                        <div class="data"><span class="attribute">Comment</span><br><strong>I feel bloated.</strong></div>
+                        <a href="#"><img src="/chevron-down-solid.svg" height="30px"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>

@@ -1,4 +1,5 @@
 const exphbs = require('express-handlebars')
+var currentTime = new Date();
 
 // Import express
 const express = require('express')
@@ -35,14 +36,14 @@ app.engine(
 // set Handlebars view engine
 app.set('view engine', 'hbs')
 
-app.use(express.static('public'))
-
 // Set up to handle POST requests
 app.use(express.json()) // needed if POST data is in JSON format
 app.use(express.urlencoded({ extended: false })) // only needed for URL-encoded input
 
 app.use(express.static(__dirname + "/resources"));
 app.use(express.static(__dirname + "/views"));
+app.use(express.static('public'))
+app.use(express.static(__dirname + "/rsc"))
 
 // link to our routers
 const clinicianRouter = require('./routes/clinicianRouter')
@@ -50,6 +51,7 @@ const patientRouter = require('./routes/patientRouter')
 
 app.use('/clinician', clinicianRouter)
 app.use('/patient', patientRouter)
+
 
 // Tells the app to send the string: "Our demo app is working!" when you hit the '/' endpoint.
 app.get('/', (req, res) => {

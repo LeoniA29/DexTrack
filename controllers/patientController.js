@@ -69,7 +69,6 @@ const getInsulinPage= async(req,res) =>{
     const patient =  await Patient.findById(req.params.patient_id).lean()
     return res.render('insertInsulin', { oneItem: patient })
 }
-
 // function to retrieve steps submission page of a patient
 const getStepsPage= async(req,res) =>{
     const patient = await Patient.findById(req.params.patient_id).lean()
