@@ -46,6 +46,7 @@ app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
 
 app.use(express.static('public'))
+app.use(express.static(__dirname + "/rsc"))
 
 // Set up to handle POST requests
 app.use(express.json()) // needed if POST data is in JSON format
