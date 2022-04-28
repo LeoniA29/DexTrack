@@ -6,11 +6,12 @@ const express = require('express')
 // Set your app up as an express app
 const app = express()
 
-//const days = ['SUN', 'MON', 'TUES', 'WED', 'THURS', 'FRI', 'SAT'];
-//const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEPT","OCT","NOV","DEC"];
-
 // configure Handlebars
 app.engine('hbs', require('exphbs'));
+/*app.engine('hbs', exphbs.engine({      // configure Handlebars 
+    defaultlayout: 'main', 
+    extname: 'hbs' 
+})) */
 app.set('view engine', 'hbs');
 
 // set Handlebars view engine
