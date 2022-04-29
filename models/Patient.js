@@ -14,9 +14,12 @@ const threshold = new mongoose.Schema({
    },
    high: {
       type: Number,
-      default: null,
+      default: null
    },
-   required: Boolean,
+   th_required: {
+      type: Boolean,
+      default: false
+   },
    type: {
       type: String,
       enum: ['glucose', 'insulin', 'weight', 'steps']

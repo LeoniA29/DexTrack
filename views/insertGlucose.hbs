@@ -1,19 +1,20 @@
 {{!< patientLayout}}
 
-{{#with oneItem}}
+{{! displays glucose submission page for a patient}}
+{{#with patient}}
 <div class = "inputDataContainer">
     <div class ="symbol"> 
-        <img id="glucose" src="/Glucose Level.png" align="center">
-        <h2 id = "glucoselevel">GLUCOSE LEVEL</h2>
+        <img id="element" src="/Glucose Level.png" align="center">
+        <h2 id = "title">BLOOD GLUCOSE LEVEL</h2>
     </div>
 
     <div class ="inputDataItems"> 
 
         <form method="POST">
-            <h2>Blood Glucose Level</h2>
-            <input type="text" id="inputGlucoseLevel" placeholder="Enter data" name="data_entry"></input>
-            <h2>Notes</h2>
-            <input type="text" id="inputGlucoseNotes" placeholder="Comment" name="data_comment"></input>
+            <h2 id="labelData">Blood Glucose Level</h2>
+            <input type="text" id="inputData" placeholder="Enter data" name="data_entry"></input>
+            <h2 id="labelNotes">Notes</h2>
+            <input type="text" id="inputNotes" placeholder="Comment" name="data_comment"></input>
             <input type="hidden" name="data_type" value="glucose" /> 
             <input type="hidden" name="data_hex" value="#E13D45" /> 
             <input type="submit" id="doneButton" value="Done"></input> 
@@ -22,3 +23,6 @@
     </div>
 </div>
 {{/with}}
+
+
+

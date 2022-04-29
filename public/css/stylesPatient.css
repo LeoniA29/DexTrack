@@ -11,7 +11,6 @@ main, section, aside{
 h1, h2 {
     margin-top: 5px;
     margin-bottom: 5px;
-    color: black
 }
 
 .container {
@@ -140,6 +139,15 @@ label {
     display: none;
 }
 
+.footer {
+    padding: 2em;
+    text-align: center;
+    background-color:#2C68AD;
+    color: #FFFFFF;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 img[id="logo"] {
     width: 50%;
     margin-top: 30px;
@@ -152,26 +160,22 @@ img[id="logo"] {
     text-align: center;
 }
 
-.symbol {
-    background-color: aqua;
-}
-
-.symbol img[id="glucose"] {
+.symbol img[id="element"] {
     margin-top: 50px;
     height: 150px;
     position: relative;
     top: 25%;
 }
 
-.symbol #glucoselevel {
+.symbol #title {
     top: 25%;
     position: relative;
-    color: #e13d45;
+    color: Black;
     margin-bottom: 30px;
 }
 
 .inputDataItems {
-    background-color: pink;
+   
     display: block;
 }
 
@@ -181,43 +185,56 @@ img[id="logo"] {
     top: 25%;
 }
 
-.inputDataItems #inputGlucoseLevel {
+#labelData {
+    top: 170px;
+}
+
+#labelNotes {
+    top: 190px;
+}
+
+.inputDataItems #inputData {
     border-radius: 20px;
     border: 2px solid #2C68AD;
     height: 30px;
-    width: 280px;
+    width: 60%;
     padding-left: 10px;
     padding-top: 10px;
-    font-size: 28px;
+    font-size: 20px;
     position: relative;
-    top: 25%;
+    top: 180px;
     margin-bottom: 30px;
-    
 }
 
-.inputDataItems #inputGlucoseNotes {
+
+.inputDataItems #inputNotes {
     border-radius: 20px;
     border: 2px solid #2C68AD; 
     height: 100px;
-    width: 280px;
+    width: 60%;
     padding-left: 10px;
     padding-top: 10px;
-    font-size: 28px;
+    font-size: 20px;
     position: relative;
-    top: 25%;
+    top: 200px;
 }
 
-.inputDataItems #doneButton {
-    width: 280px;
+#doneButton {
+    width: 40%;
     height: 30px;
     border-radius: 20px;
     position: relative;
-    top: 30%;
+    top: 280px;
+    border: 2px solid #2C68AD; 
+    background-color: #2C68AD;
+    color: #FFFFFF;
+    height: 30px;
+    font-size: 20px;
 
 }
 
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1024\px) {
     .inputDataContainer {
         display: flex;
     }
@@ -246,6 +263,17 @@ img[id="logo"] {
         margin-right: 0px;
     }
 
+    .inputContainer {
+        margin-top: 50px;
+        display: grid;
+        grid-template-columns: 40% 40%;
+        grid-template-rows: 40% 40%;
+    }
+
+    .inputContainer img {
+        margin-bottom: 60px;
+    }
+
     .sidebar {
         display: none;
     }
@@ -259,23 +287,49 @@ img[id="logo"] {
     }
 
     .Glucose h2 {
-        top: 55%;
-        font-size: 5vw;
+        top: 60%;
+        font-size: 6.5vw;
     }
 
     .Exercise h2 {
-        top: 55%;
-        font-size: 5vw;
+        top: 60%;
+        font-size: 6.5vw;
     }
 
     .Weight h2 {
-        top: 55%;
-        font-size: 5vw;
+        top: 60%;
+        font-size: 6.5vw;
     }
 
     .Insulin h2{
-        top: 55%;
-        font-size: 5vw;
+        top: 60%;
+        font-size: 6.5vw;
+    }
+
+    .inputDataItems {
+        height: 400px;
+    }
+
+    #labelData {
+        top: 20px;
+    }
+
+    
+    #labelNotes {
+        top:30px;
+    }
+    
+    .inputDataItems #inputData {
+        top: 30px;
+        
+    }
+    
+    .inputDataItems #inputNotes {
+        top: 40px;
+    }
+    
+    #doneButton {
+        top: 80px;
     }
 
 }

@@ -48,40 +48,39 @@ const registerPatient = (req, res) => {
 // insert new Patient into database and link to clinician
 const insertPatient= async (req, res) => {
 
-    const ObjectId = require('mongodb').ObjectId
-
+    // saves patient into mongoDB
     var newPatient = new Patient(req.body)
     await newPatient.save()  
 
+    // initializing all thresholds for the patient
+    var thresholds = []
+    var glucose_th = new Threshold({type: "glucose"}); thresholds.push(glucose_th);
+    var steps_th = new Threshold({type: "steps"}); thresholds.push(steps_th);
+    var weight_th = new Threshold({type: "weight"}); thresholds.push(weight_th);
+    var insulin_th = new Threshold({type: "insulin"}); thresholds.push(insulin_th);
+    
     var ID = newPatient._id;
     var patientID = new ObjectId(ID)
-    
-    var all_thresh = []
-    var glucose_th = new Threshold({type: "glucose"}); all_thresh.push(glucose_th);
-    var steps_th = new Threshold({type: "steps"}); all_thresh.push(steps_th);
-    var weight_th = new Threshold({type: "weight"}); all_thresh.push(weight_th);
-    var insulin_th = new Threshold({type: "insulin"}); all_thresh.push(insulin_th);
-    
-
-    for (var i in all_thresh) {
-    
+    for (var i in thresholds) {
+        // iterates through the thresholds array in push it into the patient's
+        // threshold array in mongoDB
         Patient.findByIdAndUpdate(patientID,
-        {$push: {threshold_list: all_thresh[i]}},
-        
-        {safe: true, upsert: true},
-        function(err, doc) {
-            if(err){
-            console.log(err);
-            }else{
-                // return res.redirect('/clinician/'+ req.params.clinician_id);
+            {$push: {threshold_list: thresholds[i]}},
+            {safe: true, upsert: true},
+            function(err, doc) {
+                if(err){
+                    console.log(err);
+                } else{
+                }
             }
-        }
-    )
+        )
     }
 
+    
     var clinician = req.params.clinician_id
     var object_clinician = new ObjectId(clinician)
 
+    // pushes patient into clinician's patient list in mongoDB
     Clinician.findByIdAndUpdate(object_clinician,
         {$push: {patient_list: newPatient}},
         {safe: true, upsert: true},
@@ -89,14 +88,11 @@ const insertPatient= async (req, res) => {
             if(err){
             console.log(err);
             }else{
-                // return res.redirect('/clinician/'+ req.params.clinician_id);
             }
         }
     )
 
-    
-    
-    
+    // redirects back to clinician home page
     return res.redirect('/clinician/'+ req.params.clinician_id);
 
 }
@@ -173,7 +169,6 @@ const getClinicianPatientList =  async (req, res, next) => {
         return next(err)
     }
 }
-
 // exports an object, which contain functions imported by router
 module.exports = {
     getClinicianById,

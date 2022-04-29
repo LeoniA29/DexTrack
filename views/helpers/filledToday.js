@@ -1,5 +1,5 @@
 module.exports = function(handlebars) {
-    return function(x) {
-        return (x!=null);
+    return function(patientData) {
+        return (patientData!=null);
     };
 }
