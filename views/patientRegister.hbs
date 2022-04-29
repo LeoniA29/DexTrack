@@ -1,22 +1,91 @@
-<h2>Register a New Patient</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Register</title>
+    <link rel="stylesheet" href="clinician-styles.css">
+</head>
+<body>
+    <header> 
+        <!-- Navigation bar at top of webpage -->
+        <div class="navbar">
+            <div class="dropdown">
+                <button class="dropbtn">Dr. Alice Brown <img src="/chevron-down.png"></i></button>
+                <div class="dropdown-content">
+                    <a href="#">Sign out</a>
+                </div>
+            </div>
+            <div class="icons">
+                <a class="active" href="#"><img src="/house-solid.svg" width="28" height="28" class="change-color"></a>
+                <a href="#"><img src="/circle-half-stroke-solid.svg" width="28" height="28" class="change-color"></a>
+                <a><img src="/Line.png" height="28"></i></a>
+                <a href="#"><img src="/circle-user-regular.svg" width="28" height="28" class="change-color"></a>
+            </div>
+        </div>
+    </header>   
 
-<form action="/home/patient/register" method="POST">
+    <main>
+        <h2>Register a New Patient</h2>
+        <div class="row">
+             <div class="container">
+                <form action="/home/patient/register" method="POST">
 
-<h3>Create an account</h3>
+                <div class="col-50">
+                    <h3>Create an Account</h3>
+                    <div class="fname">
+                        <label for="fname">First name</label>
+                        <input type="text" placeholder="First name" name="firstName"/>
+                    </div>
+                    <div class="lname">
+                        <label for="lname">Last name</label>
+                        <input type="text" placeholder="Last name" name="lastName"/>
+                    </div>
+                    <div class="email">
+                        <label for="email">Email</label>
+                        <input type="text" placeholder="Email address" name="email"/>
+                    </div>
+                </div>
 
-    <input type="text" placeholder="Given name" name="givenName" style="Width:200px" />
-    <input type="text" placeholder="Family name" name="familyName"  style="Width:200px" />
-    <br><br>
-    <input type="text" placeholder="Email address" name="email" style="Width:300px"/>
+                <div class="col-50">
+                    <h3>Personal Details</h3>
+                    <div class="sex">
+                        <label for="sex">Sex</label>
+                        <input type="text" placeholder="Sex" name="sex"/>
+                    </div>
+                    <div class="dob">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" placeholder="Date of Birth" name="dob"/>
+                    </div>
+                    <div class="phone">
+                        <label for="phone">Phone Number</label>
+                        <input type="text" placeholder="Phone Number" name="phone"/>
+                    </div>
+                    <div class="mstate">
+                        <label for="mstate">Marital State</label>
+                        <input type="text" placeholder="Marital State" name="mstate"/>
+                    </div>
+                    <div class="occupation">
+                        <label for="occupation">Occupation</label>
+                        <input type="text" placeholder="Occupation" name="occupation"/>
+                    </div>
+                    <div class="address">
+                        <label for="address">Address</label>
+                        <input type="text" placeholder="Address" name="address"/>
+                    </div>
+                    <div class="postcode">
+                        <label for="postcode">Postcode</label>
+                        <input type="text" placeholder="Postcode" name="postcode"/>
+                    </div>
+                </div>
+ 
+                <input href="#" type="submit" value="Submit" class="submit-btn">
+                </form>
+            </div>
+        </div>
 
-<h3>Personal Details</h3>
 
-    <input type="text" placeholder="Sex" name="sex" />
-    <input type="date" placeholder="Date of Birth" name="dob" />
-    <input type="text" placeholder="Phone number" name="phone" />
-    <br><br>
-    <input type="text" placeholder="Occupation" name="occupation" style="Width:200px" />
-    <input type="text" placeholder="Address" name="address" style="Width:300px"/>
-    <input type="text" placeholder="Postcode" name="occupation" />
-
-</form>
+    </main> 
+</body>
+</html>

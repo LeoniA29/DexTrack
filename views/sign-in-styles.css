@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+h4 {
+    font-family: 'Lexend Deca', sans-serif;;
+    font-weight: 500;
+    size: 32pt;
+    color: #2D68AD;
+    margin-left: 50px;
+}
+
+.forgot-pass {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #2D68AD;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+}
+
+.sign-in body {
+    background-color: #C3E1FF;
+}
+
+.sign-in main {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+/* Background img */
+.sign-in {
+    background-image: url("rsc/clouds-02.png");
+}
