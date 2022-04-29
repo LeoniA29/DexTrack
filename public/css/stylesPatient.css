@@ -160,10 +160,6 @@ img[id="logo"] {
     text-align: center;
 }
 
-.symbol {
-    background-color: aqua;
-}
-
 .symbol img[id="glucose"] {
     margin-top: 50px;
     height: 150px;
@@ -174,12 +170,12 @@ img[id="logo"] {
 .symbol #glucoselevel {
     top: 25%;
     position: relative;
-    color: #e13d45;
+    color: Black;
     margin-bottom: 30px;
 }
 
 .inputDataItems {
-    background-color: pink;
+   
     display: block;
 }
 
