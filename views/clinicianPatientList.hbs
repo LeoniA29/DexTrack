@@ -44,6 +44,7 @@
         <div class="scroll">
             {{#if testData}}
                 {{#each testData}}
+                {{this}}
                     <button class="entry">
                         <div class="col" id="overflow"><span class="attribute">Patient</span><br><strong>{{this.[0].first_name}} {{this.[0].last_name}}</strong></div>
                             
