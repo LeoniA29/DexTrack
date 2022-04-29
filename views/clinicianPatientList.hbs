@@ -10,10 +10,10 @@
         </div>
     </div>
     <div class="icons">
-        <a href="#"><img src="/house-solid.svg" width="28" height="28" class="change-color"></a>
-        <a href="#"><img src="/circle-half-stroke-solid.svg" width="28" height="28" class="change-color"></a>
+        <a href="#"><img src="/house-solid.svg" id="icon" class="change-color"></a>
+        <a href="#"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
         <a><img src="/Line.png" height="28"></a>
-        <a href="#"><img src="/circle-user-regular.svg" width="28" height="28" class="change-color"></a>
+        <a href="#"><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
     </div>
 </div>
 
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="search-bar">
-                <label for="searchbar"><img src="/magnifying-glass-solid.svg" height="16px" class="change-color"></label>
+                <label for="searchbar"><img src="/magnifying-glass-solid.svg" class="change-color"></label>
                 <input type="text" placeholder="Search" name="search">
             </div>
         </div>
@@ -52,7 +52,7 @@
 
                                 <!-- Checks if data should be highlighted because it exceeds threshold -->
                                 {{#if (exceedThreshold this.[2] this.[1].glucose_data.data_entry) }}
-                                    <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong style="color:#E13D45;">{{this.[1].glucose_data.data_entry}} nmol/L</strong></div>
+                                    <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong id="threshold-check">{{this.[1].glucose_data.data_entry}} nmol/L</strong></div>
                                 {{else}}
                                     <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong>{{this.[1].glucose_data.data_entry}} nmol/L</strong></div>
                                 {{/if}}
@@ -63,7 +63,7 @@
 
                             {{#if (filledToday this.[1].weight_data)}}
                                 {{#if (exceedThreshold this.[2] this.[1].weight_data.data_entry) }}
-                                    <div class="col"><span class="attribute">Weight</span><br><strong style="color:#E13D45;">{{this.[1].weight_data.data_entry}} kg</strong></div>
+                                    <div class="col"><span class="attribute">Weight</span><br><strong id="threshold-check">{{this.[1].weight_data.data_entry}} kg</strong></div>
                                 {{else}}
                                     <div class="col"><span class="attribute">Weight</span><br><strong>{{this.[1].weight_data.data_entry}} kg</strong></div>
                                 {{/if}}
@@ -73,7 +73,7 @@
 
                             {{#if (filledToday this.[1].insulin_data)}}
                                 {{#if (exceedThreshold this.[2] this.[1].insulin_data.data_entry) }}
-                                     <div class="col"><span class="attribute">Dose of Insulin</span><br><strong style="color:#E13D45;">{{this.[1].insulin_data.data_entry}} dose</strong></div>
+                                     <div class="col"><span class="attribute">Dose of Insulin</span><br><strong id="threshold-check">{{this.[1].insulin_data.data_entry}} dose</strong></div>
                                 {{else}}
                                     <div class="col"><span class="attribute">Dose of Insulin</span><br><strong>{{this.[1].insulin_data.data_entry}} dose</strong></div>
                                 {{/if}}
@@ -84,7 +84,7 @@
 
                             {{#if (filledToday this.[1].steps_data)}}
                                 {{#if (exceedThreshold this.[2] this.[1].steps_data.data_entry) }}
-                                    <div class="col"><span class="attribute">Exercise</span><br><strong style="color:#E13D45;">{{this.[1].steps_data.data_entry}} steps</strong></div>
+                                    <div class="col"><span class="attribute">Exercise</span><br><strong id="threshold-check">{{this.[1].steps_data.data_entry}} steps</strong></div>
                                 {{else}}
                                     <div class="col"><span class="attribute">Exercise</span><br><strong>{{this.[1].steps_data.data_entry}} steps</strong></div>
                                 {{/if}}

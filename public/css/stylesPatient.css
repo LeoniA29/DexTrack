@@ -140,7 +140,7 @@ label {
 }
 
 .footer {
-    padding: 2em;
+    padding: 5em;
     text-align: center;
     background-color:#2C68AD;
     color: #FFFFFF;
@@ -154,6 +154,11 @@ img[id="logo"] {
     margin-bottom: 20px;
 }
 
+#glucoseEmpty.Glucose, #glucoseFilled.Glucose, #weightEmpty.Weight, #weightFilled.Weight, #insulinEmpty.Insulin, #insulinFilled.Insulin, #exerciseEmpty.Exercise, #exerciseFilled.Exercise {
+    align-self: center;
+}
+
+
 /* Input Data */
 
 .inputDataContainer {
@@ -165,6 +170,7 @@ img[id="logo"] {
     height: 150px;
     position: relative;
     top: 25%;
+    align-self: center;
 }
 
 .symbol #title {

@@ -1,4 +1,5 @@
 /* body structure */
+/* css files used for clinician UI still under development */
 
 header, body, footer, button, input, textarea {
     font-family: Lexend Deca;
@@ -182,7 +183,7 @@ button {
 }
 
 
-/* patient list */
+/* clinicianPatientList */
 
 .patientList .scroll p{
     text-align: center;
@@ -206,6 +207,10 @@ button {
 
 .search-bar input {
     border-width: 0px;
+}
+
+.search-bar img {
+    height: 16px;
 }
 
 .sort-by {
@@ -234,8 +239,11 @@ button {
     display: block;
 }
 
+#threshold-check {
+    color:#E13D45;
+}
 
-/* patient comments */
+/* patient comments hbs (under development) */
 
 .patient-comments {
     background-color:#F2F2F2;
@@ -256,7 +264,7 @@ button {
 }
 
 
-/* patient profile */
+/* patient profile hbs (under development) */
 
 .profile {
     background-color:#E6F2FE;
@@ -287,7 +295,7 @@ span.attribute {
 }
 
 
-/* patient log */
+/* patient log hbs (under development) */
 
 .date {
     border-radius:  36px;
@@ -312,7 +320,7 @@ span.attribute {
 }
 
 
-/* graphs */
+/* graphs hbs (under development) */
 
 .graphs {
     width: 320px;
@@ -330,7 +338,7 @@ span.attribute {
 }
 
 
-/* thresholds */
+/* thresholds hbs (under development) */
 
 #thresholds.segment {
     height: fit-content;
@@ -385,7 +393,7 @@ span.attribute {
 }
 
 
-/* message */
+/* message hbs (under development) */
 
 .rightcolumn .message {
     background-color:#E6F2FE;
@@ -451,7 +459,7 @@ span.attribute {
 }
 
 
-/* clinician notes */
+/* clinician notes hbs (under development) */
 
 .clinician-notes {
     padding-top: 20px;

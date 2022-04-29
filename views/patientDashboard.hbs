@@ -3,7 +3,7 @@
 {{! displays today's date information and patient's first name}}
 <div class="dashboardInformation">
     <h2 id="date">{{todaysDay}}, {{todaysDate}} {{todaysMonth}} </h2>
-    <h1 id ="welcome">Hi, {{patient.first_name}} </h1>
+    <h1 id ="welcome">Hi, {{patient.first_name}} {{patient.last_name}}</h1>
 </div>
 
     <div class="inputContainer">
@@ -11,50 +11,50 @@
         {{! handles glucose data input of a patient}}
         <div class="Glucose">
                 {{#if (isRequired patientData.glucose_data patient.threshold_list "glucose")}} 
-                    <a href="/patient/{{patient._id}}/insertGlucose"> <img id="glucoseEmpty" src="/Glucose_Required.png" align="center"></a>
+                    <a href="/patient/{{patient._id}}/insertGlucose"> <img id="glucoseEmpty" src="/Glucose_Required.png"></a>
                 {{else if (filledToday patientData.glucose_data)}}
-                    <img id="glucoseFilled" src="/Glucose_Filled.png" align="center">
+                    <img id="glucoseFilled" src="/Glucose_Filled.png">
                     <h2>{{patientData.glucose_data.data_entry}}</h2>
                 {{else}}
-                    <a href="/patient/{{patient._id}}/insertGlucose"> <img id="glucoseEmpty" src="/Glucose_Empty.png" align="center"></a>
+                    <a href="/patient/{{patient._id}}/insertGlucose"> <img id="glucoseEmpty" src="/Glucose_Empty.png"></a>
                 {{/if}}
-        </div>
-
-        {{! handles step count input of a patient}}
-        <div class="Exercise">
-                {{#if (isRequired patientData.steps_data patient.threshold_list "steps")}}
-                    <a href="/patient/{{patient._id}}/insertSteps"> <img id="stepsRequired" src="/Exercise_Required.png" align="center"></a>
-                {{else if (filledToday patientData.steps_data) }}
-                    <img id="stepsFilled" src="/Exercise_Filled.png" align="center">
-                    <h2>{{patientData.steps_data.data_entry}}</h2>
-                {{else}}
-                    <a href="/patient/{{patient._id}}/insertSteps"> <img id="stepsEmpty" src="/Exercise_Empty.png" align="center"></a>
-                {{/if}}
-           
         </div>
 
         {{! handles weight input of a patient}}
         <div class="Weight">
                 {{#if (isRequired patientData.weight_data patient.threshold_list "weight")}}
-                    <a href="/patient/{{patient._id}}/insertWeight"> <img id="weightEmpty" src="/Weight_Required.png" align="center"></a>
+                    <a href="/patient/{{patient._id}}/insertWeight"> <img id="weightEmpty" src="/Weight_Required.png"></a>
                 {{else if (filledToday patientData.weight_data)}}
-                    <img id="weightFilled" src="/Weight_Filled.png" align="center">
+                    <img id="weightFilled" src="/Weight_Filled.png">
                     <h2>{{patientData.weight_data.data_entry}}</h2>
                 {{else}}
-                    <a href="/patient/{{patient._id}}/insertWeight"> <img id="weightEmpty" src="/Weight_Empty.png" align="center"></a>
+                    <a href="/patient/{{patient._id}}/insertWeight"> <img id="weightEmpty" src="/Weight_Empty.png"></a>
                 {{/if}}
         </div>
 
         {{! handles insulin input of a patient}}
         <div class="Insulin">
                 {{#if (isRequired patientData.insulin_data patient.threshold_list "insulin")}}
-                    <a href="/patient/{{patient._id}}/insertInsulin"> <img id="insulinEmpty" src="/Insulin_Required.png" align="center"></a>
+                    <a href="/patient/{{patient._id}}/insertInsulin"> <img id="insulinEmpty" src="/Insulin_Required.png"></a>
                 {{else if (filledToday patientData.insulin_data)}}
-                    <img id="insulinFilled" src="/Insulin_Filled.png" align="center">
+                    <img id="insulinFilled" src="/Insulin_Filled.png">
                     <h2>{{patientData.insulin_data.data_entry}}</h2>
                 {{else}}
-                    <a href="/patient/{{patient._id}}/insertInsulin"> <img id="insulinEmpty" src="/Insulin_Empty.png" align="center"></a>
+                    <a href="/patient/{{patient._id}}/insertInsulin"> <img id="insulinEmpty" src="/Insulin_Empty.png"></a>
                 {{/if}}
+        </div>
+
+        {{! handles step count input of a patient}}
+        <div class="Exercise">
+                {{#if (isRequired patientData.steps_data patient.threshold_list "steps")}}
+                    <a href="/patient/{{patient._id}}/insertSteps"> <img id="stepsRequired" src="/Exercise_Required.png"></a>
+                {{else if (filledToday patientData.steps_data) }}
+                    <img id="stepsFilled" src="/Exercise_Filled.png">
+                    <h2>{{patientData.steps_data.data_entry}}</h2>
+                {{else}}
+                    <a href="/patient/{{patient._id}}/insertSteps"> <img id="stepsEmpty" src="/Exercise_Empty.png"></a>
+                {{/if}}
+           
         </div>
 
     </div>
