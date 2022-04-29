@@ -3,11 +3,6 @@ module.exports = function(handlebars) {
         th_boolean = false;
         if (x!=null) {
             x.
-
-
-
-
-
         }
 
         return (th_boolean);
