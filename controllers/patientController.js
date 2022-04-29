@@ -4,7 +4,8 @@ const {Patient, DataSet, Threshold, Data} = require('../models/patient')
 const ObjectId = require('mongodb').ObjectId // ObjectID constant 
 const todaysDate = new Date(); // today's date constant 
 
-// remove later, not need by patients
+
+// retrieve all existing patients
 const getAllPatients = async (req, res, next) => {
     try {
         const patients = await Patient.find().lean()
@@ -12,7 +13,7 @@ const getAllPatients = async (req, res, next) => {
     } catch (err) {
         return next(err)
     }
-   }
+}
 
 // function to retrieve a patient's dashboard using their patient ID
 const getPatientById = async(req, res, next) => {
@@ -27,7 +28,7 @@ const getPatientById = async(req, res, next) => {
             // iterating through each patient's time-series inputs
             if ( patient.input_data[i].set_date.getDate() == todaysDate.getDate() ) {
                 // render today's patient data if found one 
-                return res.render('patientDashboard', { oneItem: patient, twoItem: patient.input_data[i]} )
+                return res.render('patientDashboard', { patient: patient, patientData: patient.input_data[i]} )
         }
 
     }
@@ -51,7 +52,7 @@ const getPatientById = async(req, res, next) => {
         )
 
         const n = patient.input_data.length // new input_data entry is pushed at the back of the array 
-        return res.render('patientDashboard', { oneItem: patient, twoItem: patient.input_data[n]})
+        return res.render('patientDashboard', { patient: patient, patientData: patient.input_data[n]})
 
     } catch (err) {
         return next(err)
@@ -61,24 +62,24 @@ const getPatientById = async(req, res, next) => {
 // function to retrieve glucose submission page of a patient
 const getGlucosePage= async (req,res) =>{
     const patient = await Patient.findById(req.params.patient_id).lean()
-    return res.render('insertGlucose', { oneItem: patient })
+    return res.render('insertGlucose', { patient: patient })
 }
 
 // function to retrieve insulin submission page of a patient
 const getInsulinPage= async(req,res) =>{
     const patient =  await Patient.findById(req.params.patient_id).lean()
-    return res.render('insertInsulin', { oneItem: patient })
+    return res.render('insertInsulin', { patient: patient })
 }
 // function to retrieve steps submission page of a patient
 const getStepsPage= async(req,res) =>{
     const patient = await Patient.findById(req.params.patient_id).lean()
-    return res.render('insertSteps', { oneItem: patient})
+    return res.render('insertSteps', { patient: patient})
 }
 
 // function to retrieve weight submission page of a patient
 const getWeightPage= async(req,res) =>{
     const patient =  await Patient.findById(req.params.patient_id).lean()
-    return res.render('insertWeight', { oneItem: patient })
+    return res.render('insertWeight', { patient: patient })
 }
 
 
@@ -176,21 +177,16 @@ const insertPatientData= async(req, res, next) => {
     }
 }
 
-const getAboutDextrack= (req, res)=> {
-    return res.render('About Dextrack')
-}
-   
 
 // exports objects containing functions imported by router
 module.exports = {
-    getAllPatients, // remove later
+    getAllPatients, 
     insertPatientData,
     getPatientById,
     getGlucosePage,
     getInsulinPage,
     getStepsPage,
-    getWeightPage,
-    getAboutDextrack
+    getWeightPage
 }
 
 

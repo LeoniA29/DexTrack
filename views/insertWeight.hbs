@@ -1,6 +1,7 @@
 {{!< patientLayout}}
 
-{{#with oneItem}}
+{{! displays weight submission page for a patient}}
+{{#with patient}}
 <div class = "inputDataContainer">
     <div class ="symbol"> 
         <img id="element" src="/Weight.png" align="center">
@@ -13,7 +14,7 @@
             <h2 id="labelData">Weight Measured</h2>
             <input type="text" id="inputData" placeholder="Enter data" name="data_entry"></input>
             <h2 id="labelNotes">Notes</h2>
-            <input type="text" id="inputGlucoseNotes" placeholder="Comment" name="data_comment"></input>
+            <input type="text" id="inputNotes" placeholder="Comment" name="data_comment"></input>
             <input type="hidden" name="data_type" value="weight" /> 
              <input type="hidden" name="data_hex" value="#6F62D0" /> 
             <input type="submit" id="doneButton" value="Done"></input> 

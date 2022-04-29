@@ -3,10 +3,11 @@ const express = require('express')
 // create our Router object
 const patientRouter = express.Router()
 
-// import people controller functions
+// import patient controller functions
 const patientController = require('../controllers/patientController')
 
 
+// patient routes used
 patientRouter.get('/', patientController.getAllPatients) // remove later
 patientRouter.get('/:patient_id', patientController.getPatientById)
 
