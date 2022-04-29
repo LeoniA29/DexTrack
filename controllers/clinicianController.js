@@ -162,7 +162,7 @@ const getClinicianPatientList =  async (req, res, next) => {
         //console.log(patients[i]._id.toString())
         // console.log(patientList)
         //console.log(data)
-        //console.log(test)
+        console.log(test)
         return res.render('clinicianPatientList', { clinicianItem: clinician, testData: test})
     
     } catch (err) {
