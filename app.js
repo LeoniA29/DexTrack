@@ -1,4 +1,4 @@
-const exphbs = require('express-handlebars')
+//const exphbs = require('express-handlebars')
 var currentTime = new Date();
 
 // Import express
@@ -7,11 +7,11 @@ const express = require('express')
 const app = express()
 
 // configure Handlebars
-//app.engine('hbs', exphbs);
-app.engine('hbs', exphbs.engine({      // configure Handlebars 
+app.engine('hbs', require('exphbs'));
+/*app.engine('hbs', exphbs.engine({      // configure Handlebars 
     defaultlayout: 'main', 
     extname: 'hbs' 
-})) 
+})) */
 
 // set Handlebars view engine
 app.set('view engine', 'hbs');
@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
 })
 
 // Tells the app to listen on port 3000 and logs that information to the console.
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 3300, () => {
     console.log('DexTrack is alive!')
 })
 

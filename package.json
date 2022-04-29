@@ -19,8 +19,8 @@
   },
   "homepage": "https://github.com/LeoniA29/DexTrack#readme",
   "dependencies": {
+    "exphbs": "^1.2.0",
     "express": "^4.17.3",
-    "express-handlebars": "^6.0.4",
     "mongodb": "^4.5.0",
     "mongoose": "^6.3.0"
   },
