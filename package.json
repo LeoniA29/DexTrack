@@ -21,6 +21,7 @@
   "dependencies": {
     "exphbs": "^1.2.0",
     "express": "^4.17.3",
+    "handlebars": "^4.7.7",
     "mongodb": "^4.5.0",
     "mongoose": "^6.3.0"
   },
