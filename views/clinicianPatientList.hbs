@@ -18,7 +18,7 @@
 </div>
 
 <ul class="breadcrumb">
-  <li>Displaying Patient List of Clinician </li>
+  <li>Your Patient List</li>
 </ul>
 
 <div class="sections">
@@ -51,7 +51,7 @@
                             {{#if (filledToday this.[1].glucose_data)}}
 
                                 <!-- Checks if data should be highlighted because it exceeds threshold -->
-                                {{#if (exceedThreshold this.[2] this.[1].glucose_data.data_entry) }}
+                                {{#if (exceedThreshold this.[2] this.[1].glucose_data) }}
                                     <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong id="threshold-check">{{this.[1].glucose_data.data_entry}} nmol/L</strong></div>
                                 {{else}}
                                     <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong>{{this.[1].glucose_data.data_entry}} nmol/L</strong></div>
@@ -62,7 +62,7 @@
                             {{/if}}
 
                             {{#if (filledToday this.[1].weight_data)}}
-                                {{#if (exceedThreshold this.[2] this.[1].weight_data.data_entry) }}
+                                {{#if (exceedThreshold this.[2] this.[1].weight_data) }}
                                     <div class="col"><span class="attribute">Weight</span><br><strong id="threshold-check">{{this.[1].weight_data.data_entry}} kg</strong></div>
                                 {{else}}
                                     <div class="col"><span class="attribute">Weight</span><br><strong>{{this.[1].weight_data.data_entry}} kg</strong></div>
@@ -72,7 +72,7 @@
                             {{/if}}
 
                             {{#if (filledToday this.[1].insulin_data)}}
-                                {{#if (exceedThreshold this.[2] this.[1].insulin_data.data_entry) }}
+                                {{#if (exceedThreshold this.[2] this.[1].insulin_data) }}
                                      <div class="col"><span class="attribute">Dose of Insulin</span><br><strong id="threshold-check">{{this.[1].insulin_data.data_entry}} dose</strong></div>
                                 {{else}}
                                     <div class="col"><span class="attribute">Dose of Insulin</span><br><strong>{{this.[1].insulin_data.data_entry}} dose</strong></div>
@@ -83,7 +83,7 @@
 
 
                             {{#if (filledToday this.[1].steps_data)}}
-                                {{#if (exceedThreshold this.[2] this.[1].steps_data.data_entry) }}
+                                {{#if (exceedThreshold this.[2] this.[1].steps_data) }}
                                     <div class="col"><span class="attribute">Exercise</span><br><strong id="threshold-check">{{this.[1].steps_data.data_entry}} steps</strong></div>
                                 {{else}}
                                     <div class="col"><span class="attribute">Exercise</span><br><strong>{{this.[1].steps_data.data_entry}} steps</strong></div>
