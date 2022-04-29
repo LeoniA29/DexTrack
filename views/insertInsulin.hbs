@@ -1,11 +1,27 @@
+{{!< patientLayout}}
 
-<h1>Displaying insert insulin page</h1>
 {{#with oneItem}}
-<form method="POST">
-    <input type="text" placeholder="Enter data" name="data_entry" />
-    <input type="text" placeholder="Comment" name="data_comment" />
-    <input type="hidden" name="data_type" value="insulin" /> 
-    <input type="hidden" name="data_hex" value="#FF9D47" /> 
-    <input type="submit"/>
-</form>
+<div class = "inputDataContainer">
+    <div class ="symbol"> 
+        <img id="glucose" src="/Insulin.png" align="center">
+        <h2 id = "glucoselevel">Insulin LEVEL</h2>
+    </div>
+
+    <div class ="inputDataItems"> 
+
+        <form method="POST">
+            <h2 id="bloodGlucoseLevel">Insulin Level</h2>
+            <input type="text" id="inputGlucoseLevel" placeholder="Enter data" name="data_entry"></input>
+            <h2 id="bloodGlucoseNotes">Notes</h2>
+            <input type="text" id="inputGlucoseNotes" placeholder="Comment" name="data_comment"></input>
+            <input type="hidden" name="data_type" value="insulin" /> 
+            <input type="hidden" name="data_hex" value="#FF9D47" />  
+            <input type="submit" id="doneButton" value="Done"></input> 
+        </form>
+        
+    </div>
+</div>
 {{/with}}
+
+
+

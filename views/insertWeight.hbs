@@ -1,10 +1,24 @@
-<h1>Displaying insert weight page</h1>
+{{!< patientLayout}}
+
 {{#with oneItem}}
-<form method="POST">
-    <input type="text" placeholder="Enter data" name="data_entry" />
-    <input type="text" placeholder="Comment" name="data_comment" />
-    <input type="hidden" name="data_type" value="weight" /> 
-    <input type="hidden" name="data_hex" value="#6F62D0" /> 
-    <input type="submit" />
-</form>
+<div class = "inputDataContainer">
+    <div class ="symbol"> 
+        <img id="glucose" src="/Weight.png" align="center">
+        <h2 id = "glucoselevel">Weight</h2>
+    </div>
+
+    <div class ="inputDataItems"> 
+
+        <form method="POST">
+            <h2 id="bloodGlucoseLevel">Weight</h2>
+            <input type="text" id="inputGlucoseLevel" placeholder="Enter data" name="data_entry"></input>
+            <h2 id="bloodGlucoseNotes">Notes</h2>
+            <input type="text" id="inputGlucoseNotes" placeholder="Comment" name="data_comment"></input>
+            <input type="hidden" name="data_type" value="weight" /> 
+             <input type="hidden" name="data_hex" value="#6F62D0" /> 
+            <input type="submit" id="doneButton" value="Done"></input> 
+        </form>
+        
+    </div>
+</div>
 {{/with}}
