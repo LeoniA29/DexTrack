@@ -160,14 +160,14 @@ img[id="logo"] {
     text-align: center;
 }
 
-.symbol img[id="glucose"] {
+.symbol img[id="element"] {
     margin-top: 50px;
     height: 150px;
     position: relative;
     top: 25%;
 }
 
-.symbol #glucoselevel {
+.symbol #title {
     top: 25%;
     position: relative;
     color: Black;
@@ -185,15 +185,15 @@ img[id="logo"] {
     top: 25%;
 }
 
-#bloodGlucoseLevel {
+#labelData {
     top: 170px;
 }
 
-#bloodGlucoseNotes {
+#labelNotes {
     top: 190px;
 }
 
-.inputDataItems #inputGlucoseLevel {
+.inputDataItems #inputData {
     border-radius: 20px;
     border: 2px solid #2C68AD;
     height: 30px;
@@ -207,7 +207,7 @@ img[id="logo"] {
 }
 
 
-.inputDataItems #inputGlucoseNotes {
+.inputDataItems #inputNotes {
     border-radius: 20px;
     border: 2px solid #2C68AD; 
     height: 100px;
@@ -310,21 +310,21 @@ img[id="logo"] {
         height: 400px;
     }
 
-    #bloodGlucoseLevel {
+    #labelData {
         top: 20px;
     }
 
     
-    #bloodGlucoseNotes {
+    #labelNotes {
         top:30px;
     }
     
-    .inputDataItems #inputGlucoseLevel {
+    .inputDataItems #inputData {
         top: 30px;
         
     }
     
-    .inputDataItems #inputGlucoseNotes {
+    .inputDataItems #inputNotes {
         top: 40px;
     }
     
