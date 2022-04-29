@@ -38,23 +38,7 @@
 {{#each testData}}
     <p>{{this.[0].first_name}} {{this.[0].last_name}}</p>
 
-{{/each}}--}}
-
-        <!-- Navigation bar at top of webpage -->
-        <div class="navbar">
-            <div class="dropdown">
-                <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}} <img src="/chevron-down.png"></button>
-                <div class="dropdown-content">
-                    <a href="#">Sign out</a>
-                </div>
-            </div>
-            <div class="icons">
-                <a href="#"><img src="/house-solid.svg" width="28" height="28" class="change-color"></a>
-                <a href="#"><img src="/circle-half-stroke-solid.svg" width="28" height="28" class="change-color"></a>
-                <a><img src="/Line.png" height="28"></i></a>
-                <a href="#"><img src="/circle-user-regular.svg" width="28" height="28" class="change-color"></a>
-            </div>
-        </div>
+{{/each}}
     
 <ul class="breadcrumb">
   <li>Displaying Patient List of Clinician </li>
@@ -98,46 +82,99 @@
             {{else}}
         {{/if}}
 
-    </section>
+    </section> 
+--}}
 
-    <section class="patientComments">
-        <h4>Patient comments</h4>
-        <div class="comments">
-            <div class="sticky-bar"></div>
-            <div class="cntr">
-                <div class="patient">
-                    <div class="row">
-                        <div class="data"><span class="attribute">Date/Time</span><br><strong>20 March, 11am</strong></div>
-                        <div class="data"><span class="attribute">Patient</span><br><strong>Ana Sergawa</strong></div>
-                        <div class="data"><span class="attribute">Comment</span><br><strong>I feel bloated.</strong></div>
-                        <a href="#"><img src="/chevron-down-solid.svg" height="30px"></a>
-                    </div>
-                </div>
-                <div class="patient">
-                    <div class="row">
-                        <div class="data"><span class="attribute">Date/Time</span><br><strong>20 March, 11am</strong></div>
-                        <div class="data"><span class="attribute">Patient</span><br><strong>Ana Sergawa</strong></div>
-                        <div class="data"><span class="attribute">Comment</span><br><strong>I feel bloated.</strong></div>
-                        <a href="#"><img src="/chevron-down-solid.svg" height="30px"></a>
-                    </div>
-                </div>
-                <div class="patient">
-                    <div class="row">
-                        <div class="data"><span class="attribute">Date/Time</span><br><strong>20 March, 11am</strong></div>
-                        <div class="data"><span class="attribute">Patient</span><br><strong>Ana Sergawa</strong></div>
-                        <div class="data"><span class="attribute">Comment</span><br><strong>I feel bloated.</strong></div>
-                        <a href="#"><img src="/chevron-down-solid.svg" height="30px"></a>
-                    </div>
-                </div>
-                <div class="patient">
-                    <div class="row">
-                        <div class="data"><span class="attribute">Date/Time</span><br><strong>20 March, 11am</strong></div>
-                        <div class="data"><span class="attribute">Patient</span><br><strong>Ana Sergawa</strong></div>
-                        <div class="data"><span class="attribute">Comment</span><br><strong>I feel bloated.</strong></div>
-                        <a href="#"><img src="/chevron-down-solid.svg" height="30px"></a>
-                    </div>
+    <!-- Navigation bar at top of webpage -->
+    
+<div class="navbar">
+    <div class="dropdown">
+        <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}}<img src="/chevron-down.png"></button>
+        <div class="dropdown-content">
+            <a href="#">Patient comments</a>
+            <a href="#">Sign out</a>
+        </div>
+    </div>
+    <div class="icons">
+        <a href="#"><img src="/house-solid.svg" width="28" height="28" class="change-color"></a>
+        <a href="#"><img src="/circle-half-stroke-solid.svg" width="28" height="28" class="change-color"></a>
+        <a><img src="/Line.png" height="28"></a>
+        <a href="#"><img src="/circle-user-regular.svg" width="28" height="28" class="change-color"></a>
+    </div>
+</div>
+
+<ul class="breadcrumb">
+  <li>Displaying Patient List of Clinician </li>
+</ul>
+
+<div class="sections">
+
+     <!-- Each section corresponds to each segment of the patient information in the webpage -->
+    <section class="patientList">
+        <div class="sticky-bar">
+            <button class="add-patient" onclick="location.href='/clinician/{{clinicianItem._id}}/register'">Register New Patient</button>
+            <div class="sort">
+                <button class="dropbtn">Sort by <img src="/chevron-down.png"></button>
+                <div class="sort-by">
+                    <a href="#">Name ascending</a>
+                    <a href="#">Name descending</a>
                 </div>
             </div>
+            <div class="search-bar">
+                <label for="searchbar"><img src="/magnifying-glass-solid.svg" height="16px" class="change-color"></label>
+                <input type="text" placeholder="Search" name="search">
+            </div>
+        </div>
+        <div class="scroll">
+            {{#if testData}}
+                {{#each testData}}
+                    <button class="entry">
+                        <div class="col"><span class="attribute">Patient</span><br><strong>{{this.[0].first_name}} {{this.[0].last_name}}</strong></div>
+                        {{#with this.[1]}}
+                            {{#if (filledToday glucose_data)}}
+                                {{!{{#if (exceedThreshold)}}
+                                {{!{{else}}
+                                    <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong>{{glucose_data.data_entry}} nmol/L</strong></div>
+                                {{!{{/if}}
+                            {{else}}
+                                <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong>Not filled</strong></div>
+                            {{/if}}
+
+                            {{#if (filledToday weight_data)}}
+                                {{!{{#if (exceedThreshold)}}
+                                {{!{{else}}
+                                    <div class="col"><span class="attribute">Weight</span><br><strong>{{weight_data.data_entry}} kg</strong></div>
+                                {{!{{/if}}
+                            {{else}}
+                                <div class="col"><span class="attribute">Weight</span><br><strong>Not filled</strong></div>
+                            {{/if}}
+
+                            {{#if (filledToday insulin_data)}}
+                                {{!{{#if (exceedThreshold)}}
+                                {{!{{else}}
+                                    <div class="col"><span class="attribute">Dose of Insulin</span><br><strong>{{insulin_data.data_entry}} dose</strong></div>
+                               
+                                {{!{{/if}}
+                            {{else}}
+                                    <div class="col"><span class="attribute">Dose of Insulin</span><br><strong>Not filled</strong></div>
+                            {{/if}}
+
+
+                            {{#if (filledToday steps_data)}}
+                                {{!{{#if (exceedThreshold)}}
+                                {{!{{else}}
+                                    <div class="col"><span class="attribute">Exercise</span><br><strong>{{steps_data.data_entry}} steps</strong></div>
+                                {{!{{/if}}
+                            {{else}}
+                                <div class="col"><span class="attribute">Exercise</span><br><strong>Not filled</strong></div>
+                            {{/if}}
+                        {{/with}}
+                    </button>
+
+                {{/each}}
+            {{else}}
+                    <p>You have no patients, please register a new patient.</p>
+            {{/if}}
         </div>
     </section>
 

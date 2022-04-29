@@ -25,15 +25,12 @@ button {
 section {
     padding-top: 20px;
     padding-bottom: 20px;
-    margin-bottom: 20px;
+    margin-left: 160px;
+    margin-right: 160px;
+    
 }
 
-.row2, .row3 {
-    padding-left: 80px;
-    padding-right: 80px;
-}
-
-.row2:after, .row3:after {
+.row-2:after, .row-3:after {
     content: "";
     display: table;
     clear: both;
@@ -41,13 +38,12 @@ section {
 
 .leftcolumn {
     float: left;
-    width: 73%;
+    width: 75%;
   }
 
 .rightcolumn {
     float: left;
     width: 25%;
-    padding-left: 20px;
 }
 
 @media screen and (max-width: 500px) {
@@ -62,11 +58,9 @@ section {
 
 .patientList {
     background-color:#E6F2FE;
-    margin-left: 80px;
-    margin-right: 80px;
     border-radius:  36px;
     border: 0px;
-    height: 660px;
+    height: 800px;
 }
 
 .sticky-bar {
@@ -74,6 +68,7 @@ section {
     height: 40px;
     border-radius:  36px;
     margin-bottom: 10px;
+    padding-right: 20px;
 }
 
 .search-bar {
@@ -97,7 +92,7 @@ section {
 .sort {
     overflow: hidden;
     float: right;
-    padding-right: 20px;
+    margin-right: 20px;
 }
 
 .sort .dropbtn {
@@ -138,27 +133,35 @@ section {
     display: block;
 }
 
-.patients {
-    overflow: auto;
-    height: 570px;
+.add-patient {
+    overflow: hidden;
+    float: right;
+    font-size: 16px;
+    color: #FCF5ED;
+    background: #FB6E5A;
+    padding: 4.5px 20px 4.5px 20px;
+    border: 0px;
+    border-radius:  36px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    font-family: inherit; /* Important for vertical align on mobile phones */
+    margin: 0; /* Important for vertical align on mobile phones */
 }
-.patient {
-    padding: 16px;
+
+.scroll {
+    overflow: auto;
+    height: 700px;
+}
+.entry {
+    padding: 20px;
     font-size: medium;
-    width: 908px;
-    height: 110px;
+    width: 1300px;
+    height: 150px;
     border-radius: 36px;
     border-width: 0;
     background: white;
     margin:auto; 
     display:block;
     margin-bottom: 20px;
-}
-
-.patient .row {
-    margin:auto; 
-    display:block;
-    margin-top:-10px;
 }
 
 
@@ -170,20 +173,17 @@ section {
 
 .patientComments h4 {
     color: #2C68AD;
-    font-size: 22px;
+    font-size: 30px;
     font-weight:400;
-    margin-left: 80px;
-    margin-top: 0px;
-    margin-bottom: 10px;
+    margin-left: 30px;
+    margin-bottom: 20px;
 }
 
 .comments {
     background-color:#F2F2F2;
-    margin-left: 80px;
-    margin-right: 80px;
     border-radius:  36px;
     border: 0px;
-    height: 500px;
+    height: 800px;
 }
 
 .comments .sticky-bar {
@@ -191,70 +191,71 @@ section {
     height: 50px;
 }
 
-.cntr {
-    height: 370px;
-    overflow: auto;
-    display:inline-block;
-    padding-left: 45px;
-    transform: translate(11%);
+.comments a {
+    float: right;
+    margin-right: 20px;
+}
+
+.comments #comment-data {
+    width: 35%;
+}
+
+.comments #comment-entry {
+    padding: 20px !important;
 }
 
 /* patient profile */
 
 .profile {
     background-color:#E6F2FE;
-    margin-left: 80px;
-    margin-right: 80px;
-    border-radius:  36px;
+    border-radius: 36px;
     border: 0px;
+    display: flex;
+    padding: 30px;
 }
 
 .col {
     float: left;
     width: 20%;
     line-height: 30px;
-}
-
-.row {
-    margin-left: 90px;
-    padding: 20px;
-}
-
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
+    font-size: 18px;
+    margin-left: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis; 
 }
 
 span.attribute {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 
 /* patient log */
 
-.logs {
+.leftcolumn .segment {
     background-color:#F2F2F2;
     float: left;
     height: 660px;
+    width: 100%;
     border-radius: 36px;
     border: 0px;
-    width: 100%;
+    padding: 20px;
 }
 
-.logs h3 {
-    font-size: 22px;
+.segment h3 {
+    font-size: 25px;
     color: #2C68AD;
     font-weight: 400;
-    margin-left: 30px;
+    margin-left: 10px;
     margin-top: 0px;
     background: #F2F2F2;
     border-radius:  36px;
 }
 
 .date {
-    margin-left: 30px;
     border-radius:  36px;
+    align-items: center;
+    overflow: auto;
+    margin-bottom: 20px;
 }
 
 .date h4 {
@@ -262,18 +263,20 @@ span.attribute {
     font-weight: 400;
     float: left;
     text-align: center;
+    margin-left: 40px;
+    margin-right: 50px;
 }
 
 .entries {
-    margin-left: 65px;
-    overflow: auto;
+    margin-left: 129px;
+    margin-right: 20px;
     height: 550px;
 }
 
 .accordion {
-    padding: 16px;
+    padding: 20px;
     margin-bottom: 20px;
-    width: 780px;
+    width: 95%;
     height: 130px;
     border-radius: 36px;
     border-width: 3px;
@@ -282,7 +285,7 @@ span.attribute {
 
 .data {
     font-family: Lexend Deca;
-    font-size: 16px;
+    font-size: 18px;
     float: left;
     width: 25%;
     line-height: 40px;
@@ -290,14 +293,17 @@ span.attribute {
     margin-left: 30px;
 }
 
+.data .attribute strong {
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
 
 /* graphs */
 
 .graphs {
-    padding-top: 0px !important;
-    padding-bottom: 0px !important;
-    margin-bottom: 0px !important;
     width: 320px;
+    float: right;
 }
 
 .card{
@@ -313,76 +319,32 @@ span.attribute {
 
 /* thresholds */
 
-.thresholds {
-    background-color:#F2F2F2;
-    float: left;
-    height: 350px;
-    border-radius: 36px;
-    border: 0px;
-    width: 97%;
-    padding-left:30px;
-}
-
-.thresholds h3 {
-    font-size: 22px;
-    color: #2C68AD;
-    font-weight: 400;
-    margin-top: 0px;
-    background: #F2F2F2;
-    border-radius:  36px;
+#thresholds.segment {
+    height: fit-content;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .threshold {
     float: left;
-    width: 22%;
-    margin-right:21px;
+    width: 25%;
     margin-bottom: 20px;
+    font-size: 18px;
 }
 
 .threshold h4 {
     font-weight: 400;
     margin-top: 0px;
     margin-bottom: 10px;
+    font-size: 22px;
 }
 
-.container-1 {
-    border-color: #E13D45;
+.container {
     border-width: 3px;
     background: white;
-    padding-left: 10px;
-    padding-top: 25px;
-    padding-bottom: 25px;
+    padding: 30px;
     border-radius: 15px;
-}
-
-.container-2 {
-    border-color: #6F62D0;
-    border-width: 3px;
-    background: white;
-    padding-left: 10px;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    border-radius: 15px;
-}
-
-.container-3 {
-    border-color: #FF9D47;
-    border-width: 3px;
-    background: white;
-    padding-left: 10px;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    border-radius: 15px;
-}
-
-.container-4 {
-    border-color: #55B48B;
-    border-width: 3px;
-    background: white;
-    padding-left: 10px;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    border-radius: 15px;
+    margin-right: 20px;
 }
 
 .upper{
@@ -394,7 +356,7 @@ span.attribute {
     line-height: 30px;
 }
 
-.thresholds button{
+#thresholds.segment button{
     border: none;
     background: #2C68AD;
     width: 100px;
@@ -412,27 +374,27 @@ span.attribute {
 
 /* message */
 
-.message {
+.rightcolumn .message {
     background-color:#E6F2FE;
-    float: left;
-    height: 350px;
-    width: 100%;
+    float: right;
+    height: 425px;
+    width: 80%;
     border-radius: 36px;
     border: 0px;
-    display: flex;
 }
 
 .message h4 {
-    margin-top: 0;
+    margin-top: 20px;
     margin-left: 20px;
     margin-bottom: 10px;
+    width: 100%;
     font-size: 16px;
     color: #2C68AD;
     font-weight: 400;
     position: absolute;
 }
 
-.message p {
+.prev-msg {
     border-radius: 1.15rem;
     line-height: 1.25;
     overflow: scroll;
@@ -454,7 +416,7 @@ span.attribute {
     font-size: 14px;
     margin-left: 20px;
     margin-right: 20px;
-    margin-top: 30px;
+    margin-top: 50px;
     height: 60px;
     width: 250px;
 }
@@ -462,17 +424,17 @@ span.attribute {
 .message textarea {
     margin-left: 20px;
     margin-right: 20px;
-    margin-top: 130px;
+    margin-top: 145px;
     padding: 10px;
     border-radius: 15px;
     border-width: 1px;;
-    width:100%;
-    height: 150px;
+    width:250px;
+    height: 200px;
 }
 
 .message button {
     position: absolute;
-    margin-top: 320px;
+    margin-top: 5px;
     margin-left: 20px;
     display: block;
     background-color: #FB6E5A;
@@ -488,6 +450,7 @@ span.attribute {
 
 .clinician-notes {
     background:#E6F2FE !important;
+    margin-bottom: 30px;
 }
 
 .patient .toggle-down {
@@ -504,7 +467,7 @@ span.attribute {
 
 .icons {
     float: right;
-    padding-top: 20px;
+    padding-top: 40px;
 }
 .icons a {
     margin-right: 20px;
@@ -517,8 +480,8 @@ span.attribute {
 .dropdown {
     overflow: hidden;
     float: right;
-    padding-right: 20px;
-    padding-top: 20px;
+    padding-right: 40px;
+    padding-top: 40px;
 }
 
 .dropdown .dropbtn {
@@ -565,13 +528,13 @@ span.attribute {
   ul.breadcrumb {
       padding: 10px 16px;
       list-style: none;
-      margin-left: 80px;
+      margin-left: 200px;
   }
 
   ul.breadcrumb li {
     display: inline;
     color: #2C68AD;
-    font-size: 30px;
+    font-size: 40px;
     font-weight:400;
   }
 
@@ -607,29 +570,21 @@ span.attribute {
 }
 
 
-
-/* add new patient button */
-
-#add_button {
-    display: block;
-    position: sticky;
-    float: right;
-    margin-right: 11px;
-    margin-top: 500px;
-    top: 50px;
-    font-size: 40px;
-    border: none;
-    outline: none;
-    background-color: #FB6E5A;
-    color: white;
-    padding: 3px 18px 5px 18px;
-    border-radius: 50px;
-}
-
-
 /* headings */
 
   h6 {
     font-size: 15px;
     font-weight: 400;
 }
+
+  /* footer */
+
+footer {
+    padding: 5em;
+    text-align: center;
+    background-color:#2C68AD;
+    color: #FFFFFF;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+  
