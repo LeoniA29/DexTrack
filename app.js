@@ -1,4 +1,4 @@
-const exphbs = require('express-handlebars')
+//const exphbs = require('express-handlebars')
 var currentTime = new Date();
 
 // Import express
@@ -12,10 +12,9 @@ app.engine('hbs', require('exphbs'));
     defaultlayout: 'main', 
     extname: 'hbs' 
 })) */
-app.set('view engine', 'hbs');
 
 // set Handlebars view engine
-app.set('view engine', 'hbs')
+app.set('view engine', 'hbs');
 
 // Set up to handle POST requests
 app.use(express.json()) // needed if POST data is in JSON format
