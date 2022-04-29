@@ -8,8 +8,14 @@ const note = new mongoose.Schema({
 
 // schema for threshold
 const threshold = new mongoose.Schema({
-   low: Number,
-   high: Number,
+   low: {
+      type: Number,
+      default: null
+   },
+   high: {
+      type: Number,
+      default: null,
+   },
    required: Boolean,
    type: {
       type: String,
@@ -19,7 +25,7 @@ const threshold = new mongoose.Schema({
 
 // schema for data 
 const data = new mongoose.Schema({
-   data_entry: String,
+   data_entry: Number,
    data_comment: String,
    data_type: String,
    data_hex: String
@@ -76,5 +82,6 @@ const schema = new mongoose.Schema({
 const Patient = mongoose.model('Patient', schema)
 const Data = mongoose.model('Data', data)
 const DataSet = mongoose.model('DataSet', data_set)
+const Threshold = mongoose.model('Threshold', threshold)
 
-module.exports = {Patient, Data, DataSet}
+module.exports = {Patient, Data, DataSet, Threshold}

@@ -1,5 +1,5 @@
 const Clinician = require('../models/clinician')
-const {Patient, Data, DataSet} = require('../models/patient')
+const {Patient, Data, DataSet, Threshold} = require('../models/patient')
 
 const ObjectId = require('mongodb').ObjectId
 const todaysDate = new Date();
@@ -48,7 +48,33 @@ const insertPatient= async (req, res) => {
     const ObjectId = require('mongodb').ObjectId
 
     var newPatient = new Patient(req.body)
-    newPatient.save()  
+    await newPatient.save()  
+
+    var ID = newPatient._id;
+    var patientID = new ObjectId(ID)
+    
+    var all_thresh = []
+    var glucose_th = new Threshold({type: "glucose"}); all_thresh.push(glucose_th);
+    var steps_th = new Threshold({type: "steps"}); all_thresh.push(steps_th);
+    var weight_th = new Threshold({type: "weight"}); all_thresh.push(weight_th);
+    var insulin_th = new Threshold({type: "insulin"}); all_thresh.push(insulin_th);
+    
+
+    for (var i in all_thresh) {
+    
+        Patient.findByIdAndUpdate(patientID,
+        {$push: {threshold_list: all_thresh[i]}},
+        
+        {safe: true, upsert: true},
+        function(err, doc) {
+            if(err){
+            console.log(err);
+            }else{
+                // return res.redirect('/clinician/'+ req.params.clinician_id);
+            }
+        }
+    )
+    }
 
     var clinician = req.params.clinician_id
     var object_clinician = new ObjectId(clinician)
@@ -60,10 +86,16 @@ const insertPatient= async (req, res) => {
             if(err){
             console.log(err);
             }else{
-                return res.redirect('/clinician/'+ req.params.clinician_id);
+                // return res.redirect('/clinician/'+ req.params.clinician_id);
             }
         }
     )
+
+    
+    
+    
+    return res.redirect('/clinician/'+ req.params.clinician_id);
+
 }
 
 // render patient list hbs
@@ -91,7 +123,7 @@ const getClinicianPatientList =  async (req, res, next) => {
 
             if (patient) {
                 patientList.push(patient)
-                console.log(patient.input_data.length)
+                //console.log(patient.input_data.length)
                 
                 if (patient.input_data.length == 0) {
                     const patientData = new DataSet({set_date: todaysDate})
@@ -103,10 +135,10 @@ const getClinicianPatientList =  async (req, res, next) => {
                             if(err){
                                 console.log(err);
                             }else{
-                                console.log("insertdata into patient test now")
+                                //console.log("insertdata into patient test now")
                                 const n = patient.input_data.length
                                 test.push([patient, patient.input_data[n]])
-                                console.log("did it succeed?")
+                                //console.log("did it succeed?")
                             }
                         }
                     )
@@ -114,7 +146,7 @@ const getClinicianPatientList =  async (req, res, next) => {
                 for (j in patient.input_data){
             
                     if (patient.input_data[j].set_date.getDate() == todaysDate.getDate() ) {
-                        console.log('old patient insert old data')
+                        //console.log('old patient insert old data')
                         data.push(patient.input_data[j])
                         test.push([patient, patient.input_data[j]])
                     }
@@ -122,9 +154,9 @@ const getClinicianPatientList =  async (req, res, next) => {
             }
         }
         //console.log(patients[i]._id.toString())
-        //console.log(patientList)
+        // console.log(patientList)
         //console.log(data)
-        console.log(test)
+        // console.log(test)
         return res.render('clinicianPatientList', { clinicianItem: clinician, patientItem: patientList, patientData: data, testData: test})
 
     

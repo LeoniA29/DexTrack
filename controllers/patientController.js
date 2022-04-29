@@ -1,5 +1,5 @@
 // schema models imported
-const {Patient, DataSet, Data} = require('../models/patient')
+const {Patient, DataSet, Threshold, Data} = require('../models/patient')
 
 const ObjectId = require('mongodb').ObjectId // ObjectID constant 
 const todaysDate = new Date(); // today's date constant 
@@ -34,12 +34,12 @@ const getPatientById = async(req, res, next) => {
 
         // it's a new day, create new input_data schema for a patient
         const patientData = new DataSet({set_date: todaysDate})
-
-        var id1 = req.params.patient_id
-        var objectId1 = new ObjectId(id1)
+        
+        var id = req.params.patient_id
+        var patientID = new ObjectId(id)
 
         // pushes this input_data into the patient in mongoDB
-        Patient.findByIdAndUpdate(objectId1,
+        Patient.findByIdAndUpdate(patientID,
             {$push: {input_data: patientData}},
             {safe: true, upsert: true},
             function(err, doc) {
