@@ -4,7 +4,7 @@ const {Patient, Data, DataSet, Threshold} = require('../models/patient')
 const ObjectId = require('mongodb').ObjectId
 const todaysDate = new Date();
 
-
+// this is for testing, once login feature enabled, it will not be necessary
 const getAllClinicians = async (req, res, next) => {
  try {
  const clinicians = await Clinician.find().lean()
@@ -14,21 +14,24 @@ const getAllClinicians = async (req, res, next) => {
  }
 }
 
+// this is for testing, once login feature enabled, it will not be necessary
+
 const getClinicianById = async(req, res, next) => {
  try {
  const clinician = await Clinician.findById(req.params.clinician_id).lean()
  if (!clinician) {
- // no author found in database
+ // no clinician found in database
  return res.sendStatus(404)
  }
- // found person and get patient list
 
+ // found data and get clinician list
  return res.render('oneData', { oneItem: clinician})
  } catch (err) {
  return next(err)
  }
 }
 
+// this is for testing, once login feature enabled, it will not be necessary
 const insertClinician= (req, res) => {
     var newData = new Clinician(req.body)
     /* use validation in-between */
@@ -42,7 +45,7 @@ const registerPatient = (req, res) => {
     return res.render('patientRegister', { oneItem: clinician})
 }
 
-// trying to insertPatient into database and link to clinician
+// insert new Patient into database and link to clinician
 const insertPatient= async (req, res) => {
 
     const ObjectId = require('mongodb').ObjectId
@@ -98,8 +101,9 @@ const insertPatient= async (req, res) => {
 
 }
 
-// render patient list hbs
+// render patient list belonging to the clinician
 const getClinicianPatientList =  async (req, res, next) => {
+
     try {
         const clinician = await Clinician.findById(req.params.clinician_id).lean()
         if (!clinician) {
@@ -107,25 +111,38 @@ const getClinicianPatientList =  async (req, res, next) => {
             return res.sendStatus(404)
         }
 
+        // array to collect patient data
         var patients = clinician.patient_list
         var test = [];
-        var patientList = [];
-        var data = [];
+        //var patientList = [];
+        //var data = [];
 
+        // checks if clinician has patient or not, this is for testing purposes
         if (!patients) {
             return res.render('clinicianPatientList', { clinicianItem: clinician, patientItem: patientList})
         } 
 
+        // loops through the list of patients from clinician to extract input data
         for (var i in patients) {
             patientID = patients[i]._id.toString()
+            var hasToday = false;
 
             const patient = await Patient.findById(patientID).lean()
 
             if (patient) {
-                patientList.push(patient)
-                //console.log(patient.input_data.length)
-                
-                if (patient.input_data.length == 0) {
+
+                // finds patient's data input for that day
+                for (j in patient.input_data){
+            
+                    if (patient.input_data[j].set_date.getDate() == todaysDate.getDate() ) {
+                        //console.log('existing patient insert today's data')
+                        test.push([patient, patient.input_data[j], patient.threshold_list])
+                        var hasToday = true;
+                    }
+                }
+
+                // checks if patient has any data_set for that day
+                if (hasToday == false) {
                     const patientData = new DataSet({set_date: todaysDate})
                 
                     Patient.findByIdAndUpdate(patientID,
@@ -135,71 +152,26 @@ const getClinicianPatientList =  async (req, res, next) => {
                             if(err){
                                 console.log(err);
                             }else{
-                                //console.log("insertdata into patient test now")
-                                const n = patient.input_data.length
-                                test.push([patient, patient.input_data[n]])
-                                //console.log("did it succeed?")
                             }
                         }
                     )
-                }
-                for (j in patient.input_data){
-            
-                    if (patient.input_data[j].set_date.getDate() == todaysDate.getDate() ) {
-                        //console.log('old patient insert old data')
-                        data.push(patient.input_data[j])
-                        test.push([patient, patient.input_data[j]])
-                    }
+                    
+                    // insert default data_set into the patient if it does not exist yet for that day
+                    const n = patient.input_data.length
+                    test.push([patient, patient.input_data[n], patient.threshold_list])
+                    
                 }
             }
         }
         //console.log(patients[i]._id.toString())
         // console.log(patientList)
         //console.log(data)
-        // console.log(test)
-        return res.render('clinicianPatientList', { clinicianItem: clinician, patientItem: patientList, patientData: data, testData: test})
-
+        //console.log(test)
+        return res.render('clinicianPatientList', { clinicianItem: clinician, testData: test})
     
     } catch (err) {
         return next(err)
     }
-}
-const insertInputData = (patient, test) => {
-    const n = patient.input_data.length
-    test.push([patient, patient.input_data[n]])
-    console.log('new patient make new null')
-}
-const makeDataSet = async (patient, patientID) => {
-    const patientData = new DataSet({set_date: todaysDate})
-
-    var patientObjectID = new ObjectId(patientID)
-    var data_boolean = false
-
-    Patient.findByIdAndUpdate(patientObjectID,
-        {$push: {input_data: patientData}},
-        {safe: true, upsert: true},
-        function(err, doc) {
-            if(err){
-                console.log(err);
-            }else{
-                console.log("input_data made")
-                console.log("input_data made again in here but cannot?")
-            }
-        }
-    )
-    
-    console.log("pass patient function")
-    if (patient.input_data.length == 1) {
-        data_boolean = true
-    }
-
-    return new Promise ((resolve, reject) => {
-        if (data_boolean) {
-            resolve(data_boolean)
-        } else {
-            reject('input_data not successfully made')
-        }
-    })
 }
 
 // exports an object, which contain functions imported by router
