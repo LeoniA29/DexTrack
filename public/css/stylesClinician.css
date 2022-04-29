@@ -485,6 +485,11 @@ span.attribute {
     margin-right: 20px;
 }
 
+#icon {
+    width: 28px;
+    height: 28px;
+}
+
 .change-color {
     filter: invert(33%) sepia(95%) saturate(583%) hue-rotate(178deg) brightness(89%) contrast(89%);
   } 
