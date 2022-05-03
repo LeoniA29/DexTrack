@@ -6,12 +6,43 @@ const express = require('express')
 // Set your app up as an express app
 const app = express()
 
+const days = ['SUN', 'MON', 'TUES', 'WED', 'THURS', 'FRI', 'SAT'];
+const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEPT","OCT","NOV","DEC"];
+
 // configure Handlebars
+<<<<<<< HEAD
 app.engine('hbs', require('exphbs'));
 /*app.engine('hbs', exphbs.engine({      // configure Handlebars 
     defaultlayout: 'main', 
     extname: 'hbs' 
 })) */
+=======
+app.engine(
+    'hbs',
+    exphbs.engine({
+        defaultlayout: 'main',
+        extname: 'hbs',
+        helpers: {
+            todaysDate: function() {
+                return (new Date().getDate())
+            },
+            todaysDay: function() {
+                return (days[new Date().getDay()])
+            },
+            todaysMonth: function() {
+                return (months[new Date().getMonth()])
+            },
+
+            filledToday: function(x) {
+                return (x!=null)
+            }
+
+        }
+    })
+)
+// set Handlebars view engine
+app.set('view engine', 'hbs')
+>>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003
 
 // set Handlebars view engine
 app.set('view engine', 'hbs');
@@ -21,6 +52,7 @@ app.use(express.json()) // needed if POST data is in JSON format
 app.use(express.urlencoded({ extended: false })) // only needed for URL-encoded input
 
 app.use(express.static(__dirname + "/resources"));
+<<<<<<< HEAD
 app.use(express.static(__dirname + "/views"));
 app.use(express.static(__dirname + "/public"));
 
@@ -31,6 +63,15 @@ const patientRouter = require('./routes/patientRouter')
 app.use('/clinician', clinicianRouter)
 app.use('/patient', patientRouter)
 
+=======
+
+// link to our routers
+const clinicianRouter = require('./routes/clinicianRouter')
+const patientRouter = require('./routes/patientRouter')
+
+app.use('/home/clinician', clinicianRouter)
+app.use('/home/patient', patientRouter)
+>>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003
 
 // Tells the app to send the string: "Our demo app is working!" when you hit the '/' endpoint.
 app.get('/', (req, res) => {

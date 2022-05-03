@@ -8,6 +8,7 @@ const note = new mongoose.Schema({
 
 // schema for threshold
 const threshold = new mongoose.Schema({
+<<<<<<< HEAD
    low: {
       type: Number,
       default: null
@@ -20,6 +21,11 @@ const threshold = new mongoose.Schema({
       type: Boolean,
       default: false
    },
+=======
+   low: Number,
+   high: Number,
+   required: Boolean,
+>>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003
    type: {
       type: String,
       enum: ['glucose', 'insulin', 'weight', 'steps']
@@ -28,10 +34,16 @@ const threshold = new mongoose.Schema({
 
 // schema for data 
 const data = new mongoose.Schema({
+<<<<<<< HEAD
    data_entry: Number,
    data_comment: String,
    data_type: String,
    data_hex: String
+=======
+   data_entry: String,
+   data_comment: String,
+   data_type: String
+>>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003
 });
 
 
@@ -85,6 +97,11 @@ const schema = new mongoose.Schema({
 const Patient = mongoose.model('Patient', schema)
 const Data = mongoose.model('Data', data)
 const DataSet = mongoose.model('DataSet', data_set)
+<<<<<<< HEAD
 const Threshold = mongoose.model('Threshold', threshold)
 
 module.exports = {Patient, Data, DataSet, Threshold}
+=======
+
+module.exports = {Patient, Data, DataSet}
+>>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003

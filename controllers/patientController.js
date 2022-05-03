@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 // schema models imported
 const {Patient, DataSet, Threshold, Data} = require('../models/patient')
+=======
+const {Patient, DataSet, Data} = require('../models/patient')
+
+const ObjectId = require('mongodb').ObjectId
+const todaysDate = new Date();
+>>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003
 
 const ObjectId = require('mongodb').ObjectId // ObjectID constant 
 const todaysDate = new Date(); // today's date constant 
@@ -13,10 +20,16 @@ const getAllPatients = async (req, res, next) => {
     } catch (err) {
         return next(err)
     }
+<<<<<<< HEAD
 }
 
 // function to retrieve a patient's dashboard using their patient ID
+=======
+   }
+
+>>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003
 const getPatientById = async(req, res, next) => {
+
     try {
         const patient = await Patient.findById(req.params.patient_id).lean()
         
@@ -33,6 +46,7 @@ const getPatientById = async(req, res, next) => {
 
     }
 
+<<<<<<< HEAD
         // it's a new day, create new input_data schema for a patient
         const patientData = new DataSet({set_date: todaysDate})
         
@@ -53,12 +67,49 @@ const getPatientById = async(req, res, next) => {
 
         const n = patient.input_data.length // new input_data entry is pushed at the back of the array 
         return res.render('patientDashboard', { patient: patient, patientData: patient.input_data[n]})
+=======
+    
+    for (i in patient.input_data){
+        
+        if (patient.input_data[i].set_date == undefined) {
+            break;
+        }
+
+        if ( patient.input_data[i].set_date.getDate() == todaysDate.getDate() ) {
+            return res.render('patientDashboard', { oneItem: patient, twoItem: patient.input_data[i]} )
+        }
+
+    }
+
+    
+    const patientData = new DataSet({set_date: todaysDate})
+
+    var id1 = req.params.patient_id
+    var objectId1 = new ObjectId(id1)
+
+    Patient.findByIdAndUpdate(objectId1,
+        {$push: {input_data: patientData}},
+        {safe: true, upsert: true},
+        function(err, doc) {
+            if(err){
+            console.log(err);
+            }else{
+            //do stuff
+            }
+        }
+    )
+    // console.log("new dataset for today")
+    const n = patient.input_data.length
+    // console.log(n)
+    return res.render('test', { oneItem: patient, twoItem: patient.input_data[n]})
+>>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003
 
     } catch (err) {
         return next(err)
     }
 }
 
+<<<<<<< HEAD
 // function to retrieve glucose submission page of a patient
 const getGlucosePage= async (req,res) =>{
     const patient = await Patient.findById(req.params.patient_id).lean()
@@ -114,11 +165,70 @@ const insertPatientData= async(req, res, next) => {
                     if (err) {
                         console.log(err);
                     } else{
+=======
+const getGlucosePage= async (req,res) =>{
+    const patient = await Patient.findById(req.params.patient_id).lean()
+    /*
+    for (i in patient.input_data) {
+         if ( (patient.input_data[i].set_date.getDate() == todaysDate.getDate()) && (patient.input_data[i].glucose_data != null) ) {
+            return res.redirect('/home/patient/'+ req.params.patient_id)
+        }
+    }
+    */
+    return res.render('insertGlucose', { oneItem: patient })
+}
+
+const getInsulinPage= async(req,res) =>{
+    const patient =  await Patient.findById(req.params.patient_id).lean()
+    return res.render('insertInsulin', { oneItem: patient })
+}
+
+const getStepsPage= async(req,res) =>{
+    const patient = await Patient.findById(req.params.patient_id).lean()
+    return res.render('insertSteps', { oneItem: patient})
+}
+
+const getWeightPage= async(req,res) =>{
+    const patient =  await Patient.findById(req.params.patient_id).lean()
+    return res.render('insertWeight', { oneItem: patient })
+}
+
+
+const insertPatientData= async(req, res) => {
+
+    var id1 = req.params.patient_id
+    var objectId1 = new ObjectId(id1)
+
+    const patient = await Patient.findById(req.params.patient_id).lean()
+
+    var newData = new Data(req.body)
+    // console.log(newData)
+
+    for (i in patient.input_data){
+        
+        if ( patient.input_data[i].set_date.getDate() == todaysDate.getDate() ) {
+            const inputID = patient.input_data[i]._id
+            var objectId2 = new ObjectId(inputID)
+
+            if (req.body.data_type == "glucose") {
+                // console.log("glucose data")
+                    
+                Patient.updateOne(
+                { _id: objectId1, "input_data._id": objectId2 },
+                {$set: {"input_data.$.glucose_data": newData}},
+                {safe: true, upsert: true},
+                function(err, doc) {
+                    if(err){
+                        console.log(err);
+                    }else{
+                        //do stuff
+>>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003
                         }
                     }
                 )
             }
 
+<<<<<<< HEAD
             // steps data type inputted
             if (req.body.data_type == "steps") {
                
@@ -130,11 +240,26 @@ const insertPatientData= async(req, res, next) => {
                     if (err) {
                         console.log(err);
                     } else {
+=======
+            if (req.body.data_type == "steps") {
+                // console.log("steps data")
+                    
+                Patient.updateOne(
+                { _id: objectId1, "input_data._id": objectId2},
+                { $set: {"input_data.$.steps_data": newData}},
+                {safe: true, upsert: true},
+                function(err, doc) {
+                    if(err){
+                        console.log(err);
+                    }else{
+                        //do stuff
+>>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003
                         }
                     }
                 )
             }
 
+<<<<<<< HEAD
             // weight data type inputted
             if (req.body.data_type == "weight") {
               
@@ -146,11 +271,26 @@ const insertPatientData= async(req, res, next) => {
                      if (err) {
                         console.log(err);
                     } else{
+=======
+            if (req.body.data_type == "weight") {
+                // console.log("weight data")
+                    
+                Patient.updateOne(
+                { _id: objectId1, "input_data._id": objectId2},
+                { $set: {"input_data.$.weight_data": newData}},
+                {safe: true, upsert: true},
+                function(err, doc) {
+                     if(err){
+                        console.log(err);
+                    }else{
+                        //do stuff
+>>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003
                         }
                     }
                 )
             }
 
+<<<<<<< HEAD
             // insulin data type inputted
             if (req.body.data_type == "insulin") {
                 
@@ -162,10 +302,25 @@ const insertPatientData= async(req, res, next) => {
                     if (err) {
                         console.log(err);
                     } else {
+=======
+            if (req.body.data_type == "insulin") {
+                // console.log("insulin data")
+                    
+                Patient.updateOne(
+                {_id: objectId1,"input_data._id": objectId2},
+                {$set: {"input_data.$.insulin_data": newData}},
+                {safe: true, upsert: true},
+                function(err, doc) {
+                    if(err){
+                        console.log(err);
+                    }else{
+                        //do stuff
+>>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003
                         }
                     }
                 ) 
             }
+<<<<<<< HEAD
 
         }
     }
@@ -181,6 +336,18 @@ const insertPatientData= async(req, res, next) => {
 // exports objects containing functions imported by router
 module.exports = {
     getAllPatients, 
+=======
+        }
+    }
+
+    return res.redirect('/home/patient/' + req.params.patient_id)
+}
+   
+
+// exports an object, which contain functions imported by router
+module.exports = {
+    getAllPatients,
+>>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003
     insertPatientData,
     getPatientById,
     getGlucosePage,

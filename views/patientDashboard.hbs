@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {{!< patientLayout}}
 
 {{! displays today's date information and patient's first name}}
@@ -55,8 +56,62 @@
                     <a href="/patient/{{patient._id}}/insertSteps"> <img id="stepsEmpty" src="/Exercise_Empty.png"></a>
                 {{/if}}
            
+=======
+
+<div class="dashboardInformation">
+<h2 id="date">{{todaysDay}}, {{todaysDate}} {{todaysMonth}} </h2>
+
+<h1 id ="welcome">Hi, {{oneItem.first_name}} </h1>
+</div>
+
+    <div class="inputContainer">
+    
+        <div class="Glucose">
+                {{#if (filledToday twoItem.glucose_data)}}
+                    <img id="glucoseFilled" src="/Glucose_Filled.png" align="center">
+                    <h2>{{twoItem.glucose_data.data_entry}}</h2>
+                {{else}}
+                    <a href="/home/patient/{{oneItem._id}}/insertGlucose"> <img id="glucoseEmpty" src="/Glucose_Empty.png" align="center"></a>
+                {{/if}}
+        </div>
+
+        <div class="Exercise">
+                {{#if (filledToday twoItem.steps_data)}}
+                    <img id="stepsFilled" src="/Exercise_Filled.png" align="center">
+                    <h2>{{twoItem.steps_data.data_entry}}</h2>
+                {{else}}
+                    <a href="/home/patient/{{oneItem._id}}/insertSteps"> <img id="stepsEmpty" src="/Exercise_Empty.png" align="center"></a>
+                {{/if}}
+    
+        </div>
+
+        <div class="Weight">
+                {{#if (filledToday twoItem.weight_data)}}
+                    <img id="weightFilled" src="/Weight_Filled.png" align="center">
+                    <h2>{{twoItem.weight_data.data_entry}}</h2>
+                {{else}}
+                    <a href="/home/patient/{{oneItem._id}}/insertWeight"> <img id="weightEmpty" src="/Weight_Empty.png" align="center"></a>
+                {{/if}}
+        </div>
+
+        <div class="Insulin">
+                {{#if (filledToday twoItem.insulin_data)}}
+                    <img id="insulinFilled" src="/Insulin_Filled.png" align="center">
+                    <h2>{{twoItem.insulin_data.data_entry}}</h2>
+                {{else}}
+                    <a href="/home/patient/{{oneItem._id}}/insertInsulin"> <img id="insulinEmpty" src="/Insulin_Empty.png" align="center"></a>
+                {{/if}}
+>>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003
         </div>
 
     </div>
 
+<<<<<<< HEAD
     
+=======
+    
+
+
+
+
+>>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003

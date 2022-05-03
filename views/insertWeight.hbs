@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {{!< patientLayout}}
 
 {{! displays weight submission page for a patient}}
@@ -22,4 +23,14 @@
         
     </div>
 </div>
+=======
+<h1>Displaying insert weight page</h1>
+{{#with oneItem}}
+<form method="POST">
+    <input type="text" placeholder="Enter data" name="data_entry" />
+    <input type="text" placeholder="Comment" name="data_comment" />
+    <input type="hidden" name="data_type" value="weight" /> 
+    <input type="submit" />
+</form>
+>>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003
 {{/with}}

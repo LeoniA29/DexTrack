@@ -1,0 +1,327 @@
+header, body, footer { 
+    font-family: Lexend Deca; 
+    margin: 0px;
+} 
+
+main, section, aside{
+    margin: 0;
+    color: #ffffff;
+}
+
+h1, h2 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.container {
+    display: flex;
+}
+
+
+label {
+    margin: 0 20px 0 0;
+    font-size: 36px;
+    line-height: 60px;
+    color:#2C68AD;
+    position: fixed;
+    right: 15px;
+    top: 50px;
+    z-index: 99;
+    display: none;
+}
+
+.main {
+    background: #ffffff;
+    flex: 1;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 30px;
+}
+
+.main h2 {
+    color: #2C68AD;
+    font-size: 20px;
+}
+
+.main h1 {
+    color: #000000;
+    font-size: 48px;
+}
+
+.dashboardInformation {
+    margin-left: 40px;
+}
+
+.inputContainer {
+    text-align: center;
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
+.inputContainer img {
+    width: 80%;
+}
+
+.Glucose, .Exercise, .Weight, .Insulin {
+    position: relative;
+    display: inline-block;
+}
+
+.Glucose h2  {
+    position: absolute;
+    top: 57%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3.8vw;
+    color:#e13d45;
+    font-weight: 100;
+}
+
+.Exercise h2  {
+    position: absolute;
+    top: 57%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3.8vw;
+    color:#66b48b;
+    font-weight: 100;
+}
+
+.Weight h2  {
+    position: absolute;
+    top: 57%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3.8vw;
+    color:#6f62d0;
+    font-weight: 100;
+}
+
+.Insulin h2  {
+    position: absolute;
+    top: 57%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3.8vw;
+    color:#ff9d47;
+    font-weight: 100;
+}
+
+.sidebar {
+    background: #f9f9f9;
+    flex: 0 1 300px; 
+    text-align: right;
+    padding-top: 120px;
+}
+
+.menu {
+    overflow-x: hidden;
+    transition: 0.5s;
+    transition: all 300ms ease 0s;
+}
+
+.menu a {
+    text-align: right;
+    text-decoration: none;
+    color: #2C68AD;
+    display: block;
+    transition: 0.3s;
+    padding: 0 20px 3px 0;
+    font-size: 24px;
+}
+
+.menu a :hover {
+    text-decoration: underline;
+}
+
+#toggle {
+    display: none;
+}
+
+.footer {
+    padding: 2em;
+    text-align: center;
+    background-color:#2C68AD;
+    color: #FFFFFF;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+img[id="logo"] {
+    width: 50%;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+/* Input Data */
+
+.inputDataContainer {
+    text-align: center;
+}
+
+.symbol {
+    background-color: aqua;
+}
+
+.symbol img[id="glucose"] {
+    margin-top: 50px;
+    height: 150px;
+    position: relative;
+    top: 25%;
+}
+
+.symbol #glucoselevel {
+    top: 25%;
+    position: relative;
+    color: #e13d45;
+    margin-bottom: 30px;
+}
+
+.inputDataItems {
+    background-color: pink;
+    display: block;
+}
+
+.inputDataItems h2 {
+    color: black;
+    position: relative;
+    top: 25%;
+}
+
+.inputDataItems #inputGlucoseLevel {
+    border-radius: 20px;
+    border: 2px solid #2C68AD;
+    height: 30px;
+    width: 280px;
+    padding-left: 10px;
+    padding-top: 10px;
+    font-size: 28px;
+    position: relative;
+    top: 25%;
+    margin-bottom: 30px;
+    
+}
+
+.inputDataItems #inputGlucoseNotes {
+    border-radius: 20px;
+    border: 2px solid #2C68AD; 
+    height: 100px;
+    width: 280px;
+    padding-left: 10px;
+    padding-top: 10px;
+    font-size: 28px;
+    position: relative;
+    top: 25%;
+}
+
+.inputDataItems #doneButton {
+    width: 280px;
+    height: 30px;
+    border-radius: 20px;
+    position: relative;
+    top: 30%;
+
+}
+
+
+@media screen and (min-width: 1024px) {
+    .inputDataContainer {
+        display: flex;
+    }
+
+    .symbol {
+        flex: 1;
+        /* Because the image is fixed, needs to use min height*/
+        min-height: 700px;
+    }
+
+    .symbol img[id="glucose"] {
+        height: 220px;
+    }
+
+    .inputDataItems {
+        flex: 0 1 50%
+    }
+}
+
+
+  
+@media screen and (max-width: 1024px) {
+    .main {
+        margin-top: 50px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .sidebar {
+        display: none;
+    }
+    
+    label {
+        display: block;
+    }
+
+    #toggle:checked + .sidebar {
+        display: block;
+    }
+
+    .Glucose h2 {
+        top: 55%;
+        font-size: 5vw;
+    }
+
+    .Exercise h2 {
+        top: 55%;
+        font-size: 5vw;
+    }
+
+    .Weight h2 {
+        top: 55%;
+        font-size: 5vw;
+    }
+
+    .Insulin h2{
+        top: 55%;
+        font-size: 5vw;
+    }
+
+}
+
+@media screen and (max-width: 375px) {
+
+    .main {
+        margin-top: 50px;
+    }
+
+    .inputContainer {
+        margin-top: 50px;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 50% 50%;
+    }
+
+    .inputContainer img {
+        margin-bottom: 40px;
+    }
+
+    .Glucose h2 {
+        top: 47%;
+        font-size: 10vw;
+    }
+
+    .Exercise h2 {
+        top: 47%;
+        font-size: 10vw;
+    }
+
+    .Weight h2 {
+        top: 47%;
+        font-size: 10vw;
+    }
+
+    .Insulin h2{
+        top: 47%;
+        font-size: 10vw;
+    }
+}

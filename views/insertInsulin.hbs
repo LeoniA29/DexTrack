@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {{!< patientLayout}}
 
 {{! displays insulin submission page for a patient}}
@@ -26,3 +27,14 @@
 
 
 
+=======
+<h1>Displaying insert insulin page</h1>
+{{#with oneItem}}
+<form method="POST">
+    <input type="text" placeholder="Enter data" name="data_entry" />
+    <input type="text" placeholder="Comment" name="data_comment" />
+    <input type="hidden" name="data_type" value="insulin" /> 
+    <input type="submit"/>
+</form>
+{{/with}}
+>>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003
