@@ -16,7 +16,8 @@
                     <img id="glucoseFilled" src="/Glucose_Filled.png">
                     <h2>{{patientData.glucose_data.data_entry}}</h2>
                 {{else}}
-                    <a href="/patient/{{patient._id}}/insertGlucose"> <img id="glucoseEmpty" src="/Glucose_Empty.png"></a>
+                    {{!-- <a href="/patient/{{patient._id}}/insertGlucose"> <img id="glucoseEmpty" src="/Glucose_Empty.png"></a> --}}
+                   <img id="glucoseEmpty" src="/Glucose_Empty.png">
                 {{/if}}
         </div>
 
@@ -28,7 +29,8 @@
                     <img id="weightFilled" src="/Weight_Filled.png">
                     <h2>{{patientData.weight_data.data_entry}}</h2>
                 {{else}}
-                    <a href="/patient/{{patient._id}}/insertWeight"> <img id="weightEmpty" src="/Weight_Empty.png"></a>
+                    {{!-- <a href="/patient/{{patient._id}}/insertWeight"> <img id="weightEmpty" src="/Weight_Empty.png"></a> --}}
+                    <img id="weightEmpty" src="/Weight_Empty.png">
                 {{/if}}
         </div>
 
@@ -40,7 +42,8 @@
                     <img id="insulinFilled" src="/Insulin_Filled.png">
                     <h2>{{patientData.insulin_data.data_entry}}</h2>
                 {{else}}
-                    <a href="/patient/{{patient._id}}/insertInsulin"> <img id="insulinEmpty" src="/Insulin_Empty.png"></a>
+                    {{!-- <a href="/patient/{{patient._id}}/insertInsulin"> <img id="insulinEmpty" src="/Insulin_Empty.png"></a> --}}
+                    <img id="insulinEmpty" src="/Insulin_Empty.png">
                 {{/if}}
         </div>
 
@@ -52,7 +55,8 @@
                     <img id="stepsFilled" src="/Exercise_Filled.png">
                     <h2>{{patientData.steps_data.data_entry}}</h2>
                 {{else}}
-                    <a href="/patient/{{patient._id}}/insertSteps"> <img id="stepsEmpty" src="/Exercise_Empty.png"></a>
+                    {{!-- <a href="/patient/{{patient._id}}/insertSteps"> <img id="stepsEmpty" src="/Exercise_Empty.png"></a> --}}
+                    <img id="stepsEmpty" src="/Exercise_Empty.png">
                 {{/if}}
            
         </div>
