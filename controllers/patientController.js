@@ -87,73 +87,57 @@ const getPatientById = (isAuthenticated, async(req, res, next) => {
     }
 })
 
-/*
-// function to retrieve a patient's dashboard using their patient ID
-const getPatientById = async(req, res, next) => {
-    try {
-        const patient = await Patient.findById(req.params.patient_id).lean()
-        
-        if (!patient) {
-            return res.sendStatus(404)
-        }
-
-        for (i in patient.input_data){
-            // iterating through each patient's time-series inputs
-            if ( patient.input_data[i].set_date.getDate() == todaysDate.getDate() ) {
-                // render today's patient data if found one 
-                return res.render('patientDashboard', { patient: patient, patientData: patient.input_data[i]} )
-        }
-
-        }
-
-        // it's a new day, create new input_data schema for a patient
-        const patientData = new DataSet({set_date: todaysDate})
-        
-        var id = req.params.patient_id
-        var patientID = new ObjectId(id)
-
-        // pushes this input_data into the patient in mongoDB
-        Patient.findByIdAndUpdate(patientID,
-            {$push: {input_data: patientData}},
-            {safe: true, upsert: true},
-            function(err, doc) {
-                if(err){
-                console.log(err);
-                }else{
-                }
-            }
-        )
-
-        const n = patient.input_data.length // new input_data entry is pushed at the back of the array 
-        return res.render('patientDashboard', { patient: patient, patientData: patient.input_data[n]})
-
-    } catch (err) {
-        return next(err)
-    }
-}
-*/
-
 // function to retrieve glucose submission page of a patient
 const getGlucosePage= async (req,res) =>{
     const patient = await Patient.findById(req.user._id).lean()
-    return res.render('insertGlucose', { patient: patient })
+
+    for (i in patient.input_data){
+        if (patient.input_data[i].set_date.getDate() == todaysDate.getDate() ) {
+            if (patient.input_data[i].glucose_data == null){
+                return res.render('insertGlucose', { patient: patient })
+            }
+        }
+    }
+    return res.redirect('/patient/dashboard')
 }
 
 // function to retrieve insulin submission page of a patient
 const getInsulinPage= async(req,res) =>{
     const patient = await Patient.findById(req.user._id).lean()
-    return res.render('insertInsulin', { patient: patient })
+    for (i in patient.input_data){
+        if (patient.input_data[i].set_date.getDate() == todaysDate.getDate() ) {
+            if (patient.input_data[i].insulin_data == null){
+                return res.render('insertInsulin', { patient: patient })
+            }
+        }
+    }
+    return res.redirect('/patient/dashboard')
 }
+
 // function to retrieve steps submission page of a patient
 const getStepsPage= async(req,res) =>{
     const patient = await Patient.findById(req.user._id).lean()
-    return res.render('insertSteps', { patient: patient})
+    for (i in patient.input_data){
+        if (patient.input_data[i].set_date.getDate() == todaysDate.getDate() ) {
+            if (patient.input_data[i].steps_data == null){
+                return res.render('insertSteps', { patient: patient })
+            }
+        }
+    }
+    return res.redirect('/patient/dashboard')
 }
 
 // function to retrieve weight submission page of a patient
 const getWeightPage= async(req,res) =>{
     const patient = await Patient.findById(req.user._id).lean()
-    return res.render('insertWeight', { patient: patient })
+    for (i in patient.input_data){
+        if (patient.input_data[i].set_date.getDate() == todaysDate.getDate() ) {
+            if (patient.input_data[i].weight_data == null){
+                return res.render('insertWeight', { patient: patient })
+            }
+        }
+    }
+    return res.redirect('/patient/dashboard')
 }
 
 
@@ -169,9 +153,6 @@ const insertPatientData= async(req, res, next) => {
         var newData = new Data(req.body)
 
     for (i in patient.input_data){
-        console.log(req.body.data_type)
-        console.log(patient.input_data[i].set_date.getDate())
-        console.log(todaysDate.getDate())
         if (patient.input_data[i].set_date.getDate() == todaysDate.getDate() ) {
 
             // convert input ID into an instance of an object
