@@ -1,10 +1,17 @@
-//const exphbs = require('express-handlebars')
-var currentTime = new Date();
-
-// Import express
 const express = require('express')
-// Set your app up as an express app
 const app = express()
+const flash = require('express-flash')  // for showing login error messages
+const session = require('express-session')  // for managing user sessions
+app.use(flash())
+
+// Set up to handle POST requests
+app.use(express.json()) // needed if POST data is in JSON format
+app.use(express.urlencoded({ extended: true })) // needed so that POST form works
+
+app.use(express.static(__dirname + "/resources"));
+app.use(express.static(__dirname + "/views"));
+app.use(express.static(__dirname + "/public"));
+// app.use(express.static('public'))   // define where static assets like CSS live
 
 // configure Handlebars
 app.engine('hbs', require('exphbs'));
@@ -16,13 +23,28 @@ app.engine('hbs', require('exphbs'));
 // set Handlebars view engine
 app.set('view engine', 'hbs');
 
-// Set up to handle POST requests
-app.use(express.json()) // needed if POST data is in JSON format
-app.use(express.urlencoded({ extended: false })) // only needed for URL-encoded input
+app.use(
+    session({
+        // The secret used to sign session cookies (ADD ENV VAR)
+        secret: process.env.SESSION_SECRET || 'keyboard cat',
+        name: 'demo', // The cookie name (CHANGE THIS)
+        saveUninitialized: false,
+        resave: false,
+        proxy: process.env.NODE_ENV === 'production', //  to work on Heroku
+        cookie: {
+            sameSite: 'strict',
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 300000 // sessions expire after 5 minutes
+        },
+    })
+)
 
-app.use(express.static(__dirname + "/resources"));
-app.use(express.static(__dirname + "/views"));
-app.use(express.static(__dirname + "/public"));
+// use PASSPORT
+const passport = require('./passport')
+// use EXPRESS-VALIDATOR (not actually used at this stage)
+const { body, validationResult } = require('express-validator')
+app.use(passport.authenticate('session'))
 
 // link to our routers
 const clinicianRouter = require('./routes/clinicianRouter')

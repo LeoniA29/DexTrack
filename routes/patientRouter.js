@@ -1,4 +1,5 @@
 const express = require('express')
+const passport = require('../passport')
 
 // create our Router object
 const patientRouter = express.Router()
@@ -8,20 +9,23 @@ const patientController = require('../controllers/patientController')
 
 
 // patient routes used
-patientRouter.get('/', patientController.getAllPatients) // remove later
-patientRouter.get('/:patient_id', patientController.getPatientById)
+patientRouter.get('/login', patientController.getPatientLoginPage)
+patientRouter.post('/login', passport.authenticate('local', { failureRedirect: '/patient/login', failureFlash: true }), patientController.patientLogin)
+patientRouter.post('/logout', patientController.patientLogout)
 
-patientRouter.get('/:patient_id/insertGlucose', patientController.getGlucosePage)
-patientRouter.post('/:patient_id/insertGlucose', patientController.insertPatientData)
+patientRouter.get('/dashboard', patientController.getPatientById)
 
-patientRouter.get('/:patient_id/insertInsulin', patientController.getInsulinPage)
-patientRouter.post('/:patient_id/insertInsulin', patientController.insertPatientData)
+patientRouter.get('/dashboard/insertGlucose', patientController.getGlucosePage)
+patientRouter.post('/dashboard/insertGlucose', patientController.insertPatientData)
 
-patientRouter.get('/:patient_id/insertSteps', patientController.getStepsPage)
-patientRouter.post('/:patient_id/insertSteps', patientController.insertPatientData)
+patientRouter.get('/dashboard/insertInsulin', patientController.getInsulinPage)
+patientRouter.post('/dashboard/insertInsulin', patientController.insertPatientData)
 
-patientRouter.get('/:patient_id/insertWeight', patientController.getWeightPage)
-patientRouter.post('/:patient_id/insertWeight', patientController.insertPatientData)
+patientRouter.get('/dashboard/insertSteps', patientController.getStepsPage)
+patientRouter.post('/dashboard/insertSteps', patientController.insertPatientData)
+
+patientRouter.get('/dashboard/insertWeight', patientController.getWeightPage)
+patientRouter.post('/dashboard/insertWeight', patientController.insertPatientData)
 
 // export the router
 module.exports = patientRouter
