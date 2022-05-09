@@ -30,8 +30,10 @@ const hasRole = (thisRole) => {
 
 // patient routes used
 patientRouter.get('/login', patientController.getPatientLoginPage)
-patientRouter.post('/login', passport.authenticate('local', { failureRedirect: '/patient/login', failureFlash: true }), patientController.patientLogin)
-patientRouter.post('/logout', patientController.patientLogout)
+patientRouter.post('/login', passport.authenticate('local', {
+    successRedirect: '/patient/dashboard', failureRedirect: '/login', failureFlash: true
+    }))
+patientRouter.post('/dashboard', patientController.patientLogout)
 
 patientRouter.get('/dashboard', isAuthenticated, hasRole('patient'), patientController.getPatientById)
 

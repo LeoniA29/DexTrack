@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 // schema for notes
 const note = new mongoose.Schema({
@@ -63,6 +63,7 @@ const data_set = new mongoose.Schema({
 const patientSchema = new mongoose.Schema({
    username: {type: String, unique: true},
    password: {type: String},
+   secret: {type: String, default: "INFO30005"},
    first_name: String,
    last_name: String,
    role: {

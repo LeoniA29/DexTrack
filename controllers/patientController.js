@@ -30,20 +30,14 @@ const patientLogout = (req,res)=>{
 }
 
 // function to retrieve a patient's dashboard during their current session
-const getPatientById = async(req, res) => {
-    try {
-        const patient = await Patient.findById(req.user._id).lean() // do not remove lean 
-        
-        if (!patient) {
-            return res.sendStatus(404)
-        }
-
-        for (i in patient.input_data){
+const getPatientById = (req, res) => {
+   
+        for (i in req.user.input_data){
             // iterating through each patient's time-series inputs
 
-            if ( compareDates(patient.input_data[i].set_date) ) {
+            if ( compareDates(req.user.input_data[i].set_date) ) {
                 // render today's patient data if found one 
-                return res.render('patientDashboard', { patient: patient, patientData: patient.input_data[i]} )
+                return res.render('patientDashboard', { patient: req.user.toJSON(), patientData: req.user.input_data[i].toJSON()} )
             }
         }
 
@@ -65,11 +59,7 @@ const getPatientById = async(req, res) => {
         // new input_data entry is pushed at the back of the array 
         // not n-1, because const 'patient' not updated yet, only pushed to database
         const n = patient.input_data.length 
-        return res.render('patientDashboard', { patient: patient, patientData: patient.input_data[n]} )
-
-    } catch (err) {
-        return next(err)
-    }
+        return res.render('patientDashboard', { patient: req.user.toJSON(), patientData: req.user.input_data[n].toJSON()})
 }
 
 // function to retrieve glucose submission page of a patient
