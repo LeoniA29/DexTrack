@@ -102,7 +102,7 @@ patientSchema.pre('save', function save(next) {
     }
 
     // auto-generate salt/hash
-    console.log(patient.password)
+    // console.log(patient.password)
     bcrypt.hash(patient.password, SALT_FACTOR, (err, hash) => {
         if (err) {
             return next(err)

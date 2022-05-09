@@ -4,50 +4,33 @@ const {Patient, Data, DataSet, Threshold} = require('../models/patient')
 const ObjectId = require('mongodb').ObjectId // ObjectID constant 
 const todaysDate = new Date(); // today's date constant 
 
-// use PASSPORT
-const passport = require('../passport')
 
-
-// Passport Authentication middleware
-const isAuthenticated = (req, res, next) => {
-    // If user is not authenticated via Passport, redirect to login page
-    if (!req.isAuthenticated()) {
-        return res.redirect('/login')
-    }
-    // Otherwise, proceed to next middleware function
-    return next()
+// middleware to compare full dates (date, month, year)
+const compareDates = (patientDate)=> {
+    const sameDate = patientDate.getDate() == todaysDate.getDate()
+    const sameMonth = patientDate.getMonth() == todaysDate.getMonth()
+    const sameYear = patientDate.getFullYear() == todaysDate.getFullYear()
+    return ( (sameDate) && (sameMonth) && (sameYear) )
 }
 
-/*
-// retrieve all existing patients
-const getAllPatients = async (req, res, next) => {
-    try {
-        const patients = await Patient.find().lean()
-        return res.render('allPatients', { data: patients })
-    } catch (err) {
-        return next(err)
-    }
-}
-*/
-
+// function which renders patient's login page 
 const getPatientLoginPage = (req,res)=> {
     res.render('login', {flash: req.flash('error'), title: 'Login'})
 }
 
-const patientLogin =(req, res)=>
-    {
-        res.redirect('/patient/dashboard')
-    }
+// function which redirects patient to their dashboard once login is successful
+const patientLogin =(req, res)=>{
+    res.redirect('/patient/dashboard')
+}
 
+// logouts patient from their current session
 const patientLogout = (req,res)=>{
     req.logout()
     res.redirect('/patient/login')
 }
 
-
-
-    // function to retrieve a patient's dashboard using their patient ID
-const getPatientById = (isAuthenticated, async(req, res, next) => {
+// function to retrieve a patient's dashboard during their current session
+const getPatientById = async(req, res) => {
     try {
         const patient = await Patient.findById(req.user._id).lean() // do not remove lean 
         
@@ -57,11 +40,11 @@ const getPatientById = (isAuthenticated, async(req, res, next) => {
 
         for (i in patient.input_data){
             // iterating through each patient's time-series inputs
-            if ( patient.input_data[i].set_date.getDate() == todaysDate.getDate() ) {
+
+            if ( compareDates(patient.input_data[i].set_date) ) {
                 // render today's patient data if found one 
                 return res.render('patientDashboard', { patient: patient, patientData: patient.input_data[i]} )
-        }
-
+            }
         }
 
         // it's a new day, create new input_data schema for a patient
@@ -79,21 +62,23 @@ const getPatientById = (isAuthenticated, async(req, res, next) => {
             }
         )
 
-        const n = patient.input_data.length // new input_data entry is pushed at the back of the array 
-         return res.render('patientDashboard', { patient: patient, patientData: patient.input_data[n]} )
+        // new input_data entry is pushed at the back of the array 
+        // not n-1, because const 'patient' not updated yet, only pushed to database
+        const n = patient.input_data.length 
+        return res.render('patientDashboard', { patient: patient, patientData: patient.input_data[n]} )
 
     } catch (err) {
         return next(err)
     }
-})
+}
 
 // function to retrieve glucose submission page of a patient
 const getGlucosePage= async (req,res) =>{
     const patient = await Patient.findById(req.user._id).lean()
 
     for (i in patient.input_data){
-        if (patient.input_data[i].set_date.getDate() == todaysDate.getDate() ) {
-            if (patient.input_data[i].glucose_data == null){
+        if (compareDates(patient.input_data[i].set_date)) {
+            if ( (patient.input_data[i].glucose_data == null) && (patient.threshold_list[0].th_required) ){
                 return res.render('insertGlucose', { patient: patient })
             }
         }
@@ -105,8 +90,8 @@ const getGlucosePage= async (req,res) =>{
 const getInsulinPage= async(req,res) =>{
     const patient = await Patient.findById(req.user._id).lean()
     for (i in patient.input_data){
-        if (patient.input_data[i].set_date.getDate() == todaysDate.getDate() ) {
-            if (patient.input_data[i].insulin_data == null){
+        if (compareDates(patient.input_data[i].set_date)) {
+            if ( (patient.input_data[i].insulin_data == null) && (patient.threshold_list[3].th_required)) {
                 return res.render('insertInsulin', { patient: patient })
             }
         }
@@ -118,8 +103,8 @@ const getInsulinPage= async(req,res) =>{
 const getStepsPage= async(req,res) =>{
     const patient = await Patient.findById(req.user._id).lean()
     for (i in patient.input_data){
-        if (patient.input_data[i].set_date.getDate() == todaysDate.getDate() ) {
-            if (patient.input_data[i].steps_data == null){
+        if (compareDates(patient.input_data[i].set_date)) {
+            if ( (patient.input_data[i].steps_data == null) && (patient.threshold_list[1].th_required) ){
                 return res.render('insertSteps', { patient: patient })
             }
         }
@@ -131,8 +116,8 @@ const getStepsPage= async(req,res) =>{
 const getWeightPage= async(req,res) =>{
     const patient = await Patient.findById(req.user._id).lean()
     for (i in patient.input_data){
-        if (patient.input_data[i].set_date.getDate() == todaysDate.getDate() ) {
-            if (patient.input_data[i].weight_data == null){
+        if (compareDates(patient.input_data[i].set_date)) {
+            if ( (patient.input_data[i].weight_data == null) && (patient.threshold_list[2].th_required)) {
                 return res.render('insertWeight', { patient: patient })
             }
         }
