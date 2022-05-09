@@ -65,6 +65,10 @@ const patientSchema = new mongoose.Schema({
    password: {type: String},
    first_name: String,
    last_name: String,
+   role: {
+      type: String,
+      default: "patient"
+  },
    email: String,
    sex: {
       type: String,

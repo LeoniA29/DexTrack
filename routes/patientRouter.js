@@ -17,23 +17,34 @@ const isAuthenticated = (req, res, next) => {
     return next()
 }
 
+// set up role-based authentication
+const hasRole = (thisRole) => {
+    return (req, res, next) => {
+        if (req.user.role == thisRole) 
+            return next()
+        else {
+            res.redirect('/patient/login')
+        }
+    }    
+}
+
 // patient routes used
 patientRouter.get('/login', patientController.getPatientLoginPage)
 patientRouter.post('/login', passport.authenticate('local', { failureRedirect: '/patient/login', failureFlash: true }), patientController.patientLogin)
 patientRouter.post('/logout', patientController.patientLogout)
 
-patientRouter.get('/dashboard', isAuthenticated, patientController.getPatientById)
+patientRouter.get('/dashboard', isAuthenticated, hasRole('patient'), patientController.getPatientById)
 
-patientRouter.get('/insertGlucose', isAuthenticated, patientController.getGlucosePage)
+patientRouter.get('/insertGlucose', isAuthenticated, hasRole('patient'), patientController.getGlucosePage)
 patientRouter.post('/insertGlucose', isAuthenticated, patientController.insertPatientData)
 
-patientRouter.get('/insertInsulin', isAuthenticated, patientController.getInsulinPage)
+patientRouter.get('/insertInsulin', isAuthenticated, hasRole('patient'), patientController.getInsulinPage)
 patientRouter.post('/insertInsulin', isAuthenticated, patientController.insertPatientData)
 
-patientRouter.get('/insertSteps', isAuthenticated, patientController.getStepsPage)
+patientRouter.get('/insertSteps', isAuthenticated, hasRole('patient'), patientController.getStepsPage)
 patientRouter.post('/insertSteps', isAuthenticated, patientController.insertPatientData)
 
-patientRouter.get('/insertWeight', isAuthenticated, patientController.getWeightPage)
+patientRouter.get('/insertWeight', isAuthenticated, hasRole('patient'), patientController.getWeightPage)
 patientRouter.post('/insertWeight', isAuthenticated, patientController.insertPatientData)
 
 // export the router

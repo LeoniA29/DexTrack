@@ -17,6 +17,10 @@ const patientList = new mongoose.Schema({
 const schema = new mongoose.Schema({
  first_name: String,
  last_name: String,
+ role: {
+     type: String,
+     default: "clinician"
+ },
  patient_list: [ObjectId]
 })
 
