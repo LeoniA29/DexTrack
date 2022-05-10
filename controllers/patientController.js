@@ -15,7 +15,7 @@ const compareDates = (patientDate)=> {
 
 // function which renders patient's login page 
 const getPatientLoginPage = (req,res)=> {
-    res.render('login', {flash: req.flash('error'), title: 'Login'})
+    res.render('patientLogin', {flash: req.flash('error'), title: 'Login'})
 }
 
 // function which redirects patient to their dashboard once login is successful

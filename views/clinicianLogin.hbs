@@ -1,0 +1,23 @@
+{{! This is the login page. }}
+
+<h1>Clinician Login Page</h1>
+
+<p>Looks like you haven't logged in yet. We take privacy seriously, so the Home page is only visible to logged-in users!</p>
+
+<form action="/clinician/login" method="post">
+    <div>
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" autocomplete="username" required autofocus/>
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="password" required />
+    </div>
+    <div>
+        <button type="submit" value="submit">Log In</button>
+    </div>
+</form>
+
+{{#each flash}}
+<p class="alert">{{this}}</p>
+{{/each}}

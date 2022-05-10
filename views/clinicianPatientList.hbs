@@ -26,7 +26,7 @@
      <!-- Each section corresponds to each segment of the patient information in the webpage -->
     <section class="patientList">
         <div class="sticky-bar">
-            <button class="orange-button" onclick="location.href='/clinician/{{clinicianItem._id}}/register'">Add New Patient</button>
+            <button class="orange-button" onclick="location.href='/clinician/registerPatient'">Add New Patient</button>
             <div class="blue-button" id="sort">
                 <button class="dropbtn">Sort by <img src="/chevron-down.png"></button>
                 <div class="sort-by">
@@ -102,3 +102,8 @@
     </section>
 
 </div>
+
+<form method="POST">
+        <button>Logout</button>
+        </form>
+
