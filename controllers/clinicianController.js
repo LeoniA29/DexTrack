@@ -48,10 +48,12 @@ const getClinicianById = async(req, res, next) => {
 }
 
 // this is for testing, once login feature enabled, it will not be necessary
-const insertClinician= (req, res) => {
+const insertClinician= async (req, res) => {
     var newData = new Clinician(req.body)
     /* use validation in-between */
-    newData.save()    
+    const customUsername = (newData.first_name.slice(0, 3) + newData.last_name.slice(0, 3))
+    newData.username += customUsername
+    await newData.save()    
     return res.redirect('back')
 }
 

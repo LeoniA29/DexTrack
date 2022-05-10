@@ -36,6 +36,9 @@ clinicianRouter.post('/login', passport.authenticate('local', {
 
 clinicianRouter.post('/dashboard', clinicianController.clinicianLogout)
 
+clinicianRouter.get('/insert', clinicianController.getAllClinicians)
+clinicianRouter.post('/insert', clinicianController.insertClinician)
+
 clinicianRouter.get('/dashboard', isAuthenticated, hasRole('clinician'), clinicianController.getClinicianPatientList)
 
 clinicianRouter.get('/registerPatient', isAuthenticated, hasRole('clinician'), clinicianController.getRegisterPage)

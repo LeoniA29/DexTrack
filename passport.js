@@ -34,11 +34,13 @@ let localStrategy = new LocalStrategy(
             if (!user){
                 return done(undefined, false, {message: 'Incorrect username or password',})
             }
-            console.log("a patient")
+            // console.log("a patient")
             user.verifyPassword(password, (err, valid) => {
+                /*
                 console.log(password)
                 console.log(err)
                 console.log(valid)
+                */
                 if (err) {
                     return done(undefined, false, {message: 'Unknown error has occurred'})
                 }
@@ -53,11 +55,13 @@ let localStrategy = new LocalStrategy(
         }
 
         else {
-            console.log("a clinician")
+            // console.log("a clinician")
             user.verifyPassword(password, (err, valid) => {
+                /*
                 console.log(password)
                 console.log(err)
                 console.log(valid)
+                */
                 if (err) {
                     
                     return done(undefined, false, {message: 'Unknown error has occurred'})
