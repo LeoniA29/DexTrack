@@ -7,10 +7,10 @@ const todaysDate = new Date();
 // this is for testing, once login feature enabled, it will not be necessary
 const getAllClinicians = async (req, res, next) => {
  try {
- const clinicians = await Clinician.find().lean()
- return res.render('allClinicians', { data: clinicians })
+    const clinicians = await Clinician.find().lean()
+    return res.render('allClinicians', { data: clinicians })
  } catch (err) {
- return next(err)
+    return next(err)
  }
 }
 
@@ -18,7 +18,7 @@ const getAllClinicians = async (req, res, next) => {
 
 const getClinicianById = async(req, res, next) => {
  try {
- const clinician = await Clinician.findById(req.params.clinician_id).lean()
+ const clinician = await Clinician.findById(req.user._id).lean()
  if (!clinician) {
  // no clinician found in database
  return res.sendStatus(404)
@@ -39,45 +39,44 @@ const insertClinician= (req, res) => {
     return res.redirect('back')
 }
 
+// function which renders patient's login page 
+const getClinicianLoginPage = (req,res)=> {
+    res.render('login', {flash: req.flash('error'), title: 'Login'})
+}
+
+// function which redirects patient to their dashboard once login is successful
+const clinicianLogin =(req, res)=>{
+    res.redirect('/clinician/dashboard')
+}
+
+// logouts patient from their current session
+const clinicianLogout = (req,res)=>{
+    req.logout()
+    res.redirect('/clinician/login')
+}
+
 // render register patient hbs
-const registerPatient = (req, res) => {
-    const clinician = Clinician.findById(req.params.clinician_id).lean()
-    return res.render('patientRegister', { oneItem: clinician})
+const getRegisterPage = (req, res) => {
+    return res.render('patientRegister')
 }
 
 // insert new Patient into database and link to clinician
 const insertPatient= async (req, res) => {
 
     // saves patient into mongoDB
-    var newPatient = new Patient(req.body)
-    await newPatient.save()  
-
-    // initializing all thresholds for the patient
-    var thresholds = []
-    var glucose_th = new Threshold({type: "glucose"}); thresholds.push(glucose_th);
-    var steps_th = new Threshold({type: "steps"}); thresholds.push(steps_th);
-    var weight_th = new Threshold({type: "weight"}); thresholds.push(weight_th);
-    var insulin_th = new Threshold({type: "insulin"}); thresholds.push(insulin_th);
+    const newPatient = new Patient(req.body)
     
-    var ID = newPatient._id;
-    var patientID = new ObjectId(ID)
-    for (var i in thresholds) {
-        // iterates through the thresholds array in push it into the patient's
-        // threshold array in mongoDB
-        Patient.findByIdAndUpdate(patientID,
-            {$push: {threshold_list: thresholds[i]}},
-            {safe: true, upsert: true},
-            function(err, doc) {
-                if(err){
-                    console.log(err);
-                } else{
-                }
-            }
-        )
-    }
-
+    const glucose_th = new Threshold({type: "glucose"});
+    const steps_th = new Threshold({type: "steps"}); 
+    const weight_th = new Threshold({type: "weight"}); 
+    const insulin_th = new Threshold({type: "insulin"});
     
-    var clinician = req.params.clinician_id
+    newPatient.threshold_list.splice(0, 0, glucose_th, steps_th, weight_th, insulin_th)
+    const customUsername = (newPatient.first_name.slice(0, 3) + newPatient.last_name.slice(0, 3))
+    newPatient.username += customUsername
+
+
+    var clinician = req.user._id
     var object_clinician = new ObjectId(clinician)
 
     // pushes patient into clinician's patient list in mongoDB
@@ -91,22 +90,18 @@ const insertPatient= async (req, res) => {
             }
         }
     )
+    
+    await newPatient.save()
 
     // redirects back to clinician home page
-    return res.redirect('/clinician/'+ req.params.clinician_id);
+    return res.redirect('/clinician/dashboard');
 
 }
 
 // render patient list belonging to the clinician
 const getClinicianPatientList =  async (req, res, next) => {
 
-    try {
-        const clinician = await Clinician.findById(req.params.clinician_id).lean()
-        if (!clinician) {
-            // no clinician found in database
-            return res.sendStatus(404)
-        }
-
+        const clinician = req.user.toJSON()
         // array to collect patient data
         var patients = clinician.patient_list
         var test = [];
@@ -114,9 +109,9 @@ const getClinicianPatientList =  async (req, res, next) => {
         //var data = [];
 
         // checks if clinician has patient or not, this is for testing purposes
-        if (!patients) {
-            return res.render('clinicianPatientList', { clinicianItem: clinician, patientItem: patientList})
-        } 
+        //if (!patients) {
+          //  return res.render('clinicianPatientList', { clinicianItem: clinician, patientItem: patientList})
+        //} 
 
         // loops through the list of patients from clinician to extract input data
         for (var i in patients) {
@@ -164,19 +159,29 @@ const getClinicianPatientList =  async (req, res, next) => {
         //console.log(data)
         console.log(test)
         return res.render('clinicianPatientList', { clinicianItem: clinician, testData: test})
-    
-    } catch (err) {
-        return next(err)
-    }
 }
+
+// render patient comments hbs
+const getPatientComments = async (req, res, next) => {
+    const clinician = Clinician.findById(req.user._id).lean()
+    var commentsList = [];
+
+    
+    return res.render('patientRegister', { commentsList: patient_comments})
+}
+
 // exports an object, which contain functions imported by router
 module.exports = {
+    getClinicianLoginPage,
+    clinicianLogin,
+    clinicianLogout,
     getClinicianById,
     getAllClinicians,
     insertClinician,
     insertPatient,
-    registerPatient,
+    getRegisterPage,
     getClinicianPatientList,
+    getPatientComments
 }
 
 

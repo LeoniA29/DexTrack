@@ -5,8 +5,11 @@
     <div class="dropdown">
         <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}} <img src="/chevron-down.png"></button>
         <div class="dropdown-content">
-            <a href="#">Patient comments</a>
-            <a href="#">Sign out</a>
+            <a href="/clinician/patientComments">Patient comments</a>
+            <form class="logout" action="/clinician/logout" method="post">
+                <button type="submit">Sign Out</button>
+            </form>
+            <!-- <a action="/logout" method="POST" type="submit">Sign out</a> -->
         </div>
     </div>
     <div class="icons">
@@ -26,7 +29,7 @@
      <!-- Each section corresponds to each segment of the patient information in the webpage -->
     <section class="patientList">
         <div class="sticky-bar">
-            <button class="orange-button" onclick="location.href='/clinician/{{clinicianItem._id}}/register'">Add New Patient</button>
+            <button class="orange-button" onclick="location.href='/clinician/registerPatient'">Add New Patient</button>
             <div class="blue-button" id="sort">
                 <button class="dropbtn">Sort by <img src="/chevron-down.png"></button>
                 <div class="sort-by">
