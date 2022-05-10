@@ -18,53 +18,50 @@ body {
 }
 
 section {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 30px;
     margin-left: 160px;
     margin-right: 160px;
     margin-bottom: 20px;
     
 }
 
-.row-2:after, .row-3:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-.leftcolumn {
-    float: left;
-    width: 75%;
-  }
-
-.rightcolumn {
-    float: left;
-    width: 25%;
-}
-
-@media screen and (max-width: 500px) {
-    .leftcolumn, .rightcolumn {
-      width: 100%;
-      padding: 0;
-    }
-}
-
 .scroll {
     overflow: auto;
     height: 700px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.patientList, .clinician-notes, .patient-comments {
+    background-color:#E6F2FE;
+    border-radius:  36px;
+    border: 0px;
+    height: 800px;
+}
+
+.sticky-bar {
+    background: #E6F2FE;
+    height: 40px;
+    border-radius:  36px;
+    margin-bottom: 10px;
+    padding-right: 20px;
 }
 
 .entry {
     padding: 20px;
     font-size: medium;
-    width: 1300px;
     height: 150px;
     border-radius: 36px;
     border-width: 0;
     background: white;
-    margin:auto; 
-    display:block;
     margin-bottom: 20px;
+    display: flex;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+button.entry {
+    width: 100%;
 }
 
 .patientComments, .clinicianNotes {
@@ -79,24 +76,23 @@ section {
     margin-bottom: 20px;
 }
 
-.leftcolumn .segment {
+.segment {
     background-color:#F2F2F2;
-    float: left;
     height: 660px;
-    width: 100%;
     border-radius: 36px;
     border: 0px;
-    padding: 20px;
 }
 
 .segment h3 {
-    font-size: 25px;
+    font-size: 30px;
     color: #2C68AD;
     font-weight: 400;
     margin-left: 10px;
     margin-top: 0px;
+}
+
+.segment .sticky-bar {
     background: #F2F2F2;
-    border-radius:  36px;
 }
 
 .accordion {
@@ -107,6 +103,11 @@ section {
     border-radius: 36px;
     border-width: 3px;
     background: white;
+    display: flex;
+}
+
+.accordion img {
+    height: 30px;
 }
 
 .data {
@@ -121,10 +122,14 @@ section {
 }
 
 #overflow.data {
-    width: 260px;
+    width: 500px;
     overflow: hidden;
     text-overflow: ellipsis; 
     white-space: nowrap;
+}
+
+.buttons {
+    padding: 0px;
 }
 
 
@@ -166,19 +171,25 @@ button {
     margin: 0; /* Important for vertical align on mobile phones */
 }
 
-.patientList, .clinician-notes, .patient-comments {
-    background-color:#E6F2FE;
-    border-radius:  36px;
-    border: 0px;
-    height: 800px;
+.view {
+    width: 49%;
+    border-radius: 22px;
+    font-size: 16px;
+    text-decoration: underline;
 }
 
-.sticky-bar {
-    background: #E6F2FE;
-    height: 40px;
-    border-radius:  36px;
-    margin-bottom: 10px;
-    padding-right: 20px;
+#clinician-notes.view {
+    border-color: #2C68AD;
+    background: #F2F2F2;
+    border-width: 3px;
+}
+
+#send-message.view {
+    background: #2C68AD;
+    border-width: 3px;
+    border-color: #2C68AD;
+    color: white;
+    float: right;
 }
 
 
@@ -245,13 +256,8 @@ button {
     height: 50px;
 }
 
-.patient-comments a, .clinician-notes a {
-    float: right;
-    margin-right: 20px;
-}
-
 .patient-comments #overflow.data {
-    width: 380px;
+    width: 415px;
 }
 
 
@@ -313,19 +319,39 @@ span.attribute {
 
 /* graphs */
 
-.graphs {
-    width: 320px;
-    float: right;
+#graphs.segment {
+    padding: 0px;
+    background: none;
+    height: auto;
+}
+
+#graphs.segment .row{
+    align-items: center;
+    display: flex;
+    height: auto;
+    margin-bottom: 40px;
 }
 
 .card{
-    border-radius: 23px;
-    border-width: 3px;
-    height: 168px;
-    width: 320px;
+    border-radius: 40px;
+    border: 3px solid;
     background: white;
-    position: relative;
-    margin-bottom: 10px;
+    float: left;
+    margin-right: 60px;
+    width: 49%;
+    height: 50px;
+}
+
+#right-weight.card {
+    margin-right: 0px;
+    float: right;
+    border-color: #55B48B;
+}
+
+#right-insulin.card {
+    margin-right: 0px;
+    float: right;
+    border-color: #FF9D47
 }
 
 
@@ -333,39 +359,43 @@ span.attribute {
 
 #thresholds.segment {
     height: fit-content;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding: 40px;
 }
 
 .threshold {
     float: left;
     width: 25%;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     font-size: 18px;
 }
 
 .threshold h4 {
     font-weight: 400;
     margin-top: 0px;
-    margin-bottom: 10px;
-    font-size: 22px;
+    margin-bottom: 20px;
+    font-size: 25px;
 }
 
 .container {
-    border-width: 3px;
+    border: 3px solid;
     background: white;
     padding: 30px;
-    border-radius: 15px;
+    border-radius: 30px;
     margin-right: 20px;
+    font-size: 22px;
+}
+
+#exercise.container {
+    margin-right: 0px;
 }
 
 .upper{
-    padding-bottom: 20px;
-    line-height: 30px;
+    padding-bottom: 30px;
+    line-height: 40px;
 }
 
 .lower {
-    line-height: 30px;
+    line-height: 40px;
 }
 
 #thresholds.segment button{
@@ -373,80 +403,58 @@ span.attribute {
     background: #2C68AD;
     width: 100px;
     height: 50px;
-    cursor: pointer;
-    font-size: 17px;
+    font-size: 22px;
     text-align: center;
-    border-radius:  20px;
+    border-radius: 25px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    font-family: inherit;
     margin:auto; 
     display:block;
+}
+
+#thresholds.segment button a {
+    color: white; 
+    text-decoration:none; 
+    font-weight: 500;
 }
 
 
 /* message */
 
-.rightcolumn .message {
+#message.segment {
     background-color:#E6F2FE;
-    float: right;
-    height: 425px;
-    width: 80%;
-    border-radius: 36px;
-    border: 0px;
-}
-
-.message h4 {
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-bottom: 10px;
-    width: 100%;
-    font-size: 16px;
-    color: #2C68AD;
-    font-weight: 400;
-    position: absolute;
+    padding: 50px;
 }
 
 .prev-msg {
     border-radius: 1.15rem;
     line-height: 1.25;
     overflow: scroll;
-    padding: 0.5rem .875rem;
-    position:absolute;
+    padding: 20px;
     background-color: #248bf5;
     color: #fff; 
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    font-family: -apple-system, 
-    BlinkMacSystemFont, 
-    "Segoe UI", 
-    Roboto, 
-    Oxygen-Sans, 
-    Ubuntu, 
-    Cantarell, 
-    "Helvetica Neue", 
-    sans-serif;
-    font-weight:normal;
-    font-size: 14px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 50px;
-    height: 60px;
-    width: 250px;
+    font-size: 22px;
+    height: 100px;
+    margin-bottom: 20px;
 }
 
-.message textarea {
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 145px;
-    padding: 10px;
+.prev-msg strong {
+    font-size: 18px;
+}
+
+#message.segment textarea {
+    padding: 20px;
     border-radius: 15px;
-    border-width: 1px;;
-    width:250px;
-    height: 200px;
+    border-width: 1px;
+    font-size: 22px;
+    height: 330px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
 }
 
 #send.orange-button {
-    margin-right: 27px;
-    margin-top: 10px;
+    font-size: 22px;
 }
 
 
@@ -463,6 +471,41 @@ span.attribute {
 
 .clinician-notes #overflow.data {
     width: 800px;
+}
+
+
+/* colors */
+
+#glucose {
+    border-color: #E13D45;
+}
+
+#weight {
+    border-color: #6F62D0;
+}
+
+#insulin {
+    border-color: #FF9D47;
+}
+
+#exercise {
+    border-color: #55B48B;
+}
+
+#glucose_text {
+    color: #E13D45;
+}
+
+#weight_text {
+    color: #6F62D0;
+}
+
+#insulin_text {
+    color: #FF9D47;
+}
+
+#exercise_text {
+    color: #55B48B;
 }
 
 
@@ -570,4 +613,3 @@ footer h6 {
     font-size: 15px;
     font-weight: 400;
 }
-  
