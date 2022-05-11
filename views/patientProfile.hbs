@@ -1,0 +1,41 @@
+{{!< patientLayout}}
+
+{{! displays today's date information and patient's first name}}
+<div class="dashboardInformation">
+    <h2 id="date">{{todaysDay}}, {{todaysDate}} {{todaysMonth}} </h2>
+    <h1 id ="welcome">Your Profile</h1>
+</div>
+
+
+    
+{{#with patient}}
+
+    <div class="profile">
+    <p>Given Name: {{first_name}}</p>
+    <p>Family Name: {{last_name}}</p>
+    <p>Username: {{username}}</p>
+    <p>Screen Name: {{screen_name}}</p>
+    {{#with (showBirthDate dob)}}
+        <p>DOB: {{this.[0]}} {{this.[1]}} {{this.[2]}} </p>
+    {{/with}}
+    <p>Email: {{email}}</p>
+    <p>Profession: {{occupation}}</p>
+    <p>Address: {{address}} VIC {{postcode}}</p>
+    <p>Contact Number: {{phone}}</p>
+    
+
+    <br>
+        <form method="POST">
+            <input type="text" placeholder="Update screen name..." name="screen_name"></input>
+            <input type="submit"  value="Click to Submit!"></input> 
+        </form>
+    </div>
+
+   
+
+{{/with}}
+
+{{#each flash}}
+<p class="alert" style="color: black">{{this.msg}}</p>
+{{/each}}
+

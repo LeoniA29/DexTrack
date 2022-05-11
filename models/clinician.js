@@ -3,16 +3,13 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 
 const clinicianSchema = new mongoose.Schema({
- first_name: String,
- last_name: String,
- username: {type: String, unique: true},
- password: {type: String},
- secret: {type: String, default: "INFO30005"},
- role: {
-     type: String,
-     default: "clinician"
- },
- patient_list: [ObjectId]
+    first_name: {type: String},
+    last_name: {type: String},
+    username: {type: String},
+    password: {type: String},
+    secret: {type: String, default: "INFO30005"},
+    role: {type: String, default: "clinician"},
+    patient_list: [ObjectId]
 })
 
 // password comparison function

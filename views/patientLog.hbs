@@ -1,0 +1,52 @@
+{{!< patientLayout}}
+
+{{! displays today's date information and patient's first name}}
+<div class="dashboardInformation">
+    <h2 id="date">{{todaysDay}}, {{todaysDate}} {{todaysMonth}} </h2>
+    <h1 id ="welcome">Hi, {{patient.first_name}}</h1>
+</div>
+
+{{#each input}}
+
+        {{#with (displayDate this)}}
+            <p style="color: black">
+                {{this.[0]}} 
+                <br>
+                {{this.[1]}}
+                </p>
+        {{/with}}
+
+        {{#with (getLogs this)}}
+    
+            
+
+            {{#if (emptyToday this.empty)}}
+
+                <p style="color: black">no inputs for that date </p>
+
+            {{else}}
+                {{#each this.arr}}
+
+                    {{#with (showType this)}}
+                    <div class ="symbol_mini"> 
+                        <img id="element" src={{this}}>
+                    </div>
+                    {{/with}}
+                    <p style="color: black">
+                        type: {{this.[0]}}, 
+                        entry: {{this.[1]}}, 
+                        time: {{this.[2]}}
+                    </p>
+                    <br>
+                {{/each}}
+                
+            {{/if}}
+
+            </p>
+        {{/with}}
+
+{{/each}}
+
+
+
+    

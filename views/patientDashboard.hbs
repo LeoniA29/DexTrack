@@ -15,6 +15,7 @@
                 {{else if (filledToday patientData.glucose_data)}}
                     <img id="glucoseFilled" src="/Glucose_Filled.png">
                     <h2>{{patientData.glucose_data.data_entry}}</h2>
+                
                 {{else}}
                     {{!-- <a href="/patient/{{patient._id}}/insertGlucose"> <img id="glucoseEmpty" src="/Glucose_Empty.png"></a> --}}
                    <img id="glucoseEmpty" src="/Glucose_Empty.png">
@@ -54,6 +55,7 @@
                 {{else if (filledToday patientData.steps_data) }}
                     <img id="stepsFilled" src="/Exercise_Filled.png">
                     <h2>{{patientData.steps_data.data_entry}}</h2>
+
                 {{else}}
                     {{!-- <a href="/patient/{{patient._id}}/insertSteps"> <img id="stepsEmpty" src="/Exercise_Empty.png"></a> --}}
                     <img id="stepsEmpty" src="/Exercise_Empty.png">

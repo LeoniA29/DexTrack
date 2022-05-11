@@ -4,6 +4,9 @@ const passport = require('../passport')
 // create our Router object
 const clinicianRouter = express.Router()
 
+// add Express-Validator
+const {body} = require('express-validator')
+
 // import clinician controller functions
 const clinicianController = require('../controllers/clinicianController')
 
@@ -42,7 +45,19 @@ clinicianRouter.post('/insert', clinicianController.insertClinician)
 clinicianRouter.get('/dashboard', isAuthenticated, hasRole('clinician'), clinicianController.getClinicianPatientList)
 
 clinicianRouter.get('/registerPatient', isAuthenticated, hasRole('clinician'), clinicianController.getRegisterPage)
-clinicianRouter.post('/registerPatient', isAuthenticated, clinicianController.insertPatient)
+
+clinicianRouter.post('/registerPatient', isAuthenticated,
+
+    body('first_name', ' first name must be valid').not().isEmpty().isAlpha().escape(), 
+    body('last_name', 'last name must be valid').not().isEmpty().isAlpha().escape(), 
+    body('email', 'email must be valid').not().isEmpty().isEmail().escape(), 
+    body('dob', 'date of birth must be valid').not().isEmpty().isDate().escape(),
+    body('occupation', 'occupation must be valid').not().isEmpty().isString().escape(), 
+    body('address', 'address must be valid').not().isEmpty().isString().escape(),
+    body('postcode', 'postcode must be valid and at-least 4 digits').not().isEmpty().isNumeric().isLength({min:4}).escape(),  
+    body('phone', 'phone number must be valid').not().isEmpty().isNumeric().escape(),
+    
+    clinicianController.insertPatient)
 
 clinicianRouter.get('/patientComments', isAuthenticated, hasRole('clinician'), clinicianController.getPatientComments)
 

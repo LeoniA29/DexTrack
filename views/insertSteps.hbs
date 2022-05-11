@@ -1,23 +1,25 @@
 {{!< patientLayout}}
-
+{{#each flash}}
+<p class="alert">{{this.msg}}</p>
+{{/each}}
 {{! displays step count submission page for a patient}}
 {{#with patient}}
 <div class = "inputDataContainer">
     <div class ="symbol"> 
         <img id="element" src="/Exercise.png">
-        <h2 id = "title">STEPS </h2>
+        <h2 id = "title">STEP COUNT </h2>
     </div>
 
     <div class ="inputDataItems"> 
 
         <form method="POST">
-            <h2 id="labelData">Steps Count</h2>
-            <input type="text" id="inputData" placeholder="Enter data" name="data_entry"></input>
+            <h2 id="labelData">Number of Steps</h2>
+            <input type="text" id="inputData" placeholder="Enter step count..." name="data_entry"></input>
             <h2 id="labelNotes">Notes</h2>
-            <input type="text" id="inputNotes" placeholder="Comment" name="data_comment"></input>
+            <input type="text" id="inputNotes" placeholder="Enter comment..." name="data_comment"></input>
             <input type="hidden" name="data_type" value="steps" /> 
             <input type="hidden" name="data_hex" value="#55B48B" /> 
-            <input type="submit" id="doneButton" value="Done"></input> 
+            <input type="submit" id="doneButton" value="Click to Submit!"></input> 
         </form>
         
     </div>

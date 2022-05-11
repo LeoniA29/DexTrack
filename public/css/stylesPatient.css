@@ -173,6 +173,10 @@ img[id="logo"] {
     align-self: center;
 }
 
+.symbol_mini img[id="element"] {
+    width:10%;
+}
+
 .symbol #title {
     top: 25%;
     position: relative;
@@ -236,11 +240,13 @@ img[id="logo"] {
     color: #FFFFFF;
     height: 30px;
     font-size: 20px;
-
 }
 
+.profile {
+    color: black;
+}
 
-@media screen and (min-width: 1024\px) {
+@media screen and (min-width: 1024px) {
     .inputDataContainer {
         display: flex;
     }
@@ -375,5 +381,9 @@ img[id="logo"] {
     .Insulin h2{
         top: 47%;
         font-size: 10vw;
+    }
+
+    #doneButton{
+        font-size: 15px;
     }
 }

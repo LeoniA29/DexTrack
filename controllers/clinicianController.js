@@ -4,6 +4,9 @@ const {Patient, Data, DataSet, Threshold} = require('../models/patient')
 const ObjectId = require('mongodb').ObjectId
 const todaysDate = new Date();
 
+// add Express-Validator
+const {validationResult, check } = require('express-validator')
+
 // function which renders patient's login page 
 const getClinicianLoginPage = (req,res)=> {
     res.render('clinicianLogin', {flash: req.flash('error'), title: 'Login'})
@@ -59,7 +62,7 @@ const insertClinician= async (req, res) => {
 
 // render register patient hbs
 const getRegisterPage = (req, res) => {
-    return res.render('patientRegister')
+    return res.render('patientRegister', {flash: req.flash('errors')})
 }
 
 // render patient comments hbs
@@ -75,6 +78,16 @@ const getPatientComments = async (req, res, next) => {
 // insert new Patient into database and link to clinician
 const insertPatient= async (req, res) => {
 
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        const errorsFound = validationResult(req).array()
+        // console.log(errorsFound)
+        req.flash('errors', errorsFound);
+        return res.redirect('/clinician/registerPatient')
+        // return res.send(errors) // if validation errors, do not process data
+    }
+
+
     // saves patient into mongoDB
     const newPatient = new Patient(req.body)
     
@@ -87,7 +100,9 @@ const insertPatient= async (req, res) => {
     const customUsername = (newPatient.first_name.slice(0, 3) + newPatient.last_name.slice(0, 3))
     newPatient.username += customUsername
 
-
+    const dobDate = newPatient.dob.getDate()
+    const dobMonth = newPatient.dob.getMonth()
+    newPatient.screen_name = (customUsername + dobDate + dobMonth) 
 
     // pushes patient into clinician's patient list in mongoDB
     Clinician.findByIdAndUpdate(req.user._id,

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
+const SALT_FACTOR = 10
 
 // schema for notes
 const note = new mongoose.Schema({
@@ -9,84 +10,53 @@ const note = new mongoose.Schema({
 
 // schema for threshold
 const threshold = new mongoose.Schema({
-   low: {
-      type: Number,
-      default: null
-   },
-   high: {
-      type: Number,
-      default: null
-   },
-   th_required: {
-      type: Boolean,
-      default: false
-   },
-   type: {
-      type: String,
-      enum: ['glucose', 'insulin', 'weight', 'steps']
-   }
+   low: {type: Number, default: null},
+   high: {type: Number, default: null},
+   th_required: {type: Boolean, default: true},
+   type: {type: String, enum: ['glucose', 'insulin', 'weight', 'steps']}
 });
 
 // schema for data 
 const data = new mongoose.Schema({
-   data_entry: Number,
+   data_entry: {type: Number, required: true},
    data_comment: String,
    data_type: String,
-   data_hex: String
+   data_hex: String,
+   data_date: Date
 });
-
 
 // schema for data set
 const data_set = new mongoose.Schema({
    set_date: Date,
-   // created_date :{type: Date, default: Date.now},
-   glucose_data: { 
-      type: data, 
-      default: null
-   },
-   steps_data: { 
-      type: data, 
-      default: null
-   },
-   weight_data: { 
-      type: data, 
-      default: null
-   },
-   insulin_data: { 
-      type: data, 
-      default: null
-   }
+   glucose_data: {type: data, default: null},
+   steps_data: { type: data, default: null},
+   weight_data: { type: data, default: null},
+   insulin_data: { type: data, default: null}
 });
 
-// schema for patient
-// patient collection 
+// schema for patient patient collection 
 const patientSchema = new mongoose.Schema({
-   username: {type: String, unique: true},
-   password: {type: String},
+   username: {type: String, unique: true}, // make required
+   password: {type: String}, // make required
    secret: {type: String, default: "INFO30005"},
-   first_name: String,
-   last_name: String,
-   role: {
-      type: String,
-      default: "patient"
-  },
-   email: String,
-   sex: {
-      type: String,
-      enum: ['Female','Male','Prefer not to answer'],
-      default: 'Prefer not to answer'
-   },
-   dob: Date,
-   phone: String,
-   occupation: String,
-   address: String,
-   postcode: String,
-   // this is unique from the clinician to each patient
-   clinician_message: String,
-  // array of objects for the patient defined in the schema below
-   clincian_notes: [note],
-   threshold_list: [threshold],
-   input_data: [data_set]
+   screen_name: {type: String},
+
+   first_name: {type: String, required: true},
+   last_name: {type: String, required: true},
+   role: {type: String, default: "patient"},
+   email: {type: String, required: true},
+   sex: { type: String, enum: ['Female','Male','Prefer not to answer'], default: 'Prefer not to answer'},
+   dob: {type: Date, required: true},
+   phone: {type: String, required: true},
+   occupation: {type: String, required: true},
+   address: {type: String, required: true},
+   postcode: {type: String, required: true},
+
+   clinician_message: String, // this is unique from the clinician to each patient
+   clincian_notes: [note], // array of objects for the patient defined in the schema below
+   threshold_list: [threshold], // array of thresholds objects
+
+   input_data: [data_set] // array of data objects
   })
 
 
@@ -96,8 +66,6 @@ patientSchema.methods.verifyPassword = function (password, callback) {
        callback(err, valid)
    })
 }
-
-const SALT_FACTOR = 10
 
 // hash password before saving
 patientSchema.pre('save', function save(next) {
@@ -117,7 +85,6 @@ patientSchema.pre('save', function save(next) {
         next()
     })
 })
-
 
 const Data = mongoose.model('Data', data)
 const DataSet = mongoose.model('DataSet', data_set)

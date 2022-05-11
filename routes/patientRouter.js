@@ -4,6 +4,9 @@ const passport = require('../passport')
 // create our Router object
 const patientRouter = express.Router()
 
+// add Express-Validator
+const {body} = require('express-validator')
+
 // import patient controller functions
 const patientController = require('../controllers/patientController')
 
@@ -40,16 +43,46 @@ patientRouter.post('/dashboard', patientController.patientLogout)
 patientRouter.get('/dashboard', isAuthenticated, hasRole('patient'), patientController.getPatientById)
 
 patientRouter.get('/insertGlucose', isAuthenticated, hasRole('patient'), patientController.getGlucosePage)
-patientRouter.post('/insertGlucose', isAuthenticated, patientController.insertPatientData)
+patientRouter.post('/insertGlucose', isAuthenticated, 
+
+    body('data_entry', 'glucose entry must be valid').not().isEmpty().isNumeric().escape(), 
+    body('data_comment', 'comment must be valid').isLength({max:260}).escape(),
+
+    patientController.insertPatientData)
 
 patientRouter.get('/insertInsulin', isAuthenticated, hasRole('patient'), patientController.getInsulinPage)
-patientRouter.post('/insertInsulin', isAuthenticated, patientController.insertPatientData)
+patientRouter.post('/insertInsulin', isAuthenticated, 
+
+    body('data_entry', 'insulin entry must be valid').not().isEmpty().isNumeric().escape(), 
+    body('data_comment', 'comment must be valid').isLength({max:260}).escape(),   
+
+    patientController.insertPatientData)
 
 patientRouter.get('/insertSteps', isAuthenticated, hasRole('patient'), patientController.getStepsPage)
-patientRouter.post('/insertSteps', isAuthenticated, patientController.insertPatientData)
+patientRouter.post('/insertSteps', isAuthenticated, 
+
+    body('data_entry', 'insulin entry must be valid').not().isEmpty().isNumeric().escape(), 
+    body('data_comment', 'comment must be valid').isLength({max:260}).escape(),   
+
+    patientController.insertPatientData)
 
 patientRouter.get('/insertWeight', isAuthenticated, hasRole('patient'), patientController.getWeightPage)
-patientRouter.post('/insertWeight', isAuthenticated, patientController.insertPatientData)
+patientRouter.post('/insertWeight', isAuthenticated, 
 
+    body('data_entry', 'weight entry must be valid').not().isEmpty().isNumeric().escape(), 
+    body('data_comment', 'comment must be valid').isLength({max:260}).escape(),  
+
+    patientController.insertPatientData)
+
+patientRouter.get('/log', isAuthenticated, hasRole('patient'), patientController.getPatientLog)
+
+patientRouter.get('/profile', isAuthenticated, hasRole('patient'), patientController.getPatientProfile)
+patientRouter.post('/profile', isAuthenticated, 
+
+    body('screen_name', 'screen name must only be alphanumeric').not().isEmpty().isAlphanumeric().escape(),      
+
+    patientController.updateProfile)
+
+patientRouter.get('/404', isAuthenticated, hasRole('patient'), patientController.getErrorPage)
 // export the router
 module.exports = patientRouter
