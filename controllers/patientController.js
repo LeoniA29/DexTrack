@@ -34,14 +34,38 @@ const patientLogout = (req,res)=>{
 // function to retrieve a patient's dashboard during their current session
 const getPatientById = async (req, res) => {
    
+
+    const total = req.user.input_data.length
+    var accum = 0
+   
+    // calculate engagement score
+    for (var i in req.user.input_data) {
+        var gluc = req.user.input_data[i].glucose_data
+        var wei = req.user.input_data[i].weight_data
+        var ins = req.user.input_data[i].insulin_data
+        var step = req.user.input_data[i].steps_data
+        
+        if ( (gluc) || (wei) || (ins) || (step) ) {
+            accum +=1;
+        }
+    }
+   
+    var es = Math.round((accum/total)*100)
+    
+    
+
+
+
         for (i in req.user.input_data){
             // iterating through each patient's time-series inputs
-
+            
             if ( compareDates(req.user.input_data[i].set_date) ) {
                 // render today's patient data if found one 
-                return res.render('patientDashboard', { patient: req.user.toJSON(), patientData: req.user.input_data[i].toJSON()} )
+                return res.render('patientDashboard', { patient: req.user.toJSON(), patientData: req.user.input_data[i].toJSON(), score: es} )
             }
         }
+
+    es = Math.round((accum/(total+1))*100)
 
         // it's a new day, create new input_data schema for a patient
         const patientData = new DataSet({set_date: todaysDate})
@@ -58,7 +82,7 @@ const getPatientById = async (req, res) => {
             }
         )
 
-        return res.render('patientDashboard', {patient: req.user.toJSON(), patientData: patientData})
+        return res.render('patientDashboard', {patient: req.user.toJSON(), patientData: patientData, score: es})
 }
 
 // function to retrieve glucose submission page of a patient
