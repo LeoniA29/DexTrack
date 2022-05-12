@@ -1,5 +1,6 @@
 const express = require('express')
 const passport = require('../passport')
+const app = express()
 
 // create our Router object
 const patientRouter = express.Router()
@@ -82,6 +83,7 @@ patientRouter.post('/profile', isAuthenticated,
     body('screen_name', 'screen name must only be alphanumeric').not().isEmpty().isAlphanumeric().escape(),      
 
     patientController.updateProfile)
+
 
 patientRouter.get('/404', isAuthenticated, hasRole('patient'), patientController.getErrorPage)
 // export the router

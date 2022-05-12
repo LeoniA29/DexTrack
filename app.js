@@ -41,12 +41,6 @@ if (app.get('env') === 'production') {
     app.set('trust proxy', 1); // Trust first proxy
 }
 
-
-// Tells the app to send the string: "Our demo app is working!" when you hit the '/' endpoint.
-app.get('/', (req, res) => {
-    res.render('index.hbs')
-})
-
 // Tells the app to listen on port 3000 and logs that information to the console.
 app.listen(process.env.PORT || 3000, () => {
     console.log('DexTrack is alive!')
@@ -59,8 +53,12 @@ app.use(passport.authenticate('session'))
 // link to our routers
 const clinicianRouter = require('./routes/clinicianRouter')
 const patientRouter = require('./routes/patientRouter')
+const userRouter = require('./routes/userRouter')
 
 app.use('/clinician', clinicianRouter)
 app.use('/patient', patientRouter)
+app.use('/', userRouter)
+
+
 
 require('./models')

@@ -18,12 +18,21 @@
             <!-- Navigation bar at top of webpage -->
             <header>
                 <nav class="nav_bar">
-                    <img id="blob1" src ="blob1.png">
-                    <a href="aboutDextrack.html"><img id="logo" src="logo.png"></a>
+                    <img id="blob1" src="/blob1.png">
+                    <a href="/about-dextrack"><img id="logo" src="/logo.png"></a>
                     <ul class="nav_pages">
-                        <li><a href="aboutDextrack.html">About DexTrack</a></li>
-                        <li><a href="aboutDiabetes.html">About Diabetes</a></li>
-                        <li><a href="#"><button>Sign In</button></a></li>
+                        <li><a href="/about-dextrack">About DexTrack</a></li>
+                        <li><a href="/about-diabetes">About Diabetes</a></li>
+
+                        {{#if logged}}
+                        <li><a href="/patient/dashboard"><button>Dashboard</button></a></li>
+                        <form method="POST">
+                            <li><button>Sign Out</button></li>
+                        </form>
+                        {{else}}
+                        <li><a href="/"><button>Sign In</button></a></li>
+                        {{/if}}
+
                     </ul>
                     <div class="menu1">
                         <span class="bar"></span>
@@ -43,7 +52,7 @@
                         <button onClick="scrollReadMore2()">Find Out More</button>
                     </div>
                     <div class="info_vector">
-                        <img src="vector1.png">
+                        <img src="/vector1.png">
                     </div>
                 </div>
             </section>
@@ -52,7 +61,7 @@
                 <h1 class="labels">Our Products</h1>
                 <div class="about_products">
                     <div class="product_vector">
-                        <img src="vector2.png">
+                        <img src="/vector2.png">
                     </div>
                     <div class="product_text">
                         <p>We help healthcare organisations digitally transform their care delivery by replacing manual, costly processes with automated and streamlined digital care pathways. Digital care pathways monitor, support and engage patients along their entire care journey, improving convenience and health outcomes while reducing waste and administritative burden.</p>
@@ -68,13 +77,13 @@
                     <h3>At DexTrack, we've got a well seasoned team at the helm.</h3>
                     <ul class="profile_cards">
                         <li>
-                            <img src="profile1.jpg">
+                            <img src="/profile1.jpg">
                             <h4>Aaron</h4>
                             <h4>Johannes</h4>
                             <p>Front-end Designer</p>
                         </li>
                         <li>
-                            <img src="profile2.jpg">
+                            <img src="/profile2.jpg">
                             <h4>Khadiza</h4>
                             <h4>Refry</h4>
                             <p>Front-end Designer</p>
@@ -82,19 +91,19 @@
                     </ul>
                     <ul class="profile_cards">
                         <li>
-                            <img src="profile3.jpg">
+                            <img src="/profile3.jpg">
                             <h4>Leoni</h4>
                             <h4>Angela</h4>
                             <p>Back-end Developer</p>
                         </li>
                         <li>
-                            <img src="profile4.jpg">
+                            <img src="/profile4.jpg">
                             <h4>Nadya</h4>
                             <h4>Aureilia</h4>
                             <p>Back-end Developer</p>
                         </li>
                         <li>
-                            <img src="profile5.jpg">
+                            <img src="/profile5.jpg">
                             <h4>Vincent</h4>
                             <h4>Kurniawan</h4>
                             <p>Back-end Developer</p>
