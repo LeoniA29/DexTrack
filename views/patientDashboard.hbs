@@ -10,6 +10,10 @@
     <h1 id ="welcome">
         ES: {{score}}
     </h1>
+
+    {{#if (getBadge score)}}
+        <h2 id="date">Display Badge Here</h2>
+    {{/if}}
 </div>
 
     <div class="inputContainer">

@@ -84,6 +84,7 @@ patientRouter.post('/profile', isAuthenticated,
 
     patientController.updateProfile)
 
+patientRouter.get('/leaderboard', isAuthenticated, hasRole('patient'), patientController.getLeaderboard)
 
 patientRouter.get('/404', isAuthenticated, hasRole('patient'), patientController.getErrorPage)
 // export the router

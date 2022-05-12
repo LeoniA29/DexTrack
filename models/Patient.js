@@ -40,6 +40,7 @@ const patientSchema = new mongoose.Schema({
    password: {type: String, required: true}, 
    secret: {type: String, default: 'INFO30005'},
    screen_name: {type: String, unique: true, required: true},
+   score: {type: Number, default: 0},
 
    first_name: {type: String, required: true},
    last_name: {type: String, required: true},

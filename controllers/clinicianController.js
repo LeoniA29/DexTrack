@@ -20,7 +20,7 @@ const clinicianLogin =(req, res)=>{
 // logouts patient from their current session
 const clinicianLogout = (req,res)=>{
     req.logout()
-    res.redirect('/clinician/login')
+    res.redirect('/')
 }
 
 // this is for testing, once login feature enabled, it will not be necessary

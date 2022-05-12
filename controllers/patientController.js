@@ -5,7 +5,8 @@ const ObjectId = require('mongodb').ObjectId // ObjectID constant
 const todaysDate = new Date(); // today's date constant 
 
 // add Express-Validator
-const {validationResult, check } = require('express-validator')
+const {validationResult, check } = require('express-validator');
+const Clinician = require('../models/clinician');
 
 // middleware to compare full dates (date, month, year)
 const compareDates = (patientDate)=> {
@@ -28,7 +29,7 @@ const patientLogin =(req, res)=>{
 // logouts patient from their current session
 const patientLogout = (req,res)=>{
     req.logout()
-    res.redirect('/patient/login')
+    res.redirect('/')
 }
 
 // function to retrieve a patient's dashboard during their current session
@@ -52,16 +53,23 @@ const getPatientById = async (req, res) => {
    
     var es = Math.round((accum/total)*100)
     
-    
-
-
-
         for (i in req.user.input_data){
             // iterating through each patient's time-series inputs
             
             if ( compareDates(req.user.input_data[i].set_date) ) {
                 // render today's patient data if found one 
-                return res.render('patientDashboard', { patient: req.user.toJSON(), patientData: req.user.input_data[i].toJSON(), score: es} )
+
+                    Patient.findOneAndUpdate(
+                        { _id: req.user._id},
+                        {score: es},
+                        function(err, doc) {
+                             if (err) {
+                                console.log(err);
+                            } else{
+                                }
+                            }
+                        )
+                return res.render('patientDashboard', { patient: req.user.toJSON(), patientData: req.user.input_data[i].toJSON(), score: es})
             }
         }
 
@@ -71,8 +79,9 @@ const getPatientById = async (req, res) => {
         const patientData = new DataSet({set_date: todaysDate})
     
         // pushes this input_data into the patient in mongoDB
-        Patient.findByIdAndUpdate(req.user._id,
-            {$push: {input_data: patientData}},
+        Patient.findOneAndUpdate({ _id: req.user._id},
+            {$push: {input_data: patientData}, score: es},
+
             {safe: true, upsert: true, new: true},
             function(err, doc) {
                 if(err){
@@ -292,10 +301,39 @@ const updateProfile = (req,res) =>{
        
 }
 
+
 const getErrorPage = (req,res)=>{
     return res.render('404')
 }
 
+/*
+const getLeaderboard = (req,res) => {
+    return res.render('leaderboard', {patient: req.user.toJSON()})
+}
+*/
+
+const getLeaderboard = async (req,res) => {
+    
+    const userScores = []
+
+    const users = await Patient.find()
+   
+    users.sort( function(a,b) {
+        return b.score - a.score
+    })
+
+    for (i in users){
+        var temp = []
+        temp.push(parseInt(i)+1); temp.push(users[i].screen_name); temp.push(users[i].score)
+        userScores.push(temp)
+        
+        if (parseInt(i)==4){
+            break;
+        }
+    }
+
+    return res.render ('leaderboard', {board: userScores})
+}
 
 // exports objects containing functions imported by router
 module.exports = {
@@ -311,6 +349,7 @@ module.exports = {
     getPatientLog,
     getPatientProfile,
     updateProfile,
+    getLeaderboard,
     getErrorPage
 }
 
