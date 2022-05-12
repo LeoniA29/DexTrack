@@ -11,6 +11,7 @@ app.use(express.urlencoded({ extended: true })) // needed so that POST form work
 app.use(express.static(__dirname + "/resources"));
 app.use(express.static(__dirname + "/views"));
 app.use(express.static(__dirname + "/public"));
+
 // app.use(express.static('public'))   // define where static assets like CSS live
 
 // configure Handlebars

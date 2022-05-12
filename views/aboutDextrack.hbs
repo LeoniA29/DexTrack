@@ -7,11 +7,13 @@
         <title>About DexTrack</title>
         <link href='https://fonts.googleapis.com/css?family=Lexend Deca' rel='stylesheet'>
         <link href="/css/style.css" rel="stylesheet">
+
     </head>
 
     <body>
-        <!-- Scroll to top of page function -->
-        <button onClick="scrollToTop()" id="top_button" title="Go to top">^</button>
+    
+            <button id="top_button" onClick="scrollToTop()" title="Go to top">^</button> 
+  
 
         <div class="sections">
 
@@ -65,7 +67,12 @@
                     </div>
                     <div class="product_text">
                         <p>We help healthcare organisations digitally transform their care delivery by replacing manual, costly processes with automated and streamlined digital care pathways. Digital care pathways monitor, support and engage patients along their entire care journey, improving convenience and health outcomes while reducing waste and administritative burden.</p>
-                        <a href="#"><button>Sign in to Access Features</button></a>
+                        
+                        {{#if logged}}
+                        <a href="/patient/dashboard"><button>Return to Dashboard!</button></a>
+                        {{else}}
+                        <a href="/"><button>Sign in to Access Features</button></a>
+                        {{/if}}
                     </div>
                 </div>
             </section>
@@ -117,6 +124,7 @@
                 <h4>© 2022 DexTrack, all rights reserved</h4>
             </footer>
         </div>
+        
     </body>
-    <script src="script.js"></script>
+    <script src="/javasript/script.js"></script>
 </html>

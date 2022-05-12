@@ -9,7 +9,7 @@ const getAboutDexTrack = (req,res) => {
 
 const userLogout = (req,res)=>{
     req.logout()
-    res.redirect('/patient/login')
+    res.redirect('/')
 }
 
 const getIndex = (req, res) => {
