@@ -2,18 +2,10 @@
 
 {{! displays today's date information and patient's first name}}
 <div class="dashboardInformation">
-    <h2 id="date">{{todaysDay}}, {{todaysDate}} {{todaysMonth}} </h2>
-    <h1 id ="welcome">Your Profile</h1>
+    <h2 id="date">
+        {{date.[0].value}}, {{date.[2].value}} {{date.[4].value}} {{date.[6].value}}
+    </h2>
 </div>
-
-{{!-- 
-{{#with patient}}
-    <div class="profile">
-    <p>Given Name: {{first_name}}</p>
-    <p>Engagement Score: {{score}}</p>
-    </div>
-{{/with}}
---}}
 
 {{#each board}}
    <p style="color: black"> Rank: {{this.[0]}}, Screen name: {{this.[1]}}, Score: {{this.[2]}} </p>

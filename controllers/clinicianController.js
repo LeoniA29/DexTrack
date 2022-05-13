@@ -2,7 +2,34 @@ const Clinician = require('../models/clinician')
 const {Patient, Data, DataSet, Threshold} = require('../models/patient')
 
 const ObjectId = require('mongodb').ObjectId
-const todaysDate = new Date();
+
+const formatter = new Intl.DateTimeFormat('en-au', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    fractionalSecondDigits: 3,
+    hourCycle: 'h24',
+    timeZone: 'Australia/Melbourne'
+  });
+
+  const todaysDate = formatter.formatToParts(new Date()); // today's date constant 
+
+// middleware to compare full dates (date, month, year)
+const compareDates = (clinicianDate)=> {
+
+    clinicianDate = formatter.formatToParts(clinicianDate); 
+
+    const sameDate = clinicianDate[2].value == todaysDate[2].value
+    const sameMonth = clinicianDate[4].value == todaysDate[4].value
+    const sameYear = clinicianDate[6].value == todaysDate[6].value
+    
+    return ( (sameDate) && (sameMonth) && (sameYear) )
+}
+
 
 // add Express-Validator
 const {validationResult, check } = require('express-validator')
@@ -149,7 +176,7 @@ const getClinicianPatientList =  async (req, res, next) => {
                 // finds patient's data input for that day
                 for (j in patient.input_data){
             
-                    if (patient.input_data[j].set_date.getDate() == todaysDate.getDate() ) {
+                    if (compareDates(patient.input_data[j].set_date)) {
                         //console.log('existing patient insert today's data')
                         test.push([patient, patient.input_data[j], patient.threshold_list])
                         var hasToday = true;
@@ -158,7 +185,7 @@ const getClinicianPatientList =  async (req, res, next) => {
 
                 // checks if patient has any data_set for that day
                 if (hasToday == false) {
-                    const patientData = new DataSet({set_date: todaysDate})
+                    const patientData = new DataSet({set_date: new Date()})
                 
                     Patient.findByIdAndUpdate(patientID,
                         {$push: {input_data: patientData}},

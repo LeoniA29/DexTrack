@@ -1,18 +1,34 @@
 // schema models imported
 const {Patient, Data, DataSet, Threshold} = require('../models/patient')
-
 const ObjectId = require('mongodb').ObjectId // ObjectID constant 
-const todaysDate = new Date(); // today's date constant 
+
+const formatter = new Intl.DateTimeFormat('en-au', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    fractionalSecondDigits: 3,
+    hourCycle: 'h24',
+    timeZone: 'Australia/Melbourne'
+  });
+
+  const todaysDate = formatter.formatToParts(new Date()); // today's date constant 
 
 // add Express-Validator
 const {validationResult, check } = require('express-validator');
-const Clinician = require('../models/clinician');
 
 // middleware to compare full dates (date, month, year)
 const compareDates = (patientDate)=> {
-    const sameDate = patientDate.getDate() == todaysDate.getDate()
-    const sameMonth = patientDate.getMonth() == todaysDate.getMonth()
-    const sameYear = patientDate.getFullYear() == todaysDate.getFullYear()
+
+    patientDate = formatter.formatToParts(patientDate); 
+
+    const sameDate = patientDate[2].value == todaysDate[2].value
+    const sameMonth = patientDate[4].value == todaysDate[4].value
+    const sameYear = patientDate[6].value == todaysDate[6].value
+    
     return ( (sameDate) && (sameMonth) && (sameYear) )
 }
 
@@ -53,27 +69,6 @@ const getPatientById = async (req, res) => {
    
     var es = Math.round((accum/total)*100)
 
-    /*
-        for (i in req.user.input_data){
-            // iterating through each patient's time-series inputs
-            
-            if ( compareDates(req.user.input_data[i].set_date) ) {
-                // render today's patient data if found one 
-
-                    Patient.updateOne(
-                        { _id: req.user._id},
-                        {score: es},
-                        function(err, doc) {
-                             if (err) {
-                                console.log(err);
-                            } else{
-                                }
-                            }
-                        )
-                return res.render('patientDashboard', { patient: req.user.toJSON(), patientData: req.user.input_data[i].toJSON(), score: es})
-            }
-        }
-        */
     const t = req.user.input_data.length
     if (compareDates(req.user.input_data[t-1].set_date)){
         Patient.updateOne(
@@ -86,13 +81,13 @@ const getPatientById = async (req, res) => {
                     }
                 }
             )
-        return res.render('patientDashboard', { patient: req.user.toJSON(), patientData: req.user.input_data[t-1].toJSON(), score: es})
+        return res.render('patientDashboard', { patient: req.user.toJSON(), patientData: req.user.input_data[t-1].toJSON(), score: es, date: todaysDate})
     }
 
     es = Math.round((accum/(total+1))*100)
 
         // it's a new day, create new input_data schema for a patient
-        const patientData = new DataSet({set_date: todaysDate})
+        const patientData = new DataSet({set_date: new Date()})
     
         // pushes this input_data into the patient in mongoDB
         Patient.updateOne({ _id: req.user._id},
@@ -107,23 +102,14 @@ const getPatientById = async (req, res) => {
             }
         )
 
-        return res.render('patientDashboard', {patient: req.user.toJSON(), patientData: patientData, score: es})
+        return res.render('patientDashboard', {patient: req.user.toJSON(), patientData: patientData, score: es, date: todaysDate})
 }
 
 // function to retrieve glucose submission page of a patient
 const getGlucosePage= async (req,res) =>{
     const patient = await Patient.findById(req.user._id).lean()
     const t = patient.input_data.length
-    /*
-    for (i in patient.input_data){
-        if (compareDates(patient.input_data[i].set_date)) {
-            if ( (patient.input_data[i].glucose_data == null) && (patient.threshold_list[0].th_required) ){
-                return res.render('insertGlucose', { patient: patient, flash: req.flash('errors')})
-            }
-        }
-    }
-    */
-
+  
     if ( (patient.input_data[t-1].glucose_data == null) && (patient.threshold_list[0].th_required) ){
         return res.render('insertGlucose', { patient: patient, flash: req.flash('errors')})
     }
@@ -135,15 +121,7 @@ const getGlucosePage= async (req,res) =>{
 const getInsulinPage= async(req,res) =>{
     const patient = await Patient.findById(req.user._id).lean()
     const t = patient.input_data.length
-    /*
-    for (i in patient.input_data){
-        if (compareDates(patient.input_data[i].set_date)) {
-            if ( (patient.input_data[i].insulin_data == null) && (patient.threshold_list[3].th_required)) {
-                return res.render('insertInsulin', { patient: patient, flash: req.flash('errors')})
-            }
-        }
-    }
-    */
+
     if ( (patient.input_data[t-1].insulin_data == null) && (patient.threshold_list[3].th_required)) {
         return res.render('insertInsulin', { patient: patient, flash: req.flash('errors')})
     }
@@ -154,15 +132,7 @@ const getInsulinPage= async(req,res) =>{
 const getStepsPage= async(req,res) =>{
     const patient = await Patient.findById(req.user._id).lean()
     const t = patient.input_data.length
-    /*
-    for (i in patient.input_data){
-        if (compareDates(patient.input_data[i].set_date)) {
-            if ( (patient.input_data[i].steps_data == null) && (patient.threshold_list[1].th_required) ){
-                return res.render('insertSteps', { patient: patient, flash: req.flash('errors')})
-            }
-        }
-    }
-    */
+
     if ( (patient.input_data[t-1].steps_data == null) && (patient.threshold_list[1].th_required) ){
         return res.render('insertSteps', { patient: patient, flash: req.flash('errors')})
     }
@@ -174,16 +144,6 @@ const getStepsPage= async(req,res) =>{
 const getWeightPage= async(req,res) =>{
     const patient = await Patient.findById(req.user._id).lean()
     const t = patient.input_data.length
-
-    /*
-    for (i in patient.input_data){
-        if (compareDates(patient.input_data[i].set_date)) {
-            if ( (patient.input_data[i].weight_data == null) && (patient.threshold_list[2].th_required)) {
-                return res.render('insertWeight', { patient: patient, flash: req.flash('errors')})
-            }
-        }
-    }
-    */
 
     if ( (patient.input_data[t-1].weight_data == null) && (patient.threshold_list[2].th_required)) {
         return res.render('insertWeight', { patient: patient, flash: req.flash('errors')})
@@ -201,7 +161,7 @@ const insertPatientData= async(req, res) => {
         const patient = await Patient.findById(req.user._id).lean()
         
         var newData = new Data(req.body)
-        newData.data_date = Date.now()
+        newData.data_date = new Date(); 
 
         const errors = validationResult(req)
             if (!errors.isEmpty()) {
@@ -222,83 +182,6 @@ const insertPatientData= async(req, res) => {
                     }
             }
     
-    /*
-    for (i in patient.input_data){
-        if (compareDates(patient.input_data[i].set_date)) {
-
-            // convert input ID into an instance of an object
-            const inputID = patient.input_data[i]._id
-            var objectInput = new ObjectId(inputID)
-            
-        
-            // glucose data type inputted
-            if (req.body.data_type == "glucose") {
-                
-                // sets glucose entry for the day
-                Patient.updateOne( 
-                { _id: req.user._id, "input_data._id": objectInput},
-                {$set: {"input_data.$.glucose_data": newData}},
-                function(err, doc) {
-                    if (err) {
-                        console.log(err);
-                    } else{
-                        }
-                    }
-                )
-            }
-
-            // steps data type inputted
-            if (req.body.data_type == "steps") {
-               
-                // sets steps entry for the day
-                Patient.updateOne(
-                { _id: req.user._id, "input_data._id": objectInput},
-                { $set: {"input_data.$.steps_data": newData}},
-                function(err, doc) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        }
-                    }
-                )
-            }
-
-            // weight data type inputted
-            if (req.body.data_type == "weight") {
-              
-                // sets weight entry for the day
-                Patient.updateOne(
-                { _id: req.user._id, "input_data._id": objectInput},
-                { $set: {"input_data.$.weight_data": newData}},
-                function(err, doc) {
-                     if (err) {
-                        console.log(err);
-                    } else{
-                        }
-                    }
-                )
-            }
-
-            // insulin data type inputted
-            if (req.body.data_type == "insulin") {
-                
-                // sets insulin entry for the day
-                Patient.updateOne(
-                {_id: req.user._id,"input_data._id": objectInput},
-                {$set: {"input_data.$.insulin_data": newData}},
-                function(err, doc) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        }
-                    }
-                ) 
-            }
-
-        }
-    }
-
-    */
     const t = patient.input_data.length
     // convert input ID into an instance of an object
     const inputID = patient.input_data[t-1]._id
@@ -381,14 +264,14 @@ const getPatientLog = (req,res)=>{
     const inputs = req.user.input_data
    
     for (var i = inputs.length - 1; i>=0; i--){
-        sortedInputs.push(inputs[i])
+        sortedInputs.push(inputs[i].toJSON())
     }
-    return res.render('patientLog', {input: sortedInputs, patient: req.user.toJSON()})
+    return res.render('patientLog', {input: sortedInputs, patient: req.user.toJSON(), date: todaysDate})
 }
 
 const getPatientProfile = (req, res) => {
 
-    return res.render('patientProfile', {patient: req.user.toJSON(), flash: req.flash('errors')})
+    return res.render('patientProfile', {patient: req.user.toJSON(), date: todaysDate, flash: req.flash('errors')})
 }
 
 const updateProfile = (req,res) =>{
@@ -421,11 +304,6 @@ const getErrorPage = (req,res)=>{
     return res.render('404')
 }
 
-/*
-const getLeaderboard = (req,res) => {
-    return res.render('leaderboard', {patient: req.user.toJSON()})
-}
-*/
 
 const getLeaderboard = async (req,res) => {
     
@@ -447,7 +325,7 @@ const getLeaderboard = async (req,res) => {
         }
     }
 
-    return res.render ('leaderboard', {board: userScores})
+    return res.render ('leaderboard', {board: userScores, date: todaysDate})
 }
 
 // exports objects containing functions imported by router

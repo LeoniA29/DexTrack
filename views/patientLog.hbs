@@ -2,24 +2,23 @@
 
 {{! displays today's date information and patient's first name}}
 <div class="dashboardInformation">
-    <h2 id="date">{{todaysDay}}, {{todaysDate}} {{todaysMonth}} </h2>
+    <h2 id="date">
+        {{date.[0].value}}, {{date.[2].value}} {{date.[4].value}} {{date.[6].value}}
+    </h2>
     <h1 id ="welcome">Hi, {{patient.first_name}}</h1>
 </div>
-
 {{#each input}}
 
-        {{#with (displayDate this)}}
+        {{#with (showDate this.set_date)}}
             <p style="color: black">
-                {{this.[0]}} 
+                {{this.[2].value}} 
                 <br>
-                {{this.[1]}}
+                {{this.[4].value}}
                 </p>
         {{/with}}
 
         {{#with (getLogs this)}}
     
-            
-
             {{#if (emptyToday this.empty)}}
 
                 <p style="color: black">no inputs for that date </p>
@@ -35,7 +34,9 @@
                     <p style="color: black">
                         type: {{this.[0]}}, 
                         entry: {{this.[1]}}, 
-                        time: {{this.[2]}}
+                        {{#with (showDate this.[2])}}
+                            time: {{this.[8].value}}:{{this.[10].value}} 
+                        {{/with}}
                     </p>
                     <br>
                 {{/each}}

@@ -2,7 +2,9 @@
 
 {{! displays today's date information and patient's first name}}
 <div class="dashboardInformation">
-    <h2 id="date">{{todaysDay}}, {{todaysDate}} {{todaysMonth}} </h2>
+    <h2 id="date">
+        {{date.[0].value}}, {{date.[2].value}} {{date.[4].value}} {{date.[6].value}}
+    </h2>
     <h1 id ="welcome">Hi, {{patient.first_name}}</h1>
 </div>
 
