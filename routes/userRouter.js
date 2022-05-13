@@ -1,5 +1,4 @@
 const express = require('express')
-const passport = require('../passport')
 
 // create our Router object
 const userRouter = express.Router()
@@ -25,17 +24,6 @@ const isLoggedIn2 = (req, res, next) => {
     }
     // Otherwise, proceed to next middleware function
     return next()
-}
-
-// set up role-based authentication
-const hasRole = (thisRole) => {
-    return (req, res, next) => {
-        if (req.user.role == thisRole) 
-            return next()
-        else {
-            res.redirect('/patient/login')
-        }
-    }    
 }
 
 userRouter.get('/about-diabetes', isLoggedIn1, userController.getAboutDiabetes)
