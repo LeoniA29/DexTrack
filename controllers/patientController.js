@@ -52,14 +52,15 @@ const getPatientById = async (req, res) => {
     }
    
     var es = Math.round((accum/total)*100)
-    
+
+    /*
         for (i in req.user.input_data){
             // iterating through each patient's time-series inputs
             
             if ( compareDates(req.user.input_data[i].set_date) ) {
                 // render today's patient data if found one 
 
-                    Patient.findOneAndUpdate(
+                    Patient.updateOne(
                         { _id: req.user._id},
                         {score: es},
                         function(err, doc) {
@@ -72,6 +73,21 @@ const getPatientById = async (req, res) => {
                 return res.render('patientDashboard', { patient: req.user.toJSON(), patientData: req.user.input_data[i].toJSON(), score: es})
             }
         }
+        */
+    const t = req.user.input_data.length
+    if (compareDates(req.user.input_data[t-1].set_date)){
+        Patient.updateOne(
+            { _id: req.user._id},
+            {score: es},
+            function(err, doc) {
+                 if (err) {
+                    console.log(err);
+                } else{
+                    }
+                }
+            )
+        return res.render('patientDashboard', { patient: req.user.toJSON(), patientData: req.user.input_data[t-1].toJSON(), score: es})
+    }
 
     es = Math.round((accum/(total+1))*100)
 
@@ -79,7 +95,7 @@ const getPatientById = async (req, res) => {
         const patientData = new DataSet({set_date: todaysDate})
     
         // pushes this input_data into the patient in mongoDB
-        Patient.findOneAndUpdate({ _id: req.user._id},
+        Patient.updateOne({ _id: req.user._id},
             {$push: {input_data: patientData}, score: es},
 
             {safe: true, upsert: true, new: true},
@@ -97,7 +113,8 @@ const getPatientById = async (req, res) => {
 // function to retrieve glucose submission page of a patient
 const getGlucosePage= async (req,res) =>{
     const patient = await Patient.findById(req.user._id).lean()
-
+    const t = patient.input_data.length
+    /*
     for (i in patient.input_data){
         if (compareDates(patient.input_data[i].set_date)) {
             if ( (patient.input_data[i].glucose_data == null) && (patient.threshold_list[0].th_required) ){
@@ -105,12 +122,20 @@ const getGlucosePage= async (req,res) =>{
             }
         }
     }
+    */
+
+    if ( (patient.input_data[t-1].glucose_data == null) && (patient.threshold_list[0].th_required) ){
+        return res.render('insertGlucose', { patient: patient, flash: req.flash('errors')})
+    }
+
     return res.redirect('/patient/dashboard')
 }
 
 // function to retrieve insulin submission page of a patient
 const getInsulinPage= async(req,res) =>{
     const patient = await Patient.findById(req.user._id).lean()
+    const t = patient.input_data.length
+    /*
     for (i in patient.input_data){
         if (compareDates(patient.input_data[i].set_date)) {
             if ( (patient.input_data[i].insulin_data == null) && (patient.threshold_list[3].th_required)) {
@@ -118,12 +143,18 @@ const getInsulinPage= async(req,res) =>{
             }
         }
     }
+    */
+    if ( (patient.input_data[t-1].insulin_data == null) && (patient.threshold_list[3].th_required)) {
+        return res.render('insertInsulin', { patient: patient, flash: req.flash('errors')})
+    }
     return res.redirect('/patient/dashboard')
 }
 
 // function to retrieve steps submission page of a patient
 const getStepsPage= async(req,res) =>{
     const patient = await Patient.findById(req.user._id).lean()
+    const t = patient.input_data.length
+    /*
     for (i in patient.input_data){
         if (compareDates(patient.input_data[i].set_date)) {
             if ( (patient.input_data[i].steps_data == null) && (patient.threshold_list[1].th_required) ){
@@ -131,18 +162,31 @@ const getStepsPage= async(req,res) =>{
             }
         }
     }
+    */
+    if ( (patient.input_data[t-1].steps_data == null) && (patient.threshold_list[1].th_required) ){
+        return res.render('insertSteps', { patient: patient, flash: req.flash('errors')})
+    }
+
     return res.redirect('/patient/dashboard')
 }
 
 // function to retrieve weight submission page of a patient
 const getWeightPage= async(req,res) =>{
     const patient = await Patient.findById(req.user._id).lean()
+    const t = patient.input_data.length
+
+    /*
     for (i in patient.input_data){
         if (compareDates(patient.input_data[i].set_date)) {
             if ( (patient.input_data[i].weight_data == null) && (patient.threshold_list[2].th_required)) {
                 return res.render('insertWeight', { patient: patient, flash: req.flash('errors')})
             }
         }
+    }
+    */
+
+    if ( (patient.input_data[t-1].weight_data == null) && (patient.threshold_list[2].th_required)) {
+        return res.render('insertWeight', { patient: patient, flash: req.flash('errors')})
     }
     return res.redirect('/patient/dashboard')
 }
@@ -177,9 +221,10 @@ const insertPatientData= async(req, res) => {
                         return res.redirect('/patient/insertWeight')
                     }
             }
-
+    
+    /*
     for (i in patient.input_data){
-        if (patient.input_data[i].set_date.getDate() == todaysDate.getDate() ) {
+        if (compareDates(patient.input_data[i].set_date)) {
 
             // convert input ID into an instance of an object
             const inputID = patient.input_data[i]._id
@@ -251,6 +296,76 @@ const insertPatientData= async(req, res) => {
             }
 
         }
+    }
+
+    */
+    const t = patient.input_data.length
+    // convert input ID into an instance of an object
+    const inputID = patient.input_data[t-1]._id
+    var objectInput = new ObjectId(inputID)
+    
+    // glucose data type inputted
+    if (req.body.data_type == "glucose") {
+        
+        // sets glucose entry for the day
+        Patient.updateOne( 
+        { _id: req.user._id, "input_data._id": objectInput},
+        {$set: {"input_data.$.glucose_data": newData}},
+        function(err, doc) {
+            if (err) {
+                console.log(err);
+            } else{
+                }
+            }
+        )
+    }
+
+    // steps data type inputted
+    if (req.body.data_type == "steps") {
+       
+        // sets steps entry for the day
+        Patient.updateOne(
+        { _id: req.user._id, "input_data._id": objectInput},
+        { $set: {"input_data.$.steps_data": newData}},
+        function(err, doc) {
+            if (err) {
+                console.log(err);
+            } else {
+                }
+            }
+        )
+    }
+
+    // weight data type inputted
+    if (req.body.data_type == "weight") {
+      
+        // sets weight entry for the day
+        Patient.updateOne(
+        { _id: req.user._id, "input_data._id": objectInput},
+        { $set: {"input_data.$.weight_data": newData}},
+        function(err, doc) {
+             if (err) {
+                console.log(err);
+            } else{
+                }
+            }
+        )
+    }
+
+    // insulin data type inputted
+    if (req.body.data_type == "insulin") {
+        
+        // sets insulin entry for the day
+        Patient.updateOne(
+        {_id: req.user._id,"input_data._id": objectInput},
+        {$set: {"input_data.$.insulin_data": newData}},
+        function(err, doc) {
+            if (err) {
+                console.log(err);
+            } else {
+                }
+            }
+        ) 
     }
 
     // redirect patient to the dashboard page
