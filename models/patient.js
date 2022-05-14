@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const bcrypt = require('bcryptjs')
 
 // schema for notes
 const note = new mongoose.Schema({
@@ -8,24 +9,9 @@ const note = new mongoose.Schema({
 
 // schema for threshold
 const threshold = new mongoose.Schema({
-<<<<<<< HEAD
-   low: {
-      type: Number,
-      default: null
-   },
-   high: {
-      type: Number,
-      default: null
-   },
-   th_required: {
-      type: Boolean,
-      default: false
-   },
-=======
    low: Number,
    high: Number,
    required: Boolean,
->>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003
    type: {
       type: String,
       enum: ['glucose', 'insulin', 'weight', 'steps']
@@ -34,16 +20,9 @@ const threshold = new mongoose.Schema({
 
 // schema for data 
 const data = new mongoose.Schema({
-<<<<<<< HEAD
-   data_entry: Number,
-   data_comment: String,
-   data_type: String,
-   data_hex: String
-=======
    data_entry: String,
    data_comment: String,
    data_type: String
->>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003
 });
 
 
@@ -71,9 +50,15 @@ const data_set = new mongoose.Schema({
 
 // schema for patient
 // patient collection 
-const schema = new mongoose.Schema({
+const patientSchema = new mongoose.Schema({
+   username: {type: String, unique: true},
+   password: {type: String},
    first_name: String,
    last_name: String,
+   role: {
+      type: String,
+      default: "patient"
+  },
    email: String,
    sex: {
       type: String,
@@ -87,21 +72,45 @@ const schema = new mongoose.Schema({
    postcode: String,
    // this is unique from the clinician to each patient
    clinician_message: String,
-  // array of objects for the patient defined in the schema below
+   // array of objects for the patient defined in the schema below
    clincian_notes: [note],
    threshold_list: [threshold],
    input_data: [data_set]
   })
 
 
-const Patient = mongoose.model('Patient', schema)
+// password comparison function
+patientSchema.methods.verifyPassword = function (password, callback) {
+   bcrypt.compare(password, this.password, (err, valid) => {
+       callback(err, valid)
+   })
+}
+
+const SALT_FACTOR = 10
+
+// hash password before saving
+patientSchema.pre('save', function save(next) {
+    const patient = this // go to next if password field has not been modified
+    if (!patient.isModified('password')) {
+        return next()
+    }
+
+    // auto-generate salt/hash
+    // console.log(patient.password)
+    bcrypt.hash(patient.password, SALT_FACTOR, (err, hash) => {
+        if (err) {
+            return next(err)
+        }
+        //replace password with hash
+        patient.password = hash
+        next()
+    })
+})
+
+
 const Data = mongoose.model('Data', data)
 const DataSet = mongoose.model('DataSet', data_set)
-<<<<<<< HEAD
 const Threshold = mongoose.model('Threshold', threshold)
+const Patient = mongoose.model('Patient', patientSchema)
 
 module.exports = {Patient, Data, DataSet, Threshold}
-=======
-
-module.exports = {Patient, Data, DataSet}
->>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003
