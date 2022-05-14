@@ -3,7 +3,7 @@ const {Patient, Data, DataSet, Threshold} = require('../models/patient')
 const bcrypt = require('bcryptjs') // import bcrypt
 const he = require('he')
 // add Express-Validator
-const {validationResult, check } = require('express-validator');
+const {body, validationResult, check } = require('express-validator');
 
 // ObjectID constant 
 const ObjectId = require('mongodb').ObjectId 
@@ -217,6 +217,7 @@ const insertPatientData= async(req, res) => {
         const errors = validationResult(req)
 
         if (!errors.isEmpty()) {
+
             const errorsFound = validationResult(req).array()
             req.flash('errors', errorsFound);
 
@@ -342,14 +343,44 @@ const updateProfile = async (req,res) =>{
         if (!errors.isEmpty()) {
             const errorsFound = validationResult(req).array()
             req.flash('errors', errorsFound);
+
+        
+            if (!errors.mapped()['password']) {
+                const hashed_pass = await bcrypt.hash(req.body.password, 10)
+                Patient.findOneAndUpdate(
+                    { _id: req.user._id},
+                    {password: hashed_pass},
+                    function(err, doc) {
+                        if (err) {
+                            return res.redirect('/patient/404')
+                        } else{
+                           
+                        }
+                    }
+                )
+            }
+
+            if (!errors.mapped()['screen_name'])  {
+                Patient.findOneAndUpdate(
+                    { _id: req.user._id},
+                    {screen_name: req.body.screen_name},
+                    function(err, doc) {
+                        if (err) {
+                            return res.redirect('/patient/404')
+                        } else{
+                           
+                        }
+                    }
+                )
+            }
+
             return res.redirect('/patient/profile')
         }
 
-        else {
-            const pass = await bcrypt.hash(req.body.password, 10)
+            const hashed_pass = await bcrypt.hash(req.body.password, 10)
             Patient.findOneAndUpdate(
                 { _id: req.user._id},
-                {screen_name: req.body.screen_name, password: pass},
+                {screen_name: req.body.screen_name, password: hashed_pass},
                 function(err, doc) {
                     if (err) {
                         return res.redirect('/patient/404')
@@ -359,7 +390,7 @@ const updateProfile = async (req,res) =>{
                 }
             )
              return res.redirect('/patient/profile')
-        }
+        
 
     } catch(err) {
         console.log(err)
@@ -388,7 +419,7 @@ const getLeaderboard = async (req,res) => {
             }
         }
 
-        return res.render ('leaderboard', {board: userScores, date: todaysDate})
+        return res.render ('leaderboard', {patient: req.user.toJSON(), board: userScores, date: todaysDate})
 
     } catch(err) {
         return res.redirect('/patient/404')

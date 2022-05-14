@@ -60,44 +60,29 @@ h1, h2 {
     display: inline-block;
 }
 
-.Glucose h2  {
+.inputContainer h2 {
     position: absolute;
     top: 57%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 3.8vw;
-    color:#e13d45;
     font-weight: 100;
+}
+
+.Glucose h2  {
+    color:#e13d45;
 }
 
 .Exercise h2  {
-    position: absolute;
-    top: 57%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 3.8vw;
     color:#66b48b;
-    font-weight: 100;
 }
 
 .Weight h2  {
-    position: absolute;
-    top: 57%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 3.8vw;
     color:#6f62d0;
-    font-weight: 100;
 }
 
 .Insulin h2  {
-    position: absolute;
-    top: 57%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 3.8vw;
     color:#ff9d47;
-    font-weight: 100;
 }
 
 
@@ -134,7 +119,7 @@ img[id="logo"] {
 .symbol #title {
     top: 25%;
     position: relative;
-    color: #e13d45;
+    color: black;
     margin-bottom: 30px;
 }
 
@@ -153,7 +138,7 @@ img[id="logo"] {
     top: 170px;
 }
 
-#inputNotes {
+#labelNotes {
     top: 190px;
 }
 
@@ -162,12 +147,12 @@ img[id="logo"] {
     border: 2px solid #2C68AD;
     height: 30px;
     width: 60%;
-    padding-left: 10px;
-    padding-top: 10px;
-    font-size: 20px;
+    padding: 8px;
+    font-size: 15px;
     position: relative;
     top: 180px;
     margin-bottom: 30px;
+    text-align: center;
 }
 
 
@@ -176,9 +161,8 @@ img[id="logo"] {
     border: 2px solid #2C68AD; 
     height: 100px;
     width: 60%;
-    padding-left: 10px;
-    padding-top: 10px;
-    font-size: 20px;
+    padding: 10px;
+    font-size: 15px;
     position: relative;
     top: 200px;
 }
@@ -203,7 +187,7 @@ img[id="logo"] {
 	width: 350px;
 	height: auto;
     margin: auto;
-    margin-top: 120px;
+    margin-top: 50px;
 }
 
 .leaderboardTop {
@@ -252,11 +236,6 @@ img[id="logo"] {
 
 /* patient log */
 
-.dashboardInformation {
-    margin-left: 40px;
-    margin-top: 100px;
-}
-
 .logContainer {
 	display: flex;
 	flex-direction: column;
@@ -293,16 +272,17 @@ img[id="logo"] {
 #logTime {
 	color: #2c68ad;
 	padding-left: 10px;
-	font-size: 15px;
+	font-size: 16px;
 	font-weight: lighter;
 	display: inline-block;
 	margin: 0px;
+  
 }
 
 #logData {
 	color: hsl(212, 59%, 43%);
 	padding-left: 15px;
-	font-size: 15px;
+	font-size: 16px;
 	display: inline-block;
 	margin: 0px;
 }
@@ -411,26 +391,11 @@ label {
         margin-bottom: 60px;
     }
 
-    .Glucose h2 {
+    .inputContainer h2 {
         top: 60%;
         font-size: 6.5vw;
     }
-
-    .Exercise h2 {
-        top: 60%;
-        font-size: 6.5vw;
-    }
-
-    .Weight h2 {
-        top: 60%;
-        font-size: 6.5vw;
-    }
-
-    .Insulin h2{
-        top: 60%;
-        font-size: 6.5vw;
-    }
-
+    
     .inputDataItems {
         height: 400px;
     }
@@ -440,7 +405,7 @@ label {
     }
 
     
-    #inputNotes {
+    #labelNotes {
         top:30px;
     }
     
@@ -480,23 +445,9 @@ label {
         margin-bottom: 40px;
     }
 
-    .Glucose h2 {
+    .inputContainer h2 {
         top: 47%;
         font-size: 10vw;
     }
 
-    .Exercise h2 {
-        top: 47%;
-        font-size: 10vw;
-    }
-
-    .Weight h2 {
-        top: 47%;
-        font-size: 10vw;
-    }
-
-    .Insulin h2{
-        top: 47%;
-        font-size: 10vw;
-    }
 }

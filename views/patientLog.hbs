@@ -19,14 +19,13 @@
                 </h2>
         {{/with}}
 
-        
             
         {{#with (getLogs this)}}
             
             {{#if (emptyToday this.empty)}}
-
+            <div class="logBox">
                 <h3 id="logData">no inputs for that date </h3>
-
+                </div>
             {{else}}
             
                 {{#each this.arr}}

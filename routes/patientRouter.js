@@ -72,7 +72,7 @@ patientRouter.get('/insertWeight', isAuthenticated, hasRole('patient'), patientC
 patientRouter.post('/insertWeight', isAuthenticated, 
 
     body('data_entry', 'weight entry must be valid').isNumeric().escape(), 
-    body('data_comment', 'comment must be valid').isLength({max:260}).escape(),  
+    body('data_comment', 'comment must be valid').isString().isLength({max:260}).escape(),  
 
     patientController.insertPatientData)
 
