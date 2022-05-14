@@ -1,5 +1,4 @@
 /* body structure */
-/* css files used for clinician UI still under development */
 
 header, body, footer, button, input, textarea {
     font-family: Lexend Deca;
@@ -19,53 +18,50 @@ body {
 }
 
 section {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 30px;
     margin-left: 160px;
     margin-right: 160px;
     margin-bottom: 20px;
     
 }
 
-.row-2:after, .row-3:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-.leftcolumn {
-    float: left;
-    width: 75%;
-  }
-
-.rightcolumn {
-    float: left;
-    width: 25%;
-}
-
-@media screen and (max-width: 500px) {
-    .leftcolumn, .rightcolumn {
-      width: 100%;
-      padding: 0;
-    }
-}
-
 .scroll {
     overflow: auto;
     height: 700px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.patientList, .clinician-notes, .patient-comments {
+    background-color:#E6F2FE;
+    border-radius:  36px;
+    border: 0px;
+    height: 800px;
+}
+
+.sticky-bar {
+    background: #E6F2FE;
+    height: 40px;
+    border-radius:  36px;
+    margin-bottom: 10px;
+    padding-right: 20px;
 }
 
 .entry {
     padding: 20px;
     font-size: medium;
-    width: 1300px;
     height: 150px;
     border-radius: 36px;
     border-width: 0;
     background: white;
-    margin:auto; 
-    display:block;
     margin-bottom: 20px;
+    display: flex;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+button.entry {
+    width: 100%;
 }
 
 .patientComments, .clinicianNotes {
@@ -80,34 +76,53 @@ section {
     margin-bottom: 20px;
 }
 
-.leftcolumn .segment {
+.segment {
     background-color:#F2F2F2;
-    float: left;
     height: 660px;
-    width: 100%;
     border-radius: 36px;
     border: 0px;
-    padding: 20px;
 }
 
 .segment h3 {
-    font-size: 25px;
+    font-size: 30px;
     color: #2C68AD;
     font-weight: 400;
     margin-left: 10px;
     margin-top: 0px;
+}
+
+.segment .sticky-bar {
     background: #F2F2F2;
-    border-radius:  36px;
 }
 
 .accordion {
     padding: 20px;
     margin-bottom: 20px;
-    width: 95%;
+    width: 99.99%;
     height: 130px;
     border-radius: 36px;
     border-width: 3px;
     background: white;
+    display: flex;
+}
+
+.accordion img {
+    height: 30px;
+    float: right;
+}
+
+.panel {
+    padding: 20px 50px 20px 50px;
+    display: none;
+    background: white;
+    overflow: hidden;
+    margin-top: -60px;
+    margin-bottom: 20px;
+    border-radius: 0 0 36px 36px;
+    border: 3px solid;
+    border-top-width: 0px;
+    font-size: 18px;
+    line-height: 40px;
 }
 
 .data {
@@ -122,10 +137,14 @@ section {
 }
 
 #overflow.data {
-    width: 260px;
+    width: 500px;
     overflow: hidden;
     text-overflow: ellipsis; 
     white-space: nowrap;
+}
+
+.buttons {
+    padding: 0px;
 }
 
 
@@ -167,28 +186,33 @@ button {
     margin: 0; /* Important for vertical align on mobile phones */
 }
 
-.patientList, .clinician-notes, .patient-comments {
-    background-color:#E6F2FE;
-    border-radius:  36px;
-    border: 0px;
-    height: 800px;
+.view {
+    width: 49%;
+    border-radius: 22px;
+    font-size: 16px;
+    text-decoration: underline;
 }
 
-.sticky-bar {
-    background: #E6F2FE;
-    height: 40px;
-    border-radius:  36px;
-    margin-bottom: 10px;
-    padding-right: 20px;
+#clinician-notes.view {
+    border-color: #2C68AD;
+    background: #F2F2F2;
+    border-width: 3px;
+}
+
+#send-message.view {
+    background: #2C68AD;
+    border-width: 3px;
+    border-color: #2C68AD;
+    color: white;
+    float: right;
 }
 
 
-/* clinicianPatientList */
+/* patient list */
 
 .patientList .scroll p{
     text-align: center;
     font-size: large;
-    font-size: 20px;
 }
 
 .search-bar {
@@ -207,10 +231,6 @@ button {
 
 .search-bar input {
     border-width: 0px;
-}
-
-.search-bar img {
-    height: 16px;
 }
 
 .sort-by {
@@ -239,11 +259,8 @@ button {
     display: block;
 }
 
-#threshold-check {
-    color:#E13D45;
-}
 
-/* patient comments hbs (under development) */
+/* patient comments */
 
 .patient-comments {
     background-color:#F2F2F2;
@@ -254,17 +271,21 @@ button {
     height: 50px;
 }
 
-.patient-comments a, .clinician-notes a {
-    float: right;
-    margin-right: 20px;
-}
-
 .patient-comments #overflow.data {
-    width: 380px;
+    width: 415px;
 }
 
+.patient-comments .accordion {
+    border-width: 0;
+}
 
-/* patient profile hbs (under development) */
+.patient-comments .panel {
+    width: auto;
+    height: auto;
+    border-width: 0;
+}
+
+/* patient profile */
 
 .profile {
     background-color:#E6F2FE;
@@ -295,13 +316,14 @@ span.attribute {
 }
 
 
-/* patient log hbs (under development) */
+/* patient log */
 
 .date {
     border-radius:  36px;
     align-items: center;
-    overflow: auto;
     margin-bottom: 20px;
+    overflow: auto;
+    height: 600px;
 }
 
 .date h4 {
@@ -316,65 +338,90 @@ span.attribute {
 .entries {
     margin-left: 129px;
     margin-right: 20px;
-    height: 550px;
+    margin-bottom: 20px;
+    padding-right: 50px;
 }
 
 
-/* graphs hbs (under development) */
+/* graphs */
 
-.graphs {
-    width: 320px;
-    float: right;
+#graphs.segment {
+    padding: 0px;
+    background: none;
+    height: auto;
+}
+
+#graphs.segment .row{
+    align-items: center;
+    display: flex;
+    height: auto;
+    margin-bottom: 40px;
 }
 
 .card{
-    border-radius: 23px;
-    border-width: 3px;
-    height: 168px;
-    width: 320px;
+    border-radius: 40px;
+    border: 3px solid;
     background: white;
-    position: relative;
-    margin-bottom: 10px;
+    float: left;
+    margin-right: 60px;
+    width: 49%;
+    height: 50px;
+}
+
+#right-weight.card {
+    margin-right: 0px;
+    float: right;
+    border-color: #55B48B;
+}
+
+#right-insulin.card {
+    margin-right: 0px;
+    float: right;
+    border-color: #FF9D47
 }
 
 
-/* thresholds hbs (under development) */
+/* thresholds */
 
 #thresholds.segment {
     height: fit-content;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding: 40px;
 }
 
 .threshold {
     float: left;
     width: 25%;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     font-size: 18px;
 }
 
 .threshold h4 {
     font-weight: 400;
     margin-top: 0px;
-    margin-bottom: 10px;
-    font-size: 22px;
+    margin-bottom: 20px;
+    font-size: 25px;
 }
 
 .container {
-    border-width: 3px;
+    border: 3px solid;
     background: white;
     padding: 30px;
-    border-radius: 15px;
+    border-radius: 30px;
     margin-right: 20px;
+    font-size: 22px;
+}
+
+#exercise.container {
+    margin-right: 0px;
 }
 
 .upper{
-    padding-bottom: 20px;
-    line-height: 30px;
+    padding-bottom: 30px;
+    line-height: 40px;
 }
 
 .lower {
-    line-height: 30px;
+    line-height: 40px;
 }
 
 #thresholds.segment button{
@@ -382,84 +429,62 @@ span.attribute {
     background: #2C68AD;
     width: 100px;
     height: 50px;
-    cursor: pointer;
-    font-size: 17px;
+    font-size: 22px;
     text-align: center;
-    border-radius:  20px;
+    border-radius: 25px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    font-family: inherit;
     margin:auto; 
     display:block;
 }
 
-
-/* message hbs (under development) */
-
-.rightcolumn .message {
-    background-color:#E6F2FE;
-    float: right;
-    height: 425px;
-    width: 80%;
-    border-radius: 36px;
-    border: 0px;
+#thresholds.segment button a {
+    color: white; 
+    text-decoration:none; 
+    font-weight: 500;
 }
 
-.message h4 {
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-bottom: 10px;
-    width: 100%;
-    font-size: 16px;
-    color: #2C68AD;
-    font-weight: 400;
-    position: absolute;
+
+/* message */
+
+#message.segment {
+    background-color:#E6F2FE;
+    padding: 50px;
 }
 
 .prev-msg {
     border-radius: 1.15rem;
     line-height: 1.25;
     overflow: scroll;
-    padding: 0.5rem .875rem;
-    position:absolute;
+    padding: 20px;
     background-color: #248bf5;
     color: #fff; 
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    font-family: -apple-system, 
-    BlinkMacSystemFont, 
-    "Segoe UI", 
-    Roboto, 
-    Oxygen-Sans, 
-    Ubuntu, 
-    Cantarell, 
-    "Helvetica Neue", 
-    sans-serif;
-    font-weight:normal;
-    font-size: 14px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 50px;
-    height: 60px;
-    width: 250px;
+    font-size: 22px;
+    height: 100px;
+    margin-bottom: 20px;
 }
 
-.message textarea {
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 145px;
-    padding: 10px;
+.prev-msg strong {
+    font-size: 18px;
+}
+
+#message.segment textarea {
+    padding: 20px;
     border-radius: 15px;
-    border-width: 1px;;
-    width:250px;
-    height: 200px;
+    border-width: 1px;
+    font-size: 22px;
+    height: 330px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
 }
 
 #send.orange-button {
-    margin-right: 27px;
-    margin-top: 10px;
+    font-size: 22px;
 }
 
 
-/* clinician notes hbs (under development) */
+/* clinician notes */
 
 .clinician-notes {
     padding-top: 20px;
@@ -475,6 +500,44 @@ span.attribute {
 }
 
 
+/* colors */
+
+#glucose {
+    border-color: #E13D45;
+}
+
+#weight {
+    border-color: #6F62D0;
+}
+
+#insulin {
+    border-color: #FF9D47;
+}
+
+#exercise {
+    border-color: #55B48B;
+}
+
+#glucose_text {
+    color: #E13D45;
+}
+
+#weight_text {
+    color: #6F62D0;
+}
+
+#insulin_text {
+    color: #FF9D47;
+}
+
+#exercise_text {
+    color: #55B48B;
+}
+
+
+/* accordion */
+
+
 /* navigation bar */
 
 .icons {
@@ -483,11 +546,6 @@ span.attribute {
 }
 .icons a {
     margin-right: 20px;
-}
-
-#icon {
-    width: 28px;
-    height: 28px;
 }
 
 .change-color {
@@ -569,6 +627,43 @@ ul.breadcrumb li a {
 }
 
 
+/* sign out modal */
+.modal-sign-out {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 /* footer */
 
 footer {
@@ -584,4 +679,3 @@ footer h6 {
     font-size: 15px;
     font-weight: 400;
 }
-  

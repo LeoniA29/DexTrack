@@ -123,13 +123,15 @@ const getPatientComments = async (req, res, next) => {
                     }
                 }
             }
-            inputList.push([patient, commentList])
+            if (commentList) {
+                inputList.push([patient, commentList])
+            }
         }
     }
 
     console.log(inputList)
     
-    return res.render('allPatientComments', { commentsList: inputList})
+    return res.render('allPatientComments', { clinicianItem: req.user.toJSON(), commentsList: inputList})
 }
 
 // insert new Patient into database and link to clinician
