@@ -9,22 +9,6 @@
 </head>
 <body> 
     <header> 
-
-        <!-- Navigation bar at top of webpage -->
-        <div class="navbar">
-            <div class="dropdown">
-                <button class="dropbtn">Dr. Alice Brown <img src="/chevron-down.png"></button>
-                <div class="dropdown-content">
-                    <a href="#">Sign out</a>
-                </div>
-            </div>
-            <div class="icons">
-                <a href="#"><img src="/house-solid.svg" width="28" height="28" class="change-color"></a>
-                <a href="#"><img src="/circle-half-stroke-solid.svg" width="28" height="28" class="change-color"></a>
-                <a><img src="/Line.png" height="28"></i></a>
-                <a href="#"><img src="/circle-user-regular.svg" width="28" height="28" class="change-color"></a>
-            </div>
-        </div>
     </header> 
 
     <main> 
@@ -37,6 +21,27 @@
     <footer> 
         <h6> © 2022 DexTrack, all rights reserved</h6> 
     </footer>
+
+<script>
+// Script for accordion
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+
+    } else {
+      panel.style.display = "block";
+    }
+  });
+}
+
+</script>
+
 </body>
-<script src="/public/script.js"></script>
+
 </html>
