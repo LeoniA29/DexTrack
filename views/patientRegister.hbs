@@ -2,7 +2,6 @@
 <h2>Register a New Patient</h2>
 
 <!-- Form to register new patient, accessed by clinician UI -->
-
 <form method="POST">
 
 <h3>Create an account</h3>
@@ -25,7 +24,11 @@
     <input type="text" placeholder="Occupation" name="occupation" style="Width:200px" />
     <input type="text" placeholder="Address" name="address" style="Width:300px"/>
     <input type="text" placeholder="Postcode" name="postcode" />
-    
+
+    <input type="hidden" name="username"/>
+    <input type="hidden" name="password" value="info35"/>
+
     <input type="submit" />
 
 </form>
+

@@ -116,7 +116,7 @@ const getClinicianPatientList =  async (req, res, next) => {
         // loops through the list of patients from clinician to extract input data
         for (var i in patients) {
             patientID = patients[i]._id.toString()
-            var hasToday = false;
+            hasToday = false;
 
             const patient = await Patient.findById(patientID).lean()
 
@@ -157,17 +157,37 @@ const getClinicianPatientList =  async (req, res, next) => {
         //console.log(patients[i]._id.toString())
         // console.log(patientList)
         //console.log(data)
-        console.log(test)
+        //console.log(test)
         return res.render('clinicianPatientList', { clinicianItem: clinician, testData: test})
 }
 
 // render patient comments hbs
 const getPatientComments = async (req, res, next) => {
-    const clinician = Clinician.findById(req.user._id).lean()
+    const clinician = req.user.toJSON()
     var commentsList = [];
+    var patients = clinician.patient_list
 
-    
-    return res.render('patientRegister', { commentsList: patient_comments})
+    for (var i in patients) {
+        patientID = patients[i]._id.toString()
+        var hasToday = false;
+
+        const patient = await Patient.findById(patientID).lean()
+
+        if (patient) {
+            for (j in patient.input_data){
+                for (k in patient.input_data[j]){
+                    console.log(patient.input_data[j][k].type)
+                    //if (patient.input_data[j][k].toString.includes('data')) {
+                        //console.log('input data exist with comment')
+                        //console.log(patient.input_data[j][k].toString)
+                        //commentsList.push(patient.input_data[j][k])
+                    //}
+                }
+            }
+        }
+    }
+    console.log(commentsList)
+    return res.render('allPatientComments', { clinicianItem: clinician, patient_comments: commentsList})
 }
 
 // exports an object, which contain functions imported by router
