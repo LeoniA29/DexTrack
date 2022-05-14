@@ -25,9 +25,4 @@ db.once('open', async () => {
 })
 
 require('./patient')
-<<<<<<< HEAD
 require('./clinician')
-
-=======
-require('./clinician')
->>>>>>> cebbb5b0219b80493d2f1fa9c1eb71816d00c003
