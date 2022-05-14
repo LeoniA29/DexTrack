@@ -60,6 +60,7 @@ clinicianRouter.post('/registerPatient', isAuthenticated,
     clinicianController.insertPatient)
 
 clinicianRouter.get('/patientComments', isAuthenticated, hasRole('clinician'), clinicianController.getPatientComments)
+clinicianRouter.post('/clinicianViewPatient', isAuthenticated, hasRole('clinician'), clinicianController.getClinicianPatient)
 
 // export the router
 module.exports = clinicianRouter

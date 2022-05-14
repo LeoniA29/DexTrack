@@ -259,7 +259,9 @@ button {
     display: block;
 }
 
-
+#search-img {
+    height: 16px;
+}
 /* patient comments */
 
 .patient-comments {
@@ -548,6 +550,14 @@ span.attribute {
     margin-right: 20px;
 }
 
+#icon {
+    width: 28px;
+    height: 28px;
+}
+
+#nav-line {
+    height: 28px;
+}
 .change-color {
     filter: invert(33%) sepia(95%) saturate(583%) hue-rotate(178deg) brightness(89%) contrast(89%);
   } 
@@ -580,7 +590,7 @@ span.attribute {
     z-index: 1;
 }
 
-.dropdown-content a {
+.dropdown-content a, #sign-out {
     float: none;
     color: black;
     padding: 12px 16px;
@@ -588,8 +598,14 @@ span.attribute {
     display: block;
     text-align: left;
 }
+#sign-out {
+    border: 0;
+    width: 100%;
+    background: none;
+    font-size: 16px;
+}
 
-.dropdown-content a:hover {
+.dropdown-content a:hover, #sign-out:hover{
     background-color: #ddd;
 }
 

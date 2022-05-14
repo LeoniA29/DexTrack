@@ -92,48 +92,6 @@ const getRegisterPage = (req, res) => {
     return res.render('patientRegister', {flash: req.flash('errors')})
 }
 
-// render patient comments hbs
-const getPatientComments = async (req, res, next) => {
-    const clinician = req.user.toJSON()
-
-    var patients = clinician.patient_list
-    var inputList = [];
-    for (var i in patients) {
-        patientID = patients[i]._id.toString()
-        const patient = await Patient.findById(patientID).lean()
-        commentList = []
-
-
-        if (patient) {
-            const patient_data = patient.input_data
-            for (dataSet in patient_data) {
-                daily_data = patient_data[dataSet]
-
-                //console.log(daily_data)
-                for (data in daily_data) {
-                    if (daily_data[data]) {
-                        try {
-                            if (daily_data[data].data_comment) {
-                                //console.log(daily_data[data].data_comment)
-                                commentList.push(daily_data[data])
-                            }
-                        } catch(err) {
-                            console.log("not data input")
-                        }
-                    }
-                }
-            }
-            if (commentList) {
-                inputList.push([patient, commentList])
-            }
-        }
-    }
-
-    console.log(inputList)
-    
-    return res.render('allPatientComments', { clinicianItem: req.user.toJSON(), commentsList: inputList})
-}
-
 // insert new Patient into database and link to clinician
 const insertPatient= async (req, res) => {
 
@@ -244,6 +202,58 @@ const getClinicianPatientList =  async (req, res, next) => {
         return res.render('clinicianPatientList', { clinicianItem: req.user.toJSON(), testData: test})
     
 }
+
+// render patient comments hbs with comments from clinician's patients
+const getPatientComments = async (req, res, next) => {
+    const clinician = req.user.toJSON()
+
+    var patients = clinician.patient_list
+    var inputList = [];
+    for (var i in patients) {
+        patientID = patients[i]._id.toString()
+        const patient = await Patient.findById(patientID).lean()
+        commentList = []
+
+
+        if (patient) {
+            const patient_data = patient.input_data
+            for (dataSet in patient_data) {
+                daily_data = patient_data[dataSet]
+
+                //console.log(daily_data)
+                for (data in daily_data) {
+                    if (daily_data[data]) {
+                        try {
+                            if (daily_data[data].data_comment) {
+                                //console.log(daily_data[data].data_comment)
+                                commentList.push(daily_data[data])
+                            }
+                        } catch(err) {
+                            console.log("not data input")
+                        }
+                    }
+                }
+            }
+            if (commentList) {
+                inputList.push([patient, commentList])
+            }
+        }
+    }
+
+    console.log(inputList)
+    
+    return res.render('allPatientComments', { clinicianItem: req.user.toJSON(), commentsList: inputList})
+}
+
+// render patient comments hbs with comments from clinician's patients
+const getClinicianPatient = async (req, res, next) => {
+    console.log(req.body)
+
+
+
+    return res.render('clinicianPatientList', { clinicianItem: req.user.toJSON()})
+}
+
 // exports an object, which contain functions imported by router
 module.exports = {
     getClinicianLoginPage,
@@ -255,7 +265,8 @@ module.exports = {
     insertPatient,
     getRegisterPage,
     getClinicianPatientList,
-    getPatientComments
+    getPatientComments,
+    getClinicianPatient,
 }
 
 

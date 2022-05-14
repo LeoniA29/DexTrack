@@ -5,15 +5,14 @@
     <div class="dropdown">
         <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}} <img src="/chevron-down.png"></button>
         <div class="dropdown-content">
-            <a href="#">Patient comments</a>
-            <a href="#">Sign out</a>
+            <a href="/clinician/patientComments">Patient comments</a>
         </div>
     </div>
     <div class="icons">
-        <a href="#"><img src="/house-solid.svg" width="28" height="28" class="change-color"></a>
-        <a href="#"><img src="/circle-half-stroke-solid.svg" width="28" height="28" class="change-color"></a>
-        <a><img src="/Line.png" height="28"></a>
-        <a href="#"><img src="/circle-user-regular.svg" width="28" height="28" class="change-color"></a>
+        <a href="/clinician/dashboard"><img src="/house-solid.svg" id="icon" class="change-color"></a>
+        <a href="#"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
+        <a><img src="/Line.png" id="nav-line"></a>
+        <a href="#"><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
     </div>
 </div>
 
@@ -32,18 +31,22 @@
                     {{#each commentsList}}
                         {{#each this.[1]}}
                             <button class="entry accordion">
-                            <div class="data" id="overflow"><span class="attribute">Patient</span><br><strong>{{../[0].first_name}} {{../[0].last_name}}</strong></div>
 
                             {{#with (showDate this.data_date)}}
                                 <div class="data"><span class="attribute">Date/Time</span><br><strong>{{this.[2].value}} {{this.[4].value}}, {{this.[8].value}}:{{this.[10].value}}</strong></div>
                             {{/with}}
 
+                            <div class="data" id="overflow"><span class="attribute">Patient</span><br><strong>{{../[0].first_name}} {{../[0].last_name}}</strong></div>
                             <div class="data" id="overflow"><span class="attribute">Comment</span><br><strong>I feel bloated.</strong></div>
                             <img src="/chevron-down-solid.svg" height="30px">
                             </button>
                             <div class="entry panel">
                                 <p><span class="attribute">Comment</span><br><strong>{{this.data_comment}}</strong></p>
+                                <form action="method="GET">
+                                    <button>view patient</button>
+                                </form>
                             </div>
+
                         {{/each}}
                     {{/each}}
                 {{else}}
