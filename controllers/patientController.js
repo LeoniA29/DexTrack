@@ -1,6 +1,7 @@
 // Schema model for patient imported
 const {Patient, Data, DataSet, Threshold} = require('../models/patient')
-
+const bcrypt = require('bcryptjs') // import bcrypt
+const he = require('he')
 // add Express-Validator
 const {validationResult, check } = require('express-validator');
 
@@ -17,7 +18,7 @@ const formatter = new Intl.DateTimeFormat('en-au', {
     minute: 'numeric',
     second: 'numeric',
     fractionalSecondDigits: 3,
-    hourCycle: 'h24',
+    hourCycle: 'h23',
     timeZone: 'Australia/Melbourne'
   });
 
@@ -203,7 +204,6 @@ const getWeightPage= async(req,res) =>{
     }
 }
 
-
 // Function to push the inputted data of a patient into it's record on mongoDB
 const insertPatientData= async(req, res) => {
 
@@ -211,7 +211,8 @@ const insertPatientData= async(req, res) => {
         const patient = await Patient.findById(req.user._id).lean()
         
         var newData = new Data(req.body)
-        newData.data_date = new Date(); 
+        newData.data_comment = he.decode(req.body.data_comment)
+        newData.data_date = new Date()
 
         const errors = validationResult(req)
 
@@ -311,6 +312,7 @@ const insertPatientData= async(req, res) => {
         }
 
     } catch (err) {
+        console.log(err)
         return res.redirect('/patient/404')
     }
 }
@@ -333,7 +335,7 @@ const getPatientLog = (req,res)=>{
 }
 
 
-const updateProfile = (req,res) =>{
+const updateProfile = async (req,res) =>{
 
     try {
         const errors = validationResult(req)
@@ -344,9 +346,10 @@ const updateProfile = (req,res) =>{
         }
 
         else {
+            const pass = await bcrypt.hash(req.body.password, 10)
             Patient.findOneAndUpdate(
                 { _id: req.user._id},
-                {screen_name: req.body.screen_name},
+                {screen_name: req.body.screen_name, password: pass},
                 function(err, doc) {
                     if (err) {
                         return res.redirect('/patient/404')
@@ -359,6 +362,7 @@ const updateProfile = (req,res) =>{
         }
 
     } catch(err) {
+        console.log(err)
         return res.redirect('/patient/404')
     }
 }

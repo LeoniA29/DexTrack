@@ -10,16 +10,11 @@
     <title>dextrack</title>
     <!-- main layout for patient UI -->
 
-    <!-- 
-    
-        note, going back from submission page to dashboard is also affected, not good
 
-    <script type="text/javascript">
-        function preventBack() { window.history.forward(); }
-        setTimeout("preventBack()", 0);
-        window.onunload = function () { null };
-    </script>
-    --> 
+
+    
+    <script src="/javasript/menu.js"></script>
+
 
 
 </head>
@@ -31,10 +26,12 @@
         {{{body}}} 
     </main> 
 
-    <label for="toggle">&#9776;</label>
-    <input type="checkbox" id="toggle"/>
+    <label onclick="openNav()" for="toggle">&#9776;</label> 
 
-    <aside class = "sidebar">
+    <div id = "myNav" class = "sidebar">
+
+        <!-- Button to close the overlay navigation -->
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         
         <!-- Side Navigation Bar -->
         
@@ -58,14 +55,9 @@
                 <p>About DexTrack</p>
             </a>
 
-             <a href="/about-dextrack"><img id="logo" src="/dextrack_logo.png" align="center"></a>
+            <img id="logo" src="/logo.png" align="center">
         </div>
-    </aside>
+    </div>
 </div>
-
-<footer class="footer"> 
-    <h4>© 2022 DexTrack, all rights reserved</h4>
-</footer>
-
  
 </html>

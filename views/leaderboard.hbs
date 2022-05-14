@@ -1,13 +1,21 @@
 {{!< patientLayout}}
+<div id="leaderboardContainer">
+    <div class ="leaderboardTop">
+        <img id="leaderboardImage" src="/leaderboard.png">
+        <h1 id="leaderboardText">LEADERBOARD</h1>
+    </div>
 
-{{! displays today's date information and patient's first name}}
-<div class="dashboardInformation">
-    <h2 id="date">
+
         {{date.[0].value}}, {{date.[2].value}} {{date.[4].value}} {{date.[6].value}}
-    </h2>
-</div>
-
+  
+<div class="row">
 {{#each board}}
-   <p style="color: black"> Rank: {{this.[0]}}, Screen name: {{this.[1]}}, Score: {{this.[2]}} </p>
+
+    {{#with (showRank this.[0])}}
+        <img id="rankImage" src={{this}}> 
+    {{/with}}
+  <div class="name"> {{this.[1]}} </div> 
+  <div class="score"> {{this.[2]}} </div> 
 {{/each}}
 
+</div>

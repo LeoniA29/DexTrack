@@ -3,6 +3,10 @@ header, body, footer {
     margin: 0px;
 } 
 
+body {
+    min-height: 100vh
+}
+
 main, section, aside{
     margin: 0;
     color: #ffffff;
@@ -17,18 +21,6 @@ h1, h2 {
     display: flex;
 }
 
-
-label {
-    margin: 0 20px 0 0;
-    font-size: 36px;
-    line-height: 60px;
-    color:#2C68AD;
-    position: fixed;
-    right: 15px;
-    top: 50px;
-    z-index: 99;
-    display: none;
-}
 
 .main {
     background: #ffffff;
@@ -108,44 +100,14 @@ label {
     font-weight: 100;
 }
 
-.sidebar {
-    background: #f9f9f9;
-    flex: 0 1 300px; 
-    text-align: right;
-    padding-top: 120px;
-}
 
-.menu {
-    overflow-x: hidden;
-    transition: 0.5s;
-    transition: all 300ms ease 0s;
-}
-
-.menu a {
-    text-align: right;
-    text-decoration: none;
-    color: #2C68AD;
-    display: block;
-    transition: 0.3s;
-    padding: 0 20px 3px 0;
-    font-size: 24px;
-}
-
-.menu a :hover {
-    text-decoration: underline;
-}
-
-#toggle {
-    display: none;
-}
-
-.footer {
-    padding: 5em;
+footer {
+    color: #FFFFFF;
     text-align: center;
     background-color:#2C68AD;
-    color: #FFFFFF;
-    margin-top: auto;
-    margin-bottom: auto;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    position: fixed;
 }
 
 img[id="logo"] {
@@ -154,9 +116,6 @@ img[id="logo"] {
     margin-bottom: 20px;
 }
 
-#glucoseEmpty.Glucose, #glucoseFilled.Glucose, #weightEmpty.Weight, #weightFilled.Weight, #insulinEmpty.Insulin, #insulinFilled.Insulin, #exerciseEmpty.Exercise, #exerciseFilled.Exercise {
-    align-self: center;
-}
 
 
 /* Input Data */
@@ -170,22 +129,17 @@ img[id="logo"] {
     height: 150px;
     position: relative;
     top: 25%;
-    align-self: center;
-}
-
-.symbol_mini img[id="element"] {
-    width:10%;
 }
 
 .symbol #title {
     top: 25%;
     position: relative;
-    color: Black;
+    color: #e13d45;
     margin-bottom: 30px;
 }
 
 .inputDataItems {
-   
+
     display: block;
 }
 
@@ -199,7 +153,7 @@ img[id="logo"] {
     top: 170px;
 }
 
-#labelNotes {
+#inputNotes {
     top: 190px;
 }
 
@@ -240,11 +194,182 @@ img[id="logo"] {
     color: #FFFFFF;
     height: 30px;
     font-size: 20px;
+
 }
 
-.profile {
-    color: black;
+/* leaderboard */
+
+#leaderboardContainer {
+	width: 350px;
+	height: auto;
+    margin: auto;
+    margin-top: 120px;
 }
+
+.leaderboardTop {
+    text-align: center;
+    border-bottom: 1px solid #2c68ad;
+}
+
+#leaderboardImage {
+    width: 80px;
+}
+
+#leaderboardText {
+    color: #2c68ad;
+    font-size: 20px;
+}
+
+.row {
+	position: relative;
+	display: block;
+	width: 90%;
+	height: 80px;
+    margin-top: 10px;
+    color: #2c68ad;
+    font-size: 20px;
+}
+
+#rankImage {
+    position: relative;
+	display: inline-block;
+	width: 25%;
+    top: 30%;
+}
+
+.name {
+	position: relative;
+	display: inline-block;
+	width: 65%;
+	line-height: 70px;
+}
+
+.score {
+	position: relative;
+	display: inline-block;
+	width: 5%;
+}
+
+/* patient log */
+
+.dashboardInformation {
+    margin-left: 40px;
+    margin-top: 100px;
+}
+
+.logContainer {
+	display: flex;
+	flex-direction: column;
+
+}
+
+.singleLog {
+	flex: 50px;
+	padding: 10px;
+	width: 300px;
+}
+
+#logDate {
+	font-size: 20px;
+	color: #2c68ad;
+}
+
+.logBox {
+	width: 90%;
+	height: 30px;
+	background: #E4EFFE;
+	border-radius: 25px;
+	white-space: nowrap;
+	margin-bottom: 10px;
+}
+
+#dataImage {
+	padding-top: 5px;
+	height: 20px;
+	padding-left: 10px;
+	display: inline-block;
+}
+
+#logTime {
+	color: #2c68ad;
+	padding-left: 10px;
+	font-size: 15px;
+	font-weight: lighter;
+	display: inline-block;
+	margin: 0px;
+}
+
+#logData {
+	color: hsl(212, 59%, 43%);
+	padding-left: 15px;
+	font-size: 15px;
+	display: inline-block;
+	margin: 0px;
+}
+
+@media (min-width: 1024px) {
+	.logContainer {
+		flex-direction: row;
+	}
+
+	.logBox {
+		max-width: 290px;
+	}
+}
+
+
+label {
+    margin: 0 20px 0 0;
+    font-size: 36px;
+    line-height: 60px;
+    color:#2C68AD;
+    position: fixed;
+    right: 15px;
+    top: 50px;
+    z-index: 1;
+}
+
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed; 
+    z-index: 2; 
+    right: 0;
+    top: 0;
+    background: #f9f9f9;
+    overflow-x: hidden; 
+    transition: 0.5s; 
+  }
+
+.menu {
+    position: relative;
+    top: 20%; 
+    width: 100%; 
+    text-align: center; 
+    margin-top: 30px;
+  }
+  
+  .sidebar a {
+    text-align: right;
+    text-decoration: none;
+    color: #2C68AD;
+    display: block;
+    transition: 0.3s;
+    padding: 0 20px 3px 0;
+    font-size: 24px;
+  }
+  
+  .sidebar a:hover, .sidebar a:focus {
+    color: #000000;
+  }
+  
+  .sidebar .closebtn {
+    position: absolute;
+    top: 40px;
+    font-size: 60px;
+    right: 20px;
+  }
+
 
 @media screen and (min-width: 1024px) {
     .inputDataContainer {
@@ -257,7 +382,7 @@ img[id="logo"] {
         min-height: 700px;
     }
 
-    .symbol img[id="glucose"] {
+    .symbol img[id="element"] {
         height: 220px;
     }
 
@@ -284,18 +409,6 @@ img[id="logo"] {
 
     .inputContainer img {
         margin-bottom: 60px;
-    }
-
-    .sidebar {
-        display: none;
-    }
-    
-    label {
-        display: block;
-    }
-
-    #toggle:checked + .sidebar {
-        display: block;
     }
 
     .Glucose h2 {
@@ -327,7 +440,7 @@ img[id="logo"] {
     }
 
     
-    #labelNotes {
+    #inputNotes {
         top:30px;
     }
     
@@ -342,6 +455,10 @@ img[id="logo"] {
     
     #doneButton {
         top: 80px;
+    }
+
+    .logContainer {
+        align-items: center;
     }
 
 }
@@ -381,9 +498,5 @@ img[id="logo"] {
     .Insulin h2{
         top: 47%;
         font-size: 10vw;
-    }
-
-    #doneButton{
-        font-size: 15px;
     }
 }

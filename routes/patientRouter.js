@@ -2,6 +2,7 @@ const express = require('express')
 const passport = require('../passport')
 const app = express()
 
+
 // create our Router object
 const patientRouter = express.Router()
 
@@ -46,7 +47,7 @@ patientRouter.get('/dashboard', isAuthenticated, hasRole('patient'), patientCont
 patientRouter.get('/insertGlucose', isAuthenticated, hasRole('patient'), patientController.getGlucosePage)
 patientRouter.post('/insertGlucose', isAuthenticated, 
 
-    body('data_entry', 'glucose entry must be valid').not().isEmpty().isNumeric().escape(), 
+    body('data_entry', 'glucose entry must be valid').isNumeric().escape(), 
     body('data_comment', 'comment must be valid').isLength({max:260}).escape(),
 
     patientController.insertPatientData)
@@ -54,7 +55,7 @@ patientRouter.post('/insertGlucose', isAuthenticated,
 patientRouter.get('/insertInsulin', isAuthenticated, hasRole('patient'), patientController.getInsulinPage)
 patientRouter.post('/insertInsulin', isAuthenticated, 
 
-    body('data_entry', 'insulin entry must be valid').not().isEmpty().isNumeric().escape(), 
+    body('data_entry', 'insulin entry must be valid').isNumeric().escape(), 
     body('data_comment', 'comment must be valid').isLength({max:260}).escape(),   
 
     patientController.insertPatientData)
@@ -62,7 +63,7 @@ patientRouter.post('/insertInsulin', isAuthenticated,
 patientRouter.get('/insertSteps', isAuthenticated, hasRole('patient'), patientController.getStepsPage)
 patientRouter.post('/insertSteps', isAuthenticated, 
 
-    body('data_entry', 'insulin entry must be valid').not().isEmpty().isNumeric().escape(), 
+    body('data_entry', 'insulin entry must be valid').isNumeric().escape(), 
     body('data_comment', 'comment must be valid').isLength({max:260}).escape(),   
 
     patientController.insertPatientData)
@@ -70,7 +71,7 @@ patientRouter.post('/insertSteps', isAuthenticated,
 patientRouter.get('/insertWeight', isAuthenticated, hasRole('patient'), patientController.getWeightPage)
 patientRouter.post('/insertWeight', isAuthenticated, 
 
-    body('data_entry', 'weight entry must be valid').not().isEmpty().isNumeric().escape(), 
+    body('data_entry', 'weight entry must be valid').isNumeric().escape(), 
     body('data_comment', 'comment must be valid').isLength({max:260}).escape(),  
 
     patientController.insertPatientData)
@@ -80,8 +81,8 @@ patientRouter.get('/log', isAuthenticated, hasRole('patient'), patientController
 patientRouter.get('/profile', isAuthenticated, hasRole('patient'), patientController.getPatientProfile)
 patientRouter.post('/profile', isAuthenticated, 
 
-    body('screen_name', 'screen name must only be alphanumeric').not().isEmpty().isAlphanumeric().escape(),      
-
+    body('screen_name', 'screen name must not be empty').isAlphanumeric().escape(),
+    body('password', 'password must not be empty').isStrongPassword().escape(),
     patientController.updateProfile)
 
 patientRouter.get('/leaderboard', isAuthenticated, hasRole('patient'), patientController.getLeaderboard)

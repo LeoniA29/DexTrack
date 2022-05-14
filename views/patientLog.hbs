@@ -7,47 +7,51 @@
     </h2>
     <h1 id ="welcome">Hi, {{patient.first_name}}</h1>
 </div>
-{{#each input}}
 
+<div class="logContainer">
+    
+{{#each input}}
+        <div class="singleLog">
+            <div clas="logEntry">
         {{#with (showDate this.set_date)}}
-            <p style="color: black">
-                {{this.[2].value}} 
-                <br>
-                {{this.[4].value}}
-                </p>
+                <h2 id = "logDate">
+                {{this.[2].value}}, {{this.[4].value}}
+                </h2>
         {{/with}}
 
+        
+            
         {{#with (getLogs this)}}
-    
+            
             {{#if (emptyToday this.empty)}}
 
-                <p style="color: black">no inputs for that date </p>
+                <h3 id="logData">no inputs for that date </h3>
 
             {{else}}
+            
                 {{#each this.arr}}
+                    <div class="logBox">
+
+                        {{#with (showDate this.[2])}}
+                            <h3 id="logTime"> {{this.[8].value}}:{{this.[10].value}} </h3>
+                        {{/with}}
 
                     {{#with (showType this)}}
-                    <div class ="symbol_mini"> 
-                        <img id="element" src={{this}}>
-                    </div>
+                        <img id="dataImage" src={{link}}>
+                        <h3 id="logData"> {{data}} {{unit}}</h3>
                     {{/with}}
-                    <p style="color: black">
-                        type: {{this.[0]}}, 
-                        entry: {{this.[1]}}, 
-                        {{#with (showDate this.[2])}}
-                            time: {{this.[8].value}}:{{this.[10].value}} 
-                        {{/with}}
-                    </p>
-                    <br>
+
+                        </div>  
                 {{/each}}
-                
             {{/if}}
-
-            </p>
+            
         {{/with}}
-
+              
+        </div>
+    </div>
 {{/each}}
 
+</div>
 
 
     
