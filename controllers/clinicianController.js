@@ -94,13 +94,43 @@ const getRegisterPage = (req, res) => {
 
 // render patient comments hbs
 const getPatientComments = async (req, res, next) => {
-    const clinician = Clinician.findById(req.user._id).lean()
-    var commentsList = [];
+    const clinician = req.user.toJSON()
 
+    var patients = clinician.patient_list
+    var inputList = [];
+    for (var i in patients) {
+        patientID = patients[i]._id.toString()
+        const patient = await Patient.findById(patientID).lean()
+        commentList = []
+
+
+        if (patient) {
+            const patient_data = patient.input_data
+            for (dataSet in patient_data) {
+                daily_data = patient_data[dataSet]
+
+                //console.log(daily_data)
+                for (data in daily_data) {
+                    if (daily_data[data]) {
+                        try {
+                            if (daily_data[data].data_comment) {
+                                //console.log(daily_data[data].data_comment)
+                                commentList.push(daily_data[data])
+                            }
+                        } catch(err) {
+                            console.log("not data input")
+                        }
+                    }
+                }
+            }
+            inputList.push([patient, commentList])
+        }
+    }
+
+    console.log(inputList)
     
-    return res.render('patientRegister', { commentsList: patient_comments})
+    return res.render('allPatientComments', { commentsList: inputList})
 }
-
 
 // insert new Patient into database and link to clinician
 const insertPatient= async (req, res) => {

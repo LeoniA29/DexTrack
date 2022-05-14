@@ -60,6 +60,4 @@ app.use('/clinician', clinicianRouter)
 app.use('/patient', patientRouter)
 app.use('/', userRouter)
 
-
-
 require('./models')

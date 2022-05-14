@@ -1,0 +1,13 @@
+{{!< main}}
+
+{{#if commentsList}}    
+    {{#each commentsList}}
+        {{#each this.[1]}}
+        <li>{{../[0].first_name}} {{../[0].last_name}}
+            {{#with (showDate this.data_date)}}
+                {{this.[2].value}} {{this.[4].value}}, {{this.[8].value}}:{{this.[10].value}} </li> 
+            {{/with}}
+            <li>{{this.data_comment}}</li>
+        {{/each}}
+    {{/each}}
+{{/if}}

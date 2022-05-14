@@ -5,8 +5,10 @@
     <div class="dropdown">
         <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}} <img src="/chevron-down.png"></button>
         <div class="dropdown-content">
-            <a href="#">Patient comments</a>
-            <a href="#">Sign out</a>
+            <a href="/clinician/patientComments">Patient comments</a>
+            <form method="POST">
+                <button>Sign out</button>
+            </form>
         </div>
     </div>
     <div class="icons">
