@@ -1,5 +1,5 @@
 // Schema model for patient imported
-const {Patient, Data, DataSet, Threshold} = require('../models/patient')
+const {Patient, Data, DataSet, Threshold, Note} = require('../models/patient')
 
 // add Express-Validator
 const {validationResult, check } = require('express-validator');

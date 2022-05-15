@@ -42,8 +42,12 @@
                             </button>
                             <div class="entry panel">
                                 <p><span class="attribute">Comment</span><br><strong>{{this.data_comment}}</strong></p>
-                                <form action="method="GET">
-                                    <button>view patient</button>
+                                <form action="/clinician/clinicianViewPatient" method="POST">
+                                    <button>
+                                        view profile
+                                        <input type="hidden" name="patient" value={{../[0]._id}}/>
+                                        <input type="hidden" type="submit"/>
+                                    </button>
                                 </form>
                             </div>
 

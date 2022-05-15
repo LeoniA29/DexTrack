@@ -1,5 +1,5 @@
 const Clinician = require('../models/clinician')
-const {Patient, Data, DataSet, Threshold} = require('../models/patient')
+const {Patient, Data, DataSet, Threshold, Note} = require('../models/patient')
 
 const ObjectId = require('mongodb').ObjectId
 
@@ -247,12 +247,17 @@ const getPatientComments = async (req, res, next) => {
 
 // render patient comments hbs with comments from clinician's patients
 const getClinicianPatient = async (req, res, next) => {
-    console.log(req.body)
+    
+    //console.log(req.body.patient.toString().slice(0, -1))
+    var patientID = req.body.patient.toString().slice(0, -1)
+    const patient = await Patient.findById(patientID).lean()
 
 
+    
 
-    return res.render('clinicianPatientList', { clinicianItem: req.user.toJSON()})
+    return res.render('clinicianViewPatient', { clinicianItem: req.user.toJSON(), patientItem: patient})
 }
+
 
 // exports an object, which contain functions imported by router
 module.exports = {

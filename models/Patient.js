@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs') // import bcrypt
 // schema for notes
 const note = new mongoose.Schema({
    note_content: String,
-   note_date: Date
+   note_date: {type: Date, required: true}
 });
 
 // schema for threshold
@@ -87,9 +87,10 @@ patientSchema.pre('save', function save(next) {
     })
 })
 
+const Note = mongoose.model('Patient', note)
 const Data = mongoose.model('Data', data)
 const DataSet = mongoose.model('DataSet', data_set)
 const Threshold = mongoose.model('Threshold', threshold)
 const Patient = mongoose.model('Patient', patientSchema)
 
-module.exports = {Patient, DataSet, Data, Threshold}
+module.exports = {Patient, DataSet, Data, Threshold, Note}
