@@ -1,3 +1,31 @@
+/* set mode */
+:root {
+    --bg-color: white;
+    --footer-color: #2C68AD;
+    --blue-white: #2C68AD;
+    --white-color: white;
+    --blue-container: #E6F2FE;
+    --entry-card: white;
+    --grey-container: #F2F2F2;
+    --white-grey: white;
+    --black-white: black;
+    --navbar-icon: invert(33%) sepia(95%) saturate(583%) hue-rotate(178deg) brightness(89%) contrast(89%);
+}
+
+.dark-theme {
+    --bg-color: #0C131C;
+    --footer-color: #272727;
+    --blue-white: #E4E5E6;
+    --white-color: #E4E5E6;
+    --blue-container: #162945;
+    --entry-card: #404F66;
+    --grey-container: #5C636E;
+    --white-grey: #B5B5B5;
+    --black-white: #E4E5E6;
+    --navbar-icon: invert(100%) sepia(1%) saturate(2453%) hue-rotate(175deg) brightness(91%) contrast(99%);
+}
+
+
 /* body structure */
 
 header, body, footer, button, input, textarea {
@@ -9,7 +37,7 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    background-color: #FFFFFF;
+    background-color: var(--bg-color);
 }
 
 .navbar {
@@ -33,14 +61,14 @@ section {
 }
 
 .patientList, .clinician-notes, .patient-comments {
-    background-color:#E6F2FE;
+    background-color: var(--blue-container);
     border-radius:  36px;
     border: 0px;
     height: 800px;
 }
 
 .sticky-bar {
-    background: #E6F2FE;
+    background: var(--blue-container);
     height: 40px;
     border-radius:  36px;
     margin-bottom: 10px;
@@ -53,7 +81,7 @@ section {
     height: 150px;
     border-radius: 36px;
     border-width: 0;
-    background: white;
+    background: var(--entry-card);
     margin-bottom: 20px;
     display: flex;
     overflow: hidden;
@@ -69,7 +97,7 @@ button.entry {
 }
 
 .patientComments h4, .clinicianNotes h4 {
-    color: #2C68AD;
+    color: var(--blue-white);
     font-size: 30px;
     font-weight:400;
     margin-left: 30px;
@@ -77,7 +105,7 @@ button.entry {
 }
 
 .segment {
-    background-color:#F2F2F2;
+    background-color:var(--grey-container);
     height: 660px;
     border-radius: 36px;
     border: 0px;
@@ -85,14 +113,14 @@ button.entry {
 
 .segment h3 {
     font-size: 30px;
-    color: #2C68AD;
+    color: var(--blue-white);
     font-weight: 400;
     margin-left: 10px;
     margin-top: 0px;
 }
 
 .segment .sticky-bar {
-    background: #F2F2F2;
+    background: var(--grey-container);
 }
 
 .accordion {
@@ -102,7 +130,7 @@ button.entry {
     height: 130px;
     border-radius: 36px;
     border-width: 3px;
-    background: white;
+    background: var(--white-grey);
     display: flex;
 }
 
@@ -114,7 +142,7 @@ button.entry {
 .panel {
     padding: 20px 50px 20px 50px;
     display: none;
-    background: white;
+    background: var(--white-grey);
     overflow: hidden;
     margin-top: -60px;
     margin-bottom: 20px;
@@ -123,6 +151,7 @@ button.entry {
     border-top-width: 0px;
     font-size: 18px;
     line-height: 40px;
+    height: auto;
 }
 
 .data {
@@ -162,7 +191,7 @@ button {
 
 .blue-button .dropbtn {
     font-size: 16px;
-    color: #FCF5ED;
+    color: var(--white-color);
     background: #2C68AD;
     padding: 4.5px 20px 4.5px 20px;
     border: 0px;
@@ -176,7 +205,7 @@ button {
     overflow: hidden;
     float: right;
     font-size: 16px;
-    color: #FCF5ED;
+    color: var(--white-color);
     background: #FB6E5A;
     padding: 4.5px 20px 4.5px 20px;
     border: 0px;
@@ -195,7 +224,7 @@ button {
 
 #clinician-notes.view {
     border-color: #2C68AD;
-    background: #F2F2F2;
+    background: var(--white-color);
     border-width: 3px;
 }
 
@@ -218,7 +247,7 @@ button {
 .search-bar {
     float: right;
     margin-right: 20px;
-    background: white;
+    background: var(--white-color);
     border-radius: 15px;
     width: 190px;
     padding: 3px 20px 3px 10px;
@@ -231,6 +260,7 @@ button {
 
 .search-bar input {
     border-width: 0px;
+    background: var(--white-color);
 }
 
 .sort-by {
@@ -259,15 +289,19 @@ button {
     display: block;
 }
 
+#search-img {
+    height: 16px;
+}
+
 
 /* patient comments */
 
 .patient-comments {
-    background-color:#F2F2F2;
+    background-color: var(--grey-container);
 }
 
 .patient-comments .sticky-bar {
-    background: #F2F2F2;
+    background: var(--grey-container);
     height: 50px;
 }
 
@@ -281,14 +315,25 @@ button {
 
 .patient-comments .panel {
     width: auto;
-    height: auto;
     border-width: 0;
 }
+
+.patient-comments .panel .button-go {
+    background:#2C68AD;
+    color: white;
+    font-size: 18px;
+    border-radius: 10px;
+    border-width: 0px;
+    padding: 7px 12px 7px 12px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    float: right;
+}
+
 
 /* patient profile */
 
 .profile {
-    background-color:#E6F2FE;
+    background-color: var(--blue-container);
     border-radius: 36px;
     border: 0px;
     display: flex;
@@ -302,6 +347,7 @@ button {
     font-size: 18px;
     overflow: hidden;
     text-overflow: ellipsis; 
+    color: var(--black-white);
 }
 
 #overflow.col {
@@ -333,6 +379,7 @@ span.attribute {
     text-align: center;
     margin-left: 40px;
     margin-right: 50px;
+    color: var(--black-white);
 }
 
 .entries {
@@ -361,7 +408,7 @@ span.attribute {
 .card{
     border-radius: 40px;
     border: 3px solid;
-    background: white;
+    background: var(--white-color);
     float: left;
     margin-right: 60px;
     width: 49%;
@@ -404,7 +451,7 @@ span.attribute {
 
 .container {
     border: 3px solid;
-    background: white;
+    background: var(--white-grey);
     padding: 30px;
     border-radius: 30px;
     margin-right: 20px;
@@ -447,7 +494,7 @@ span.attribute {
 /* message */
 
 #message.segment {
-    background-color:#E6F2FE;
+    background-color: var(--blue-container);
     padding: 50px;
 }
 
@@ -477,10 +524,16 @@ span.attribute {
     width: 100%;
     box-sizing: border-box;
     margin-bottom: 20px;
+    background: var(--white-color);
 }
 
 #send.orange-button {
     font-size: 22px;
+}
+
+#send.orange-button a{
+    color: white;
+    text-decoration: none;
 }
 
 
@@ -497,6 +550,10 @@ span.attribute {
 
 .clinician-notes #overflow.data {
     width: 800px;
+}
+
+.clinician-notes #notes {
+    border-width: 0;
 }
 
 
@@ -534,8 +591,13 @@ span.attribute {
     color: #55B48B;
 }
 
+.change-color {
+    filter: var(--navbar-icon);
+  } 
 
-/* accordion */
+.change-blue {
+    filter: invert(33%) sepia(95%) saturate(583%) hue-rotate(178deg) brightness(89%) contrast(89%);
+}
 
 
 /* navigation bar */
@@ -548,9 +610,14 @@ span.attribute {
     margin-right: 20px;
 }
 
-.change-color {
-    filter: invert(33%) sepia(95%) saturate(583%) hue-rotate(178deg) brightness(89%) contrast(89%);
-  } 
+#icon {
+    width: 28px;
+    height: 28px;
+}
+
+#nav-line{
+    height: 28px;
+}
 
 .dropdown {
     overflow: hidden;
@@ -561,7 +628,7 @@ span.attribute {
 
 .dropdown .dropbtn {
     font-size: 20px;
-    color: #FCF5ED;
+    color: var(--white-color);
     background: #2C68AD;
     padding: 3px 20px 3px 20px;
     border: 0px;
@@ -580,7 +647,7 @@ span.attribute {
     z-index: 1;
 }
 
-.dropdown-content a {
+.dropdown-content a, #sign-out{
     float: none;
     color: black;
     padding: 12px 16px;
@@ -589,7 +656,14 @@ span.attribute {
     text-align: left;
 }
 
-.dropdown-content a:hover {
+#sign-out {
+    border: 0;
+    width: 100%;
+    background:none;
+    font-size: 16px;
+}
+
+.dropdown-content a:hover, #sign-out:hover{
     background-color: #ddd;
 }
 
@@ -608,69 +682,62 @@ ul.breadcrumb {
 
 ul.breadcrumb li {
     display: inline;
-    color: #2C68AD;
+    color: var(--blue-white);
     font-size: 40px;
     font-weight:400;
 }
 
 ul.breadcrumb li+li:before {
     padding: 8px;
-    color: #2C68AD;
+    color: var(--blue-white);
     content: ">\00a0";
     font-weight:500;
 }
 
 ul.breadcrumb li a {
     text-decoration: underline;
-    color: #2C68AD;
+    color: var(--blue-white);
     font-weight: 500;
 }
 
 
-/* sign out modal */
-.modal-sign-out {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+/* splash screen */
+
+.intro {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: white;
+    transition: 1s;
 }
 
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-  }
-  
-  .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+.logo-header {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: ease-in-out 0.5s;
 }
+
+.dextrack-logo {
+    position: relative;
+    display: inline-block;
+    bottom: -20px;
+    height: 130px;
+}
+
 
 /* footer */
 
 footer {
     padding: 5em;
     text-align: center;
-    background-color:#2C68AD;
-    color: #FFFFFF;
+    background-color: var(--footer-color);
+    color: var(--white-color);
     margin-top: auto;
     margin-bottom: auto;
 }
