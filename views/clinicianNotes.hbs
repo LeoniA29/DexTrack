@@ -1,0 +1,52 @@
+<!-- Navigation bar at top of webpage -->
+<div class="navbar">
+    <div class="dropdown">
+        <button class="dropbtn">Dr. Alice Brown <img src="/chevron-down.png"></button>
+        <div class="dropdown-content">
+            <a href="#">Patient comments</a>
+            <form>
+                <button id="sign-out">Sign out</button>
+            </form>
+        </div>
+    </div>
+    <div class="icons">
+        <a href="#"><img src="/house-solid.svg" id="icon" class="change-color"></a>
+        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
+        <a><img src="/Line.png" id="nav-line"></a>
+        <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
+    </div>
+</div>
+
+<ul class="breadcrumb">
+  <li><a href="#">Patient list</a></li>
+  <li><a href="#">Ana Sergawa</a></li>
+  <li>Clinician notes</li>
+</ul>
+
+<div class="sections">
+    
+     <!-- Each section corresponds to each segment of the patient information in the webpage -->
+    <section class="clinicianNotes">
+        <h4>Clinician notes</h4>
+        <div class="clinician-notes">
+            <div class="sticky-bar">
+                <div class="blue-button">
+                    <button class="dropbtn" href="#">Add new notes</button>
+                </div>
+            </div>
+            <div class="scroll">
+                <button class="entry accordion" id="notes">
+                    <div class="data"><span class="attribute">Date/Time</span><br><strong>20 March, 11am</strong></div>
+                    <div class="data hide" id="overflow"><span class="attribute">Notes</span><br><strong>I feel bloated.ad skjhfkadhjflsdhf laujsdh flaushdf laudh fluashdflduhasdliufhalsdufhaldsf aluhdfliausdh fluhsdlfuha dlfuha ldiuhf usdhf ludh flasuhd lfuah ldifusa lfuha luify lsduyf lasuy fiuasdy fuyd fasy lfuy dlufy lsauyf luya flus lfuyd </strong></div>
+                    <div class="data">
+                        <a href="#"><img src="/chevron-down-solid.svg"></a>
+                    </div>
+                </button>
+                <div class="entry panel" id="notes">
+                    <p><span class="attribute">Notes</span><br><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adiasdjfh asduh kajdhsf kadsjhf skjdhf kspisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adiasdjfh asduh kajdhsf kadsjhf skjdhf kspisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adiasdjfh asduh kajdhsf kadsjhf skjdhf kspisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adiasdjfh asduh kajdhsf kadsjhf skjdhf kspisicing elit</strong></p>
+                </div>
+            </div>
+        </div>
+     </section>
+
+</div>

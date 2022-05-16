@@ -4,24 +4,24 @@
         <button class="dropbtn">Dr. Alice Brown <img src="/chevron-down.png"></button>
         <div class="dropdown-content">
             <a href="#">Patient comments</a>
-            <!-- Trigger/Open The Modal -->
-            <a href="#" id="sign-out">Sign out</a>
+            <form>
+                <button id="sign-out">Sign out</button>
+            </form>
         </div>
     </div>
     <div class="icons">
-        <a href="#"><img src="/house-solid.svg" width="28" height="28" class="change-color"></a>
-        <a href="#"><img src="/circle-half-stroke-solid.svg" width="28" height="28" class="change-color"></a>
-        <a><img src="/Line.png" height="28"></a>
-        <a href="#"><img src="/circle-user-regular.svg" width="28" height="28" class="change-color"></a>
+        <a href="#"><img src="/house-solid.svg" id="icon" class="change-color"></a>
+        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
+        <a><img src="/Line.png" id="nav-line"></a>
+        <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
     </div>
 </div>
 
-<!-- The Modal -->
-<div class="modal-sign-out">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Some text in the Modal..</p>
-    </div>
+<!-- Splash screen -->
+<div class="intro">
+    <h1 class="logo-header">
+        <img class="dextrack-logo" src="/dextrack_logo.png">
+    </h1>
 </div>
 
 <ul class="breadcrumb">
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="search-bar">
-                <label for="searchbar"><img src="/magnifying-glass-solid.svg" height="16px" class="change-color"></label>
+                <label for="searchbar"><img src="/magnifying-glass-solid.svg" id="search-img" class="change-blue"></label>
                 <input type="text" placeholder="Search" name="search">
             </div>
         </div>

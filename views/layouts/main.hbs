@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Clinician App</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" id="stylesheet" href="/css/styles.css">
 </head>
 <body> 
     <header> 
@@ -22,26 +22,8 @@
         <h6> © 2022 DexTrack, all rights reserved</h6> 
     </footer>
 
-<script>
-// Script for accordion
-var acc = document.getElementsByClassName("accordion");
-var i;
-
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
-
-    } else {
-      panel.style.display = "block";
-    }
-  });
-}
-
-</script>
-
 </body>
-
+<script src="/javascript/accordion.js"></script>
+<script src="/javascript/splash.js"></script>
+<script src="/javascript/theme.js"></script>
 </html>

@@ -4,14 +4,16 @@
         <button class="dropbtn">Dr. Alice Brown <img src="/chevron-down.png"></button>
         <div class="dropdown-content">
             <a href="#">Patient comments</a>
-            <a href="#">Sign out</a>
+            <form>
+                <button id="sign-out">Sign out</button>
+            </form>
         </div>
     </div>
     <div class="icons">
-        <a href="#"><img src="/house-solid.svg" width="28" height="28" class="change-color"></a>
-        <a href="#"><img src="/circle-half-stroke-solid.svg" width="28" height="28" class="change-color"></a>
-        <a><img src="/Line.png" height="28"></a>
-        <a href="#"><img src="/circle-user-regular.svg" width="28" height="28" class="change-color"></a>
+        <a href="#"><img src="/house-solid.svg" id="icon" class="change-color"></a>
+        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
+        <a><img src="/Line.png" id="nav-line"></a>
+        <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
     </div>
 </div>
 
@@ -48,128 +50,217 @@
         </div>
     </section>
 
-    <section class="row-2">
-        <div class="leftcolumn">
-            <div class="segment">
-                <h3>Patient logs</h3>
-                <div class="date">
-                    <h4><strong>20</strong><br>MON</h4>
-                    <div class="entries">
-                        <button class="accordion" style="border-color:#E13D45;">
-                            <div class="data">
-                                <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
-                            </div>
-                            <div class="data">
-                                <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
-                            </div>
-                            <div class="data" id="overflow">
-                                <span class="attribute">Comment</span><br><strong>I feel fine.</strong>
-                            </div>
-                            <img src="/chevron-down-solid.svg" height="30px">
-                        </button>
-                    </div>
-                </div>
-            </div>
+    <section class="buttons">
+        <button class="view" id="clinician-notes"> 
+            <h3>View Clinician Notes</h3>
+        </button>
+        <button class="view" id="send-message"> 
+            <h3>Send Message to Patient</h3>
+        </button>
+    </section>
+
+    <section class="segment">
+        <div class="sticky-bar">
+            <h3>Patient logs</h3>
         </div>
-        <div class="rightcolumn">
-            <div class="graphs">
-                <div class="card">
-                    <img src="/graph1.png" width="320px" height="auto">
+        <div class="date">
+            <h4><strong>20</strong><br>MON</h4>
+            <div class="entries">
+                <button class="accordion" id="glucose">
+                    <div class="data" id="overflow">
+                        <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
+                    </div>
+                    <div class="data" id="overflow">
+                        <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
+                    </div>
+                    <div class="data">
+                        <a href="#"><img src="/chevron-down-solid.svg"></a>
+                    </div>
+                </button>
+                <div class="panel" id="glucose">
+                    <p><span class="attribute">Comment</span><br><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit</strong></p>
                 </div>
-                <div class="card">
-                    <img src="/graph2.png" width="320px" height="auto">
+
+                <button class="accordion" id="weight">
+                    <div class="data" id="overflow">
+                        <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
+                    </div>
+                    <div class="data" id="overflow">
+                        <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
+                    </div>
+                    <div class="data">
+                        <a href="#"><img src="/chevron-down-solid.svg"></a>
+                    </div>
+                </button>
+                <div class="panel" id="weight">
+                    <p><span class="attribute">Comment</span><br><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit</strong></p>
                 </div>
-                <div class="card">
-                    <img src="/graph3.png" width="320px" height="auto">
+
+                <button class="accordion" id="exercise">
+                    <div class="data" id="overflow">
+                        <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
+                    </div>
+                    <div class="data" id="overflow">
+                        <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
+                    </div>
+                    <div class="data">
+                        <a href="#"><img src="/chevron-down-solid.svg"></a>
+                    </div>
+                </button>
+                <div class="panel" id="exercise">
+                    <p><span class="attribute">Comment</span><br><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit</strong></p>
                 </div>
-                <div class="card">
-                    <img src="/graph4.png" width="320px" height="auto">
+
+                <button class="accordion" id="insulin">
+                    <div class="data" id="overflow">
+                        <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
+                    </div>
+                    <div class="data" id="overflow">
+                        <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
+                    </div>
+                    <div class="data">
+                        <a href="#"><img src="/chevron-down-solid.svg"></a>
+                    </div>
+                </button>
+                <div class="panel" id="insulin">
+                    <p><span class="attribute">Comment</span><br><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit</strong></p>
                 </div>
+
+            </div>
+            <h4><strong>21</strong><br>MON</h4>
+            <div class="entries">
+                <button class="accordion" id="glucose">
+                    <div class="data" id="overflow">
+                        <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
+                    </div>
+                    <div class="data" id="overflow">
+                        <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
+                    </div>
+                    <div class="data">
+                        <a href="#"><img src="/chevron-down-solid.svg"></a>
+                    </div>
+                </button>
+                <div class="accordion panel" id="glucose">
+                    <p><span class="attribute">Comment</span><br><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit</strong></p>
+                </div>
+
+                <button class="accordion" id="weight">
+                    <div class="data" id="overflow">
+                        <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
+                    </div>
+                    <div class="data" id="overflow">
+                        <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
+                    </div>
+                    <div class="data">
+                        <a href="#"><img src="/chevron-down-solid.svg"></a>
+                    </div>
+                </button>
+                <div class="panel" id="weight">
+                    <p><span class="attribute">Comment</span><br><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit</strong></p>
+                </div>
+
+                <button class="accordion" id="exercise">
+                    <div class="data" id="overflow">
+                        <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
+                    </div>
+                    <div class="data" id="overflow">
+                        <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
+                    </div>
+                    <div class="data">
+                        <a href="#"><img src="/chevron-down-solid.svg"></a>
+                    </div>
+                </button>
+                <div class="panel" id="exercise">
+                    <p><span class="attribute">Comment</span><br><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit</strong></p>
+                </div>
+
+                <button class="accordion" id="insulin">
+                    <div class="data" id="overflow">
+                        <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
+                    </div>
+                    <div class="data" id="overflow">
+                        <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
+                    </div>
+                    <div class="data">
+                        <a href="#"><img src="/chevron-down-solid.svg"></a>
+                    </div>
+                </button>
+                <div class="panel" id="insulin">
+                    <p><span class="attribute">Comment</span><br><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit</strong></p>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <section class="row-3">
-        <div class="leftcolumn">
-            <div class="segment" id="thresholds">
-                <h3>Patient thresholds</h3>
-                <div class="threshold">
-                    <h4 style="color:#E13D45;">Blood glucose level</h4>
-                    <div class="container">
-                        <div class="upper">
-                            <span class="attribute">Upper bound</span><br><strong>180 mol/L</strong>
-                        </div>
-                        <div class="lower">
-                            <span class="attribute">Lower bound</span><br><strong>110 mol/L</strong>
-                        </div>
-                    </div>
+    <section class="segment" id="thresholds">
+        <h3>Patient thresholds</h3>
+        <div class="threshold">
+            <h4 id="glucose_text">Blood glucose level</h4>
+            <div class="container" id="glucose">
+                <div class="upper">
+                    <span class="attribute">Upper bound</span><br><strong>180 mol/L</strong>
                 </div>
-                <div class="threshold">
-                    <h4 style="color:#6F62D0;">Weight</h4>
-                    <div class="container">
-                        <div class="upper">
-                            <span class="attribute">Upper bound</span><br><strong>70 kg</strong>
-                        </div>
-                        <div class="lower">
-                            <span class="attribute">Lower bound</span><br><strong>60 kg</strong>
-                        </div>
-                    </div>
+                <div class="lower">
+                    <span class="attribute">Lower bound</span><br><strong>110 mol/L</strong>
                 </div>
-                <div class="threshold">
-                    <h4 style="color:#FF9D47;">Dose of insulin</h4>
-                    <div class="container">
-                        <div class="upper">
-                            <span class="attribute">Upper bound</span><br><strong>1 dose</strong>
-                        </div>
-                        <div class="lower">
-                            <span class="attribute">Lower bound</span><br><strong>0 dose</strong>
-                        </div>
-                    </div>
-                </div>
-                <div class="threshold">
-                    <h4 style="color:#55B48B;">Exercise</h4>
-                    <div class="container">
-                        <div class="upper">
-                            <span class="attribute">Upper bound</span><br><strong>20,000 steps</strong>
-                        </div>
-                        <div class="lower">
-                            <span class="attribute">Lower bound</span><br><strong>10,000 steps</strong>
-                        </div>
-                    </div>
-                </div>
-                <button class="edit"><a href="#" style="color: white; text-decoration:none; font-weight: 500;">Edit</a></button>
             </div>
         </div>
-
-        <div class="rightcolumn">
-            <div class="message">
-                <h4>Message to Patient</h4>
-                <div class="prev-msg"><strong style="font-size:11px; color: #E6F2FE;">Previous message:<br></strong>Keep up the spirit!</div>
-                <textarea type="text" placeholder="New message here." rows="5"></textarea>
-                <button class="orange-button" id="send"><a href="#"  style="color: white; text-decoration: none;">Send</a></button>
+        
+        <div class="threshold">
+            <h4 id="weight_text">Weight</h4>
+            <div class="container" id="weight">
+                <div class="upper">
+                    <span class="attribute">Upper bound</span><br><strong>70 kg</strong>
+                </div>
+                <div class="lower">
+                    <span class="attribute">Lower bound</span><br><strong>60 kg</strong>
+                </div>
             </div>
         </div>
+        
+        <div class="threshold">
+            <h4 id="insulin_text">Dose of insulin</h4>
+            <div class="container" id="insulin">
+                <div class="upper">
+                    <span class="attribute">Upper bound</span><br><strong>1 dose</strong>
+                </div>
+                <div class="lower">
+                    <span class="attribute">Lower bound</span><br><strong>0 dose</strong>
+                </div>
+            </div>
+        </div>
+        
+        <div class="threshold">
+            <h4 id="exercise_text">Exercise</h4>
+            <div class="container" id="exercise">
+                <div class="upper">
+                    <span class="attribute">Upper bound</span><br><strong>20,000 steps</strong>
+                </div>
+                <div class="lower">
+                    <span class="attribute">Lower bound</span><br><strong>10,000 steps</strong>
+                </div>
+            </div>
+        </div>
+        
+        <button><a href="#">Edit</a></button>
+        
     </section>
-    
-    </div>
 
-    <section class="clinicianNotes">
-        <h4>Clinician notes</h4>
-        <div class="clinician-notes">
-            <div class="sticky-bar">
-                <div class="blue-button">
-                    <button class="dropbtn" href="#">Add new notes</button>
-                </div>
+    <section class="segment" id="graphs">
+        <div class="row">
+            <div class="card" id="glucose">
             </div>
-            <div class="scroll">
-                <div class="entry" id="notes">
-                    <div class="data"><span class="attribute">Date/Time</span><br><strong>20 March, 11am</strong></div>
-                    <div class="data" id="overflow"><span class="attribute">Notes</span><br><strong>I feel bloated.ad skjhfkadhjflsdhf laujsdh flaushdf laudh fluashdflduhasdliufhalsdufhaldsf aluhdfliausdh fluhsdlfuha dlfuha ldiuhf usdhf ludh flasuhd lfuah ldifusa lfuha luify lsduyf lasuy fiuasdy fuyd fasy lfuy dlufy lsauyf luya flus lfuyd </strong></div>
-                    <a href="#"><img src="/chevron-down-solid.svg" height="30px"></a>
-                </div>
+            <div class="card" id="right-weight">
             </div>
         </div>
-     </section>
+        <div class="row">
+            <div class="card" id="exercise">
+            </div>
+            <div class="card" id="right-insulin">
+            </div>
+        </div>
+    </section >
 
  </div>
  

@@ -4,14 +4,16 @@
         <button class="dropbtn">Dr. Alice Brown <img src="/chevron-down.png"></button>
         <div class="dropdown-content">
             <a href="#">Patient comments</a>
-            <a href="#">Sign out</a>
+            <form>
+                <button id="sign-out">Sign out</button>
+            </form>
         </div>
     </div>
     <div class="icons">
-        <a href="#"><img src="/house-solid.svg" width="28" height="28" class="change-color"></a>
-        <a href="#"><img src="/circle-half-stroke-solid.svg" width="28" height="28" class="change-color"></a>
-        <a><img src="/Line.png" height="28"></a>
-        <a href="#"><img src="/circle-user-regular.svg" width="28" height="28" class="change-color"></a>
+        <a href="#"><img src="/house-solid.svg" id="icon" class="change-color"></a>
+        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
+        <a><img src="/Line.png" id="nav-line"></a>
+        <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
     </div>
 </div>
 
@@ -29,7 +31,7 @@
         <h3>Message to Patient</h3>
             <div class="prev-msg"><strong>Previous message:<br></strong>Keep up the spirit!</div>
             <textarea type="text" placeholder="New message here." rows="5"></textarea>
-            <button class="orange-button" id="send"><a href="#"  style="color: white; text-decoration: none;">Send</a></button>
+            <button class="orange-button" id="send"><a href="#">Send</a></button>
      </section>
 
 </div>
