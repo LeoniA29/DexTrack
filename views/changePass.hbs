@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/stylesPatient.css">
     <link href='https://fonts.googleapis.com/css?family=Lexend Deca' rel='stylesheet'>
     <html lang="en">
-    <title>Patient Login</title>
+    <title>Update Password</title>
     <!-- main layout for patient UI -->
 </head>
 
@@ -16,24 +16,16 @@
                     <ul class="nav_pages">
                         <li><a href="/about-dextrack">About DexTrack</a></li>
                         <li><a href="/about-diabetes">About Diabetes</a></li>
-                        <li><a href="/"><button>Sign In</button></a></li>
+                        <li><a href="/patient/dashboard"><button>Dashboard</button></a></li>
                     </ul>
                 </nav>
 
-<form class="patient_login" action="/patient/login" method="post">
-    <div>
-        <h2>Username</h2>
-        <input id="username" name="username" type="text" required/>
-    </div>
-    <div>
-        <h2>Password</h2>
-        <input id="password" name="password" type="password" required />
-    </div>
-    <div>
-        <button type="submit" value="submit">Log In</button>
-    </div>
+<form class="patient_login" method="POST">
+        <input type="text" placeholder="Change password..." name="password" required></input>
+        <input type="submit"  value="Click to Submit!"></input> 
+    </form>
 </form>
 
 {{#each flash}}
-<p class="alert">{{this}}</p>
+    <p class="alert" style="text-align: center">{{this.msg}} </p>
 {{/each}}

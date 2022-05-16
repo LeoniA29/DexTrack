@@ -1,11 +1,13 @@
 {{!< patientLayout}}
+{{!  }}
+{{! displays today's date information and patient's first name }}
 
-{{! displays today's date information and patient's first name}}
 <div class="dashboardInformation">
+    {{! Day, Date, Month, Year }}
     <h2 id="date">
         {{date.[0].value}}, {{date.[2].value}} {{date.[4].value}} {{date.[6].value}}
     </h2>
-    <h1 id ="welcome">Hi, {{patient.first_name}}</h1>
+    <h1 id ="welcome">Hi, {{patient.first_name}} </h1>
 
     <h1 id ="welcome">
         ES: {{score}}
@@ -14,6 +16,12 @@
     {{#if (getBadge score)}}
         <h2 id="date">Display Badge Here</h2>
     {{/if}}
+
+    <h2 id="date">
+        {{#with (checkNote note)}}
+            {{this}}
+        {{/with}}
+    </h2>
 </div>
     
 

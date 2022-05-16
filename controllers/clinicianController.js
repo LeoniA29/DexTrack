@@ -1,5 +1,5 @@
 const Clinician = require('../models/clinician')
-const {Patient, Data, DataSet, Threshold} = require('../models/patient')
+const {Patient, DataSet, Threshold, Clinician_Note} = require('../models/patient')
 
 const ObjectId = require('mongodb').ObjectId
 
@@ -117,19 +117,24 @@ const insertPatient= async (req, res) => {
 
     // saves patient into mongoDB
     const newPatient = new Patient(req.body)
-    
-    const glucose_th = new Threshold({type: "glucose"});
-    const steps_th = new Threshold({type: "steps"}); 
-    const weight_th = new Threshold({type: "weight"}); 
-    const insulin_th = new Threshold({type: "insulin"});
-    
-    newPatient.threshold_list.splice(0, 0, glucose_th,steps_th,weight_th, insulin_th)
+
     const customUsername = (newPatient.first_name.slice(0, 3) + newPatient.last_name.slice(0, 3))
-    newPatient.username += customUsername
+    newPatient.username = customUsername
 
     const dobDate = newPatient.dob.getDate()
     const dobMonth = newPatient.dob.getMonth()
     newPatient.screen_name = (customUsername + dobDate + dobMonth) 
+    newPatient.password = "info35"
+
+    const glucose_th = new Threshold({type: "glucose"});
+    const steps_th = new Threshold({type: "steps"}); 
+    const weight_th = new Threshold({type: "weight"}); 
+    const insulin_th = new Threshold({type: "insulin"});
+
+    newPatient.clinician_message = new Clinician_Note();
+    
+    newPatient.threshold_list.splice(0, 0, glucose_th,steps_th,weight_th, insulin_th)
+    
 
     // pushes patient into clinician's patient list in mongoDB
     Clinician.findByIdAndUpdate(req.user._id,

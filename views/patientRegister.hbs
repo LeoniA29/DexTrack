@@ -8,10 +8,10 @@
 
 <h3>Create an account</h3>
 
-    <input type="text" placeholder="Given name" name="first_name" style="Width:200px" />
-    <input type="text" placeholder="Family name" name="last_name"  style="Width:200px" />
+    <input type="text" placeholder="Given name" name="first_name" style="Width:200px" required/>
+    <input type="text" placeholder="Family name" name="last_name"  style="Width:200px" required/>
     <br><br>
-    <input type="text" placeholder="Email address" name="email" style="Width:300px"/>
+    <input type="text" placeholder="Email address" name="email" style="Width:300px" required/>
 
 <h3>Personal Details</h3>
 
@@ -20,16 +20,13 @@
       <option>Male</option>
       <option>Prefer not to say</option>
     </select>
-    <input type="date" placeholder="Date of Birth" name="dob" />
-    <input type="text" placeholder="Phone number" name="phone" />
+    <input type="date" placeholder="Date of Birth" name="dob" required/>
+    <input type="text" placeholder="Phone number" name="phone" required/>
     <br><br>
-    <input type="text" placeholder="Occupation" name="occupation" style="Width:200px" />
-    <input type="text" placeholder="Address" name="address" style="Width:300px"/>
-    <input type="text" placeholder="Postcode" name="postcode" />
-
-    <input type="hidden" name="username"/>
-    <input type="hidden" name="password" value="info35"/>
-
+    <input type="text" placeholder="Occupation" name="occupation" style="Width:200px" required/>
+    <input type="text" placeholder="Address" name="address" style="Width:300px" required/>
+    <input type="text" placeholder="Postcode" name="postcode" required/>
+  
     <input type="submit" />
 
 </form>

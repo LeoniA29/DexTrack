@@ -1,11 +1,10 @@
 const mongoose = require('mongoose') // import mongoose 
 const bcrypt = require('bcryptjs') // import bcrypt
 
-
 // schema for notes
-const note = new mongoose.Schema({
-   note_content: String,
-   note_date: Date
+const clinician_note = new mongoose.Schema({
+   note_content: {type: String, default: " ", required: true},
+   note_date: {type: Date, default: new Date(), requried: true}
 });
 
 // schema for threshold
@@ -36,15 +35,14 @@ const data_set = new mongoose.Schema({
 
 // schema for patient patient collection 
 const patientSchema = new mongoose.Schema({
-   username: {type: String, unique: true, required: true},
-   password: {type: String, required: true}, 
-   secret: {type: String, default: 'INFO30005'},
-   screen_name: {type: String, unique: true, required: true},
-   score: {type: Number, default: 0},
-
    first_name: {type: String, required: true},
    last_name: {type: String, required: true},
-   role: {type: String, default: 'patient'},
+   username: {type: String, unique: true, required: true},
+   screen_name: {type: String, unique: true, required: true},
+   password: {type: String, required: true}, 
+   secret: {type: String, default: 'INFO30005'},
+   score: {type: Number, default: 0},
+   role: {type: String, default: 'patient', required: true},
    email: {type: String, required: true},
    sex: { type: String, enum: ['Female','Male','Prefer not to answer'], default: 'Prefer not to answer'},
    dob: {type: Date, required: true},
@@ -52,9 +50,9 @@ const patientSchema = new mongoose.Schema({
    occupation: {type: String, required: true},
    address: {type: String, required: true},
    postcode: {type: String, required: true},
+   short_bio: {type: String, default: "Tell us a bit about yourself!"},
 
-   clinician_message: String, // this is unique from the clinician to each patient
-   clincian_notes: [note], // array of objects for the patient defined in the schema below
+   clinician_message: clinician_note,// this is unique from the clinician to each patient
    threshold_list: [threshold], // array of thresholds objects
    input_data: [data_set] // array of data_set objects
   })
@@ -91,5 +89,6 @@ const Data = mongoose.model('Data', data)
 const DataSet = mongoose.model('DataSet', data_set)
 const Threshold = mongoose.model('Threshold', threshold)
 const Patient = mongoose.model('Patient', patientSchema)
+const Clinician_Note = mongoose.model('Clinician_Note', clinician_note)
 
-module.exports = {Patient, DataSet, Data, Threshold}
+module.exports = {Patient, DataSet, Data, Threshold, Clinician_Note}

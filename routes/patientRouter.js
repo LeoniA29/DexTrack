@@ -1,92 +1,96 @@
-const express = require('express')
-const passport = require('../passport')
-const app = express()
+// libraries imported
+const express = require('express') // for express-validator
+const passport = require('../passport') // for passport and session
+const {body} = require('express-validator') // for express-validator
 
-
-// create our Router object
+// create Router object
 const patientRouter = express.Router()
-
-// add Express-Validator
-const {body} = require('express-validator')
 
 // import patient controller functions
 const patientController = require('../controllers/patientController')
 
 // Passport Authentication middleware
 const isAuthenticated = (req, res, next) => {
-    // If user is not authenticated via Passport, redirect to login page
+    // patient not authenticated, redirect to patient login page
     if (!req.isAuthenticated()) {
         return res.redirect('/patient/login')
     }
-    // Otherwise, proceed to next middleware function
+    // if successful, proceed to dashboard in controller
     return next()
 }
 
-// set up role-based authentication
+// Patient role-based authentication
 const hasRole = (thisRole) => {
     return (req, res, next) => {
+        // user is a patient
         if (req.user.role == thisRole) 
             return next()
         else {
+        // not a patient
             res.redirect('/patient/login')
         }
     }    
 }
 
-// patient routes used
+// Routes used by Patient
 patientRouter.get('/login', patientController.getPatientLoginPage)
-patientRouter.post('/login', passport.authenticate('local', {
-    successRedirect: '/patient/dashboard', failureRedirect: '/patient/login', failureFlash: true
-    }))
-// patientRouter.post('/logout', patientController.patientLogout)
+patientRouter.post('/login', passport.authenticate('local', 
+    {successRedirect: '/patient/dashboard', failureRedirect: '/patient/login', failureFlash: true}))
+
+patientRouter.get('/dashboard', isAuthenticated, hasRole('patient'), patientController.getPatientDashboard)
 patientRouter.post('/dashboard', patientController.patientLogout)
-
-
-patientRouter.get('/dashboard', isAuthenticated, hasRole('patient'), patientController.getPatientById)
 
 patientRouter.get('/insertGlucose', isAuthenticated, hasRole('patient'), patientController.getGlucosePage)
 patientRouter.post('/insertGlucose', isAuthenticated, 
 
-    body('data_entry', 'glucose entry must be valid').isNumeric().escape(), 
-    body('data_comment', 'comment must be valid').isLength({max:260}).escape(),
+    body('data_entry', 'Glucose data cannot be negative').isFloat({min: 0}).escape(), // glucose data must numeric and not negative
+    body('data_comment', 'Comment cannot exceed 260 characters').isLength({max: 250}).escape(), // comment can't exceed 250 characters
 
     patientController.insertPatientData)
 
 patientRouter.get('/insertInsulin', isAuthenticated, hasRole('patient'), patientController.getInsulinPage)
 patientRouter.post('/insertInsulin', isAuthenticated, 
 
-    body('data_entry', 'insulin entry must be valid').isNumeric().escape(), 
-    body('data_comment', 'comment must be valid').isLength({max:260}).escape(),   
+    body('data_entry', 'Insulin data cannot be negative').isFloat({min: 0}).escape(), // insulin data must numeric and not negative
+    body('data_comment', 'Comment cannot exceed 260 characters').isLength({max: 250}).escape(), // comment can't exceed 250 characters 
 
     patientController.insertPatientData)
 
 patientRouter.get('/insertSteps', isAuthenticated, hasRole('patient'), patientController.getStepsPage)
 patientRouter.post('/insertSteps', isAuthenticated, 
 
-    body('data_entry', 'insulin entry must be valid').isNumeric().escape(), 
-    body('data_comment', 'comment must be valid').isLength({max:260}).escape(),   
+    body('data_entry', 'Steps data cannot be negative').isFloat({min: 0}).escape(), // steps data must numeric and not negative
+    body('data_comment', 'Comment cannot exceed 260 characters').isLength({max: 250}).escape(), // comment can't exceed 250 characters   
 
     patientController.insertPatientData)
 
 patientRouter.get('/insertWeight', isAuthenticated, hasRole('patient'), patientController.getWeightPage)
 patientRouter.post('/insertWeight', isAuthenticated, 
 
-    body('data_entry', 'weight entry must be valid').isNumeric().escape(), 
-    body('data_comment', 'comment must be valid').isString().isLength({max:260}).escape(),  
+    body('data_entry', 'Weight data cannot be negative').isFloat({min: 0}).escape(), // Weight data must numeric and not negative
+    body('data_comment', 'Comment cannot exceed 260 characters').isLength({max: 250}).escape(), // comment can't exceed 250 characters   
 
     patientController.insertPatientData)
 
 patientRouter.get('/log', isAuthenticated, hasRole('patient'), patientController.getPatientLog)
 
+patientRouter.get('/leaderboard', isAuthenticated, hasRole('patient'), patientController.getLeaderboard)
+
 patientRouter.get('/profile', isAuthenticated, hasRole('patient'), patientController.getPatientProfile)
 patientRouter.post('/profile', isAuthenticated, 
 
-    body('screen_name', 'screen name must not be empty').isAlphanumeric().escape(),
-    body('password', 'password must not be empty').isStrongPassword().escape(),
+    body('short_bio', 'Short bio is too long, please shorten it!').isLength({max: 250}).escape(), // short bio must not exceed 250 characters
+
     patientController.updateProfile)
 
-patientRouter.get('/leaderboard', isAuthenticated, hasRole('patient'), patientController.getLeaderboard)
+patientRouter.get('/change-password', isAuthenticated, hasRole('patient'), patientController.getPassPage)
+patientRouter.post('/change-password', isAuthenticated, 
+
+    body('password', 'Password is not strong enough').isStrongPassword().escape(), // password must be strong   
+    
+    patientController.updatePass)
 
 patientRouter.get('/404', isAuthenticated, hasRole('patient'), patientController.getErrorPage)
+
 // export the router
 module.exports = patientRouter

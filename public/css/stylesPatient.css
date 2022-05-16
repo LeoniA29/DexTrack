@@ -12,6 +12,86 @@ main, section, aside{
     color: #ffffff;
 }
 
+/* navigation bar */
+
+img[id="nav_logo"] {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: auto;
+    height: 60px;
+    z-index: 2;
+    padding: 20px;
+    margin-left: 20px;
+}
+
+
+.nav_bar, .nav_pages {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+}
+
+.nav_pages {
+    list-style: none;
+}
+
+.nav_pages li, .nav_pages button { 
+    font-weight: 600;
+    font-size: 20px;
+    padding: 0 1.5em;
+}
+
+.nav_pages li a {
+    transition: all 0.5s ease 0s;
+}
+
+.nav_bar button {
+    background-color:#2C68AD;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.5s ease 0s;
+    color: #FFFFFF;
+    font-size: 20px;
+}
+
+.nav_bar a#pull, .menu1 {
+    display: none;
+}
+
+
+.nav_bar button:hover {
+    background-color:#FB6E59;
+}
+
+button:hover {
+    background-color:#2C68AD;
+}
+
+.nav_pages li a:hover {
+    color: #2C68AD;
+}
+
+li, a, button {
+    font-family: Lexend Deca;
+    color: black;
+    text-decoration: none;
+}
+
+
+.patient_login {
+    margin: 10vh 0;
+    text-align: center;
+}
+
+.patient_login button {
+    margin-top: 20px;
+}
+
+
 h1, h2 {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -288,6 +368,8 @@ img[id="logo"] {
 }
 
 @media (min-width: 1024px) {
+
+
 	.logContainer {
 		flex-direction: row;
 	}
@@ -352,6 +434,8 @@ label {
 
 
 @media screen and (min-width: 1024px) {
+
+    
     .inputDataContainer {
         display: flex;
     }
@@ -374,6 +458,21 @@ label {
 
   
 @media screen and (max-width: 1024px) {
+
+    .nav_pages {
+        position: absolute;
+        right: -100%;
+        padding-left: 0;
+        background-color: #fff;
+        width: 100%;
+        border-radius: 10px;
+        transition: 0.3s;
+    }
+    
+    .nav_pages li {
+        display: none;
+    }
+        
     .main {
         margin-top: 50px;
         margin-left: 0px;

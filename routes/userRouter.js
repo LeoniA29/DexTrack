@@ -1,3 +1,4 @@
+// libraries imported
 const express = require('express')
 
 // create our Router object
@@ -7,29 +8,29 @@ const userRouter = express.Router()
 const userController = require('../controllers/userController')
 
 // Passport Authentication middleware
-const isLoggedIn1 = (req, res, next) => {
-    // If user is not authenticated via Passport, redirect to login page
+const isLoggedDiabetes = (req, res, next) => {
+    // If user is not logged in, redirect to About-Diabetes page
     if (!req.isAuthenticated()) {
         return res.render('aboutDiabetes', {logged: false})
     }
-    // Otherwise, proceed to next middleware function
+    // Otherwise, go to dashboard
     return next()
 }
 
 // Passport Authentication middleware
-const isLoggedIn2 = (req, res, next) => {
-    // If user is not authenticated via Passport, redirect to login page
+const isLoggedDextrack = (req, res, next) => {
+    // If user is not logged in, redirect to About-Dextrack page
     if (!req.isAuthenticated()) {
         return res.render('aboutDexTrack', {logged: false})
     }
-    // Otherwise, proceed to next middleware function
+    // Otherwise, go to dashboard
     return next()
 }
 
-userRouter.get('/about-diabetes', isLoggedIn1, userController.getAboutDiabetes)
-userRouter.get('/about-dextrack', isLoggedIn2, userController.getAboutDexTrack)
-
+userRouter.get('/about-diabetes', isLoggedDiabetes, userController.getAboutDiabetes)
 userRouter.post('/about-diabetes', userController.userLogout)
+
+userRouter.get('/about-dextrack', isLoggedDextrack, userController.getAboutDexTrack)
 userRouter.post('/about-dextrack', userController.userLogout)
 
 userRouter.get('/', userController.getIndex)
