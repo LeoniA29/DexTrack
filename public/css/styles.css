@@ -496,6 +496,7 @@ span.attribute {
 #message.segment {
     background-color: var(--blue-container);
     padding: 50px;
+    height: fit-content;
 }
 
 .prev-msg {
@@ -554,6 +555,13 @@ span.attribute {
 
 .clinician-notes #notes {
     border-width: 0;
+}
+
+
+/* clinician notes form */
+
+#message.segment #notes {
+    margin-top: 20px;
 }
 
 
