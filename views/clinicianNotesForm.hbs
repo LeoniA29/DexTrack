@@ -1,0 +1,37 @@
+<!-- Navigation bar at top of webpage -->
+<div class="navbar">
+    <div class="dropdown">
+        <button class="dropbtn">Dr. Alice Brown <img src="/chevron-down.png"></button>
+        <div class="dropdown-content">
+            <a href="#">Patient comments</a>
+            <form>
+                <button id="sign-out">Sign out</button>
+            </form>
+        </div>
+    </div>
+    <div class="icons">
+        <a href="#"><img src="/house-solid.svg" id="icon" class="change-color"></a>
+        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
+        <a><img src="/Line.png" id="nav-line"></a>
+        <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
+    </div>
+</div>
+
+
+<ul class="breadcrumb">
+  <li><a href="#">Patient list</a></li>
+  <li><a href="#">Ana Sergawa</a></li>
+  <li><a href="#">Clinician Notes</a></li>
+  <li>New Note</li>
+</ul>
+
+<div class="sections">
+    
+     <!-- Each section corresponds to each segment of the patient information in the webpage -->
+    <section class="segment clinician-form" id="message">
+        <span class="attribute">Day/date</span><br><strong>Monday, 16 May 2022</strong><br>
+        <textarea id="notes" type="text" placeholder="New note here." rows="5"></textarea>
+        <button class="orange-button" id="send"><a href="#">Save</a></button>
+     </section>
+
+</div>
