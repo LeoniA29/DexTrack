@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs')
 const clinicianSchema = new mongoose.Schema({
     first_name: {type: String},
     last_name: {type: String},
-    username: {type: String},
+    email: {type: String},
     password: {type: String},
     secret: {type: String, default: "INFO30005"},
     role: {type: String, default: "clinician"},

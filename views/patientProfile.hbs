@@ -13,12 +13,11 @@
     <div class="profile" style="color:black">
     <p>Given Name: {{first_name}}</p>
     <p>Family Name: {{last_name}}</p>
-    <p>Username: {{username}}</p>
+    <p>Email: {{email}}</p>
     <p>Screen Name: {{screen_name}}</p>
     {{#with (showDate dob)}}
         <p>DOB: {{this.[2].value}} {{this.[4].value}} {{this.[6].value}} </p>
     {{/with}}
-    <p>Email: {{email}}</p>
     <p>Profession: {{occupation}}</p>
     <p>Address: {{address}} VIC {{postcode}}</p>
     <p>Contact Number: {{phone}}</p>

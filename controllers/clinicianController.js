@@ -80,9 +80,9 @@ const getClinicianById = async(req, res, next) => {
 // this is for testing, once login feature enabled, it will not be necessary
 const insertClinician= async (req, res) => {
     var newData = new Clinician(req.body)
+    newData.password = "info35"
     /* use validation in-between */
-    const customUsername = (newData.first_name.slice(0, 3) + newData.last_name.slice(0, 3))
-    newData.username += customUsername
+
     await newData.save()    
     return res.redirect('back')
 }
@@ -118,8 +118,7 @@ const insertPatient= async (req, res) => {
     // saves patient into mongoDB
     const newPatient = new Patient(req.body)
 
-    const customUsername = (newPatient.first_name.slice(0, 3) + newPatient.last_name.slice(0, 3))
-    newPatient.username = customUsername
+    const customUsername = (newPatient.first_name.toLowerCase().slice(0, 3) + newPatient.last_name.toLowerCase().slice(0, 3))
 
     const dobDate = newPatient.dob.getDate()
     const dobMonth = newPatient.dob.getMonth()

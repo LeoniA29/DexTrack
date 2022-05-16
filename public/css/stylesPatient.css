@@ -267,7 +267,7 @@ img[id="logo"] {
 	width: 350px;
 	height: auto;
     margin: auto;
-    margin-top: 50px;
+    margin-top: -50px;
 }
 
 .leaderboardTop {
