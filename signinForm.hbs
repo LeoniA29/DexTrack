@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="sign-in-styles.css">
+</head>
+<body>
+    <main>
+        <img src="clouds-02.png" class="cloud-bg">
+        <section class="sign-in">
+        <h4>Sign in</h4>
+        <br><br>
+            <div class="row">
+                <div class="container">
+                    <form action="/home/clinician/signin" method="POST">
+
+                    <div class="col-50">
+                        <div class="email-user">
+                            <label for="emailUser">Email</label>
+                            <input type="text" placeholder="Email" name="emailUser"/>
+                        </div>
+                        <div class="passwords">
+                            <label for="passwords">Password</label>
+                            <input type="password" placeholder="Password" name="password"/>
+                        </div>
+                    </div>
+                    <input href="#" type="button" value="Forgot Password?" class="forgot-pass">
+                    <input href="#" type="submit" value="Log in" class="submit-btn">
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main> 
+</body>
+</html>
