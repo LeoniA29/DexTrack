@@ -2,10 +2,17 @@ const mongoose = require('mongoose') // import mongoose
 const bcrypt = require('bcryptjs') // import bcrypt
 
 // schema for notes
-const clinician_note = new mongoose.Schema({
+const clinician_message = new mongoose.Schema({
    note_content: {type: String, default: " ", required: true},
    note_date: {type: Date, default: new Date(), requried: true}
 });
+
+// schema for notes
+const note = new mongoose.Schema({
+   note_content: {type: String},
+   note_date: {type: Date, default: new Date(), required: true}
+});
+
 
 // schema for threshold
 const threshold = new mongoose.Schema({
@@ -51,7 +58,8 @@ const patientSchema = new mongoose.Schema({
    postcode: {type: String, required: true},
    short_bio: {type: String, default: "Tell us a bit about yourself!"},
 
-   clinician_message: clinician_note,// this is unique from the clinician to each patient
+   clinician_message: clinician_message, // this is unique from the clinician to each patient
+   clinician_notes: [note], // array of clinician notes unique to each patient
    threshold_list: [threshold], // array of thresholds objects
    input_data: [data_set] // array of data_set objects
   })
@@ -85,9 +93,10 @@ patientSchema.pre('save', function save(next) {
 })
 
 const Data = mongoose.model('Data', data)
+const Note = mongoose.model('Note', note)
 const DataSet = mongoose.model('DataSet', data_set)
 const Threshold = mongoose.model('Threshold', threshold)
 const Patient = mongoose.model('Patient', patientSchema)
-const Clinician_Note = mongoose.model('Clinician_Note', clinician_note)
+const Message = mongoose.model('Message', clinician_message)
 
-module.exports = {Patient, DataSet, Data, Threshold, Clinician_Note}
+module.exports = {Patient, DataSet, Data, Threshold, Note, Message}
