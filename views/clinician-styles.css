@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* Headings */
+h1 {
+    font-family: 'Lexend Deca', sans-serif;;
+    font-weight: 300;
+    size: 50pt;
+    color: #2D68AD;
+}
+
+h2 {
+    font-family: 'Lexend Deca', sans-serif;;
+    font-weight: 300;
+    size: 32pt;
+    color: #2D68AD;
+    margin-left: 50px;
+}
+
+/* Patient forms */
+/* [on wide screen] */
+.container {
+    background-color: #F2F2F2;
+    padding: 20px;
+    border: none;
+    border-radius: 30px;
+    width: 1000px;
+    margin: 20px 80px 20px 80px;
+}
+  
+h3 {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 300;
+    size: 32pt;
+    color: #2D68AD; 
+}
+  
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+  
+input[type=text], [type=date], [type=password] {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 15px;
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    text-align: left;
+    color: black;
+}
+  
+.row label {
+    font-family: 'Lexend Deca', sans-serif;
+    font-size: 24;
+    font-weight: 200;
+    font-style: normal;
+    text-align: left;
+    color: #000000;
+    margin-bottom: 10px;
+    display: block
+}
+  
+.col-50 {
+    -ms-flex: 50%;
+    flex: 50%;
+    padding: 0 50px;
+}
+  
+input {
+    margin-right: 10px;
+}
+  
+.email input {
+    width: 200px;
+}
+  
+.fname, .lname {
+    display: inline-block
+}
+
+.sex, .dob, .phone, .mstate {
+	display: inline-block
+}
+
+.occupation, .address, .postcode {
+	display: inline-block
+}
+
+.required label {
+	display: inline;
+}
+
+.required {
+    background-color: #FFFFFF;
+    padding: 10px;
+    border: none;
+    border-radius: 30px;
+}
+
+.up-low-bound {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border: none;
+    border-radius: 30px;
+    width: 170px;
+}
+
+/* Not working */
+.up-low-bound #blood {
+    border: 2px #E13D45;
+}
+
+.up-low-bound #weight {
+    border: 2px #6F62D0;
+}
+
+.up-low-bound #insulin {
+    border: 2px #FF9D47;
+}
+
+.up-low-bound #exercise {
+    border: 2px #55B48B;
+}
+
+.col-50 #blood, #weight, #insulin, #exercise {
+	display: inline-block;
+}
+
+#blood h3 {
+	color: #E13D45;
+}
+
+#weight h3 {
+    color: #6F62D0;
+}
+    
+#insulin h3 {
+    color: #FF9D47;
+}
+    
+#exercise h3 {
+    color: #55B48B;   
+} 
+
+.submit-btn {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    background-color: #FB6E5A;
+    color: #FFFFFF;
+    padding: 10px 15px 10px 15px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-left: 750px;
+    margin-bottom: 20px;
+}
+    
+.submit-btn:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* [on small screen] */
+@media (max-width: 600px) {
+    .row {
+        flex-direction: column-reverse;
+    }
+}
