@@ -84,10 +84,24 @@ input[type=text], [type=date], [type=password] {
     margin-bottom: 20px;
 }
     
-.submit-btn:hover {
+.submit-btn:hover, .cancel-btn:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
+.cancel-btn {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    background-color: #2D68AD;
+    color: #FFFFFF;
+    padding: 10px 15px 10px 15px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+    
 /* [on small screen] */
 @media (max-width: 600px) {
     .row {

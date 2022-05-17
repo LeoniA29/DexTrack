@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Threshold</title>
+    <link rel="stylesheet" href="clinician-styles.css">
+</head>
+<body>
+    <header> 
+        <!-- Navigation bar at top of webpage -->
+        <div class="navbar">
+            <div class="dropdown">
+                <button class="dropbtn">Dr. Alice Brown <img src="/chevron-down.png"></i></button>
+                <div class="dropdown-content">
+                    <a href="#">Sign out</a>
+                </div>
+            </div>
+            <div class="icons">
+                <a class="active" href="#"><img src="/house-solid.svg" width="28" height="28" class="change-color"></a>
+                <a href="#"><img src="/circle-half-stroke-solid.svg" width="28" height="28" class="change-color"></a>
+                <a><img src="/Line.png" height="28"></i></a>
+                <a href="#"><img src="/circle-user-regular.svg" width="28" height="28" class="change-color"></a>
+            </div>
+        </div>
+    </header>   
+
+    <main>
+        <h2>Set Threshold</h2>
+        <div class="row">
+            <div class="container">
+                <form action="/home/patient/register" method="POST">
+
+                <div class="col-50" id="blood">
+                    <h3>Blood glucose level</h3>
+                        <div class="up-low-bound" id="blood">
+                            <label for="upper">Upper bound</label>
+                            <input type="text" placeholder=" mol/L" name="upBlood"/>
+                            <label for="lower">Lower bound</label>
+                            <input type="text" placeholder=" mol/L" name="lowBlood"/>
+                            <br><br>
+                            <div class="required">
+                                <label for="required">Set as required</label>
+                                <input type="checkbox" placeholder="Set as required" name="required"/>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-50" id="weight">
+                    <h3>Weight</h3>
+                        <div class="up-low-bound" id="weight">
+                            <label for="upper">Upper bound</label>
+                            <input type="text" placeholder=" kg" name="upWeight"/>
+                            <label for="lower">Lower bound</label>
+                            <input type="text" placeholder=" kg" name="lowWeight"/>
+                            <br><br>
+                            <div class="required">
+                                <label for="required">Set as required</label>
+                                <input type="checkbox" placeholder="Set as required" name="required"/>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-50" id="insulin">
+                    <h3>Dose of insulin</h3>
+                        <div class="up-low-bound" id="insulin">
+                            <label for="upper">Upper bound</label>
+                            <input type="text" placeholder=" dose" name="upInsulin"/>
+                            <label for="lower">Lower bound</label>
+                            <input type="text" placeholder=" dose" name="lowInsulin"/>
+                            <br><br>
+                            <div class="required">
+                                <label for="required">Set as required</label>
+                                <input type="checkbox" placeholder="Set as required" name="required"/>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-50" id="exercise">
+                    <h3>Exercise</h3>
+                        <div class="up-low-bound" id="exercise">
+                            <label for="upper">Upper bound</label>
+                            <input type="text" placeholder=" steps" name="upExercise"/>
+                            <label for="lower">Lower bound</label>
+                            <input type="text" placeholder=" steps" name="lowExercise"/>
+                            <br><br>
+                            <div class="required">
+                                <label for="required">Set as required</label>
+                                <input type="checkbox" placeholder="Set as required" name="required"/>
+                            </div>
+                        </div>
+                </div>
+                
+                <input href="#" type="submit" value="Submit" class="submit-btn">
+                </form>
+            </div>
+        </div>
+    </main> 
+</body>
+</html>
