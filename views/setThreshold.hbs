@@ -30,11 +30,9 @@
         <h2>Set Threshold</h2>
         <div class="row">
             <div class="container">
-                <form action="/home/patient/register" method="POST">
-
                 <div class="col-50" id="blood">
                     <h3>Blood glucose level</h3>
-                        <div class="up-low-bound" id="blood">
+                        <div class="up-low-bound" id="bloodLevel">
                             <label for="upper">Upper bound</label>
                             <input type="text" placeholder=" mol/L" name="upBlood"/>
                             <label for="lower">Lower bound</label>
@@ -48,7 +46,7 @@
                 </div>
                 <div class="col-50" id="weight">
                     <h3>Weight</h3>
-                        <div class="up-low-bound" id="weight">
+                        <div class="up-low-bound" id="weightLevel">
                             <label for="upper">Upper bound</label>
                             <input type="text" placeholder=" kg" name="upWeight"/>
                             <label for="lower">Lower bound</label>
@@ -62,7 +60,7 @@
                 </div>
                 <div class="col-50" id="insulin">
                     <h3>Dose of insulin</h3>
-                        <div class="up-low-bound" id="insulin">
+                        <div class="up-low-bound" id="insulinLevel">
                             <label for="upper">Upper bound</label>
                             <input type="text" placeholder=" dose" name="upInsulin"/>
                             <label for="lower">Lower bound</label>
@@ -76,7 +74,7 @@
                 </div>
                 <div class="col-50" id="exercise">
                     <h3>Exercise</h3>
-                        <div class="up-low-bound" id="exercise">
+                        <div class="up-low-bound" id="exerciseLevel">
                             <label for="upper">Upper bound</label>
                             <input type="text" placeholder=" steps" name="upExercise"/>
                             <label for="lower">Lower bound</label>
@@ -90,7 +88,6 @@
                 </div>
                 
                 <input href="#" type="submit" value="Submit" class="submit-btn">
-                </form>
             </div>
         </div>
     </main> 
