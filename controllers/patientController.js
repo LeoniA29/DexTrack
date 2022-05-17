@@ -229,7 +229,7 @@ const insertPatientData= async(req, res) => {
         
         // create new Data object
         var newData = new Data(req.body)
-        newData.data_comment = he.unescape(req.body.data_comment)
+        // newData.data_comment = he.unescape(req.body.data_comment)
         newData.data_date = new Date()
 
         // detect input errors 

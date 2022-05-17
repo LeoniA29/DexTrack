@@ -40,6 +40,5 @@ clinicianSchema.methods.verifyPassword = function (password, callback) {
      })
  })
 
-
 const Clinician = mongoose.model('Clinician', clinicianSchema)
 module.exports = Clinician

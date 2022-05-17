@@ -165,6 +165,10 @@ h1, h2 {
     color:#ff9d47;
 }
 
+.alert {
+    color: black;
+    text-align: center;
+}
 
 footer {
     color: #FFFFFF;

@@ -1,5 +1,5 @@
 const Clinician = require('../models/clinician')
-const {Patient, DataSet, Threshold, Clinician_Note} = require('../models/patient')
+const {Patient, DataSet, Threshold, Message} = require('../models/patient')
 
 const ObjectId = require('mongodb').ObjectId
 
@@ -130,7 +130,7 @@ const insertPatient= async (req, res) => {
     const weight_th = new Threshold({type: "weight"}); 
     const insulin_th = new Threshold({type: "insulin"});
 
-    newPatient.clinician_message = new Clinician_Note();
+    newPatient.clinician_message = new Message();
     
     newPatient.threshold_list.splice(0, 0, glucose_th,steps_th,weight_th, insulin_th)
     
