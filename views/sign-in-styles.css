@@ -13,6 +13,14 @@ h4 {
     text-align: center;
 }
 
+h5 {
+    font-family: 'Lexend Deca', sans-serif;;
+    font-weight: 400;
+    size: 36pt;
+    color: #000000;
+    text-align: center;
+}
+
 .forgot-pass {
     font-family: 'Lexend Deca', sans-serif;
     font-weight: 400;
@@ -101,6 +109,14 @@ input[type=text], [type=date], [type=password] {
     cursor: pointer;
     margin-bottom: 20px;
 }
+
+.as-patient img, .as-clinician img {
+    width: 200px;
+    background-color: #FFFFFF;
+    border-radius: ;
+}
+
+
     
 /* [on small screen] */
 @media (max-width: 600px) {
