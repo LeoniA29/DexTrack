@@ -53,8 +53,8 @@ const patientSchema = new mongoose.Schema({
    address: {type: String, required: true},
    postcode: {type: String, required: true},
 
-   clinician_message: String, // this is unique from the clinician to each patient
-   clincian_notes: [note], // array of objects for the patient defined in the schema below
+   clinician_message: {type: String, default: ''}, // this is unique from the clinician to each patient
+   clinician_notes: [note], // array of objects for the patient defined in the schema below
    threshold_list: [threshold], // array of thresholds objects
    input_data: [data_set] // array of data_set objects
   })
@@ -87,7 +87,7 @@ patientSchema.pre('save', function save(next) {
     })
 })
 
-const Note = mongoose.model('Patient', note)
+const Note = mongoose.model('Note', note)
 const Data = mongoose.model('Data', data)
 const DataSet = mongoose.model('DataSet', data_set)
 const Threshold = mongoose.model('Threshold', threshold)

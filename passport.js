@@ -5,13 +5,14 @@ const LocalStrategy = require('passport-local').Strategy
 const {Patient} = require('./models/patient')
 const Clinician = require('./models/clinician')
 
+
 passport.serializeUser((user, done) => {
     done(undefined, user._id)
     })
 
 passport.deserializeUser( async function (userId, done)  {
 
-    let user = await Clinician.findById(userId, { password: 0 })
+    let user = await Clinician.findById(userId, {password:0})
     
     if (user) {
         return done(undefined, user)
@@ -55,6 +56,7 @@ let localStrategy = new LocalStrategy(
         }
 
         else {
+            // console.log(user)
             // console.log("a clinician")
             user.verifyPassword(password, (err, valid) => {
                 /*

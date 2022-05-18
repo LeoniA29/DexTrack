@@ -60,7 +60,16 @@ clinicianRouter.post('/registerPatient', isAuthenticated,
     clinicianController.insertPatient)
 
 clinicianRouter.get('/patientComments', isAuthenticated, hasRole('clinician'), clinicianController.getPatientComments)
-clinicianRouter.post('/clinicianViewPatient', isAuthenticated, hasRole('clinician'), clinicianController.getClinicianPatient)
+clinicianRouter.get('/clinicianViewPatient', isAuthenticated, hasRole('clinician'), clinicianController.getClinicianPatient)
+clinicianRouter.post('/clinicianViewPatient', isAuthenticated, hasRole('clinician'), clinicianController.postClinicianPatient)
+
+clinicianRouter.get('/clinicianNotesPatient', isAuthenticated, hasRole('clinician'), clinicianController.getClinicianPatientNotes)
+clinicianRouter.get('/clinicianNotesPatientInput', isAuthenticated, hasRole('clinician'), clinicianController.getClinicianPatientNotesInput)
+clinicianRouter.post('/clinicianNotesPatientInput', isAuthenticated, hasRole('clinician'), clinicianController.postClinicianPatientNotesInput)
+
+clinicianRouter.get('/clinicianSupportPatient', isAuthenticated, hasRole('clinician'), clinicianController.getClinicianPatientSupport)
+clinicianRouter.post('/clinicianSupportPatient', isAuthenticated, hasRole('clinician'), clinicianController.postClinicianPatientSupport)
+
 
 // export the router
 module.exports = clinicianRouter

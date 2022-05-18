@@ -29,17 +29,19 @@
     <section class="patientList">
         <div class="sticky-bar">
             <button class="orange-button" onclick="location.href='/clinician/registerPatient'">Add New Patient</button>
-            <div class="blue-button" id="sort">
-                <button class="dropbtn">Sort by <img src="/chevron-down.png"></button>
-                <div class="sort-by">
-                    <a href="#">Name ascending</a>
-                    <a href="#">Name descending</a>
+            <form action="/clinician/searchPatient" method="POST">  
+                <div class="blue-button" id="sort">
+                    <button class="dropbtn">Sort by <img src="/chevron-down.png"></button>
+                    <div class="sort-by">
+                        <a href="#">Name ascending</a>
+                        <a href="#">Name descending</a>
+                    </div>
                 </div>
-            </div>
-            <div class="search-bar">
-                <label for="searchbar"><img src="/magnifying-glass-solid.svg" id="search-img" class="change-color"></label>
-                <input type="text" placeholder="Search" name="search">
-            </div>
+                <div class="search-bar">
+                    <label for="searchbar"><img src="/magnifying-glass-solid.svg" id="search-img" class="change-color"></label>
+                    <input type="text" placeholder="Search" name="search">
+                </div>
+            </form>  
         </div>
 
         <!-- Iterate through testData to correctly load patient list of clinician -->
