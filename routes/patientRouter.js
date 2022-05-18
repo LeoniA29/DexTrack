@@ -44,7 +44,7 @@ patientRouter.get('/insertGlucose', isAuthenticated, hasRole('patient'), patient
 patientRouter.post('/insertGlucose', isAuthenticated, 
 
     body('data_entry', 'invalid glucose data entered').isFloat({min: 0, max: 10000}).escape(), // glucose data must numeric, not negative and not too large
-    body('data_comment', 'comment cannot exceed 260 characters').isLength({max: 250}).blacklist('$<>&').escape(), // comment can't exceed 250 characters
+    body('data_comment', 'comment cannot exceed 260 characters').isLength({max: 250}).blacklist('$<>&{}'), // comment can't exceed 250 characters
 
     patientController.insertPatientData)
 
@@ -52,7 +52,7 @@ patientRouter.get('/insertInsulin', isAuthenticated, hasRole('patient'), patient
 patientRouter.post('/insertInsulin', isAuthenticated, 
 
     body('data_entry', 'invalid insulin glucose data entered').isFloat({min: 0, max: 10000}).escape(), // insulin data must numeric, not negative and not too large
-    body('data_comment', 'comment cannot exceed 260 characters').isLength({max: 250}).blacklist('$<>&').escape(), // comment can't exceed 250 characters
+    body('data_comment', 'comment cannot exceed 260 characters').isLength({max: 250}).blacklist('$<>&{}'), // comment can't exceed 250 characters
 
 
     patientController.insertPatientData)
@@ -61,7 +61,7 @@ patientRouter.get('/insertSteps', isAuthenticated, hasRole('patient'), patientCo
 patientRouter.post('/insertSteps', isAuthenticated, 
 
     body('data_entry', 'invalid steps data entered').isFloat({min: 0, max: 50000}).escape(), // steps data must be numeric, not negative and not too large
-    body('data_comment', 'comment cannot exceed 260 characters').isLength({max: 250}).blacklist('$<>&').escape(), // comment can't exceed 250 characters
+    body('data_comment', 'comment cannot exceed 260 characters').isLength({max: 250}).blacklist('$<>&{}'),// comment can't exceed 250 characters
 
 
     patientController.insertPatientData)
@@ -70,7 +70,7 @@ patientRouter.get('/insertWeight', isAuthenticated, hasRole('patient'), patientC
 patientRouter.post('/insertWeight', isAuthenticated, 
 
     body('data_entry', 'Weight data cannot be negative').isFloat({min: 0, max: 1000}).escape(), // Weight data must numeric and not negative
-    body('data_comment', 'Comment cannot exceed 260 characters').isLength({max: 250}).blacklist('$<>&').escape(), // comment can't exceed 250 characters   
+    body('data_comment', 'Comment cannot exceed 260 characters').isLength({max: 250}).blacklist('$<>&{}'), // comment can't exceed 250 characters   
 
     patientController.insertPatientData)
 
@@ -88,7 +88,7 @@ patientRouter.post('/profile', isAuthenticated,
 patientRouter.get('/change-password', isAuthenticated, hasRole('patient'), patientController.getPassPage)
 patientRouter.post('/change-password', isAuthenticated, 
 
-    body('password', 'Password is not strong enough').isStrongPassword().escape(), // password must be strong   
+    body('password', 'Password is not strong enough').isStrongPassword(), // password must be strong   
     
     patientController.updatePass)
 

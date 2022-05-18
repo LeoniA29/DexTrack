@@ -48,14 +48,14 @@ clinicianRouter.get('/registerPatient', isAuthenticated, hasRole('clinician'), c
 
 clinicianRouter.post('/registerPatient', isAuthenticated,
 
-    body('first_name', ' first name must be valid').not().isEmpty().isAlpha().escape(), 
-    body('last_name', 'last name must be valid').not().isEmpty().isAlpha().escape(), 
-    body('email', 'email must be valid').not().isEmpty().isEmail().escape(), 
-    body('dob', 'date of birth must be valid').not().isEmpty().isDate().escape(),
-    body('occupation', 'occupation must be valid').not().isEmpty().isString().escape(), 
-    body('address', 'address must be valid').not().isEmpty().isString().escape(),
-    body('postcode', 'postcode must be valid and at-least 4 digits').not().isEmpty().isNumeric().isLength({min:4}).escape(),  
-    body('phone', 'phone number must be valid').not().isEmpty().isNumeric().escape(),
+    body('first_name', ' first name must be valid').isAlpha().escape(), 
+    body('last_name', 'last name must be valid').isAlpha().escape(), 
+    body('email', 'email must be valid').isEmail().escape(), 
+    body('dob', 'date of birth must be valid').isDate().escape(),
+    body('occupation', 'occupation must be valid').isAlpha().escape(), 
+    body('address', 'address must be valid').blacklist('$<>&{}'),
+    body('postcode', 'postcode must be valid and at-least 4 digits').isNumeric().isLength({min:4}).escape(),  
+    body('phone', 'phone number must be valid').isMobilePhone(),
     
     clinicianController.insertPatient)
 
