@@ -132,7 +132,7 @@ const insertPatient= async (req, res) => {
             }
         }
     )
-    
+
     await newPatient.save()
 
     // redirects back to clinician home page
