@@ -43,24 +43,26 @@ patientRouter.post('/dashboard', patientController.patientLogout)
 patientRouter.get('/insertGlucose', isAuthenticated, hasRole('patient'), patientController.getGlucosePage)
 patientRouter.post('/insertGlucose', isAuthenticated, 
 
-    body('data_entry', 'Glucose data cannot be negative').isFloat({min: 0, max: 250}).escape(), // glucose data must numeric and not negative
-    body('data_comment', 'Comment cannot exceed 260 characters').isLength({max: 250}).blacklist('$<>&').escape(), // comment can't exceed 250 characters
+    body('data_entry', 'invalid glucose data entered').isFloat({min: 0, max: 10000}).escape(), // glucose data must numeric, not negative and not too large
+    body('data_comment', 'comment cannot exceed 260 characters').isLength({max: 250}).blacklist('$<>&').escape(), // comment can't exceed 250 characters
 
     patientController.insertPatientData)
 
 patientRouter.get('/insertInsulin', isAuthenticated, hasRole('patient'), patientController.getInsulinPage)
 patientRouter.post('/insertInsulin', isAuthenticated, 
 
-    body('data_entry', 'Insulin data cannot be negative').isFloat({min: 0, max: 1000}).escape(), // insulin data must numeric and not negative
-    body('data_comment', 'Comment cannot exceed 260 characters').isLength({max: 250}).blacklist('$<>&').escape(), // comment can't exceed 250 characters 
+    body('data_entry', 'invalid insulin glucose data entered').isFloat({min: 0, max: 10000}).escape(), // insulin data must numeric, not negative and not too large
+    body('data_comment', 'comment cannot exceed 260 characters').isLength({max: 250}).blacklist('$<>&').escape(), // comment can't exceed 250 characters
+
 
     patientController.insertPatientData)
 
 patientRouter.get('/insertSteps', isAuthenticated, hasRole('patient'), patientController.getStepsPage)
 patientRouter.post('/insertSteps', isAuthenticated, 
 
-    body('data_entry', 'Steps data cannot be negative').isFloat({min: 0, max: 100000}).escape(), // steps data must numeric and not negative
-    body('data_comment', 'Comment cannot exceed 260 characters').isLength({max: 250}).blacklist('$<>&').escape(), // comment can't exceed 250 characters   
+    body('data_entry', 'invalid steps data entered').isFloat({min: 0, max: 50000}).escape(), // steps data must be numeric, not negative and not too large
+    body('data_comment', 'comment cannot exceed 260 characters').isLength({max: 250}).blacklist('$<>&').escape(), // comment can't exceed 250 characters
+
 
     patientController.insertPatientData)
 

@@ -92,12 +92,13 @@ const getPatientDashboard = async (req, res) => {
         // clinician message for the current patient 
         const message = req.user.clinician_message.note_content;
 
-        // calculate today's engagement score of the current patient
-        // here, true means it's still the same day
-        var es = calculateES(req.user.input_data, true) 
-
         const total = req.user.input_data.length // total of days since patient first logged in
+
         if (compareDates(req.user.input_data[total-1].set_date)) {
+            
+            // calculate today's engagement score of the current patient
+            // here, true means it's still the same day
+            var es = calculateES(req.user.input_data, true) 
             // Still same day, hence render today's dashboard
             Patient.updateOne(
                 { _id: req.user._id},
@@ -113,26 +114,33 @@ const getPatientDashboard = async (req, res) => {
             return res.render('patientDashboard', { patient: req.user.toJSON(), 
                     patientData: req.user.input_data[total-1].toJSON(), score: es, date: todaysDate, note: message})
         }
+        
+        var diff = (new Date()).getDate() - req.user.input_data[total-1].set_date.getDate();
+        var last = req.user.input_data[total-1].set_date.getDate();
+
+        for (var i = 1; i <=diff; i++){
+            // it's a new day, create new input_data schema for a patient
+            const patientData = new DataSet({set_date: (new Date()).setDate(last+i)})
+        
+            // pushes this input_data into the patient in mongoDB
+            Patient.updateOne({ _id: req.user._id},
+                {$push: {input_data: patientData}}, // pushes new dataset and updates engagement score
+                {safe: true, upsert: true, new: true},
+                function(err, doc) {
+                    if(err) {
+                        return res.redirect('/patient/404')
+                    }else {
+                    
+                }   
+                }
+            )
+        }
 
         // calculate today's engagement score of the current patient
         // here, false means patient has just first logged in for today
         es = calculateES(req.user.input_data, false)
 
-        // it's a new day, create new input_data schema for a patient
-        const patientData = new DataSet({set_date: new Date()})
-        
-        // pushes this input_data into the patient in mongoDB
-        Patient.updateOne({ _id: req.user._id},
-            {$push: {input_data: patientData}, score: es}, // pushes new dataset and updates engagement score
-            {safe: true, upsert: true, new: true},
-            function(err, doc) {
-                if(err) {
-                    return res.redirect('/patient/404')
-                }else {
-                    
-                }
-            }
-        )
+
         return res.render('patientDashboard', {patient: req.user.toJSON(), 
             patientData: patientData, score: es, date: todaysDate, note: message})
 

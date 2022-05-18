@@ -10,6 +10,7 @@ body {
     padding: 0;
     width: 100%;
     background-color: #FFFFFF;
+    overflow-x: hidden;
 }
 
 section {
@@ -517,6 +518,14 @@ button:hover {
     img[id="logo"] {
         padding-left: 0;
         height: 50px;
+    }
+
+    html, body {
+        overflow-x: hidden;
+    }
+    
+    body {
+        position: relative;
     }
 
     .about_info, .about_products{

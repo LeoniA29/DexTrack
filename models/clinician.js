@@ -9,7 +9,8 @@ const clinicianSchema = new mongoose.Schema({
     password: {type: String},
     secret: {type: String, default: "INFO30005"},
     role: {type: String, default: "clinician"},
-    patient_list: [ObjectId]
+    patient_list: [ObjectId],
+    select_patients: {type: String, default: ""}
 })
 
 // password comparison function
