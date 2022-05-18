@@ -80,7 +80,7 @@ const getClinicianById = async(req, res, next) => {
 const insertClinician= async (req, res) => {
     var newData = new Clinician(req.body)
 
-    newData.password = "Info?30005" 
+    newData.password = "INFO?30005" 
     await newData.save()    
     return res.redirect('back')
     
@@ -112,18 +112,15 @@ const insertPatient= async (req, res) => {
     const dobDate = newPatient.dob.getDate()
     const dobMonth = newPatient.dob.getMonth()
     newPatient.screen_name = (customUsername + dobDate + dobMonth) 
-    newPatient.password = "info35"
+    newPatient.password = "INFO?30005" 
 
     const glucose_th = new Threshold({type: "glucose"});
     const steps_th = new Threshold({type: "steps"}); 
     const weight_th = new Threshold({type: "weight"}); 
     const insulin_th = new Threshold({type: "insulin"});
-
-    newPatient.clinician_message = new Message();
     
     newPatient.threshold_list.splice(0, 0, glucose_th,steps_th,weight_th, insulin_th)
     
-
     // pushes patient into clinician's patient list in mongoDB
     Clinician.findByIdAndUpdate(req.user._id,
         {$push: {patient_list: newPatient}},

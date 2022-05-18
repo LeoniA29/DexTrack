@@ -55,7 +55,7 @@ clinicianRouter.post('/registerPatient', isAuthenticated,
     body('occupation', 'occupation must be valid').isAlpha().escape(), 
     body('address', 'address must be valid').blacklist('$<>&{}'),
     body('postcode', 'postcode must be valid and at-least 4 digits').isNumeric().isLength({min:4}).escape(),  
-    body('phone', 'phone number must be valid').isMobilePhone(),
+    body('phone', 'phone number must be valid').isMobilePhone().escape(),
     
     clinicianController.insertPatient)
 
