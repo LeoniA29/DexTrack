@@ -1,7 +1,6 @@
 const Clinician = require('../models/clinician')
-const {Patient, DataSet, Threshold, Message} = require('../models/patient')
+const {Patient, DataSet, Threshold, Note} = require('../models/patient')
 
-const ObjectId = require('mongodb').ObjectId
 
 const formatter = new Intl.DateTimeFormat('en-au', {
     weekday: 'long',
@@ -80,27 +79,17 @@ const getClinicianById = async(req, res, next) => {
 // this is for testing, once login feature enabled, it will not be necessary
 const insertClinician= async (req, res) => {
     var newData = new Clinician(req.body)
-    newData.password = "info35"
-    /* use validation in-between */
 
+    newData.password = "Info?30005" 
     await newData.save()    
     return res.redirect('back')
+    
 }
 
 // render register patient hbs
 const getRegisterPage = (req, res) => {
     return res.render('patientRegister', {flash: req.flash('errors')})
 }
-
-// render patient comments hbs
-const getPatientComments = async (req, res, next) => {
-    const clinician = Clinician.findById(req.user._id).lean()
-    var commentsList = [];
-
-    
-    return res.render('patientRegister', { commentsList: patient_comments})
-}
-
 
 // insert new Patient into database and link to clinician
 const insertPatient= async (req, res) => {
@@ -157,6 +146,10 @@ const insertPatient= async (req, res) => {
 // render patient list belonging to the clinician
 const getClinicianPatientList =  async (req, res, next) => {
 
+        // reset patient selected by clincian
+        req.user.select_patient = ''
+        req.user.save()
+
         // array to collect patient data
         var patients = req.user.patient_list
         var test = [];
@@ -180,7 +173,7 @@ const getClinicianPatientList =  async (req, res, next) => {
                 // finds patient's data input for that day
                 for (j in patient.input_data){
             
-                    if (compareDates(patient.input_data[j].set_date)) {
+                    if ((compareDates(patient.input_data[j].set_date) && (hasToday == false))) {
                         //console.log('existing patient insert today's data')
                         test.push([patient, patient.input_data[j], patient.threshold_list])
                         var hasToday = true;
@@ -209,13 +202,175 @@ const getClinicianPatientList =  async (req, res, next) => {
                 }
             }
         }
-        //console.log(patients[i]._id.toString())
-        // console.log(patientList)
-        //console.log(data)
-        // console.log(test)
         return res.render('clinicianPatientList', { clinicianItem: req.user.toJSON(), testData: test})
     
 }
+
+// render patient comments hbs with comments from clinician's patients
+const getPatientComments = async (req, res, next) => {
+    const clinician = req.user.toJSON()
+
+    var patients = clinician.patient_list
+    var inputList = [];
+    for (var i in patients) {
+        patientID = patients[i]._id.toString()
+        const patient = await Patient.findById(patientID).lean()
+        commentList = []
+
+
+        if (patient) {
+            const patient_data = patient.input_data
+            for (dataSet in patient_data) {
+                daily_data = patient_data[dataSet]
+
+                //console.log(daily_data)
+                for (data in daily_data) {
+                    if (daily_data[data]) {
+                        try {
+                            if (daily_data[data].data_comment) {
+                                //console.log(daily_data[data].data_comment)
+                                commentList.push(daily_data[data])
+                            }
+                        } catch(err) {
+                            console.log("not data input")
+                        }
+                    }
+                }
+            }
+            if (commentList) {
+                inputList.push([patient, commentList])
+            }
+        }
+    }
+
+    console.log(inputList)
+    
+    return res.render('allPatientComments', { clinicianItem: req.user.toJSON(), commentsList: inputList})
+}
+
+// set patient for clinician
+const postClinicianPatient = async (req, res, next) => {
+    //console.log(req.body.patient.toString().slice(0, -1))
+    var patientID = req.body.patient.toString().slice(0, -1)
+    //console.log(req.user)
+    req.user.select_patient = patientID
+    req.user.save()
+    //console.log(req.user)
+    const patient = await Patient.findById(patientID).lean()
+
+    return res.redirect('/clinician/clinicianViewPatient')
+}
+
+// render patient profile for clinician
+const getClinicianPatient = async (req, res, next) => {
+
+    var patientID = req.user.select_patient
+    const patient = await Patient.findById( patientID).lean()
+    var threshold = patient.threshold
+    
+
+    return res.render('clinicianViewPatient', { clinicianItem: req.user.toJSON(), patientItem: patient})
+}
+
+// render patient notes for clinician
+const getClinicianPatientNotes = async (req, res, next) => {
+
+    var patientID = req.user.select_patient
+    const patient = await Patient.findById(patientID).lean()
+    console.log(patient.clincian_notes)
+    var notesList = []
+
+    if (patient) {
+        for (i in patient.clinician_notes) {
+            notesList.push(patient.clinician_notes[i])
+        }
+        console.log(notesList)
+    }
+
+    return res.render('clinicianNotesPatient', { clinicianItem: req.user.toJSON(), patientItem: patient, noteItem: notesList})
+}
+
+// render patient notes input for clinician
+const getClinicianPatientNotesInput = async (req, res, next) => {
+    
+    //console.log(req.body.patient.toString().slice(0, -1))
+    var patientID = req.user.select_patient
+    const patient = await Patient.findById(patientID).lean()
+
+    // redirects back to clinician home page
+    return res.render('clinicianNotesInput', { clinicianItem: req.user.toJSON(), patientItem: patient, date: todaysDate})
+}
+
+// render patient notes input for clinician
+const postClinicianPatientNotesInput = async (req, res, next) => {
+    
+    var patientID = req.user.select_patient
+    const patient = await Patient.findById(patientID).lean()
+
+    if (req.body.note) {
+        // clinician sends new clinician notes
+        const newNote = new Note({note_content: req.body.note, note_date: new Date()})
+        // pushes this input_data into the patient in mongoDB
+        Patient.updateOne({ _id: patientID},
+            {$push: {clinician_notes: newNote}},
+
+            {safe: true, upsert: true, new: true},
+            function(err, doc) {
+                if(err) {
+                    //return res.redirect('/clinician/404')
+                }else {
+                
+                }
+            }
+        )
+    }
+
+    return res.redirect('/clinician/clinicianNotesPatient')
+}
+
+
+// render support message for clinician
+const getClinicianPatientSupport = async (req, res, next) => {
+    
+    var patientID = req.user.select_patient
+    const patient = await Patient.findById(patientID).lean()
+
+    if (patient) {
+        var message = patient.clinician_message
+    }
+
+    return res.render('clinicianSupportPatient', { clinicianItem: req.user.toJSON(), patientItem: patient, messageItem: message})
+}
+
+// post support message for clinician
+const postClinicianPatientSupport = async (req, res, next) => {
+
+
+    var patientID = req.user.select_patient
+    const patient = await Patient.findById(patientID).lean()
+
+
+    // clinician sends new clinician notes
+    //const newNote = new Note({note_content: req.body.note, note_date: new Date()})
+    if (req.body.message) {
+        // pushes this input_data into the patient in mongoDB
+        Patient.updateOne({ _id: patientID},
+            {$set: {clinician_message: req.body.message.toString()}},
+
+            {safe: true, upsert: true, new: true},
+            function(err, doc) {
+                if(err) {
+                    //return res.redirect('/clinician/404')
+                }else {
+                
+                }
+            }
+        )
+    }
+
+    return res.redirect('/clinician/clinicianSupportPatient')
+}
+
 // exports an object, which contain functions imported by router
 module.exports = {
     getClinicianLoginPage,
@@ -227,7 +382,14 @@ module.exports = {
     insertPatient,
     getRegisterPage,
     getClinicianPatientList,
-    getPatientComments
+    getPatientComments,
+    postClinicianPatient,
+    getClinicianPatient,
+    getClinicianPatientNotes,
+    getClinicianPatientNotesInput,
+    postClinicianPatientNotesInput,
+    getClinicianPatientSupport,
+    postClinicianPatientSupport,
 }
 
 

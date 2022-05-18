@@ -5,14 +5,16 @@
     <div class="dropdown">
         <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}} <img src="/chevron-down.png"></button>
         <div class="dropdown-content">
-            <a href="#">Patient comments</a>
-            <a href="#">Sign out</a>
+            <a href="/clinician/patientComments">Patient comments</a>
+            <form method="POST">
+                <button id="sign-out">Sign out</button>
+            </form>
         </div>
     </div>
     <div class="icons">
-        <a href="#"><img src="/house-solid.svg" id="icon" class="change-color"></a>
+        <a href="/clinician/dashboard"><img src="/house-solid.svg" id="icon" class="change-color"></a>
         <a href="#"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
-        <a><img src="/Line.png" height="28"></a>
+        <a><img src="/Line.png" id="nav-line"></a>
         <a href="#"><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
     </div>
 </div>
@@ -27,23 +29,28 @@
     <section class="patientList">
         <div class="sticky-bar">
             <button class="orange-button" onclick="location.href='/clinician/registerPatient'">Add New Patient</button>
-            <div class="blue-button" id="sort">
-                <button class="dropbtn">Sort by <img src="/chevron-down.png"></button>
-                <div class="sort-by">
-                    <a href="#">Name ascending</a>
-                    <a href="#">Name descending</a>
+            <form action="/clinician/searchPatient" method="POST">  
+                <div class="blue-button" id="sort">
+                    <button class="dropbtn">Sort by <img src="/chevron-down.png"></button>
+                    <div class="sort-by">
+                        <a href="#">Name ascending</a>
+                        <a href="#">Name descending</a>
+                    </div>
                 </div>
-            </div>
-            <div class="search-bar">
-                <label for="searchbar"><img src="/magnifying-glass-solid.svg" class="change-color"></label>
-                <input type="text" placeholder="Search" name="search">
-            </div>
+                <div class="search-bar">
+                    <label for="searchbar"><img src="/magnifying-glass-solid.svg" id="search-img" class="change-color"></label>
+                    <input type="text" placeholder="Search" name="search">
+                </div>
+            </form>  
         </div>
 
         <!-- Iterate through testData to correctly load patient list of clinician -->
         <div class="scroll">
             {{#if testData}}
                 {{#each testData}}
+                <form action="/clinician/clinicianViewPatient" method="POST">
+                    <input type="hidden" name="patient" value={{this.[0]._id}}/>
+                    <input type="hidden" type="submit"/>
                     <button class="entry">
                         <div class="col" id="overflow"><span class="attribute">Patient</span><br><strong>{{this.[0].first_name}} {{this.[0].last_name}}</strong></div>
                             
@@ -91,8 +98,8 @@
                             {{else}}
                                 <div class="col"><span class="attribute">Exercise</span><br><strong>Not filled</strong></div>
                             {{/if}}
-
                     </button>
+                </form>
                 {{/each}}
             {{else}}
                     <br>

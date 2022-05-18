@@ -1,0 +1,48 @@
+{{!< main}}
+
+<!-- Navigation bar at top of webpage -->
+<div class="navbar">
+    <div class="dropdown">
+        <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}} <img src="/chevron-down.png"></button>
+        <div class="dropdown-content">
+             <a href="/clinician/patientComments">Patient comments</a>
+        </div>
+    </div>
+    <div class="icons">
+        <a href="/clinician/dashboard"><img src="/house-solid.svg" id="icon" class="change-color"></a>
+        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
+        <a><img src="/Line.png" id="nav-line"></a>
+        <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
+    </div>
+</div>
+
+
+<ul class="breadcrumb">
+  <li><a href="/clinician/dashboard">Patient list</a></li>
+  <li><a href="/clinician/clinicianViewPatient">{{patientItem.first_name}} {{patientItem.last_name}}</a></li>
+  <li>Send message</li>
+</ul>
+
+<div class="sections">
+    
+    <!-- Each section corresponds to each segment of the patient information in the webpage -->
+    <section class="segment" id="message">
+        <h3>Message to Patient</h3>
+            {{#if messageItem}}
+                <div class="prev-msg"><strong>Previous message:<br></strong>{{messageItem}}</div>
+            {{else}}
+                <div class="prev-msg"><strong>Previous message:<br></strong>No previous message</div>
+            {{/if}}
+
+            <form action="/clinician/clinicianSupportPatient" method="POST">
+            
+                <input id="notes" type="text" name="message" rows="5" placeholder="New message here."/>
+                <!-- <textarea type="text" placeholder="New message here." rows="5"></textarea> -->
+                <button class="orange-button" id="send">Send</button>
+
+            </form>
+            
+            
+     </section>
+
+</div>

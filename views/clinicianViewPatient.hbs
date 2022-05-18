@@ -1,0 +1,10 @@
+{{!< main}}
+let us test if this works
+
+{{#with patientItem}}
+
+{{first_name}} {{last_name}}
+{{/with}}
+<button class="orange-button" onclick="location.href='/clinician/clinicianNotesPatient'">View notes</button>
+
+<button class="orange-button" onclick="location.href='/clinician/clinicianSupportPatient'">Send support</button>

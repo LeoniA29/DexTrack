@@ -1,4 +1,4 @@
-// Patient's schema model imported
+// Schema model for patient imported
 const {Patient, Data, DataSet} = require('../models/patient')
 
 // Imported libraries used
