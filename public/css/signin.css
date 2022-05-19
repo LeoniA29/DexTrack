@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body {
+    background-color: #C3E1FF;
+    background-image: url("resources/clouds-02.png");
+}
+
+h4 {
+    font-family: 'Lexend Deca', sans-serif;;
+    font-weight: 500;
+    size: 50pt;
+    color: #2D68AD;
+    text-align: center;
+}
+
+h5 {
+    font-family: 'Lexend Deca', sans-serif;;
+    font-weight: 400;
+    size: 36pt;
+    color: #000000;
+    text-align: center;
+}
+
+.forgot-pass {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #2D68AD;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    text-align: left;
+    margin-right: 20px;
+}
+
+.sign-in {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+  
+input[type=text], [type=date], [type=password] {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 15px;
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    text-align: left;
+    color: black;
+    width: 250px;
+}
+  
+.row label {
+    font-family: 'Lexend Deca', sans-serif;
+    font-size: 24;
+    font-weight: 200;
+    font-style: normal;
+    text-align: left;
+    color: #000000;
+    margin-bottom: 10px;
+    display: block
+}
+  
+.col-50 {
+    -ms-flex: 50%;
+    flex: 50%;
+}
+
+.submit-btn {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    background-color: #FB6E5A;
+    color: #FFFFFF;
+    padding: 10px 15px 10px 15px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+    
+.submit-btn:hover, .cancel-btn:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.cancel-btn {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    background-color: #2D68AD;
+    color: #FFFFFF;
+    padding: 10px 15px 10px 15px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.as-patient img, .as-clinician img {
+    width: 200px;
+    background-color: #FFFFFF;
+    border-radius: 2px;
+}
+
+
+    
+/* [on small screen] */
+@media (max-width: 600px) {
+    .row {
+        flex-direction: column-reverse;
+    }
+}

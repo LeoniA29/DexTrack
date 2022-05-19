@@ -3,26 +3,42 @@
     --bg-color: white;
     --footer-color: #2C68AD;
     --blue-white: #2C68AD;
+    --blue-white-hover: #165093;
+    --blue-white-click: #0A3465;
     --white-color: white;
+    --white-color-hover: #F4F4F4;
+    --white-color-click: #E5E3E3;
     --blue-container: #E6F2FE;
     --entry-card: white;
+    --entry-card-hover: #F4F4F4;
+    --entry-card-active: #E5E3E3;
     --grey-container: #F2F2F2;
     --white-grey: white;
     --black-white: black;
     --navbar-icon: invert(33%) sepia(95%) saturate(583%) hue-rotate(178deg) brightness(89%) contrast(89%);
+    --navbar-hover: invert(24%) sepia(77%) saturate(1096%) hue-rotate(186deg) brightness(91%) contrast(97%);
+    --navbar-click: invert(15%) sepia(45%) saturate(3300%) hue-rotate(199deg) brightness(97%) contrast(92%);
 }
 
 .dark-theme {
     --bg-color: #0C131C;
     --footer-color: #272727;
     --blue-white: #E4E5E6;
+    --blue-white-hover: #A9ABAC;
+    --blue-white-click: #787B7C;
     --white-color: #E4E5E6;
+    --white-color-hover:#A9ABAC;
+    --white-color-click: #787B7C;
     --blue-container: #162945;
     --entry-card: #404F66;
+    --entry-card-hover: #374458;
+    --entry-card-active: #333F52;
     --grey-container: #5C636E;
     --white-grey: #DDDDDD;
     --black-white: #E4E5E6;
     --navbar-icon: invert(100%) sepia(1%) saturate(2453%) hue-rotate(175deg) brightness(91%) contrast(99%);
+    --navbar-hover: invert(75%) sepia(6%) saturate(83%) hue-rotate(155deg) brightness(92%) contrast(86%);
+    --navbar-click: invert(53%) sepia(5%) saturate(179%) hue-rotate(149deg) brightness(89%) contrast(81%);
 }
 
 
@@ -92,6 +108,14 @@ button.entry {
     width: 100%;
 }
 
+button.entry:hover {
+    background: var(--entry-card-hover);
+}
+
+button.entry:active {
+    background: var(--entry-card-active);
+}
+
 .patientComments, .clinicianNotes {
     padding-top: 0px;
 }
@@ -141,9 +165,7 @@ button.entry {
 
 .panel {
     padding: 20px 50px 20px 50px;
-    display: none;
     background: var(--white-grey);
-    overflow: hidden;
     margin-top: -60px;
     margin-bottom: 20px;
     border-radius: 0 0 36px 36px;
@@ -152,6 +174,9 @@ button.entry {
     font-size: 18px;
     line-height: 40px;
     height: auto;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
 }
 
 .data {
@@ -201,6 +226,15 @@ button {
     margin: 0; /* Important for vertical align on mobile phones */
 }
 
+.blue-button .dropbtn:hover {
+    background: #165093;
+}
+
+.blue-button .dropbtn:active {
+    background: #0D3E77;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0);
+}
+
 .orange-button {
     overflow: hidden;
     float: right;
@@ -213,6 +247,15 @@ button {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     font-family: inherit; /* Important for vertical align on mobile phones */
     margin: 0; /* Important for vertical align on mobile phones */
+}
+
+.orange-button:hover {
+    background: #F55842;
+}
+
+.orange-button:active {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0);
+    background: #ED4831;
 }
 
 .view {
@@ -228,12 +271,30 @@ button {
     border-width: 3px;
 }
 
+#clinician-notes.view:hover {
+    background: var(--white-color-hover);
+}
+
+#clinician-notes.view:active {
+    background: var(--white-color-click);
+}
+
 #send-message.view {
     background: #2C68AD;
     border-width: 3px;
     border-color: #2C68AD;
     color: white;
     float: right;
+}
+
+#send-message.view:hover {
+    background: #165093;
+    border-color: #165093;
+}
+
+#send-message.view:active {
+    background:  #0D3E77;
+    background-color: #0D3E77;
 }
 
 
@@ -294,6 +355,98 @@ button {
 }
 
 
+/* patient register */
+
+#register.segment {
+    height: fit-content;
+    overflow: auto;
+}
+
+#register.segment label {
+    color: var(--black-white);
+}
+
+#register.segment input[type=text], [type=date], [type=password] {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 15px;
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 300px;
+    font-style: normal;
+    text-align: left;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background: var(--white-color);
+}
+
+.col-50 {
+    -ms-flex: 50%;
+    flex: 50%;
+    padding: 30px 30px 10px 30px;
+}
+
+.fname, .lname {
+    display: inline-block;
+    margin-right: 30px;
+}
+
+.sex, .dob, .phone, .mstate, .occupation {
+	display: inline-block;
+    margin-right: 30px;
+}
+
+.address, .postcode {
+    display: inline-block;
+    margin-right: 30px;
+}
+
+.phone input, .occupation input, .email input, .fname input, .lname input {
+    width: 200px;
+}
+
+.address input {
+    width: 250px;
+}
+
+#register.segment button {
+    font-size: 20px;
+}
+
+
+/* threshold register */
+
+#threshold-form.segment {
+    height: fit-content;
+    overflow: auto;
+    padding: 60px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+#threshold-form.segment input[type=text] {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 15px;
+    font-family: 'Lexend Deca', sans-serif;
+    font-style: normal;
+    text-align: left;
+    display: block;
+    color: black;
+    width: auto;
+    font-size: 16px;
+}
+
+#threshold-form.segment .upper, #threshold-form.segment .lower, #threshold-form.segment .required {
+    overflow: hidden;
+}
+
+#threshold-form.segment button {
+    font-size: 25px;
+    display: block;
+}
+
+
 /* patient comments */
 
 .patient-comments {
@@ -316,6 +469,7 @@ button {
 .patient-comments .panel {
     width: auto;
     border-width: 0;
+    display: block;
 }
 
 .patient-comments .panel .button-go {
@@ -327,6 +481,15 @@ button {
     padding: 7px 12px 7px 12px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     float: right;
+}
+
+.patient-comments .panel .button-go:hover {
+    background: #165093;
+}
+
+.patient-comments .panel .button-go:active {
+    background: #0D3E77;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0);
 }
 
 
@@ -418,7 +581,7 @@ span.attribute {
 #right-weight.card {
     margin-right: 0px;
     float: right;
-    border-color: #55B48B;
+    border-color: #6F62D0;
 }
 
 #right-insulin.card {
@@ -482,6 +645,15 @@ span.attribute {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     margin:auto; 
     display:block;
+}
+
+#thresholds.segment button:hover {
+    background: #165093;
+}
+
+#thresholds.segment button:active {
+    background: #0D3E77;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0);
 }
 
 #thresholds.segment button a {
@@ -560,6 +732,10 @@ span.attribute {
 
 /* clinician notes form */
 
+#message.segment.clinician-form {
+    color: var(--black-white);
+}
+
 #message.segment #notes {
     margin-top: 20px;
 }
@@ -601,7 +777,15 @@ span.attribute {
 
 .change-color {
     filter: var(--navbar-icon);
-  } 
+} 
+
+.change-color:hover {
+    filter: var(--navbar-hover);
+}
+
+.change-color:active {
+    filter: var(--navbar-click);
+}
 
 .change-blue {
     filter: invert(33%) sepia(95%) saturate(583%) hue-rotate(178deg) brightness(89%) contrast(89%);
@@ -675,6 +859,10 @@ span.attribute {
     background-color: #ddd;
 }
 
+.dropdown-content a:active, #sign-out:active{
+    background-color: #BCBCBC;
+}
+
 .dropdown:hover .dropdown-content {
     display: block;
 }
@@ -708,6 +896,15 @@ ul.breadcrumb li a {
     font-weight: 500;
 }
 
+ul.breadcrumb li a:hover {
+    color: var(--blue-white-hover);
+    text-decoration: none;
+}
+
+ul.breadcrumb li a:active {
+    color: var(--blue-white-click);
+}
+
 
 /* splash screen */
 
@@ -739,6 +936,77 @@ ul.breadcrumb li a {
 }
 
 
+/* modal popup */
+
+.popup-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.7s opacity 1s;
+}
+
+.bg-active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup {
+    width: 400px;
+    background: white;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: black;
+    visibility: hidden;
+    transition: transform 0.3s, top 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 3, 0.2);
+}
+
+.open-popup {
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup img {
+    width: 100px;
+    margin-top: -50px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.popup h3 {
+    font-size: 38px;
+    margin: 30px 0px 10px;
+    color: #2C68AD;
+}
+
+.popup p {
+    font-size: 18px;
+}
+
+#ok-button.orange-button {
+    width: 100%;
+    padding: 10px 60px;
+    border: 0;
+    outline: none;
+    font-size: 20px;
+    border-radius: 20px;
+}
+
+
 /* footer */
 
 footer {
@@ -746,7 +1014,7 @@ footer {
     text-align: center;
     background-color: var(--footer-color);
     color: var(--white-color);
-    margin-top: auto;
+    margin-top: 50px;
     margin-bottom: auto;
 }
 
