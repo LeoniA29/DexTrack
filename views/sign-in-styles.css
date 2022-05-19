@@ -1,11 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+/* body design */
 body {
     background-color: #C3E1FF;
 }
 
 .setPassword {
     background-color: #DDDDDD;
+}
+
+.error {
+    background-color: #F2F2F2;
 }
 
 .cloud-bg {
@@ -17,18 +22,76 @@ body {
     margin-top: 150px;
 }
 
+/* error pages */
+.error-icon {
+    width: 100pt;
+    margin: 100pt auto 0;
+    display: block;
+}
+
+.homeBack-btn {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    text-align: center;
+    background-color: #FB6E5A;
+    color: #FFFFFF;
+    padding: 10px 15px 10px 15px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 0 auto;
+    display: block;
+}
+
+h1 {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 200;
+    font-size: 72pt;
+    color: #FB6E5A;
+    text-align: center;
+}
+
+h2 {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 300;
+    font-size: 16pt;
+    color: #2D68AD;
+    text-align: center;
+}
+
+h3 {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 300;
+    font-size: 12pt;
+    color: #000000;
+    text-align: center;
+}
+
+img[id="logo"] {
+    top: 0;
+    left: 0;
+    position: absolute;
+    padding: 20px;
+    margin-left: 20px;
+    padding-left: 0;
+    height: 50px;
+    cursor: pointer;
+}
+
+/* sign-in pages */
 h4 {
-    font-family: 'Lexend Deca', sans-serif;;
+    font-family: 'Lexend Deca', sans-serif;
     font-weight: 500;
-    size: 50pt;
+    font-size: 16pt;
     color: #2D68AD;
     text-align: center;
 }
 
 h5 {
-    font-family: 'Lexend Deca', sans-serif;;
+    font-family: 'Lexend Deca', sans-serif;
     font-weight: 400;
-    size: 36pt;
+    font-size: 12pt;
     color: #000000;
     text-align: center;
 }
@@ -123,7 +186,7 @@ input[type=text], [type=date], [type=password] {
 }
 
 .as-patient img, .as-clinician img {
-    width: 150px;
+    width: 125px;
     background-color: #FFFFFF;
     border: 4px solid #FB6E5A;
     border-radius: 30px;
@@ -139,7 +202,8 @@ input[type=text], [type=date], [type=password] {
 }
     
 /* [on small screen] */
-@media (max-width: 600px) {
+@media (max-width: 600px), (max-height: 750px) {
+    /* sign-in pages */
     .row {
         flex-direction: column-reverse;
     }
@@ -155,5 +219,15 @@ input[type=text], [type=date], [type=password] {
     .as-patient, .as-clinician {
         display: block;
         margin-left: 0px;
+    }
+
+    /* error pages */
+    h1 {
+        font-size: 48pt;
+    }
+
+    .error-icon {
+        width: 75pt;
+        margin-top: 75pt;
     }
 }
