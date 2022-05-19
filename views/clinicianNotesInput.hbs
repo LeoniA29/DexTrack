@@ -6,6 +6,9 @@
         <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}} <img src="/chevron-down.png"></button>
         <div class="dropdown-content">
             <a href="/clinician/patientComments">Patient comments</a>
+            <form action="/clinician/logout" method="POST">
+                <button id="sign-out">Sign out</button>
+            </form>
         </div>
     </div>
     <div class="icons">
@@ -29,12 +32,18 @@
     <section class="segment clinician-form" id="message">
 
         <span class="attribute">Day/date</span><br><strong>{{date.[0].value}}, {{date.[2].value}} {{date.[4].value}} {{date.[6].value}}</strong><br>
-
-        <form action="/clinician/clinicianNotesPatientInput" method="POST">
-            <input id="notes" type="text" name="note" rows="5" placeholder="New note here."/>
-            <!-- <textarea id="notes" type="text" placeholder="New note here." rows="5"></textarea> -->
-            <button class="orange-button" id="send">Save</button>
+        <form action="/clinician/clinicianNotesPatientInput" name="form" method="POST">
+            <textarea id="notes" type="text" name="note" placeholder="New note here." rows="5" required></textarea>
+            <button class="orange-button" id="send" onclick="openPopup()">Save</button>
+            <div class="popup-bg" id="popup-bg">
+                <div class="popup" id="popup">
+                    <img src="/tick.png">
+                    <h3>Saved!</h3>
+                    <p>Your note has been successfully saved.</p>
+                    <button class="orange-button" id="ok-button" onclick="closePopup()">OK</button>
+                </div>
+            </div>        
         </form>
-
+        
      </section>
 </div>

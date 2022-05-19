@@ -37,7 +37,7 @@ clinicianRouter.post('/login', passport.authenticate('local', {
     successRedirect: '/clinician/dashboard', failureRedirect: '/clinician/login', failureFlash: true
     }))
 
-clinicianRouter.post('/dashboard', clinicianController.clinicianLogout)
+clinicianRouter.post('/logout', clinicianController.clinicianLogout)
 
 clinicianRouter.get('/insert', clinicianController.getAllClinicians)
 clinicianRouter.post('/insert', clinicianController.insertClinician)
@@ -51,11 +51,11 @@ clinicianRouter.post('/registerPatient', isAuthenticated,
     body('first_name', ' first name must be valid').isAlpha().escape(), 
     body('last_name', 'last name must be valid').isAlpha().escape(), 
     body('email', 'email must be valid').isEmail().escape(), 
-    body('dob', 'date of birth must be valid').isDate().escape(),
+    body('dob', 'date of birth must be valid').isDate().escape(), 
     body('occupation', 'occupation must be valid').isAlpha().escape(), 
-    body('address', 'address must be valid').blacklist('$<>&{}'),
-    body('postcode', 'postcode must be valid and at-least 4 digits').isNumeric().isLength({min:4}).escape(),  
-    body('phone', 'phone number must be valid').isMobilePhone().escape(),
+    body('address', 'address must be valid').blacklist('$<>&{}'), 
+    body('postcode', 'postcode must be valid and at-least 4 digits').isNumeric().isLength({min:4}).escape(), 
+    body('phone', 'phone number must be valid').isMobilePhone().escape(), 
     
     clinicianController.insertPatient)
 
@@ -70,6 +70,10 @@ clinicianRouter.post('/clinicianNotesPatientInput', isAuthenticated, hasRole('cl
 clinicianRouter.get('/clinicianSupportPatient', isAuthenticated, hasRole('clinician'), clinicianController.getClinicianPatientSupport)
 clinicianRouter.post('/clinicianSupportPatient', isAuthenticated, hasRole('clinician'), clinicianController.postClinicianPatientSupport)
 
+clinicianRouter.get('/clinicianThresholdPatient', isAuthenticated, hasRole('clinician'), clinicianController.getClinicianPatientThresholdInput)
+clinicianRouter.post('/clinicianThresholdPatient', isAuthenticated, hasRole('clinician'), clinicianController.postClinicianPatientThresholdInput)
+
+clinicianRouter.get('/404', isAuthenticated, hasRole('clinician'), clinicianController.getErrorPage)
 
 // export the router
 module.exports = clinicianRouter
