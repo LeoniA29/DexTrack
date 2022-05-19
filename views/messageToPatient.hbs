@@ -11,7 +11,7 @@
     </div>
     <div class="icons">
         <a href="#"><img src="/house-solid.svg" id="icon" class="change-color"></a>
-        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
+        <a href="#" onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
         <a><img src="/Line.png" id="nav-line"></a>
         <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
     </div>
@@ -31,7 +31,15 @@
         <h3>Message to Patient</h3>
             <div class="prev-msg"><strong>Previous message:<br></strong>Keep up the spirit!</div>
             <textarea type="text" placeholder="New message here." rows="5"></textarea>
-            <button class="orange-button" id="send"><a href="#">Send</a></button>
+            <button class="orange-button" id="send" onclick="openPopup()"><a href="#">Send</a></button>
+            <div class="popup-bg" id="popup-bg">
+                <div class="popup" id="popup">
+                    <img src="/tick.png">
+                    <h3>Sent!</h3>
+                    <p>Your message has been successfully sent.</p>
+                    <button class="orange-button" id="ok-button" onclick="closePopup()">OK</button>
+                </div>
+            </div>
      </section>
 
 </div>

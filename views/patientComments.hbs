@@ -1,47 +1,44 @@
+<!-- Navigation bar at top of webpage -->
+<div class="navbar">
+    <div class="dropdown">
+        <button class="dropbtn">Dr. Alice Brown <img src="/chevron-down.png"></button>
+        <div class="dropdown-content">
+            <a href="#">Patient comments</a>
+            <form>
+                <button id="sign-out">Sign out</button>
+            </form>
+        </div>
+    </div>
+    <div class="icons">
+        <a href="#"><img src="/house-solid.svg" id="icon" class="change-color"></a>
+        <a href='#' onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
+        <a><img src="/Line.png" id="nav-line"></a>
+        <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
+    </div>
+</div>
+
 <ul class="breadcrumb">
   <li><a href="#">Patient list</a></li>
   <li>Patient comments</li>
 </ul>
 
-<div class="sections">
-
-    <!-- Each section corresponds to each segment of the patient information in the webpage -->
+<div class="section">
     <section class="patientComments">
         <h4>Patient comments</h4>
-        <div class="comments">
+        <div class="patient-comments">
             <div class="sticky-bar"></div>
-            <div class="cntr">
-                <div class="entry">
-                    <div class="row">
-                        <div class="data"><span class="attribute">Date/Time</span><br><strong>20 March, 11am</strong></div>
-                        <div class="data"><span class="attribute">Patient</span><br><strong>Ana Sergawa</strong></div>
-                        <div class="data"><span class="attribute">Comment</span><br><strong>I feel bloated. </strong></div>
-                        <a href="#"><img src="/chevron-down-solid.svg" height="30px"></a>
-                    </div>
-                </div>
-                <div class="entry">
-                    <div class="row">
-                        <div class="data"><span class="attribute">Date/Time</span><br><strong>20 March, 11am</strong></div>
-                        <div class="data"><span class="attribute">Patient</span><br><strong>Ana Sergawa</strong></div>
-                        <div class="data"><span class="attribute">Comment</span><br><strong>I feel bloated.</strong></div>
-                        <a href="#"><img src="/chevron-down-solid.svg" height="30px"></a>
-                    </div>
-                </div>
-                <div class="entry">
-                    <div class="row">
-                        <div class="data"><span class="attribute">Date/Time</span><br><strong>20 March, 11am</strong></div>
-                        <div class="data"><span class="attribute">Patient</span><br><strong>Ana Sergawa</strong></div>
-                        <div class="data"><span class="attribute">Comment</span><br><strong>I feel bloated.</strong></div>
-                        <a href="#"><img src="/chevron-down-solid.svg" height="30px"></a>
-                    </div>
-                </div>
-                <div class="entry">
-                    <div class="row">
-                        <div class="data"><span class="attribute">Date/Time</span><br><strong>20 March, 11am</strong></div>
-                        <div class="data"><span class="attribute">Patient</span><br><strong>Ana Sergawa</strong></div>
-                        <div class="data"><span class="attribute">Comment</span><br><strong>I feel bloated.</strong></div>
-                        <a href="#"><img src="/chevron-down-solid.svg" height="30px"></a>
-                    </div>
+            <div class="scroll">
+                <button class="accordion">
+                    <div class="data" id="overflow"><span class="attribute">Patient</span><br><strong>Ana Sergawa</strong></div>
+                    <div class="data" id="overflow"><span class="attribute">Date/Time</span><br><strong>20 March, 11am</strong></div>
+                    <div class="data hide" id="overflow"><span class="attribute">Comment</span><br><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adiasdjfh asduh kajdhsf kadsjhf skjdhf kspisicing elit Lorem ipsum dolor sit amet, consectetur adipisici</strong></div>
+                    <img src="/chevron-down-solid.svg" height="30px">
+                </button>
+                <div class="entry panel">
+                    <p><span class="attribute">Comment</span><br><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adiasdjfh asduh kajdhsf kadsjhf skjdhf kspisicing elit Lorem ipsum dolor sit amet, consectetur adipisici</strong></p>
+                    <form>
+                        <button class="button-go">Go to patient</button>
+                    </form>
                 </div>
             </div>
         </div>

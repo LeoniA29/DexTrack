@@ -11,7 +11,7 @@
     </div>
     <div class="icons">
         <a href="#"><img src="/house-solid.svg" id="icon" class="change-color"></a>
-        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
+        <a href="#" onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
         <a><img src="/Line.png" id="nav-line"></a>
         <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
     </div>
@@ -31,7 +31,15 @@
     <section class="segment clinician-form" id="message">
         <span class="attribute">Day/date</span><br><strong>Monday, 16 May 2022</strong><br>
         <textarea id="notes" type="text" placeholder="New note here." rows="5"></textarea>
-        <button class="orange-button" id="send"><a href="#">Save</a></button>
+        <button class="orange-button" id="send" onclick="openPopup()"><a href="#">Save</a></button>
+        <div class="popup-bg" id="popup-bg">
+            <div class="popup" id="popup">
+                <img src="/tick.png">
+                <h3>Saved!</h3>
+                <p>Your note has been successfully saved.</p>
+                <button class="orange-button" id="ok-button" onclick="closePopup()">OK</button>
+            </div>
+        </div>
      </section>
 
 </div>

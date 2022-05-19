@@ -1,0 +1,89 @@
+<!-- Navigation bar at top of webpage -->
+<div class="navbar">
+    <div class="dropdown">
+        <button class="dropbtn">Dr. Alice Brown <img src="/chevron-down.png"></button>
+        <div class="dropdown-content">
+            <a href="#">Patient comments</a>
+            <form>
+                <button id="sign-out">Sign out</button>
+            </form>
+        </div>
+    </div>
+    <div class="icons">
+        <a href="#"><img src="/house-solid.svg" id="icon" class="change-color"></a>
+        <a href="#" onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
+        <a><img src="/Line.png" id="nav-line"></a>
+        <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
+    </div>
+</div>
+
+<ul class="breadcrumb">
+  <li><a href="#">Patient list</a></li>
+  <li>New patient</li>
+</ul>
+
+<div class="sections">
+
+    <!-- Each section corresponds to each segment of the patient information in the webpage -->
+    <section class="segment" id="register">
+        <div class="col-50">
+            <h3>Create account</h3>
+            <div class="fname">
+                <label for="fname">First name<br></label>
+                <input type="text" placeholder="First name" name="firstName"/>
+            </div>
+            <div class="lname">
+                <label for="lname">Last name<br></label>
+                <input type="text" placeholder="Last name" name="lastName"/>
+            </div>
+            <div class="email">
+                <label for="email">Email<br></label>
+                <input type="text" placeholder="Email address" name="email"/>
+            </div>
+        </div>
+
+        <div class="col-50">
+            <h3>Personal Details</h3>
+            <div class="sex">
+                <label for="sex">Sex<br></label>
+                <input type="text" placeholder="Sex" name="sex"/>
+            </div>
+            <div class="dob">
+                <label for="dob">Date of Birth<br></label>
+                <input type="date" placeholder="Date of Birth" name="dob"/>
+            </div>
+            <div class="phone">
+                <label for="phone">Phone Number<br></label>
+                <input type="text" placeholder="Phone Number" name="phone"/>
+            </div>
+            <div class="mstate">
+                <label for="mstate">Marital State<br></label>
+                <input type="text" placeholder="Marital State" name="mstate"/>
+            </div>
+            <div class="occupation">
+                <label for="occupation">Occupation<br></label>
+                <input type="text" placeholder="Occupation" name="occupation"/>
+            </div>
+            <div class="row-form">
+                <div class="address">
+                    <label for="address">Address<br></label>
+                    <input type="text" placeholder="Address" name="address"/>
+                </div>
+                <div class="postcode">
+                    <label for="postcode">Postcode<br></label>
+                    <input type="text" placeholder="Postcode" name="postcode"/>
+                </div>
+            </div>
+        </div>
+        <button class="orange-button" id="send" onclick="openPopup()">Submit</button>
+        <div class="popup-bg" id="popup-bg">
+            <div class="popup" id="popup">
+                <img src="/tick.png">
+                <h3>Submitted!</h3>
+                <p>New patient form has been successfully submitted.</p>
+                <button class="orange-button" id="ok-button" onclick="closePopup()">OK</button>
+            </div>
+        </div>
+    </section>
+
+</div>
