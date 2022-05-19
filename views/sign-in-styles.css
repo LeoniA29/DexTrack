@@ -202,7 +202,7 @@ input[type=text], [type=date], [type=password] {
 }
     
 /* [on small screen] */
-@media (max-width: 600px), (max-height: 750px) {
+@media (max-width: 600px) {
     /* sign-in pages */
     .row {
         flex-direction: column-reverse;
