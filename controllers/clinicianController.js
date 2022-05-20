@@ -1,6 +1,7 @@
 const Clinician = require('../models/clinician')
 const {Patient, DataSet, Threshold, Note} = require('../models/patient')
-
+const SALT_FACTOR = 10 // bcrypt salt constant
+const bcrypt = require('bcryptjs') // use bcrypt
 
 const formatter = new Intl.DateTimeFormat('en-au', {
     weekday: 'long',
@@ -491,7 +492,7 @@ const updatePass = async (req,res) =>{
         if (!errors.isEmpty()) {
             const errorsFound = validationResult(req).array()
             req.flash('errors', errorsFound);
-            return res.redirect('/patient/change-password')
+            return res.redirect('/clinician/change-password')
         }
 
         // hash the password using bcrypt before saving to mongodb
@@ -513,10 +514,14 @@ const updatePass = async (req,res) =>{
 
     } catch(err) {
         // error detected, renders patient error page
+        console.log(err);
         return res.redirect('/clinician/404')
     }
 }
 
+const getChangePass = (req, res)=>{
+    return res.render('clinicianPass', {flash: req.flash('errors')})
+}
 // Function to retrieve patient's error page
 const getErrorPage = (req,res)=>{
     return res.render('clinician404')
@@ -544,6 +549,7 @@ module.exports = {
     getClinicianPatientThresholdInput,
     postClinicianPatientThresholdInput,
     getErrorPage,
+    getChangePass,
     updatePass
 }
 
