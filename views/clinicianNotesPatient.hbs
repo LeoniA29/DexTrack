@@ -1,0 +1,66 @@
+{{!< main}}
+<!-- Navigation bar at top of webpage -->
+<div class="navbar">
+    <div class="dropdown">
+        <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}} <img src="/chevron-down.png"></button>
+        <div class="dropdown-content">
+            <a href="/clinician/patientComments">Patient comments</a>
+            <a href="/about-diabetes">About Diabetes</a>
+            <a href="/about-dextrack">About DexTrack</a>
+            <a href="/clinician/change-password">Update password</a>
+
+            <form action="/clinician/logout" method="POST">
+                <button id="sign-out">Sign out</button>
+            </form>
+        </div>
+    </div>
+    <div class="icons">
+        <a href="/clinician/dashboard"><img src="/house-solid.svg" id="icon" class="change-color"></a>
+        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color nightmode"></a>
+        <a><img src="/Line.png" id="nav-line"></a>
+        <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
+    </div>
+</div>
+
+<ul class="breadcrumb">
+  <li><a href="/clinician/dashboard">Patient list</a></li>
+  <li><a href="/clinician/clinicianViewPatient">{{patientItem.first_name}} {{patientItem.last_name}}</a></li>
+  <li>Clinician notes</li>
+</ul>
+
+<div class="sections">
+    
+     <!-- Each section corresponds to each segment of the patient information in the webpage -->
+    <section class="clinicianNotes">
+        <h4>Clinician notes</h4>
+        <div class="clinician-notes">
+            <div class="sticky-bar">
+                <div class="blue-button">
+                    <button class="dropbtn" onclick="location.href='/clinician/clinicianNotesPatientInput'">Add new notes</button>
+                </div>
+            </div>
+            <div class="scroll">
+                {{#if noteItem}}
+                    {{#each noteItem}}
+                            <button class="accordion" id="notes">
+
+                                {{#with (showDate this.note_date)}}
+                                    <div class="data"><span class="attribute">Date/Time</span><br><strong>{{this.[2].value}} {{this.[4].value}} {{this.[6].value}}, {{this.[8].value}}:{{this.[10].value}}</strong></div>
+                                {{/with}}
+
+                                <div class="data hide" id="overflow"><span class="attribute">Notes</span><br><strong>{{this.note_content}}</strong></div>
+                                <img src="/chevron-down-solid.svg">
+                            </button>
+                            <div class="entry panel" id="notes">
+                                <p><span class="attribute">Notes</span><br><strong>{{this.note_content}}</strong></p>
+                            </div>
+                    {{/each}}
+                {{else}}
+                    You have no notes, please add a new note
+                {{/if}}
+            </div>
+        </div>
+     </section>
+
+</div>
+

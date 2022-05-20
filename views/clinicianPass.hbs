@@ -1,0 +1,66 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Lexend Deca' rel='stylesheet'>
+    <title>Update Password</title>
+    <link rel="stylesheet" href="/css/sign-in-styles.css">
+</head>
+
+
+
+<body class="setPassword">
+
+    <!-- Navigation bar at top of webpage -->
+            <header>
+                <nav class="nav_bar">
+                    <a href="/about-dextrack"><img id="logo" src="/logo.png"></a>
+                    <ul class="nav_pages">
+                        <li class="nav_item"> 
+                            <a href="/about-dextrack" class="nav_link">About DexTrack</a>
+                        </li>
+                        <li class="nav_item">
+                            <a href="/about-diabetes" class="nav_link">About Diabetes</a>
+                        </li>
+                         <li class="nav_item">
+                            <a href="/patient/dashboard" class="nav_link"><button>Dashboard</button></a>
+                        </li>
+                        <li class="nav_item">
+                            <a href="/clinician/logout" class="nav_link"><button>Sign Out</button></a>
+                        </li>
+                    </ul>
+                    <div class="menu">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                </nav>
+            </header>
+
+    <main>
+        <img src="/clouds-02.png" class="cloud-bg">
+        <section class="sign-in">
+        <h4>Set New Password</h4>
+        <br><br>
+            <div class="row">
+                <div class="container">
+                    <form action="/clinician/change-password" method="POST">
+
+                    <div class="col-50">
+                        <div class="passwords">
+                            <label for="passwords">Password</label>
+                            <input type="password" placeholder="New Password" name="password" required/>
+                        </div>
+                    </div>
+                    <input type="submit" value="Submit!" class="submit-btn">
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main> 
+</body>
+<script src="/javascript/menu.js"></script>
+
+{{#each flash}}
+    <p class="alert">{{this.msg}}</p>
+{{/each}}

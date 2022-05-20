@@ -7,7 +7,6 @@ module.exports = function(handlebars) {
 
             // finds the threshold for that data input
             if ((threshold_list[i].type == 'glucose') && (data.data_type == 'glucose')) {
-
                 // checks if data exceeds threshold or not and if threshold exists
                 if ((data.data_entry > threshold_list[i].high) && (threshold_list[i].high) ) {
                     th_boolean = true;

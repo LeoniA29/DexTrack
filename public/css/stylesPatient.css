@@ -1,12 +1,99 @@
-header, body, footer { 
+header, body{ 
     font-family: Lexend Deca; 
     margin: 0px;
 } 
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+}
 
 main, section, aside{
     margin: 0;
     color: #ffffff;
 }
+
+/* navigation bar */
+
+img[id="nav_logo"] {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: auto;
+    height: 60px;
+    z-index: 2;
+    padding: 20px;
+    margin-left: 20px;
+}
+
+
+.nav_bar, .nav_pages {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+}
+
+.nav_pages {
+    list-style: none;
+}
+
+.nav_pages li, .nav_pages button { 
+    font-weight: 600;
+    font-size: 20px;
+    padding: 0 1.5em;
+}
+
+.nav_pages li a {
+    transition: all 0.5s ease 0s;
+}
+
+.nav_bar button {
+    background-color:#2C68AD;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.5s ease 0s;
+    color: #FFFFFF;
+    font-size: 20px;
+}
+
+.nav_bar a#pull, .menu1 {
+    display: none;
+}
+
+
+.nav_bar button:hover {
+    background-color:#FB6E59;
+}
+
+button:hover {
+    background-color:#2C68AD;
+}
+
+.nav_pages li a:hover {
+    color: #2C68AD;
+}
+
+li, a, button {
+    font-family: Lexend Deca;
+    color: black;
+    text-decoration: none;
+}
+
+
+.patient_login {
+    margin: 10vh 0;
+    text-align: center;
+}
+
+.patient_login button {
+    margin-top: 20px;
+}
+
 
 h1, h2 {
     margin-top: 5px;
@@ -18,20 +105,8 @@ h1, h2 {
 }
 
 
-label {
-    margin: 0 20px 0 0;
-    font-size: 36px;
-    line-height: 60px;
-    color:#2C68AD;
-    position: fixed;
-    right: 15px;
-    top: 50px;
-    z-index: 99;
-    display: none;
-}
-
 .main {
-    background: #ffffff;
+    background: var(--white);
     flex: 1;
     margin-left: 0px;
     margin-right: 0px;
@@ -39,18 +114,144 @@ label {
 }
 
 .main h2 {
-    color: #2C68AD;
+    color: var(--darkBlue);
     font-size: 20px;
 }
 
 .main h1 {
-    color: #000000;
+    color: var(--black);
     font-size: 48px;
 }
 
-.dashboardInformation {
-    margin-left: 40px;
+#date h2 {
+    text-align: left;
 }
+/*dashboard*/
+
+@media (max-width: 1024px) {
+    
+    .engagementContainer {
+        max-width: 500px;
+        width: 90%;
+        top: 10px;
+        position: relative;
+        margin: auto;
+        height: 150px;
+        border-radius: 20px;
+        background-color: var(--lightBlue);
+    }
+
+    .slides {
+        display: none;
+    }
+
+    #engagementSlide {
+        width: 100%;
+    }
+
+    .engagementScore {
+        float: left;
+        width: 30%;
+        text-align: center;
+    }
+
+    #badgeImage {
+        position: relative;
+        display: inline-block;
+        width: 100px;
+        top: 24px;
+
+    }
+
+    #engagementScoreValue {
+        color: white;
+        font-size: 30px;
+        position: absolute;
+        top: 50px; 
+        transform: translateX(175%)
+        }
+
+    .engagementDescription {
+        float: left;
+        width: 70%;
+    }
+
+    #engagementScoreText {
+        padding-left: 20px;
+        color: var(--darkBlue);
+        font-size: 18px;
+        padding-top: 5px;
+    }
+
+    #engementScoreDescription {
+        color: var(--darkBlue);
+        font-size: 16px;
+        padding-right: 5px;
+        margin-top: 0px;
+    }
+
+    .clinicianImage {
+        float: left;
+        width: 30%;
+        text-align: center;
+    }
+
+    #clinicianVectorImage {
+        position: relative;
+        display: inline-block;
+        height: 110px;
+        top: 18px;
+
+    }
+
+    .clinicianMessage {
+        float: left;
+        width: 70%;
+    }
+
+    #yourClinicianSaysText {
+        padding-left: 20px;
+        color: var(--black);
+        font-size: 18px;
+        padding-top: 5px;
+    }
+
+    #clinicianMessageText {
+        padding-left: 20px;
+        color: var(--black);
+        font-size: 16px;
+        padding-top: 5px;
+        padding-right: 20px;
+    }
+
+    .dot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: var(--lightBlue);
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+    }
+
+    .active, .dot:hover {
+        background-color: var(--darkBlue);
+    }
+
+      /* Fading animation */
+    .fade {
+        animation-name: fade;
+        animation-duration: 1.5s;
+    }
+    
+    @keyframes fade {
+        from {opacity: .4}
+        to {opacity: 1}
+    }
+
+}
+
 
 .inputContainer {
     text-align: center;
@@ -68,84 +269,39 @@ label {
     display: inline-block;
 }
 
-.Glucose h2  {
+.inputContainer h2 {
     position: absolute;
     top: 57%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 3.8vw;
-    color:#e13d45;
     font-weight: 100;
+}
+
+.Glucose h2  {
+    color:#e13d45;
 }
 
 .Exercise h2  {
-    position: absolute;
-    top: 57%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 3.8vw;
     color:#66b48b;
-    font-weight: 100;
 }
 
 .Weight h2  {
-    position: absolute;
-    top: 57%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 3.8vw;
     color:#6f62d0;
-    font-weight: 100;
 }
 
 .Insulin h2  {
-    position: absolute;
-    top: 57%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 3.8vw;
     color:#ff9d47;
-    font-weight: 100;
 }
 
-.sidebar {
-    background: #f9f9f9;
-    flex: 0 1 300px; 
-    text-align: right;
-    padding-top: 120px;
-}
 
-.menu {
-    overflow-x: hidden;
-    transition: 0.5s;
-    transition: all 300ms ease 0s;
-}
-
-.menu a {
-    text-align: right;
-    text-decoration: none;
-    color: #2C68AD;
-    display: block;
-    transition: 0.3s;
-    padding: 0 20px 3px 0;
-    font-size: 24px;
-}
-
-.menu a :hover {
-    text-decoration: underline;
-}
-
-#toggle {
-    display: none;
-}
-
-.footer {
-    padding: 5em;
+footer {
+    color: #FFFFFF;
     text-align: center;
     background-color:#2C68AD;
-    color: #FFFFFF;
-    margin-top: auto;
-    margin-bottom: auto;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    position: fixed;
 }
 
 img[id="logo"] {
@@ -154,9 +310,6 @@ img[id="logo"] {
     margin-bottom: 20px;
 }
 
-#glucoseEmpty.Glucose, #glucoseFilled.Glucose, #weightEmpty.Weight, #weightFilled.Weight, #insulinEmpty.Insulin, #insulinFilled.Insulin, #exerciseEmpty.Exercise, #exerciseFilled.Exercise {
-    align-self: center;
-}
 
 
 /* Input Data */
@@ -170,23 +323,22 @@ img[id="logo"] {
     height: 150px;
     position: relative;
     top: 25%;
-    align-self: center;
 }
 
 .symbol #title {
     top: 25%;
     position: relative;
-    color: Black;
+    color: var(--black);
     margin-bottom: 30px;
 }
 
 .inputDataItems {
-   
+
     display: block;
 }
 
 .inputDataItems h2 {
-    color: black;
+    color: var(--black);
     position: relative;
     top: 25%;
 }
@@ -201,46 +353,246 @@ img[id="logo"] {
 
 .inputDataItems #inputData {
     border-radius: 20px;
-    border: 2px solid #2C68AD;
+    border: 2px solid var(--darkBlue);
     height: 30px;
     width: 60%;
-    padding-left: 10px;
-    padding-top: 10px;
-    font-size: 20px;
+    padding: 8px;
+    font-size: 15px;
     position: relative;
     top: 180px;
     margin-bottom: 30px;
+    text-align: center;
 }
 
 
 .inputDataItems #inputNotes {
     border-radius: 20px;
-    border: 2px solid #2C68AD; 
+    border: 2px solid var(--darkBlue); 
     height: 100px;
     width: 60%;
-    padding-left: 10px;
-    padding-top: 10px;
-    font-size: 20px;
+    padding: 10px;
+    font-size: 15px;
     position: relative;
     top: 200px;
 }
 
 #doneButton {
-    width: 40%;
-    height: 30px;
+    width: 42%;
+    height: 35px;
     border-radius: 20px;
     position: relative;
     top: 280px;
-    border: 2px solid #2C68AD; 
-    background-color: #2C68AD;
-    color: #FFFFFF;
+    border: 2px solid var(--darkBlue); 
+    background-color: var(--darkBlue);
+    color: var(--white);
     height: 30px;
     font-size: 20px;
 
 }
 
+/* leaderboard */
 
-@media screen and (min-width: 1024\px) {
+#leaderboardContainer {
+	width: 350px;
+	height: auto;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.leaderboardTop {
+    text-align: center;
+    border-bottom: 1px solid var(--darkBlue);
+}
+
+#leaderboardImage {
+    width: 80px;
+}
+
+#leaderboardText {
+    color: var(--darkBlue);
+    font-size: 20px;
+}
+
+.row {
+	position: relative;
+	display: block;
+	width: 90%;
+	height: 80px;
+    margin-top: 10px;
+    color: var(--darkBlue);
+    font-size: 20px;
+}
+
+#rankImage {
+    position: relative;
+	display: inline-block;
+	width: 25%;
+    top: 30%;
+}
+
+.name {
+	position: relative;
+	display: inline-block;
+	width: 65%;
+	line-height: 70px;
+}
+
+.score {
+	position: relative;
+	display: inline-block;
+	width: 5%;
+}
+/* patient log */
+
+.dashboardInformation {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 100px;
+    color: var(--darkBlue);
+}
+
+.logContainer {
+	display: flex;
+	flex-direction: column;
+
+}
+
+.singleLog {
+	flex: 50px;
+	padding: 10px;
+	width: 300px;
+    border-radius: 20px;
+    border: 1px solid var(--darkBlue); 
+    margin: 5px 5px 5px 5px;
+}
+
+#logDate {
+	font-size: 20px;
+	color: var(--darkBlue);
+    margin-bottom: 10px;
+}
+
+.logBox {
+	min-width: 250px;
+    width: 90%;
+	height: 30px;
+	background: #E4EFFE;
+	border-radius: 25px;
+	white-space: nowrap;
+	margin-bottom: 10px;
+}
+
+#dataImage {
+	padding-top: 5px;
+	height: 20px;
+	padding-left: 10px;
+	display: inline-block;
+}
+
+#logTime {
+	color: #2c68ad;
+	padding-left: 10px;
+	font-size: 16px;
+	font-weight: lighter;
+	display: inline-block;
+	margin: 0px;
+  
+}
+
+#logData {
+	color:  #2c68ad;
+	padding-left: 15px;
+	font-size: 16px;
+	display: inline-block;
+	margin: 0px;
+}
+
+@media (min-width: 1024px) {
+
+
+	.logContainer {
+        flex-direction: row;
+		flex-wrap: wrap;
+        max-width: 90%;
+	}
+
+    .singleLog {
+        width: 300px;
+        flex-grow: 1;
+       
+    }
+
+	.logBox {
+		max-width: 290px;
+	}
+}
+
+/*Sidebar*/
+
+#themeToggle {
+    width: 30px;
+}
+
+label {
+    margin: 0 20px 0 0;
+    font-size: 36px;
+    line-height: 60px;
+    color: var(--darkBlue);
+    position: fixed;
+    right: 15px;
+    top: 50px;
+    z-index: 1;
+}
+
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed; 
+    z-index: 2; 
+    right: 0;
+    top: 0;
+    background: var(--lightBlue);
+    overflow-x: hidden; 
+    transition: 0.5s; 
+  }
+
+textarea{
+    resize: none;
+    overflow: none;
+}
+.menu {
+    position: relative;
+    top: 20%; 
+    width: 100%; 
+    text-align: center; 
+    margin-top: 30px;
+  }
+  
+  .sidebar a {
+    text-align: right;
+    text-decoration: none;
+    color: var(--darkBlue);
+    display: block;
+    transition: 0.3s;
+    padding: 0 20px 3px 0;
+    font-size: 24px;
+  }
+  
+  .sidebar a:hover, .sidebar a:focus {
+    color: #000000;
+  }
+  
+  .sidebar .closebtn {
+    position: absolute;
+    top: 40px;
+    font-size: 60px;
+    right: 20px;
+  }
+
+
+@media screen and (min-width: 1024px) {
+
+    
     .inputDataContainer {
         display: flex;
     }
@@ -251,7 +603,7 @@ img[id="logo"] {
         min-height: 700px;
     }
 
-    .symbol img[id="glucose"] {
+    .symbol img[id="element"] {
         height: 220px;
     }
 
@@ -263,6 +615,21 @@ img[id="logo"] {
 
   
 @media screen and (max-width: 1024px) {
+
+    .nav_pages {
+        position: absolute;
+        right: -100%;
+        padding-left: 0;
+        background-color: #fff;
+        width: 100%;
+        border-radius: 10px;
+        transition: 0.3s;
+    }
+    
+    .nav_pages li {
+        display: none;
+    }
+        
     .main {
         margin-top: 50px;
         margin-left: 0px;
@@ -280,38 +647,11 @@ img[id="logo"] {
         margin-bottom: 60px;
     }
 
-    .sidebar {
-        display: none;
+    .inputContainer h2 {
+        top: 60%;
+        font-size: 6.5vw;
     }
     
-    label {
-        display: block;
-    }
-
-    #toggle:checked + .sidebar {
-        display: block;
-    }
-
-    .Glucose h2 {
-        top: 60%;
-        font-size: 6.5vw;
-    }
-
-    .Exercise h2 {
-        top: 60%;
-        font-size: 6.5vw;
-    }
-
-    .Weight h2 {
-        top: 60%;
-        font-size: 6.5vw;
-    }
-
-    .Insulin h2{
-        top: 60%;
-        font-size: 6.5vw;
-    }
-
     .inputDataItems {
         height: 400px;
     }
@@ -338,6 +678,10 @@ img[id="logo"] {
         top: 80px;
     }
 
+    .logContainer {
+        align-items: center;
+    }
+
 }
 
 @media screen and (max-width: 375px) {
@@ -357,23 +701,229 @@ img[id="logo"] {
         margin-bottom: 40px;
     }
 
-    .Glucose h2 {
+    .inputContainer h2 {
         top: 47%;
         font-size: 10vw;
     }
 
-    .Exercise h2 {
-        top: 47%;
-        font-size: 10vw;
-    }
+}
 
-    .Weight h2 {
-        top: 47%;
-        font-size: 10vw;
-    }
+/* profile */
 
-    .Insulin h2{
-        top: 47%;
-        font-size: 10vw;
+#yourProfile {
+    color: var(--darkBlue);
+    margin-left: 40px;
+    margin-top: 100px;
+}
+
+@media screen and (max-width: 375px) {
+    #yourProfile {
+        margin-top: 50px;
     }
 }
+
+.patientCardContainer {
+    padding-top: 20px;
+    margin-bottom: 30px;
+}
+
+
+.patientCardBox {
+    width: 83%;
+    height: 600px;
+    padding: 10px;
+    border-radius: 25px;
+    background: var(--lightBlue);
+    margin: 0 auto;
+    background-image: url("../fingerprint.png");
+}
+
+#fingerprintImage {
+    position: absolute;
+    width: 300px;
+    z-index: 1;
+    justify-self: center;
+}
+
+
+.patientCardBox h4, h5 {
+    margin: 0px;
+    z-index: 2;
+    text-align: center;
+}
+
+.patientCardBox h4 {
+    margin-top: 20px;
+    color: var(--darkBlue);
+    font-size: 38px;
+}
+
+.patientCardBox h5 {
+    color: var(--darkBlue);
+    font-size: 20px;
+    font-weight: 200;
+    margin-bottom: 30px;
+}
+
+.patientCardBox h3, p {
+    color: var(--darkBlue);
+    font-size: 16px;
+    margin-left: 20px;
+    z-index: 2;
+}
+
+.patientCardBox h3 {
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.patientCardBox p {
+    font-weight: 200;
+    margin-bottom: 30px;
+}
+
+.editableInformationContainer {
+   text-align: center;
+    
+}
+
+.currentShortBio {
+    max-width: 60%;
+    margin: 0 auto;
+    color: var(--darkBlue);
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.updateShortBioText {
+    color: var(--darkBlue);
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 30px;
+}
+    
+#shortBio {
+    border-radius: 20px;
+    border: 3px solid var(--darkBlue); 
+    height: 80px;
+    width: 60%;
+    padding-top: 8px;
+    padding-left: 10px;
+    font-size: 20px;
+    font-family: Lexend Deca; 
+}
+
+#saveButton {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    width: 40%;
+    max-width: 400px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid var(--darkBlue); 
+    background-color: var(--darkBlue);
+    color: var(--white);
+    height: 30px;
+    font-size: 20px;
+}
+
+@media screen and (min-width: 1024px){
+.profileContainer {
+    display: flex;
+}
+
+.patientCardContainer {
+    flex: 1;
+}
+
+.editableInformationContainer {
+    padding-top: 150px;
+    flex: 0 1 50%;
+}
+}
+
+/* modal popup */
+
+.popup-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.7s opacity 1s;
+}
+
+.bg-active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup {
+    width: 280px;
+    background: white;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: black;
+    visibility: hidden;
+    transition: transform 0.3s, top 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 3, 0.2);
+}
+
+.open-popup {
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup img {
+    width: 100px;
+    margin-top: -50px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.popup h3 {
+    font-size: 38px;
+    margin: 30px 0px 10px;
+    color: #2C68AD;
+}
+
+.popup p {
+    font-size: 18px;
+}
+
+#ok-button.orange-button {
+    width: 100%;
+    padding: 10px 60px;
+    border: 0;
+    outline: none;
+    font-size: 20px;
+    border-radius: 20px;
+}
+
+
+/* set mode*/
+:root {
+    --white: #ffffff;
+    --darkBlue: #2C68AD;
+    --lightBlue: #E4EFFE;
+    --black: #000000;
+    }
+    
+    .dark-theme {
+    --white: #0C131C;
+    --darkBlue: #f9f9f9;
+    --lightBlue: #5c636e;
+    --black: #ffffff;
+    }

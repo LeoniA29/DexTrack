@@ -1,0 +1,112 @@
+{{!< main}}
+<!-- Navigation bar at top of webpage -->
+<div class="navbar">
+    <div class="dropdown">
+        <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}} <img src="/chevron-down.png"></button>
+        <div class="dropdown-content">
+            <a href="/clinician/patientComments">Patient comments</a>
+            <a href="/about-diabetes">About Diabetes</a>
+            <a href="/about-dextrack">About DexTrack</a>
+            <a href="/clinician/change-password">Update password</a>
+
+            <form action="/clinician/logout" method="POST">
+                <button id="sign-out">Sign out</button>
+            </form>
+        </div>
+    </div>
+    <div class="icons">
+        <a href="/clinician/dashboard"><img src="/house-solid.svg" id="icon" class="change-color"></a>
+        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color nightmode"></a>
+        <a><img src="/Line.png" id="nav-line"></a>
+        <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
+    </div>
+</div>
+
+<ul class="breadcrumb">
+  <li><a href="/clinician/dashboard">Patient list</a></li>
+  <li>New patient</li>
+</ul>
+
+<div class="sections">
+
+    <!-- Each section corresponds to each segment of the patient information in the webpage -->
+    <section class="segment" id="register">
+        <form action="/clinician/registerPatient"method="POST" name="form">
+        <div class="col-50">
+            <h3>Create account</h3>
+            <div class="fname">
+                <label for="fname">First name<br></label>
+                <input type="text" placeholder="First name" name="first_name" required/>
+            </div>
+            <div class="lname">
+                <label for="lname">Last name<br></label>
+                <input type="text" placeholder="Last name" name="last_name" required/>
+            </div>
+            <div class="email">
+                <label for="email">Email<br></label>
+                <input type="text" placeholder="Email address" name="email" required/>
+            </div>
+        </div>
+
+        <div class="col-50">
+            <h3>Personal Details</h3>
+            <div class="sex">
+                <label for="sex">Sex<br></label>
+                <select name="sex">
+                    <option>Female</option>
+                    <option>Male</option>
+                    <option>Prefer not to answer</option>
+                </select>
+            </div>
+            <div class="dob">
+                <label for="dob">Date of Birth<br></label>
+                <input type="date" placeholder="Date of Birth" name="dob" required/>
+            </div>
+            <div class="phone">
+                <label for="phone">Phone Number<br></label>
+                <input type="text" placeholder="Phone Number" name="phone" required/>
+            </div>
+            <!--
+            <div class="mstate">
+                <label for="mstate">Marital State<br></label>
+                <input type="text" placeholder="Marital State" name="mstate"/>
+            </div> -->
+            <div class="occupation">
+                <label for="occupation">Occupation<br></label>
+                <input type="text" placeholder="Occupation" name="occupation" required/>
+            </div>
+            <div class="row-form">
+                <!--<div class="insurance">
+                    <label for="insurance">Insurance<br></label>
+                    <input type="text" placeholder="Insurance" name="insurance"/>
+                </div> -->
+
+                <div class="address">
+                    <label for="address">Address<br></label>
+                    <input type="text" placeholder="Address" name="address" required/>
+                </div>
+                <div class="postcode">
+                    <label for="postcode">Postcode<br></label>
+                    <input type="text" placeholder="Postcode" name="postcode" required/>
+                </div>
+            </div>
+        </div>
+        <button class="orange-button" id="send" onclick="openPopupMulti()">Submit</button>
+        <div class="popup-bg" id="popup-bg">
+            <div class="popup" id="popup">
+                <img src="/Loading-dots.gif">
+                <h3>Processing...</h3>
+                <p>Press the button to begin data review.</p>
+                <button class="orange-button" id="ok-button" onclick="closePopupMulti()">OK</button>
+            </div>
+        </div>
+        </form>
+    </section>
+
+</div>
+
+{{#each flash}}
+<p class="alert">{{this.msg}}</p>
+{{/each}}
+
+

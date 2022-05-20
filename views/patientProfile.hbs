@@ -1,0 +1,68 @@
+{{!< patientLayout}}
+
+{{! displays today's date information and patient's first name}}
+<div class="dashboardInformation">
+    <h2 id="date">
+        {{date.[0].value}}, {{date.[2].value}} {{date.[4].value}} {{date.[6].value}}
+    </h2>
+</div>
+
+<div>
+    <h1 id="yourProfile">Your Profile</h1>
+</div>
+
+{{#with patient}}
+
+    <div class="profileContainer">
+        <div class="patientCardContainer">
+
+            <div class="patientCardBox">
+                
+                <h4>DexTrack</h4>
+                <h5>Patient Card</h5>
+                <h3>Given Name</h3>
+                <p>{{first_name}}</p>
+                <h3>Family Name</h3>
+                <p>{{last_name}}</p>
+                {{#with (showDate dob)}}
+                <h3>DOB</h3>
+                <p>{{this.[2].value}} {{this.[4].value}} {{this.[6].value}}</p>
+                {{/with}}
+                <h3>Address</h3>
+                <p>{{address}} VIC {{postcode}}</p>
+                <h3>Email</h3>
+                <p> {{email}}</p>
+            </div>
+
+        </div>
+    
+
+    <br>
+
+    <div class="editableInformationContainer">
+            <h2 class="currentShortBio">
+                {{short_bio}}
+            </h2>
+            <h2 class="updateShortBioText">Update Short Bio</h2>
+            <form method="POST" name="form">
+                <textarea type="text" id="shortBio" placeholder="Update bio..." class="testBio req-fill" name="short_bio" required></textarea>
+                <input type="submit" id="saveButton" value="Click to Save!" onclick="openPopup()"></input>
+                <div class="popup-bg" id="popup-bg">
+                    <div class="popup" id="popup">
+                        <img src="/tick.png">
+                        <h3>Updated!</h3>
+                        <p>Your bio has been successfully updated.</p>
+                        <button class="orange-button" id="ok-button" onclick="closePopup()">OK</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+   
+{{/with}}
+
+{{#each flash}}
+<p class="alert">{{this.msg}}</p>
+{{/each}}
+
+ 

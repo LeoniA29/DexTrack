@@ -6,7 +6,6 @@
         <meta name ="viewport" content="width=device-width, initial-scale=1.0">
         <title>About Diabetes</title>
         <link href='https://fonts.googleapis.com/css?family=Lexend Deca' rel='stylesheet'>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <link href="/css/style.css" rel="stylesheet">
     </head>
 
@@ -19,14 +18,38 @@
             <!-- Navigation bar at top of webpage -->
             <header>
                 <nav class="nav_bar">
-                    <img id="blob1" src ="blob1.png">
-                    <a href="aboutDextrack.html"><img id="logo" src="logo.png"></a>
+                    <a href="/about-dextrack"><img id="logo" src="/logo.png"></a>
                     <ul class="nav_pages">
-                        <li><a href="aboutDextrack.html">About DexTrack</a></li>
-                        <li><a href="aboutDiabetes.html">About Diabetes</a></li>
-                        <li><a href="#"><button>Sign In</button></a></li>
+                        <li class="nav_item"> 
+                            <a href="/about-dextrack" class="nav_link">About DexTrack</a>
+                        </li>
+                        <li class="nav_item">
+                            <a href="/about-diabetes" class="nav_link">About Diabetes</a>
+                        </li>
+
+                       {{#if (isPatient logged role)}}
+                            <li class="nav_item">
+                                <a href="/patient/dashboard" class="nav_link"><button>Dashboard</button></a>
+                            </li>
+                            <form action="/patient/logout" method="POST">
+                                <li class="nav_item"><button>Sign Out</button> </li>
+                            </form>
+                        {{else}} {{#if (isClinician logged role)}}
+                            <li class="nav_item">
+                                <a href="/clinician/dashboard" class="nav_link"><button>Dashboard</button></a>
+                            </li>
+                            <form action="/clinician/logout" method="POST">
+                                <li class="nav_item"><button>Sign Out</button> </li>
+                            </form>
+                        {{else}}
+                            <li class="nav_item"><a href="/" class="nav_link"><button>Sign In</button></a></li>
+                            
+                        {{/if}}
+                        {{/if}}
+                        
+
                     </ul>
-                    <div class="menu1">
+                    <div class="menu">
                         <span class="bar"></span>
                         <span class="bar"></span>
                         <span class="bar"></span>
@@ -65,7 +88,7 @@
                         <a href="https://www.diabetesaustralia.com.au/about-diabetes/what-is-diabetes/" target="_blank"><button>Click to Learn More</button></a>
                     </div>
                     <div class="image_content">
-                        <img src="vector3.png">
+                        <img src="/vector3.png">
                     </div>
                 </div>
             </section>
@@ -73,7 +96,7 @@
             <section class="content_diabetes diabetes1">
                 <div class="content content_bg content_right">
                     <div class="image_content">
-                        <img src="vector4.png">
+                        <img src="/vector4.png">
                     </div>
                     <div class="texttitle text_bg">
                         <h2 class="subtitle">ABOUT DIABETES</h2>
@@ -99,7 +122,7 @@
                         <a href="https://www.diabetesaustralia.com.au/about-diabetes/type-2-diabetes/" target="_blank"><button>Click to Learn More</button></a>
                     </div>
                     <div class="image_content">
-                        <img src="vector5.png">
+                        <img src="/vector5.png">
                     </div>
                 </div>
             </section>
@@ -107,7 +130,7 @@
             <section class="content_diabetes gestational_diabetes">
                 <div class="content content_bg content_right">
                     <div class="image_content">
-                        <img src="vector6.png">
+                        <img src="/vector6.png">
                     </div>
                     <div class="texttitle text_bg">
                         <h2 class="subtitle">ABOUT DIABETES</h2>
@@ -142,5 +165,6 @@
             </footer>
         </div>
     </body>
-    <script src="script.js"></script>
+     <script src="/javascript/ham.js"></script>
+    <script src="/javascript/menu.js"></script>
 </html>

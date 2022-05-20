@@ -1,20 +1,32 @@
 {{!< main}}
-    <!-- Navigation bar at top of webpage -->
-    
+<!-- Navigation bar at top of webpage -->
 <div class="navbar">
     <div class="dropdown">
         <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}} <img src="/chevron-down.png"></button>
         <div class="dropdown-content">
-            <a href="#">Patient comments</a>
-            <a href="#">Sign out</a>
+            <a href="/clinician/patientComments">Patient comments</a>
+            <a href="/about-diabetes">About Diabetes</a>
+            <a href="/about-dextrack">About DexTrack</a>
+            <a href="/clinician/change-password">Update password</a>
+
+            <form action="/clinician/logout" method="POST">
+                <button id="sign-out">Sign out</button>
+            </form>
         </div>
     </div>
     <div class="icons">
-        <a href="#"><img src="/house-solid.svg" id="icon" class="change-color"></a>
-        <a href="#"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
-        <a><img src="/Line.png" height="28"></a>
-        <a href="#"><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
+        <a href="/clinician/dashboard"><img src="/house-solid.svg" id="icon" class="change-color"></a>
+        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color nightmode"></a>
+        <a><img src="/Line.png" id="nav-line"></a>
+        <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
     </div>
+</div>
+
+<!-- Splash screen -->
+<div class="intro">
+    <h1 class="logo-header">
+        <img class="dextrack-logo" src="/dextrack_logo.png">
+    </h1>
 </div>
 
 <ul class="breadcrumb">
@@ -26,24 +38,31 @@
      <!-- Each section corresponds to each segment of the patient information in the webpage -->
     <section class="patientList">
         <div class="sticky-bar">
-            <button class="orange-button" onclick="location.href='/clinician/{{clinicianItem._id}}/register'">Add New Patient</button>
-            <div class="blue-button" id="sort">
-                <button class="dropbtn">Sort by <img src="/chevron-down.png"></button>
-                <div class="sort-by">
-                    <a href="#">Name ascending</a>
-                    <a href="#">Name descending</a>
+            <button class="orange-button" onclick="location.href='/clinician/registerPatient'">Add New Patient</button>
+            <!-- Place to run sort and search functions (future extension)
+            <form action="/clinician/searchPatient" method="POST">  
+                <div class="blue-button" id="sort">
+                    <button class="dropbtn">Sort by <img src="/chevron-down.png"></button>
+                    <div class="sort-by">
+                        <a href="#">Name ascending</a>
+                        <a href="#">Name descending</a>
+                    </div>
                 </div>
-            </div>
-            <div class="search-bar">
-                <label for="searchbar"><img src="/magnifying-glass-solid.svg" class="change-color"></label>
-                <input type="text" placeholder="Search" name="search">
-            </div>
+                <div class="search-bar">
+                    <label for="searchbar"><img src="/magnifying-glass-solid.svg" id="search-img" class="change-color"></label>
+                    <input type="text" placeholder="Search" name="search">
+                </div>
+            </form>  
+            -->
         </div>
 
         <!-- Iterate through testData to correctly load patient list of clinician -->
         <div class="scroll">
             {{#if testData}}
                 {{#each testData}}
+                <form action="/clinician/clinicianViewPatient" method="POST">
+                    <input type="hidden" name="patient" value={{this.[0]._id}}/>
+                    <input type="hidden" type="submit"/>
                     <button class="entry">
                         <div class="col" id="overflow"><span class="attribute">Patient</span><br><strong>{{this.[0].first_name}} {{this.[0].last_name}}</strong></div>
                             
@@ -52,13 +71,17 @@
 
                                 <!-- Checks if data should be highlighted because it exceeds threshold -->
                                 {{#if (exceedThreshold this.[2] this.[1].glucose_data) }}
-                                    <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong id="threshold-check">{{this.[1].glucose_data.data_entry}} nmol/L</strong></div>
+                                    <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong id="threshold-check">{{this.[1].glucose_data.data_entry}} mmol/L</strong></div>
                                 {{else}}
-                                    <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong>{{this.[1].glucose_data.data_entry}} nmol/L</strong></div>
+                                    <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong>{{this.[1].glucose_data.data_entry}} mmol/L</strong></div>
                                 {{/if}}
                                 
                             {{else}}
-                                <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong>Not filled</strong></div>
+                                    {{#if (isRequired null this.[2] "glucose")}}
+                                        <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong>required, unfilled</strong></div>
+                                    {{else}}
+                                        <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong>-</strong></div>
+                                    {{/if}}
                             {{/if}}
 
                             {{#if (filledToday this.[1].weight_data)}}
@@ -68,7 +91,11 @@
                                     <div class="col"><span class="attribute">Weight</span><br><strong>{{this.[1].weight_data.data_entry}} kg</strong></div>
                                 {{/if}}
                             {{else}}
-                                <div class="col"><span class="attribute">Weight</span><br><strong>Not filled</strong></div>
+                                    {{#if (isRequired null this.[2] "weight")}}
+                                        <div class="col"><span class="attribute">Weight</span><br><strong>required, unfilled</strong></div>
+                                    {{else}}
+                                        <div class="col"><span class="attribute">Weight</span><br><strong>-</strong></div>
+                                    {{/if}}                           
                             {{/if}}
 
                             {{#if (filledToday this.[1].insulin_data)}}
@@ -78,7 +105,11 @@
                                     <div class="col"><span class="attribute">Dose of Insulin</span><br><strong>{{this.[1].insulin_data.data_entry}} dose</strong></div>
                                 {{/if}}
                             {{else}}
-                                    <div class="col"><span class="attribute">Dose of Insulin</span><br><strong>Not filled</strong></div>
+                                    {{#if (isRequired null this.[2] "insulin")}}
+                                        <div class="col"><span class="attribute">Dose of Insulin</span><br><strong>required, unfilled</strong></div>
+                                    {{else}}
+                                        <div class="col"><span class="attribute">Dose of Insulin</span><br><strong>-</strong></div>
+                                    {{/if}}                                  
                             {{/if}}
 
 
@@ -89,10 +120,14 @@
                                     <div class="col"><span class="attribute">Exercise</span><br><strong>{{this.[1].steps_data.data_entry}} steps</strong></div>
                                 {{/if}}
                             {{else}}
-                                <div class="col"><span class="attribute">Exercise</span><br><strong>Not filled</strong></div>
+                                    {{#if (isRequired null this.[2] "steps")}}
+                                        <div class="col"><span class="attribute">Exercise</span><br><strong>required, unfilled</strong></div>
+                                    {{else}}
+                                        <div class="col"><span class="attribute">Exercise</span><br><strong>-</strong></div>
+                                    {{/if}}                                    
                             {{/if}}
-
                     </button>
+                </form>
                 {{/each}}
             {{else}}
                     <br>
@@ -102,3 +137,4 @@
     </section>
 
 </div>
+

@@ -10,11 +10,12 @@ body {
     padding: 0;
     width: 100%;
     background-color: #FFFFFF;
+    overflow-x: hidden;
 }
 
 section {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 .sections div {
@@ -55,6 +56,10 @@ img[id="blob1"] {
     list-style: none;
 }
 
+.nav_item {
+    margin-left: 5rem;
+}
+
 .nav_pages li, .nav_pages button { 
     font-weight: 600;
     font-size: 20px;
@@ -76,7 +81,7 @@ li, a, button {
     padding: 10px 30px;
 }
 
-.nav_bar a#pull, .menu1 {
+.menu {
     display: none;
 }
 
@@ -255,6 +260,7 @@ p {
 .info_vector img {
     width: 95%;
     height: auto;
+    z-index: 1;
 }
 
 
@@ -407,28 +413,65 @@ button:hover {
 
 /* media screens */
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1380px) {
     
     /* navbar */
-    /* note: the current menu of the navbar is static, javascript not implemented yet */
+
     .nav_pages {
-        position: absolute;
-        right: -100%;
-        padding-left: 0;
+        position: fixed;
+        right: -110%;
+        top: 4rem;
+        flex-direction: column;
         background-color: #fff;
         width: 100%;
         border-radius: 10px;
+        text-align: center;
         transition: 0.3s;
+        box-shadow:
+            0 10px 27px rgba(0, 0, 0, 0.05);
+        z-index: 99;
     }
-    
-    .nav_pages li {
-        display: none;
+   
+    .nav_pages.active {
+        right: 0;
     }
         
-    .menu1 {
+    .nav_item {
+        margin: 2.5rem 0;
+    }
+
+    .menu {
+        right: 0;
+        margin-top: 75px;
+        margin-right: 25px;
         display: block;
         cursor: pointer;
-        padding: 2em;
+        padding: 0.6em;
+        border-radius: 20px;
+        position: fixed;
+        background-color: #FB6E59;
+    }
+
+    img[id="logo"] {
+        margin-top: -10px;
+    }
+
+
+    .menu.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    section {
+        padding-top: 75px;
+        padding-bottom: 75px;
     }
 
     /* About DexTrack */
@@ -457,6 +500,16 @@ button:hover {
 }
 
 @media screen and (max-width: 375px) {
+
+    img[id="logo"] {
+        padding-left: 0;
+        height: 50px;
+        top: 0;
+    }
+
+    section {
+        padding-bottom: -50px;
+    }
 
     /* About Diabetes */
 
@@ -514,9 +567,16 @@ button:hover {
 
     /* About DexTrack */
 
-    img[id="logo"] {
-        padding-left: 0;
-        height: 50px;
+    .nav_bar {
+        z-index: 99;
+    }
+
+    html, body {
+        overflow-x: hidden;
+    }
+    
+    body {
+        position: relative;
     }
 
     .about_info, .about_products{
