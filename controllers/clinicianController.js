@@ -15,7 +15,7 @@ const formatter = new Intl.DateTimeFormat('en-au', {
     timeZone: 'Australia/Melbourne'
   });
 
-  const todaysDate = formatter.formatToParts(new Date()); // today's date constant 
+const todaysDate = formatter.formatToParts(new Date()); // today's date constant 
 
 // middleware to compare full dates (date, month, year)
 const compareDates = (clinicianDate)=> {

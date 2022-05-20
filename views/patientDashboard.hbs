@@ -9,18 +9,63 @@
     </h2>
     <h1 id ="welcome">Hi, {{patient.first_name}} </h1>
 
+<!-- Engagement Score -->
+    <div class="engagementContainer">
+        
+        <div class="slides fade" id="engagementSlide">
+            <div class="engagementScore">
+                <img src="/Upper-badge.png" id="badgeImage">
+                <h2 id="engagementScoreValue">{{score}}</h2>
+            </div>
+
+            <div class="engagementDescription"> 
+                <h2 id="engagementScoreText">Engagement Score</h2>
+                <p id="engementScoreDescription">The percentage of data entries that where carried out as requested by the patient's clinician</p>
+            </div>
+
+        </div>
+
+        <div class="slides fade" id="supportSlide">
+            <div class="clinicianImage">
+                <img src="/clinician-01.png" id="clinicianVectorImage">
+            </div>
+            <div class="clinicianMessage">
+                <h2 id="yourClinicianSaysText">Your Clinician Says</h2>
+                <h2 id="clinicianMessageText">
+                    "
+                    {{#with (checkNote note)}}
+                        {{this}}
+                    {{/with}}
+                    "
+                </h2>
+            </div>
+        </div>
+
+    </div>
+    <br>
+
+    <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+    </div>
+
+
+<!--
     <h1 id ="welcome">
         ES: {{score}}
     </h1>
+    -->
 
     {{#if (getBadge score)}}
         <h2 id="date">Display Badge Here</h2>
     {{/if}}
 
+<!--
     <h2 id="date">
         {{#with (checkNote note)}}
             {{this}}
         {{/with}}
+        -->
     </h2>
 </div>
     
@@ -84,10 +129,6 @@
         </div>
 
     </div>
-
-       <form method="POST">
-        <button>Logout</button>
-        </form>
 
 
     

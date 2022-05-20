@@ -27,7 +27,7 @@ const data = new mongoose.Schema({
 
 // schema for data set
 const data_set = new mongoose.Schema({
-   set_date: {type: Date, required: true},
+   set_date: {type: Date, required: true, default: new Date()},
    glucose_data: {type: data, default: null},
    steps_data: { type: data, default: null},
    weight_data: { type: data, default: null},
@@ -52,7 +52,7 @@ const patientSchema = new mongoose.Schema({
    postcode: {type: String, required: true},
    short_bio: {type: String, default: "Tell us a bit about yourself!"},
 
-   clinician_message: {type: String, default: ''}, // this is unique from the clinician to each patient
+   clinician_message: {type: String, default: " "}, // this is unique from the clinician to each patient
    clinician_notes: [note], // array of objects for the patient defined in the schema below
    threshold_list: [threshold], // array of thresholds objects
    input_data: [data_set] // array of data_set objects

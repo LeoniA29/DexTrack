@@ -1,0 +1,404 @@
+/* body design */
+body {
+    background-color: #C3E1FF;
+}
+
+header, body{
+    font-family: Lexend Deca;
+}
+
+/* navigation bar */
+
+img[id="logo"] {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: auto;
+    height: 60px;
+    z-index: 2;
+    padding: 20px;
+    margin-left: 20px;
+}
+
+img[id="cloud"] {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: auto;
+    height: 60px;
+    z-index: 2;
+    padding: 20px;
+    margin-left: 20px;
+}
+
+.nav_bar, .nav_pages {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+    margin-top: 0px;
+    margin-right: 10px;
+}
+
+.nav_pages {
+    list-style: none;
+}
+
+.nav_item {
+    margin-left: 5rem;
+}
+
+.nav_pages li, .nav_pages button { 
+    font-weight: 600;
+    font-size: 20px;
+    padding: 0 0.25em;
+}
+
+li, a {
+    font-family: Lexend Deca;
+    color: black;
+    text-decoration: none;
+}
+
+button {
+    font-family: Lexend Deca;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.5s ease 0s;
+    color: #FFFFFF;
+    font-size: 2vh;
+    background-color: #FB6E59;
+    padding: 10px 15px;
+}
+
+.nav_pages li a {
+    transition: all 0.5s ease 0s;
+}
+
+.nav_bar button {
+    background-color:#2C68AD;
+    padding: 10px 20px;
+}
+
+.menu {
+    display: none;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: #101010;
+}
+
+/* hovers */
+
+#top_button:hover {
+    background-color: #555;
+}
+
+.nav_bar button:hover {
+    background-color:#FB6E59;
+}
+
+button:hover {
+    background-color:#2C68AD;
+}
+
+.nav_pages li a:hover {
+    color: #2C68AD;
+}
+
+
+.setPassword {
+    background-color: #DDDDDD;
+}
+
+.error {
+    background-color: #F2F2F2;
+}
+
+.cloud-bg {
+    width: 50%;
+    z-index: -1;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+}
+
+/* error pages */
+.error-icon {
+    width: 100pt;
+    margin: 100pt auto 0;
+    display: block;
+}
+
+.homeBack-btn {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    text-align: center;
+    background-color: #FB6E5A;
+    color: #FFFFFF;
+    padding: 10px 15px 10px 15px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 0 auto;
+    display: block;
+    width: fit-content;
+    text-decoration: none;
+}
+
+h1 {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 200;
+    font-size: 72pt;
+    color: #FB6E5A;
+    text-align: center;
+}
+
+h2 {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 300;
+    font-size: 16pt;
+    color: #2D68AD;
+    text-align: center;
+}
+
+h3 {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 300;
+    font-size: 12pt;
+    color: #000000;
+    text-align: center;
+}
+
+img[id="logo"] {
+    top: 0;
+    left: 0;
+    position: absolute;
+    padding: 20px;
+    margin-left: 20px;
+    padding-left: 0;
+    height: 50px;
+    cursor: pointer;
+}
+
+/* sign-in pages */
+h4 {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 500;
+    
+    font-size: 16pt;
+    color: #2D68AD;
+    text-align: center;
+}
+
+h5 {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 400;
+    font-size: 12pt;
+    color: #000000;
+    text-align: center;
+}
+
+.forgot-pass {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #2D68AD;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    text-align: left;
+    margin-right: 20px;
+}
+
+.sign-in {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-weight: bolder;
+
+} 
+
+#form {
+    margin-top: 15px;
+}
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+  
+input[type=email], [type=password] {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 15px;
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    text-align: left;
+    color: black;
+    width: 250px;
+}
+  
+.row label {
+    font-family: 'Lexend Deca', sans-serif;
+    font-size: 24;
+    font-weight: 200;
+    font-style: normal;
+    text-align: left;
+    color: #000000;
+    margin-bottom: 10px;
+    display: block
+}
+  
+.col-50 {
+    -ms-flex: 50%;
+    flex: 50%;
+}
+
+.submit-btn {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    background-color: #FB6E5A;
+    color: #FFFFFF;
+    padding: 10px 15px 10px 15px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+    
+.submit-btn:hover, .cancel-btn:hover, .as-patient img:hover, .as-clinician img:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.cancel-btn {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    background-color: #2D68AD;
+    color: #FFFFFF;
+    padding: 10px 15px 10px 15px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.as-patient img, .as-clinician img {
+    width: 125px;
+    background-color: #FFFFFF;
+    border: 4px solid #FB6E5A;
+    border-radius: 30px;
+}
+
+.as-patient, .as-clinician {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.as-clinician {
+    margin-left: 50px;
+}
+    
+/* [on small screen] */
+@media (max-width: 1000px) {
+    /* sign-in pages */
+    .row {
+        flex-direction: column-reverse;
+    }
+
+    .cloud-bg {
+        display: none;
+    }
+
+    .as-patient img, .as-clinician img {
+        width: 125px;
+    }
+
+    .as-patient, .as-clinician {
+        display: block;
+        margin-left: 0px;
+    }
+
+    /* error pages */
+    h1 {
+        font-size: 48pt;
+    }
+
+    .error-icon {
+        width: 75pt;
+        margin-top: 75pt;
+    }
+
+    .nav_pages {
+        position: fixed;
+        right: -110%;
+        top: 4rem;
+        flex-direction: column;
+        background-color: #fff;
+        width: 100%;
+        border-radius: 10px;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow:
+            0 10px 27px rgba(0, 0, 0, 0.05);
+        z-index: 99;
+        margin-top: 20px;
+    }
+   
+    .nav_pages.active {
+        right: 0;
+    }
+        
+    .nav_item {
+        margin: 2.5rem 0;
+    }
+
+    .menu {
+        right: 0;
+        margin-top: 75px;
+        margin-right: 25px;
+        display: block;
+        cursor: pointer;
+        padding: 0.6em;
+        border-radius: 20px;
+        position: fixed;
+        background-color: #FB6E59;
+    }
+
+    img[id="logo"] {
+        margin-top: -10px;
+    }
+
+    .menu.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
+

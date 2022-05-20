@@ -11,6 +11,7 @@ module.exports = function(handlebars) {
             hourCycle: 'h23',
             timeZone: 'Australia/Melbourne'
         });
+
         return (formatter.formatToParts(date))
     };
 }

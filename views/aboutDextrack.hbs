@@ -20,29 +20,44 @@
             <!-- Navigation bar at top of webpage -->
             <header>
                 <nav class="nav_bar">
-                    <img id="blob1" src="/blob1.png">
                     <a href="/about-dextrack"><img id="logo" src="/logo.png"></a>
                     <ul class="nav_pages">
-                        <li><a href="/about-dextrack">About DexTrack</a></li>
-                        <li><a href="/about-diabetes">About Diabetes</a></li>
+                        <li class="nav_item"> 
+                            <a href="/about-dextrack" class="nav_link">About DexTrack</a>
+                        </li>
+                        <li class="nav_item">
+                            <a href="/about-diabetes" class="nav_link">About Diabetes</a>
+                        </li>
 
-                        {{#if logged}}
-                        <li><a href="/patient/dashboard"><button>Dashboard</button></a></li>
-                        <form method="POST">
-                            <li><button>Sign Out</button></li>
-                        </form>
+                        {{#if (isPatient logged role)}}
+                            <li class="nav_item">
+                                <a href="/patient/dashboard" class="nav_link"><button>Dashboard</button></a>
+                            </li>
+                            <form action="/patient/logout" method="POST">
+                                <li class="nav_item"><button>Sign Out</button> </li>
+                            </form>
+                        {{else}} {{#if (isClinician logged role)}}
+                            <li class="nav_item">
+                                <a href="/clinician/dashboard" class="nav_link"><button>Dashboard</button></a>
+                            </li>
+                            <form action="/clinician/logout" method="POST">
+                                <li class="nav_item"><button>Sign Out</button> </li>
+                            </form>
                         {{else}}
-                        <li><a href="/"><button>Sign In</button></a></li>
+                            <li class="nav_item"><a href="/" class="nav_link"><button>Sign In</button></a></li>
+                            
+                        {{/if}}
                         {{/if}}
 
                     </ul>
-                    <div class="menu1">
+                    <div class="menu">
                         <span class="bar"></span>
                         <span class="bar"></span>
                         <span class="bar"></span>
                     </div>
                 </nav>
             </header>
+
 
             <!-- Each section corresponds to each segment of information in the webpage -->
             <section class="info">
@@ -68,10 +83,13 @@
                     <div class="product_text">
                         <p>We help healthcare organisations digitally transform their care delivery by replacing manual, costly processes with automated and streamlined digital care pathways. Digital care pathways monitor, support and engage patients along their entire care journey, improving convenience and health outcomes while reducing waste and administritative burden.</p>
                         
-                        {{#if logged}}
+                        {{#if (isPatient logged role)}}
                         <a href="/patient/dashboard"><button>Return to Dashboard!</button></a>
+                        {{else}} {{#if (isClinician logged role)}}
+                        <a href="/clinician/dashboard"><button>Return to Dashboard!</button></a>
                         {{else}}
                         <a href="/"><button>Sign in to Access Features</button></a>
+                        {{/if}}
                         {{/if}}
                     </div>
                 </div>
@@ -126,5 +144,6 @@
         </div>
         
     </body>
-    <script src="/javasript/script.js"></script>
+    <script src="/javascript/script.js"></script>
+    <script src="/javascript/menu.js"></script>
 </html>

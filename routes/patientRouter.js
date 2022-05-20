@@ -37,6 +37,8 @@ patientRouter.get('/login', patientController.getPatientLoginPage)
 patientRouter.post('/login', passport.authenticate('local', 
     {successRedirect: '/patient/dashboard', failureRedirect: '/patient/login', failureFlash: true}))
 
+patientRouter.post('/logout', isAuthenticated, hasRole('patient'), patientController.patientLogout)
+
 patientRouter.get('/dashboard', isAuthenticated, hasRole('patient'), patientController.getPatientDashboard)
 patientRouter.post('/dashboard', patientController.patientLogout)
 
@@ -88,7 +90,7 @@ patientRouter.post('/profile', isAuthenticated,
 patientRouter.get('/change-password', isAuthenticated, hasRole('patient'), patientController.getPassPage)
 patientRouter.post('/change-password', isAuthenticated, 
 
-    body('password', 'Password is not strong enough').isStrongPassword(), // password must be strong   
+    body('password', 'Password is not strong enough').isStrongPassword().escape(), // password must be strong   
     
     patientController.updatePass)
 

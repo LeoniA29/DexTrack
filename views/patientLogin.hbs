@@ -1,38 +1,63 @@
-<!DOCTYPE html>
-
-<head> 
-    <meta charset="UTF-8"> 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <link rel="stylesheet" href="/css/stylesPatient.css">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Lexend Deca' rel='stylesheet'>
-    <html lang="en">
-    <title>Patient Login</title>
-    <!-- main layout for patient UI -->
+    <title>Sign In</title>
+    <link rel="stylesheet" href="/css/sign-in-styles.css">
 </head>
-
-            <nav class="nav_bar">
-                    <a href="/about-dextrack"><img id="nav_logo" src="/logo.png"></a>
+<body>
+    <!-- Navigation bar at top of webpage -->
+            <header>
+                <nav class="nav_bar">
+                    <a href="/about-dextrack"><img id="logo" src="/logo.png"></a>
                     <ul class="nav_pages">
-                        <li><a href="/about-dextrack">About DexTrack</a></li>
-                        <li><a href="/about-diabetes">About Diabetes</a></li>
-                        <li><a href="/"><button>Sign In</button></a></li>
+                        <li class="nav_item"> 
+                            <a href="/about-dextrack" class="nav_link">About DexTrack</a>
+                        </li>
+                        <li class="nav_item">
+                            <a href="/about-diabetes" class="nav_link">About Diabetes</a>
+                        </li>
+                        <li class="nav_item">
+                            <a href="/" class="nav_link"><button>Sign In</button></a>
+                        </li>
                     </ul>
+                    <div class="menu">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
                 </nav>
+            </header>
+    <main>
+        <img src="/clouds-02.png" class="cloud-bg">
+        <section class="sign-in">
+        <h4>Sign in</h4>
+        <br><br>
+            <div class="row">
+                <div class="container">
+                    <form action="/patient/login" method="POST">
 
-<form class="patient_login" action="/patient/login" method="post">
-    <div>
-        <h2>Email</h2>
-        <input id="username" name="username" type="email" required/>
-    </div>
-    <div>
-        <h2>Password</h2>
-        <input id="password" name="password" type="password" required />
-    </div>
-    <div>
-        <button type="submit" value="submit">Log In</button>
-    </div>
-</form>
+                    <div class="col-50">
+                        <div class="email-user">
+                            <label for="emailUser">Email</label>
+                            <input id="username" name="username" type="email" required/>
+                        </div>
+                        <div class="passwords">
+                            <label for="passwords">Password</label>
+                            <input id="password" name="password" type="password" required/>
+                        </div>
+                    </div>
+                    <button type="submit" value="submit" class="submit-btn">Log In </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main> 
+    
+</body>
+<script src="/javascript/menu.js"></script>
+
 
 {{#each flash}}
 <p class="alert">{{this}}</p>

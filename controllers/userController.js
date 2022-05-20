@@ -1,13 +1,26 @@
 // Function to retrieve About-Diabetes page
 const getAboutDiabetes = (req,res) => {
-    // User is logged in, so show "Dashboard" and "Sign Out" button
-    return res.render('aboutDiabetes', {logged: true})
+    if (req.user.role == "patient") {
+        // User is logged in, so show "Dashboard" and "Sign Out" button
+        return res.render('aboutDiabetes', {logged: true, role: "patient"})
+    }
+    else {
+        // User is logged in, so show "Dashboard" and "Sign Out" button
+        return res.render('aboutDiabetes', {logged: true, role: "clinician"})
+    }
 }
 
 // Function to retrieve About-Dextrack page
 const getAboutDexTrack = (req,res) => {
-    // User is logged in, so show "Dashboard" and "Sign Out" button
-    return res.render('aboutDexTrack', {logged: true})
+
+    if (req.user.role == "patient") {
+        // User is logged in, so show "Dashboard" and "Sign Out" button
+        return res.render('aboutDexTrack', {logged: true, role: "patient"})
+    }
+    else {
+        // User is logged in, so show "Dashboard" and "Sign Out" button
+        return res.render('aboutDexTrack', {logged: true, role: "clinician"})
+    }
 }
 
 // Function to logout patient with the "Sign Out" button

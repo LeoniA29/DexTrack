@@ -4,7 +4,6 @@ const {Patient, Data, DataSet} = require('../models/patient')
 // Imported libraries used
 const SALT_FACTOR = 10 // bcrypt salt constant
 const bcrypt = require('bcryptjs') // use bcrypt
-const he = require('he') // use he 
 const {validationResult} = require('express-validator'); // use express-validator
 
 // UTC -> Melbourne Timezone formatter 
@@ -39,7 +38,7 @@ const compareDates = (patientDate)=> {
 
 // Middleware to calculate a patient's engagement score 
 // Returns the latest patient's engagement score
-const calculateES = (inputData, sameDay) => {
+const calculateES = (inputData, diff) => {
     
     const total = inputData.length // total of days since patient first logged in
     var accum = 0 // counter of days where patient inputted at least one data
@@ -57,11 +56,8 @@ const calculateES = (inputData, sameDay) => {
         }
     }
             
-    if (sameDay) { 
-        return (Math.round((accum/total)*100)) // session is still within today
-    } else {
-        return (Math.round((accum/(total+1))*100)) // new day
-    }  
+    return (Math.round((accum/(total+diff))*100)) 
+    
 }
 
 // Function which renders patient's login page 
@@ -82,7 +78,7 @@ const getPatientProfile = (req, res) => {
 
 // Function to retrieve patient's password page change
 const getPassPage = (req,res) => {
-    return res.render('changePass', {flash: req.flash('errors')})
+    return res.render('patientPass', {flash: req.flash('errors')})
 }
 
 // Function to retrieve a patient's dashboard during their current session
@@ -90,7 +86,7 @@ const getPatientDashboard = async (req, res) => {
 
     try {
         // clinician message for the current patient 
-        const message = req.user.clinician_message.note_content;
+        const message = req.user.clinician_message
 
         const total = req.user.input_data.length // total of days since patient first logged in
 
@@ -98,7 +94,7 @@ const getPatientDashboard = async (req, res) => {
             
             // calculate today's engagement score of the current patient
             // here, true means it's still the same day
-            var es = calculateES(req.user.input_data, true) 
+            var es = calculateES(req.user.input_data, 0) 
             // Still same day, hence render today's dashboard
             Patient.updateOne(
                 { _id: req.user._id},
@@ -115,37 +111,32 @@ const getPatientDashboard = async (req, res) => {
                     patientData: req.user.input_data[total-1].toJSON(), score: es, date: todaysDate, note: message})
         }
         
-        var diff = (new Date()).getDate() - req.user.input_data[total-1].set_date.getDate();
-        var last = req.user.input_data[total-1].set_date.getDate();
-
-        for (var i = 1; i <=diff; i++){
-            // it's a new day, create new input_data schema for a patient
-            const patientData = new DataSet({set_date: (new Date()).setDate(last+i)})
-        
-            // pushes this input_data into the patient in mongoDB
-            Patient.updateOne({ _id: req.user._id},
-                {$push: {input_data: patientData}}, // pushes new dataset and updates engagement score
-                {safe: true, upsert: true, new: true},
-                function(err, doc) {
-                    if(err) {
-                        return res.redirect('/patient/404')
-                    }else {
-                    
-                }   
-                }
-            )
-        }
-
         // calculate today's engagement score of the current patient
         // here, false means patient has just first logged in for today
-        es = calculateES(req.user.input_data, false)
+        es = calculateES(req.user.input_data, 1)
+        
+        // it's a new day, create new input_data schema for a patient
+        const patientData = new DataSet()
 
+        // pushes this input_data into the patient in mongoDB
+        Patient.findByIdAndUpdate({ _id: req.user._id},
+            {$push: {input_data: patientData}}, // pushes new dataset and updates engagement score
+            {safe: true, upsert: true, new: true},
+            function(err, doc) {
+                if(err) {
+                    return res.redirect('/patient/404')
+                }else {
+                
+                }   
+            }
+        )
 
         return res.render('patientDashboard', {patient: req.user.toJSON(), 
             patientData: patientData, score: es, date: todaysDate, note: message})
 
     } catch (err) {
         // error detected, renders patient error page
+        console.log(err)
         return res.redirect('/patient/404')
     }
 }
@@ -251,6 +242,10 @@ const insertPatientData= async(req, res) => {
                 // invalid glucose data/comment
                 return res.redirect('/patient/insertGlucose')
             }
+            if (newData.data_type== 'weight') {
+                // invalid weight data/comment
+                return res.redirect('/patient/insertWeight')
+            }
             if (newData.data_type== 'insulin') {
                 // invalid insulin data/comment
                 return res.redirect('/patient/insertInsulin')
@@ -258,10 +253,6 @@ const insertPatientData= async(req, res) => {
             if (newData.data_type== 'steps') {
                 // invalid steps data/comment
                 return res.redirect('/patient/insertSteps')
-            }
-            if (newData.data_type== 'weight') {
-                // invalid weight data/comment
-                return res.redirect('/patient/insertWeight')
             }
         }
     
@@ -277,24 +268,6 @@ const insertPatientData= async(req, res) => {
                     if (err) {
                         return res.redirect('/patient/404')
                     } else{
-                        
-                    }
-                }
-            )
-            // redirect patient to the dashboard page
-            return res.redirect('/patient/dashboard')
-        }
-
-        // steps data type inputted
-        if (req.body.data_type == "steps") {
-            // sets steps entry for the day
-            Patient.updateOne(
-                { _id: req.user._id, "input_data._id": patient.input_data[total-1]._id},
-                { $set: {"input_data.$.steps_data": newData}},
-                function(err, doc) {
-                    if (err) {
-                        return res.redirect('/patient/404')
-                    } else {
                         
                     }
                 }
@@ -339,6 +312,24 @@ const insertPatientData= async(req, res) => {
             return res.redirect('/patient/dashboard')
         }
 
+        // steps data type inputted
+        if (req.body.data_type == "steps") {
+            // sets steps entry for the day
+            Patient.updateOne(
+                { _id: req.user._id, "input_data._id": patient.input_data[total-1]._id},
+                { $set: {"input_data.$.steps_data": newData}},
+                function(err, doc) {
+                    if (err) {
+                        return res.redirect('/patient/404')
+                    } else {
+                        
+                    }
+                }
+            )
+            // redirect patient to the dashboard page
+            return res.redirect('/patient/dashboard')
+        }
+
     } catch (err) {
         // error detected, renders patient error page
         return res.redirect('/patient/404')
@@ -350,15 +341,17 @@ const insertPatientData= async(req, res) => {
 const getPatientLog = (req,res)=>{
 
     try {
-        const sortedInputs = []
-        const inputs = req.user.input_data
         
-        // sort inputs in descending order according to date
-        for (var i = inputs.length - 1; i>=0; i--){
-            sortedInputs.push(inputs[i].toJSON())
-        }
+        
+        const patient = req.user.toJSON()
+        const inputs = patient.input_data
+        
+         // sort function based on patient's engagement score
+         inputs.sort( function(input1, input2) {
+            return input2.set_date - input1.set_date // sorts in descending order
+        })
 
-        return res.render('patientLog', {patient: req.user.toJSON(), input: sortedInputs, date: todaysDate})
+        return res.render('patientLog', {patient: req.user.toJSON(), input: inputs, date: todaysDate})
 
     } catch(err) {
         // error detected, renders patient error page
@@ -460,7 +453,7 @@ const getLeaderboard = async (req,res) => {
             }
         }
 
-        return res.render ('leaderboard', {patient: req.user.toJSON(), board: userScores, date: todaysDate})
+        return res.render ('patientLeaderboard', {patient: req.user.toJSON(), board: userScores, date: todaysDate})
 
     } catch(err) {
         // error detected, renders patient error page
@@ -470,7 +463,7 @@ const getLeaderboard = async (req,res) => {
 
 // Function to retrieve patient's error page
 const getErrorPage = (req,res)=>{
-    return res.render('404')
+    return res.render('patient404')
 }
 
 // exports objects containing functions imported by patient router

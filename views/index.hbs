@@ -1,10 +1,54 @@
-{{!< main}}
-<h1>Welcome to Dextrack!</h1>
-<p>Please Select User Type</p>
-{{!-- for testing --}}
-<button onclick="location.href='/patient/login'" type="button">Enter as Patient</button>
-<button onclick="location.href='/clinician/login'" type="button">Enter as Clinician</button>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Lexend Deca' rel='stylesheet'>
+    <title>Sign In</title>
+    <link rel="stylesheet" href="/css/sign-in-styles.css">
+    <script src="/javascript/menu.js"></script>
 
-
-
-
+</head>
+<body>
+    <!-- Navigation bar at top of webpage -->
+            <header>
+                <nav class="nav_bar">
+                    <a href="/about-dextrack"><img id="logo" src="/logo.png"></a>
+                    <ul class="nav_pages">
+                        <li class="nav_item"> 
+                            <a href="/about-dextrack" class="nav_link">About DexTrack</a>
+                        </li>
+                        <li class="nav_item">
+                            <a href="/about-diabetes" class="nav_link">About Diabetes</a>
+                        </li>
+                        <li class="nav_item">
+                            <a href="/" class="nav_link"><button>Sign In</button></a>
+                        </li>
+                    </ul>
+                    <div class="menu">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                </nav>
+            </header>
+    <main>
+        <img src="clouds-02.png" class="cloud-bg">
+        <section class="sign-in">
+        <h4>Sign in</h4>
+        <br><br>
+            <div class="row">
+                <div class="container">
+                    <div class="as-patient">
+                        <a href="/patient/login"><img src="patient-icon.png"> </a>
+                            <h5>As Patient</h5>
+                    </div>
+                    <div class="as-clinician">
+                        <a href="/clinician/login"><img src="clinician-icon.png"></a>
+                            <h5>As Clinician</h5>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main> 
+</body>
+<script src="/javascript/menu.js"></script>
