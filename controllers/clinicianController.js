@@ -480,10 +480,45 @@ const postClinicianPatientThresholdInput = async (req, res, next) => {
     return res.redirect('/clinician/clinicianViewPatient')
 }
 
+// Function to update patient's password
+const updatePass = async (req,res) =>{
+
+    try {
+        
+        const errors = validationResult(req)
+
+        if (!errors.isEmpty()) {
+            const errorsFound = validationResult(req).array()
+            req.flash('errors', errorsFound);
+            return res.redirect('/patient/change-password')
+        }
+
+        // hash the password using bcrypt before saving to mongodb
+        const hashed_pass = await bcrypt.hash(req.body.password, SALT_FACTOR)
+        Clinician.findOneAndUpdate(
+            { _id: req.user._id},
+            {password: hashed_pass},
+            function(err, doc) {
+                if (err) {
+                    return res.redirect('/clinician/404')
+                } else {
+                      
+                }
+            }
+        )
+    
+        return res.redirect('/clinician/dashboard')
+        
+
+    } catch(err) {
+        // error detected, renders patient error page
+        return res.redirect('/clinician/404')
+    }
+}
 
 // Function to retrieve patient's error page
 const getErrorPage = (req,res)=>{
-    return res.render('404')
+    return res.render('clinician404')
 }
 
 // exports an object, which contain functions imported by router
@@ -508,6 +543,7 @@ module.exports = {
     getClinicianPatientThresholdInput,
     postClinicianPatientThresholdInput,
     getErrorPage,
+    updatePass
 }
 
 

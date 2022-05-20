@@ -41,6 +41,8 @@ const patientSchema = new mongoose.Schema({
    screen_name: {type: String, unique: true, required: true},
    password: {type: String, required: true}, 
    secret: {type: String, default: 'INFO30005'},
+   registered_date: {type: String, required: true, default: new Date()},
+
    score: {type: Number, default: 0},
    role: {type: String, default: 'patient', required: true},
    email: {type: String, required: true, unique: true},

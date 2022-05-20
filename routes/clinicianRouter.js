@@ -75,5 +75,7 @@ clinicianRouter.post('/clinicianThresholdPatient', isAuthenticated, hasRole('cli
 
 clinicianRouter.get('/404', isAuthenticated, hasRole('clinician'), clinicianController.getErrorPage)
 
+clinicianRouter.get('/clinician/change-password', isAuthenticated, hasRole('clinician'), clinicianController.updatePass)
+
 // export the router
 module.exports = clinicianRouter
