@@ -88,7 +88,8 @@ const insertClinician= async (req, res) => {
 
 // render register patient hbs
 const getRegisterPage = (req, res) => {
-    return res.render('patientRegister', {flash: req.flash('errors')})
+    
+    return res.render('patientRegister', {clinicianItem: req.user.toJSON(), flash: req.flash('errors')})
 }
 
 // insert new Patient into database and link to clinician
