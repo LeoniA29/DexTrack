@@ -614,6 +614,7 @@ img[id="logo"] {
 	border-radius: 25px;
 	white-space: nowrap;
 	margin-bottom: 10px;
+    padding: 5px 5px 5px 5px;
 }
 
 #dataImage {

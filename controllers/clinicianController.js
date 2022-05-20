@@ -51,33 +51,6 @@ const clinicianLogout = (req,res)=>{
 }
 
 // this is for testing, once login feature enabled, it will not be necessary
-const getAllClinicians = async (req, res, next) => {
- try {
- const clinicians = await Clinician.find().lean()
- return res.render('allClinicians', { data: clinicians })
- } catch (err) {
- return next(err)
- }
-}
-
-// this is for testing, once login feature enabled, it will not be necessary
-
-const getClinicianById = async(req, res, next) => {
- try {
- const clinician = await Clinician.findById(req.params.clinician_id).lean()
- if (!clinician) {
- // no clinician found in database
- return res.sendStatus(404)
- }
-
- // found data and get clinician list
- return res.render('oneData', { oneItem: clinician})
- } catch (err) {
- return next(err)
- }
-}
-
-// this is for testing, once login feature enabled, it will not be necessary
 const insertClinician= async (req, res) => {
     var newData = new Clinician(req.body)
 
@@ -726,8 +699,6 @@ module.exports = {
     getClinicianLoginPage,
     clinicianLogin,
     clinicianLogout,
-    getClinicianById,
-    getAllClinicians,
     insertClinician,
     insertPatient,
     getRegisterPage,
