@@ -120,12 +120,12 @@ This is an example of how to list things you need to use the software and how to
 ## Login Information
 
 ### Patient Login
-**Username :** patrick@gmail.com
-**Password :** INFO?30005 
+- **Username :** patrick@gmail.com
+- **Password :** INFO?30005 
 
 ### Clinician Login
-**Username :** chrisarmstrong@gmail.com
-**Password :** INFO?30005
+- **Username :** chrisarmstrong@gmail.com
+- **Password :** INFO?30005
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -166,15 +166,6 @@ Project Link: [https://github.com/LeoniA29/Dextrack](https://github.com/LeoniA29
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
