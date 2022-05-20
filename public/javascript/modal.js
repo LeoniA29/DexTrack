@@ -2,7 +2,7 @@ let popup = document.getElementById("popup");
 let bg = document.getElementById("popup-bg");
 
 function required() {
-    var empt = document.forms["form"].value;
+    var empt = document.forms["form"]['test'].value;
 
     if (empt == "") {
         alert("Please input a Value");

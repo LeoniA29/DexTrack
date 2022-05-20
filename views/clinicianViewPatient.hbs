@@ -33,12 +33,14 @@
                 <div><span class="attribute"><br>Occupation</span><br><strong>{{this.occupation}}</strong></div>
             </div>
             <div class="col">
-                <div><span class="attribute">Date of birth</span><br><strong>{{this.dob}}</strong></div>
+                {{#with (showDate this.dob)}}
+                    <div><span class="attribute">Date of birth</span><br><strong>{{this.[2].value}} {{this.[4].value}} {{this.[6].value}}</strong></div>
+                {{/with}}
                 <!--<div><span class="attribute"><br>Insurance</span><br><strong>{{this.insurance}}</strong></div>-->
             </div>
             <div class="col">
-                <div><span class="attribute">Registered on</span><br><strong>{{this.regisDate}}</strong></div>
-                <div><span class="attribute"><br>Address</span><br><strong>{{this.address}}</strong></div>
+                <div><span class="attribute">Registered on</span><br><strong>do not forget{{this.regisDate}}</strong></div>
+                <div><span class="attribute"><br>Address</span><br><strong>{{this.address}} dfwfhjwf wefihukf wjehbdajsbd edjkwbfkjwbqf wjfhbwjkf</strong></div>
             </div>
             <div class="col">
                 <div><span class="attribute">Phone number</span><br><strong>{{this.phone}}</strong></div>
@@ -64,72 +66,123 @@
         <div class="sticky-bar">
             <h3>Patient logs</h3>
         </div>
+
         <div class="date">
-            <h4><strong>20</strong><br>MON</h4>
+        {{#each dataItem}}
+            {{#with (showDate this.set_date)}}
+                    <h4><strong>{{this.[2].value}}</strong><br>{{this.[0].value}}</h4>
+            {{/with}}
+
+            {{#with (getLogs this)}}
+
             <div class="entries">
-                <button class="accordion" id="glucose">
-                    <div class="data" id="overflow">
-                        <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
-                    </div>
-                    <div class="data" id="overflow">
-                        <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
-                    </div>
-                    <div class="data">
-                        <a href="#"><img src="/chevron-down-solid.svg"></a>
-                    </div>
-                </button>
-                <div class="panel" id="glucose">
-                    <p><span class="attribute">Comment</span><br><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit</strong></p>
-                </div>
+                {{#if (emptyToday this.empty)}}  <div class="no-input">No inputs for that date</div>
+                {{else}}
+                    {{#each this.arr}}
+                        {{#if (getType this "glucose")}}
+                            <button class="accordion" id="glucose">
+                                <div class="data" id="overflow">
+                                    {{#with (showDate this.[2])}}
+                                        <span class="attribute">Date/time</span><br><strong>{{this.[2].value}} {{this.[4].value}}, {{this.[8].value}}:{{this.[10].value}}</strong>
+                                    {{/with}}
+                                </div>
 
-                <button class="accordion" id="weight">
-                    <div class="data" id="overflow">
-                        <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
-                    </div>
-                    <div class="data" id="overflow">
-                        <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
-                    </div>
-                    <div class="data">
-                        <a href="#"><img src="/chevron-down-solid.svg"></a>
-                    </div>
-                </button>
-                <div class="panel" id="weight">
-                    <p><span class="attribute">Comment</span><br><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit</strong></p>
-                </div>
+                                <div class="data" id="overflow">
+                                    {{#if (checkThreshLog @root.thresholdItem this.[1] "glucose")}}
+                                        <span class="attribute">Blood glucose level</span><br><strong id="threshold-check">{{this.[1]}} nmol/L</strong>
+                                    {{else}}
+                                        <span class="attribute">Blood glucose level</span><br><strong>{{this.[1]}} nmol/L</strong>
+                                    {{/if}}
+                                </div>
 
-                <button class="accordion" id="exercise">
-                    <div class="data" id="overflow">
-                        <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
-                    </div>
-                    <div class="data" id="overflow">
-                        <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
-                    </div>
-                    <div class="data">
-                        <a href="#"><img src="/chevron-down-solid.svg"></a>
-                    </div>
-                </button>
-                <div class="panel" id="exercise">
-                    <p><span class="attribute">Comment</span><br><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit</strong></p>
-                </div>
+                                <div class="data">
+                                    <a href="#"><img src="/chevron-down-solid.svg"></a>
+                                </div>
+                            </button>
+                            <div class="panel" id="glucose">
+                                <p><span class="attribute">Comment</span><br><strong>{{this.[3]}}</strong></p>
+                            </div>
+                        {{/if}}
 
-                <button class="accordion" id="insulin">
-                    <div class="data" id="overflow">
-                        <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
-                    </div>
-                    <div class="data" id="overflow">
-                        <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
-                    </div>
-                    <div class="data">
-                        <a href="#"><img src="/chevron-down-solid.svg"></a>
-                    </div>
-                </button>
-                <div class="panel" id="insulin">
-                    <p><span class="attribute">Comment</span><br><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit</strong></p>
-                </div>
+                        {{#if (getType this "weight")}}
+                            <button class="accordion" id="weight">
+                                <div class="data" id="overflow">
+                                    {{#with (showDate this.[2])}}
+                                        <span class="attribute">Date/time</span><br><strong>{{this.[2].value}} {{this.[4].value}}, {{this.[8].value}}:{{this.[10].value}}</strong>
+                                    {{/with}}                                
+                                </div>
+                                
+                                <div class="data" id="overflow">
+                                    {{#if (checkThreshLog @root.thresholdItem this.[1] "weight")}}
+                                        <span class="attribute">Weight</span><br><strong id="threshold-check">{{this.[1]}} kg</strong>
+                                    {{else}}
+                                        <span class="attribute">Weight</span><br><strong>{{this.[1]}} kg</strong>
+                                    {{/if}}
+                                </div>
+                                <div class="data">
+                                    <a href="#"><img src="/chevron-down-solid.svg"></a>
+                                </div>
+                            </button>
+                            <div class="panel" id="weight">
+                                <p><span class="attribute">Comment</span><br><strong>{{this.[3]}}</strong></p>
+                            </div>
+                        {{/if}}
 
+                        {{#if (getType this "insulin")}}
+                            <button class="accordion" id="insulin">
+                                <div class="data" id="overflow">
+                                    {{#with (showDate this.[2])}}
+                                        <span class="attribute">Date/time</span><br><strong>{{this.[2].value}} {{this.[4].value}}, {{this.[8].value}}:{{this.[10].value}}</strong>
+                                    {{/with}}   
+                                </div>
+
+                                <div class="data" id="overflow">
+                                    {{#if (checkThreshLog @root.thresholdItem this.[1] "insulin")}}
+                                        <span class="attribute">Dose of insulin</span><br><strong id="threshold-check">{{this.[1]}} dose</strong>
+                                    {{else}}
+                                        <span class="attribute">Dose of insulin</span><br><strong>{{this.[1]}} dose</strong>
+                                    {{/if}}
+                                </div>
+                                <div class="data">
+                                    <a href="#"><img src="/chevron-down-solid.svg"></a>
+                                </div>
+                            </button>
+                            <div class="panel" id="insulin">
+                                <p><span class="attribute">Comment</span><br><strong>{{this.[3]}}</strong></p>
+                            </div>
+                        {{/if}}
+
+                        {{#if (getType this "steps")}}
+                            <button class="accordion" id="exercise">
+                                <div class="data" id="overflow">
+                                    {{#with (showDate this.[2])}}
+                                        <span class="attribute">Date/time</span><br><strong>{{this.[2].value}} {{this.[4].value}}, {{this.[8].value}}:{{this.[10].value}}</strong>
+                                    {{/with}}   
+                                </div>
+
+                                <div class="data" id="overflow">
+                                    {{#if (checkThreshLog @root.thresholdItem this.[1] "steps")}}
+                                        <span class="attribute">Exercise</span><br><strong id="threshold-check">{{this.[1]}} steps</strong>
+                                    {{else}}
+                                        <span class="attribute">Exercise</span><br><strong>{{this.[1]}} steps</strong>
+                                    {{/if}}
+                                </div>
+                                <div class="data">
+                                    <a href="#"><img src="/chevron-down-solid.svg"></a>
+                                </div>
+                            </button>
+                            <div class="panel" id="exercise">
+                                <p><span class="attribute">Comment</span><br><strong>{{this.[3]}}</strong></p>
+                            </div>
+                        {{/if}}
+                    {{/each}}
+                {{/if}}
             </div>
+            {{/with}}
+            {{/each}}
         </div>
     </section>
+
 
 {{#with thresholdItem}}
     <section class="segment" id="thresholds">
