@@ -29,20 +29,20 @@
 
     <!-- Each section corresponds to each segment of the patient information in the webpage -->
     <section class="segment" id="register">
-        <form method="POST" name="form">
+        <form action="/clinician/registerPatient"method="POST" name="form">
         <div class="col-50">
             <h3>Create account</h3>
             <div class="fname">
                 <label for="fname">First name<br></label>
-                <input type="text" placeholder="First name" name="firstName"/>
+                <input type="text" placeholder="First name" name="first_name" required/>
             </div>
             <div class="lname">
                 <label for="lname">Last name<br></label>
-                <input type="text" placeholder="Last name" name="lastName"/>
+                <input type="text" placeholder="Last name" name="last_name" required/>
             </div>
             <div class="email">
                 <label for="email">Email<br></label>
-                <input type="text" placeholder="Email address" name="email"/>
+                <input type="text" placeholder="Email address" name="email" required/>
             </div>
         </div>
 
@@ -53,38 +53,39 @@
                 <select name="sex">
                     <option>Female</option>
                     <option>Male</option>
-                    <option>Prefer not to say</option>
+                    <option>Prefer not to answer</option>
                 </select>
             </div>
             <div class="dob">
                 <label for="dob">Date of Birth<br></label>
-                <input type="date" placeholder="Date of Birth" name="dob"/>
+                <input type="date" placeholder="Date of Birth" name="dob" required/>
             </div>
             <div class="phone">
                 <label for="phone">Phone Number<br></label>
-                <input type="text" placeholder="Phone Number" name="phone"/>
+                <input type="text" placeholder="Phone Number" name="phone" required/>
             </div>
+            <!--
             <div class="mstate">
                 <label for="mstate">Marital State<br></label>
                 <input type="text" placeholder="Marital State" name="mstate"/>
-            </div>
+            </div> -->
             <div class="occupation">
                 <label for="occupation">Occupation<br></label>
-                <input type="text" placeholder="Occupation" name="occupation"/>
+                <input type="text" placeholder="Occupation" name="occupation" required/>
             </div>
             <div class="row-form">
-                <div class="insurance">
+                <!--<div class="insurance">
                     <label for="insurance">Insurance<br></label>
                     <input type="text" placeholder="Insurance" name="insurance"/>
-                </div>
+                </div> -->
 
                 <div class="address">
                     <label for="address">Address<br></label>
-                    <input type="text" placeholder="Address" name="address"/>
+                    <input type="text" placeholder="Address" name="address" required/>
                 </div>
                 <div class="postcode">
                     <label for="postcode">Postcode<br></label>
-                    <input type="text" placeholder="Postcode" name="postcode"/>
+                    <input type="text" placeholder="Postcode" name="postcode" required/>
                 </div>
             </div>
         </div>
