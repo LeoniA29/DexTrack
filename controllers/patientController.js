@@ -25,7 +25,7 @@ const todaysDate = melbDate.formatToParts(new Date()); // today's date constant
 
 // Middleware to compare full dates (date, month, year)
 // Returns boolean to see if date of inputted data is same as today's date
-const compareDates = (patientDate)=> {
+const compareDates = (patientDate) => {
 
     patientDate = melbDate.formatToParts(patientDate); // convert from UTC -> Melb
 
@@ -88,14 +88,15 @@ const getPatientDashboard = async (req, res) => {
         // clinician message for the current patient 
         const message = req.user.clinician_message
 
-        const total = req.user.input_data.length // total of days since patient first logged in
+        // total of days since patient first logged in
+        const total = req.user.input_data.length 
 
         if (compareDates(req.user.input_data[total-1].set_date)) {
             
             // calculate today's engagement score of the current patient
-            // here, true means it's still the same day
+            // here, 0 means its still the same day
             var es = calculateES(req.user.input_data, 0) 
-            // Still same day, hence render today's dashboard
+
             Patient.updateOne(
                 { _id: req.user._id},
                 {score: es}, // updates engagement score
@@ -120,7 +121,7 @@ const getPatientDashboard = async (req, res) => {
 
         // pushes this input_data into the patient in mongoDB
         Patient.findByIdAndUpdate({ _id: req.user._id},
-            {$push: {input_data: patientData, score: es}}, // pushes new dataset and updates engagement score
+            {$push: {input_data: patientData}}, // pushes new dataset and updates engagement score
             {safe: true, upsert: true, new: true},
             function(err, doc) {
                 if(err) {
@@ -228,7 +229,6 @@ const insertPatientData= async(req, res) => {
         
         // create new Data object
         var newData = new Data(req.body)
-        // newData.data_comment = he.unescape(req.body.data_comment)
         newData.data_date = new Date()
 
         // detect input errors 
@@ -341,8 +341,6 @@ const insertPatientData= async(req, res) => {
 const getPatientLog = (req,res)=>{
 
     try {
-        
-        
         const patient = req.user.toJSON()
         const inputs = patient.input_data
         

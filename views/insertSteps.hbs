@@ -21,11 +21,11 @@
             <input type="hidden" name="data_hex" value="#55B48B" /> 
             <input type="submit" id="doneButton" value="Click to Submit!" onclick="openPopup()"></input> 
             <div class="popup-bg" id="popup-bg">
-                <div class="popup" id="popup">
-                    <img src="/tick.png">
-                    <h3>Submitted!</h3>
-                    <p>Your steps has been logged!</p>
-                    <button class="orange-button" id="ok-button" onclick="closePopup()">OK</button>
+                    <div class="popup" id="popup">
+                    <img src="/Loading-dots.gif">
+                    <h3>Processing...</h3>
+                    <p>Press the button to begin data review.</p>
+                    <button class="orange-button" id="ok-button" onclick="closePopup()">Review</button>
                 </div>
             </div>
         </form>
@@ -35,4 +35,10 @@
 {{/with}}
 
 
-
+<div class="alert">
+    {{#each flash}}
+        <div class="alertBox">
+            <li>{{this.msg}}</li>
+        </div>
+    {{/each}}
+</div>

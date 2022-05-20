@@ -4,7 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Lexend Deca' rel='stylesheet'>
     <title>Update Password</title>
-    <link rel="stylesheet" href="/css/sign-in-styles.css">
+    <link rel="stylesheet" href="/css/stylesSignIn.css">
+    <script src="/javascript/menu.js" defer></script>
+<script src="/javascript/modal.js" defer></script>
 </head>
 
 
@@ -44,23 +46,35 @@
         <br><br>
             <div class="row">
                 <div class="container">
-                    <form action="/clinician/change-password" method="POST">
-
-                    <div class="col-50">
-                        <div class="passwords">
-                            <label for="passwords">Password</label>
-                            <input type="password" placeholder="New Password" name="password" required/>
+                    
+                        <div class="col-50">
+                            <div class="passwords">
+                                <label for="passwords">Password</label>
+                                <form action="/clinician/change-password" method="POST" name="form">
+                                    <textarea type="password" class="req-fill" placeholder="New Password" name="password" required/></textarea>
+                                    <input type="submit" value="Submit!" class="submit-btn" onclick="openPopup()"></input>
+                                    <div class="popup-bg" id="popup-bg">
+                                        <div class="popup" id="popup">
+                                            <img src="/Loading-dots.gif">
+                                            <h3>Processing...</h3>
+                                            <p>Press the button to begin data review.</p>
+                                            <button class="orange-button" id="ok-button" onclick="closePopup()">Review</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                    <input type="submit" value="Submit!" class="submit-btn">
-                    </form>
                 </div>
             </div>
         </section>
     </main> 
+    <div class="alert">
+    {{#each flash}}
+        <div class="alertBox">
+            <li>{{this.msg}}</li>
+        </div>
+    {{/each}}
+</div>
 </body>
-<script src="/javascript/menu.js"></script>
 
-{{#each flash}}
-    <p class="alert">{{this.msg}}</p>
-{{/each}}
+

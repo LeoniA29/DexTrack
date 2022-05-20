@@ -38,8 +38,12 @@
                     {{#with (showType this)}}
                         <img id="dataImage" src={{link}}>
                         <h3 id="logData"> {{data}} {{unit}}</h3>
+                        {{#if comment}}
+                            <h3 id="logData"> {{comment}}</h3>
+                        {{else}}
+                            <h3 id="logData"> no comments detected...</h3>
+                        {{/if}}
                     {{/with}}
-
                         </div>  
                 {{/each}}
             {{/if}}
