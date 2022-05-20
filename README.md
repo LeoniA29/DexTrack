@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/LeoniA29/DexTrack">
-    <img src="resources/logo.png" alt="Logo" width="80" height="80">
+    <img src="resources/logo.png" alt="Logo">
   </a>
 
 <h3 align="center">DexTrack</h3>
