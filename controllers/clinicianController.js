@@ -32,7 +32,8 @@ const compareDates = (clinicianDate)=> {
 
 
 // add Express-Validator
-const {validationResult, check } = require('express-validator')
+const {validationResult, check } = require('express-validator');
+const { ObjectId } = require('bson');
 
 // function which renders patient's login page 
 const getClinicianLoginPage = (req,res)=> {
@@ -210,7 +211,7 @@ const getClinicianPatientList =  async (req, res, next) => {
 const getPatientComments = async (req, res, next) => {
     // reset patient selected by clincian
     req.user.select_patients = ''
-    req.user.save()
+    await req.user.save()
 
     const clinician = req.user.toJSON()
 
@@ -255,11 +256,10 @@ const postClinicianPatient = async (req, res, next) => {
     var patientID = req.body.patient.toString().slice(0, -1)
 
     req.user.select_patients = patientID
-    req.user.save()
+    if (await req.user.save()) {
 
-    //const patient = await Patient.findById(patientID).lean()
-
-    return res.redirect('/clinician/clinicianViewPatient')
+        return res.redirect('/clinician/clinicianViewPatient')
+    }
 }
 
 // render patient profile for clinician
@@ -356,20 +356,6 @@ const getClinicianPatient = async (req, res, next) => {
 
 }
 
-/** 
-// Middleware to compare full dates (date, month, year)
-// Returns boolean to see if date of inputted data is same as today's date
-const compareDates = (patientDate)=> {
-
-    patientDate = melbDate.formatToParts(patientDate); // convert from UTC -> Melb
-
-    const sameDate = patientDate[2].value == todaysDate[2].value // check for same day
-    const sameMonth = patientDate[4].value == todaysDate[4].value // check for same month
-    const sameYear = patientDate[6].value == todaysDate[6].value // check for same year
-
-    return ( (sameDate) && (sameMonth) && (sameYear) )
-}
-*/
 
 // render patient notes for clinician
 const getClinicianPatientNotes = async (req, res, next) => {
@@ -625,6 +611,183 @@ const getErrorPage = (req,res)=>{
     return res.render('clinician404')
 }
 
+
+// function used by fetch API for graph
+const getGlucoseData = async (req, res, next) => {
+    var patientID = req.user.select_patients
+    var patient = await Patient.findById(patientID).lean()
+    try {
+        const glucoseGraph = []
+        const inputs = patient.input_data
+        // sort inputs in descending order according to date
+        for (var i = inputs.length - 1; i>=0; i--){
+
+            if (inputs.length >= 7) {
+                if ((inputs.length-7) <= i) {
+
+                    date = formatter.formatToParts(inputs[i].set_date)
+                    dataDate = date[4].value.toString() + " " + date[2].value.toString()
+                    //console.log(dataDate)
+
+                    if (inputs[i].glucose_data) {
+                        glucoseGraph.push([dataDate, inputs[i].glucose_data.data_entry])
+                    } else {
+                        glucoseGraph.push([dataDate, inputs[i].glucose_data])
+                    }
+                }
+
+            } else {
+
+                if (inputs[i].glucose_data) {
+                    glucoseGraph.push([dataDate, inputs[i].glucose_data.data_entry])
+                } else {
+                    glucoseGraph.push([dataDate, inputs[i].glucose_data])
+                }
+            }
+        }
+        res.send(glucoseGraph)
+
+    } catch(err) {
+        // error detected, renders patient error page
+        console.log(err);
+        return res.redirect('/clinician/404')
+    }
+}
+
+
+// function used by fetch API for graph
+const getWeightData = async (req, res, next) => {
+
+    var patientID = req.user.select_patients
+    var patient = await Patient.findById(patientID).lean()
+
+    try {
+        const weightGraph = []
+        const inputs = patient.input_data
+        // sort inputs in descending order according to date
+        for (var i = inputs.length - 1; i>=0; i--){
+
+            if (inputs.length >= 7) {
+                if ((inputs.length-7) <= i) {
+
+                    date = formatter.formatToParts(inputs[i].set_date)
+                    dataDate = date[4].value.toString() + " " + date[2].value.toString()
+                    //console.log(dataDate)
+
+                    if (inputs[i].weight_data) {
+                        weightGraph.push([dataDate, inputs[i].weight_data.data_entry])
+                    } else {
+                        weightGraph.push([dataDate, inputs[i].weight_data])
+                    }
+                }
+
+            } else {
+
+                if (inputs[i].weight_data) {
+                    weightGraph.push([dataDate, inputs[i].weight_data.data_entry])
+                } else {
+                    weightGraph.push([dataDate, inputs[i].weight_data])
+                }
+            }
+        }
+        res.send(weightGraph)
+
+    } catch(err) {
+        // error detected, renders patient error page
+        console.log(err);
+        return res.redirect('/clinician/404')
+    }
+}
+
+
+// function used by fetch API for graph
+const getInsulinData = async (req, res, next) => {
+    
+    var patientID = req.user.select_patients
+    var patient = await Patient.findById(patientID).lean()
+    
+    try {
+        const insulinGraph = []
+        const inputs = patient.input_data
+        // sort inputs in descending order according to date
+        for (var i = inputs.length - 1; i>=0; i--){
+
+            if (inputs.length >= 7) {
+                if ((inputs.length-7) <= i) {
+
+                    date = formatter.formatToParts(inputs[i].set_date)
+                    dataDate = date[4].value.toString() + " " + date[2].value.toString()
+                    //console.log(dataDate)
+
+                    if (inputs[i].insulin_data) {
+                        insulinGraph.push([dataDate, inputs[i].insulin_data.data_entry])
+                    } else {
+                        insulinGraph.push([dataDate, inputs[i].insulin_data])
+                    }
+                }
+
+            } else {
+
+                if (inputs[i].insulin_data) {
+                    insulinGraph.push([dataDate, inputs[i].insulin_data.data_entry])
+                } else {
+                    insulinGraph.push([dataDate, inputs[i].insulin_data])
+                }
+            }
+        }
+        res.send(insulinGraph)
+
+    } catch(err) {
+        // error detected, renders patient error page
+        console.log(err);
+        return res.redirect('/clinician/404')
+    }
+}
+
+// function used by fetch API for graph
+const getStepsData = async (req, res, next) => {
+
+    var patientID = req.user.select_patients
+    var patient = await Patient.findById(patientID).lean()
+    
+    try {
+        const stepsGraph = []
+        const inputs = patient.input_data
+        // sort inputs in descending order according to date
+        for (var i = inputs.length - 1; i>=0; i--){
+
+            if (inputs.length >= 7) {
+                if ((inputs.length-7) <= i) {
+
+                    date = formatter.formatToParts(inputs[i].set_date)
+                    dataDate = date[4].value.toString() + " " + date[2].value.toString()
+                    //console.log(dataDate)
+
+                    if (inputs[i].steps_data) {
+                        stepsGraph.push([dataDate, inputs[i].steps_data.data_entry])
+                    } else {
+                        stepsGraph.push([dataDate, inputs[i].steps_data])
+                    }
+                }
+
+            } else {
+
+                if (inputs[i].steps_data) {
+                    stepsGraph.push([dataDate, inputs[i].steps_data.data_entry])
+                } else {
+                    stepsGraph.push([dataDate, inputs[i].steps_data])
+                }
+            }
+        }
+        res.send(stepsGraph)
+
+    } catch(err) {
+        // error detected, renders patient error page
+        console.log(err);
+        return res.redirect('/clinician/404')
+    }
+}
+
 // exports an object, which contain functions imported by router
 module.exports = {
     getClinicianLoginPage,
@@ -648,7 +811,12 @@ module.exports = {
     postClinicianPatientThresholdInput,
     getErrorPage,
     getChangePass,
-    updatePass
+    updatePass,
+    getGlucoseData,
+    getWeightData,
+    getInsulinData,
+    getStepsData,
+
 }
 
 

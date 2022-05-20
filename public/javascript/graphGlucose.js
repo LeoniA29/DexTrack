@@ -1,4 +1,19 @@
-Highcharts.chart('container1', {
+async function getDataGlucose() {
+
+  const data = await fetch('http://localhost:3000/clinician/getGlucoseData');
+  return data.json();
+}
+
+async function loadGraphGlucose() {
+
+  const test = await getDataGlucose();
+
+  const dataArray = [];
+  for (var i=test.length -1; i>=0; i--) {
+    dataArray.push(test[i]);
+  };
+
+  Highcharts.chart('container1', {
     title: {
       text: 'Blood Glucose Level'
     },
@@ -8,24 +23,9 @@ Highcharts.chart('container1', {
     yAxis: {
       title: {
         text: 'nmol/L'
-      }, 
-      plotBands: [{
-        from: 60,
-        to: 70,
-        color: '#F2F2F2',
-        label: {
-            text: 'Threshold',
-            style: {
-                color: '#707070'
-            }
-        }
-    }]},
+      }},
     xAxis: {
-      type: 'datetime',
-      dateTimeLabelFormats: {
-        month: '%e. %b',
-        year: '%b'
-      },
+      type: 'category',
       title: {
         text: 'Date'
       }
@@ -45,14 +45,7 @@ Highcharts.chart('container1', {
     series: [{
       name: 'Blood Glucose Level',
       color: '#E13D45',
-      data: [
-        [Date.UTC(2022, 04, 20), 60],
-        [Date.UTC(2022, 04, 21), 70],
-        [Date.UTC(2022, 04, 22), 75],
-        [Date.UTC(2022, 04, 23), 55],
-        [Date.UTC(2022, 04, 24), 80],
-        [Date.UTC(2022, 04, 25), 56], 
-        [Date.UTC(2022, 04, 26), 64]],
+      data: dataArray,
         showInLegend: false
     }],
     responsive: {
@@ -70,3 +63,9 @@ Highcharts.chart('container1', {
       }]
     }
   });
+
+
+
+}
+
+

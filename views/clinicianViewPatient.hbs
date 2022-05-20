@@ -274,27 +274,27 @@
     </section>
 {{/with}}
 
-    <section class="segment" id="graphs">
+    <section class="segment" id="graphs" >
         <h3>Charts</h3>
         <div class="row">
-            <div class="card" id="glucose">
+            <div onmouseover="loadGraphGlucose()" class="card" id="glucose">
                 <figure class="highcharts-figure">
                     <div id="container1"></div>
                 </figure>
             </div>
-            <div class="card" id="right-weight">
+            <div onmouseover="loadGraphWeight()" class="card" id="right-weight">
                 <figure class="highcharts-figure">
                     <div id="container2"></div>
                 </figure>
             </div>
         </div>
-        <div class="row">
+        <div onmouseover="loadGraphInsulin()" class="row">
             <div class="card" id="insulin">
                 <figure class="highcharts-figure">
                     <div id="container3"></div>
                 </figure>
             </div>
-            <div class="card" id="right-exercise">
+            <div onmouseover="loadGraphExercise()" class="card" id="right-exercise">
                 <figure class="highcharts-figure">
                     <div id="container4"></div>
                 </figure>

@@ -1,3 +1,18 @@
+async function getDataWeight() {
+
+  const data = await fetch('http://localhost:3000/clinician/getWeightData');
+  return data.json();
+}
+
+async function loadGraphWeight() {
+  
+  const test = await getDataWeight();
+  const dataArray = [];
+
+  for (var i=test.length -1; i>=0; i--) {
+    dataArray.push(test[i]);
+  };
+
 Highcharts.chart('container2', {
     title: {
       text: 'Weight'
@@ -9,23 +24,9 @@ Highcharts.chart('container2', {
       title: {
         text: 'Kg'
       }, 
-      plotBands: [{
-        from: 45,
-        to: 55,
-        color: '#F2F2F2',
-        label: {
-            text: 'Threshold',
-            style: {
-                color: '#707070'
-            }
-        }
-    }]},
+    },
     xAxis: {
-      type: 'datetime',
-      dateTimeLabelFormats: {
-        month: '%e. %b',
-        year: '%b'
-      },
+      type: 'category',
       title: {
         text: 'Date'
       }
@@ -45,14 +46,7 @@ Highcharts.chart('container2', {
     series: [{
       name: 'Weight',
       color: '#6F62D0',
-      data: [
-        [Date.UTC(2022, 04, 20), 50],
-        [Date.UTC(2022, 04, 21), 51],
-        [Date.UTC(2022, 04, 22), 52],
-        [Date.UTC(2022, 04, 23), 52],
-        [Date.UTC(2022, 04, 24), 51],
-        [Date.UTC(2022, 04, 25), 50], 
-        [Date.UTC(2022, 04, 26), 50]],
+      data: dataArray,
         showInLegend: false
     }],
     responsive: {
@@ -70,3 +64,5 @@ Highcharts.chart('container2', {
       }]
     }
   });
+
+}

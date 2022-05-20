@@ -101,5 +101,10 @@ clinicianRouter.post('/change-password', isAuthenticated, hasRole('clinician'),
     body('password', 'Password is not strong enough').isStrongPassword().escape(), // password must be strong 
 clinicianController.updatePass)
 
+clinicianRouter.get('/getGlucoseData', isAuthenticated, hasRole('clinician'), clinicianController.getGlucoseData)
+clinicianRouter.get('/getWeightData', isAuthenticated, hasRole('clinician'), clinicianController.getWeightData)
+clinicianRouter.get('/getInsulinData', isAuthenticated, hasRole('clinician'), clinicianController.getInsulinData)
+clinicianRouter.get('/getStepsData', isAuthenticated, hasRole('clinician'), clinicianController.getStepsData)
+
 // export the router
 module.exports = clinicianRouter

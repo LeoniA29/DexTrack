@@ -1,4 +1,19 @@
-Highcharts.chart('container3', {
+async function getDataInsulin() {
+
+  const data = await fetch('http://localhost:3000/clinician/getInsulinData');
+  return data.json();
+}
+
+async function loadGraphInsulin() {
+
+  const test = await getDataInsulin();
+  const dataArray = [];
+
+  for (var i=test.length -1; i>=0; i--) {
+    dataArray.push(test[i]);
+  };
+
+  Highcharts.chart('container3', {
     title: {
       text: 'Dose of Insulin'
     },
@@ -8,24 +23,9 @@ Highcharts.chart('container3', {
     yAxis: {
       title: {
         text: 'Dose'
-      }, 
-      plotBands: [{
-        from: 3,
-        to: 1,
-        color: '#F2F2F2',
-        label: {
-            text: 'Threshold',
-            style: {
-                color: '#707070'
-            }
-        }
-    }]},
+      }},
     xAxis: {
-      type: 'datetime',
-      dateTimeLabelFormats: {
-        month: '%e. %b',
-        year: '%b'
-      },
+      type: 'category',
       title: {
         text: 'Date'
       }
@@ -43,16 +43,9 @@ Highcharts.chart('container3', {
       }
     },
     series: [{
-      name: 'Blood Glucose Level',
+      name: 'Insulin Dose',
       color: '#FF9D47',
-      data: [
-        [Date.UTC(2022, 04, 20), 1],
-        [Date.UTC(2022, 04, 21), 0],
-        [Date.UTC(2022, 04, 22), 2],
-        [Date.UTC(2022, 04, 23), 2],
-        [Date.UTC(2022, 04, 24), 1],
-        [Date.UTC(2022, 04, 25), 2], 
-        [Date.UTC(2022, 04, 26), 1]],
+      data: dataArray,
         showInLegend: false
     }],
     responsive: {
@@ -70,3 +63,4 @@ Highcharts.chart('container3', {
       }]
     }
   });
+}
