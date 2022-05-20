@@ -15,11 +15,11 @@
     <a href="https://github.com/LeoniA29/DexTrack"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="http://dextrack.herokuapp.com">View Demo</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
+    <a href="https://xd.adobe.com/view/60028f76-614d-4394-98bb-9a3fb1d25e27-3551/?fullscreen">Patient UI Prototype</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://xd.adobe.com/view/0ef39a8e-f719-4960-9834-f58e62a24ff5-5ba0/?fullscreen">Clinician UI Prototype</a>
   </p>
 </div>
 
@@ -100,16 +100,15 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/LeoniA29/DexTrack.git
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
+3. Enter your API in `config.js`
    ```js
    const API_KEY = 'ENTER YOUR API';
    ```
@@ -117,16 +116,18 @@ This is an example of how to list things you need to use the software and how to
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+<!-- LOGIN INFORMATION -->
+## Login Information
 
-<!-- USAGE EXAMPLES -->
-## Usage
+### Patient Login
+**Username :** patrick@gmail.com
+**Password :** INFO?30005 
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+### Clinician Login
+**Username :** chrisarmstrong@gmail.com
+**Password :** INFO?30005
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- CONTRIBORS -->
