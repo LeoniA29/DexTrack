@@ -6,17 +6,24 @@
         <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}} <img src="/chevron-down.png"></button>
         <div class="dropdown-content">
             <a href="/clinician/patientComments">Patient comments</a>
-            <form method="POST">
+            <form action="/clinician/logout" method="POST">
                 <button id="sign-out">Sign out</button>
             </form>
         </div>
     </div>
     <div class="icons">
         <a href="/clinician/dashboard"><img src="/house-solid.svg" id="icon" class="change-color"></a>
-        <a href="#"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
+        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
         <a><img src="/Line.png" id="nav-line"></a>
-        <a href="#"><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
+        <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
     </div>
+</div>
+
+<!-- Splash screen -->
+<div class="intro">
+    <h1 class="logo-header">
+        <img class="dextrack-logo" src="/dextrack_logo.png">
+    </h1>
 </div>
 
 <ul class="breadcrumb">
@@ -65,7 +72,11 @@
                                 {{/if}}
                                 
                             {{else}}
-                                <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong>Not filled</strong></div>
+                                    {{#if (isRequired null this.[2] "glucose")}}
+                                        <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong>required, unfilled</strong></div>
+                                    {{else}}
+                                        <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong>-</strong></div>
+                                    {{/if}}
                             {{/if}}
 
                             {{#if (filledToday this.[1].weight_data)}}
@@ -75,7 +86,11 @@
                                     <div class="col"><span class="attribute">Weight</span><br><strong>{{this.[1].weight_data.data_entry}} kg</strong></div>
                                 {{/if}}
                             {{else}}
-                                <div class="col"><span class="attribute">Weight</span><br><strong>Not filled</strong></div>
+                                    {{#if (isRequired null this.[2] "weight")}}
+                                        <div class="col"><span class="attribute">Weight</span><br><strong>required, unfilled</strong></div>
+                                    {{else}}
+                                        <div class="col"><span class="attribute">Weight</span><br><strong>-</strong></div>
+                                    {{/if}}                           
                             {{/if}}
 
                             {{#if (filledToday this.[1].insulin_data)}}
@@ -85,7 +100,11 @@
                                     <div class="col"><span class="attribute">Dose of Insulin</span><br><strong>{{this.[1].insulin_data.data_entry}} dose</strong></div>
                                 {{/if}}
                             {{else}}
-                                    <div class="col"><span class="attribute">Dose of Insulin</span><br><strong>Not filled</strong></div>
+                                    {{#if (isRequired null this.[2] "insulin")}}
+                                        <div class="col"><span class="attribute">Dose of Insulin</span><br><strong>required, unfilled</strong></div>
+                                    {{else}}
+                                        <div class="col"><span class="attribute">Dose of Insulin</span><br><strong>-</strong></div>
+                                    {{/if}}                                  
                             {{/if}}
 
 
@@ -96,7 +115,11 @@
                                     <div class="col"><span class="attribute">Exercise</span><br><strong>{{this.[1].steps_data.data_entry}} steps</strong></div>
                                 {{/if}}
                             {{else}}
-                                <div class="col"><span class="attribute">Exercise</span><br><strong>Not filled</strong></div>
+                                    {{#if (isRequired null this.[2] "steps")}}
+                                        <div class="col"><span class="attribute">Exercise</span><br><strong>required, unfilled</strong></div>
+                                    {{else}}
+                                        <div class="col"><span class="attribute">Exercise</span><br><strong>-</strong></div>
+                                    {{/if}}                                    
                             {{/if}}
                     </button>
                 </form>

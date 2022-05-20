@@ -1,0 +1,117 @@
+{{!< main}}
+
+<!-- Navigation bar at top of webpage -->
+<div class="navbar">
+    <div class="dropdown">
+        <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}} <img src="/chevron-down.png"></button>
+        <div class="dropdown-content">
+            <a href="/clinician/patientComments">Patient comments</a>
+            <form action="/clinician/logout" method="POST">
+                <button id="sign-out">Sign out</button>
+            </form>
+        </div>
+    </div>
+    <div class="icons">
+        <a href="/clinician/dashboard"><img src="/house-solid.svg" id="icon" class="change-color"></a>
+        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
+        <a><img src="/Line.png" id="nav-line"></a>
+        <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
+    </div>
+</div>
+
+<ul class="breadcrumb">
+  <li><a href="/clinician/dashboard">Patient list</a></li>
+  <li><a href="/clinician/clinicianViewPatient">{{patientItem.first_name}} {{patientItem.last_name}}</a></li>
+  <li>Set threshold</li>
+</ul>
+
+<div class="sections">
+    {{#with thresholdItem}}
+        <form action="/clinician/clinicianThresholdPatient" method="POST">
+        
+            <!-- Each section corresponds to each segment of the patient information in the webpage -->
+            <section class="segment" id="threshold-form">
+                <div class="threshold">
+                    <h4 id="glucose_text">Blood glucose level</h4>
+                    <div class="container" id="glucose">
+                        <div class="upper">
+                            <label for="upper">Upper bound</label>
+                            <input type="text" placeholder=" mol/L" name="glucose_high" value='{{this.[0].high}}'/>
+                        </div>
+                        <div class="lower">
+                            <label for="lower">Lower bound</label>
+                            <input type="text" placeholder=" mol/L" name="glucose_low" value='{{this.[0].low}}'/>
+                        </div>
+                        <div class="required">
+                            <label for="required"><span class="attribute">Set as required</span></label>
+                            <input type="checkbox" placeholder="Set as required" name="glucose_required" checked="true" value="true"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="threshold">
+                    <h4 id="weight_text">Weight</h4>
+                    <div class="container" id="weight">
+                        <div class="upper">
+                            <label for="upper">Upper bound</label> 
+                            <input type="text" placeholder=" kg" name="weight_high" value='{{this.[2].high}}'/> <!-- change this into [1] later on -->
+                        </div>
+                        <div class="lower">
+                            <label for="lower">Lower bound</label>
+                            <input type="text" placeholder=" kg" name="weight_low" value='{{this.[2].low}}'/> <!-- change this into [1] later on -->
+                        </div>
+                        <div class="required">
+                            <label for="required"><span class="attribute">Set as required</span></label>
+                            <input type="checkbox" placeholder="Set as required" name="weight_required" checked="true" value="true"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="threshold">
+                    <h4 id="insulin_text">Dose of insulin</h4>
+                    <div class="container" id="insulin">
+                        <div class="upper">
+                            <label for="upper">Upper bound</label>
+                            <input type="text" placeholder=" dose" name="insulin_high" value='{{this.[3].high}}'/>
+                        </div>
+                        <div class="lower">
+                            <label for="lower">Lower bound</label>
+                            <input type="text" placeholder=" dose" name="insulin_low" value='{{this.[3].low}}'/>
+                        </div>
+                        <div class="required">
+                            <label for="required"><span class="attribute">Set as required</span></label>
+                            <input type="checkbox" placeholder="Set as required" name="insulin_required" checked="true" value="true"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="threshold">
+                    <h4 id="exercise_text">Exercise</h4>
+                    <div class="container" id="exercise">
+                        <div class="upper">
+                            <label for="upper">Upper bound</label>
+                            <input type="text" placeholder=" steps" name="steps_high" value='{{this.[1].high}}'/> <!-- change this into [2] later on -->
+                        </div>
+                        <div class="lower">
+                            <label for="lower">Lower bound</label>
+                            <input type="text" placeholder=" steps" name="steps_low" value='{{this.[1].low}}'/> <!-- change this into [2] later on -->
+                        </div>
+                        <div class="required">
+                            <label for="required"><span class="attribute">Set as required</span></label>
+                            <input type="checkbox" placeholder="Set as required" name="steps_required" checked="true" value="true"/>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" type="submit">
+                    <button class="orange-button" onclick="openPopup()">Save</button>
+                </input>
+                <div class="popup-bg" id="popup-bg">
+                    <div class="popup" id="popup">
+                        <img src="/tick.png">
+                        <h3>Saved!</h3>
+                        <p>New thresholds have been successfully saved.</p>
+                        <button class="orange-button" id="ok-button" onclick="closePopup()">OK</button>
+                    </div>
+                </div>
+            </section>
+        </form>
+    {{/with}}
+</div>
+

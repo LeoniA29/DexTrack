@@ -120,7 +120,7 @@ const getPatientDashboard = async (req, res) => {
 
         // pushes this input_data into the patient in mongoDB
         Patient.findByIdAndUpdate({ _id: req.user._id},
-            {$push: {input_data: patientData}}, // pushes new dataset and updates engagement score
+            {$push: {input_data: patientData, score: es}}, // pushes new dataset and updates engagement score
             {safe: true, upsert: true, new: true},
             function(err, doc) {
                 if(err) {

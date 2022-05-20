@@ -115,20 +115,21 @@ const insertPatient= async (req, res) => {
     newPatient.password = "INFO?30005" 
 
     const glucose_th = new Threshold({type: "glucose"});
-    const steps_th = new Threshold({type: "steps"}); 
     const weight_th = new Threshold({type: "weight"}); 
     const insulin_th = new Threshold({type: "insulin"});
+    const steps_th = new Threshold({type: "steps"}); 
     
-    newPatient.threshold_list.splice(0, 0, glucose_th,steps_th,weight_th, insulin_th)
-    
+    newPatient.threshold_list.splice(0, 0, glucose_th, steps_th, weight_th, insulin_th)
+    // change order of this later, steps will be last
+
     // pushes patient into clinician's patient list in mongoDB
     Clinician.findByIdAndUpdate(req.user._id,
         {$push: {patient_list: newPatient}},
         {safe: true, upsert: true},
         function(err, doc) {
             if(err){
-            console.log(err);
-            }else{
+                return res.redirect('/clinician/404')
+            } else {
             }
         }
     )
@@ -144,7 +145,7 @@ const insertPatient= async (req, res) => {
 const getClinicianPatientList =  async (req, res, next) => {
 
         // reset patient selected by clincian
-        req.user.select_patient = ''
+        req.user.select_patients = ''
         req.user.save()
 
         // array to collect patient data
@@ -179,14 +180,14 @@ const getClinicianPatientList =  async (req, res, next) => {
 
                 // checks if patient has any data_set for that day
                 if (hasToday == false) {
-                    const patientData = new DataSet({set_date: new Date()})
+                    const patientData = new DataSet({set_date: todaysDate})
                 
                     Patient.findByIdAndUpdate(patientID,
                         {$push: {input_data: patientData}},
                         {safe: true, upsert: true},
                         function(err, doc) {
                             if(err){
-                                console.log(err);
+                                return res.redirect('/clinician/404')
                             }else{
                             }
                         }
@@ -205,6 +206,10 @@ const getClinicianPatientList =  async (req, res, next) => {
 
 // render patient comments hbs with comments from clinician's patients
 const getPatientComments = async (req, res, next) => {
+    // reset patient selected by clincian
+    req.user.select_patients = ''
+    req.user.save()
+
     const clinician = req.user.toJSON()
 
     var patients = clinician.patient_list
@@ -214,22 +219,19 @@ const getPatientComments = async (req, res, next) => {
         const patient = await Patient.findById(patientID).lean()
         commentList = []
 
-
         if (patient) {
             const patient_data = patient.input_data
             for (dataSet in patient_data) {
                 daily_data = patient_data[dataSet]
 
-                //console.log(daily_data)
                 for (data in daily_data) {
                     if (daily_data[data]) {
                         try {
                             if (daily_data[data].data_comment) {
-                                //console.log(daily_data[data].data_comment)
                                 commentList.push(daily_data[data])
                             }
                         } catch(err) {
-                            console.log("not data input")
+                            //console.log("not data input")
                         }
                     }
                 }
@@ -240,20 +242,20 @@ const getPatientComments = async (req, res, next) => {
         }
     }
 
-    console.log(inputList)
+    //console.log(inputList)
     
     return res.render('allPatientComments', { clinicianItem: req.user.toJSON(), commentsList: inputList})
 }
 
 // set patient for clinician
 const postClinicianPatient = async (req, res, next) => {
-    //console.log(req.body.patient.toString().slice(0, -1))
+
     var patientID = req.body.patient.toString().slice(0, -1)
-    //console.log(req.user)
-    req.user.select_patient = patientID
+
+    req.user.select_patients = patientID
     req.user.save()
-    //console.log(req.user)
-    const patient = await Patient.findById(patientID).lean()
+
+    //const patient = await Patient.findById(patientID).lean()
 
     return res.redirect('/clinician/clinicianViewPatient')
 }
@@ -261,27 +263,54 @@ const postClinicianPatient = async (req, res, next) => {
 // render patient profile for clinician
 const getClinicianPatient = async (req, res, next) => {
 
-    var patientID = req.user.select_patient
-    const patient = await Patient.findById( patientID).lean()
-    var threshold = patient.threshold
-    
+    var patientID = req.user.select_patients
+    const patient = await Patient.findById(patientID).lean()
+    var threshold = patient.threshold_list
 
-    return res.render('clinicianViewPatient', { clinicianItem: req.user.toJSON(), patientItem: patient})
+    try {
+        const sortedInputs = []
+        const graphInputs = []
+        const inputs = patient.input_data
+        // sort inputs in descending order according to date
+        for (var i = inputs.length - 1; i>=0; i--){
+            sortedInputs.push(inputs[i])
+
+            if (inputs.length >= 7) {
+                //console.log(inputs.length)
+                if ((inputs.length-7) < i) {
+                    graphInputs.push(inputs[i])
+                }
+
+            } else {
+                graphInputs.push(inputs[i])
+            }
+        }
+        //console.log(sortedInputs)
+
+        return res.render('clinicianViewPatient', { clinicianItem: req.user.toJSON(), patientItem: patient, thresholdItem: threshold, dataItem: sortedInputs, graphItem: graphInputs})
+
+    } catch(err) {
+        // error detected, renders patient error page
+        return res.redirect('/clinician/404')
+    }
+
 }
+
+
 
 // render patient notes for clinician
 const getClinicianPatientNotes = async (req, res, next) => {
 
-    var patientID = req.user.select_patient
+    var patientID = req.user.select_patients
     const patient = await Patient.findById(patientID).lean()
-    console.log(patient.clincian_notes)
+    //console.log(patient.clincian_notes)
     var notesList = []
 
     if (patient) {
         for (i in patient.clinician_notes) {
             notesList.push(patient.clinician_notes[i])
         }
-        console.log(notesList)
+        //console.log(notesList)
     }
 
     return res.render('clinicianNotesPatient', { clinicianItem: req.user.toJSON(), patientItem: patient, noteItem: notesList})
@@ -291,7 +320,7 @@ const getClinicianPatientNotes = async (req, res, next) => {
 const getClinicianPatientNotesInput = async (req, res, next) => {
     
     //console.log(req.body.patient.toString().slice(0, -1))
-    var patientID = req.user.select_patient
+    var patientID = req.user.select_patients
     const patient = await Patient.findById(patientID).lean()
 
     // redirects back to clinician home page
@@ -301,7 +330,7 @@ const getClinicianPatientNotesInput = async (req, res, next) => {
 // render patient notes input for clinician
 const postClinicianPatientNotesInput = async (req, res, next) => {
     
-    var patientID = req.user.select_patient
+    var patientID = req.user.select_patients
     const patient = await Patient.findById(patientID).lean()
 
     if (req.body.note) {
@@ -314,7 +343,7 @@ const postClinicianPatientNotesInput = async (req, res, next) => {
             {safe: true, upsert: true, new: true},
             function(err, doc) {
                 if(err) {
-                    //return res.redirect('/clinician/404')
+                    return res.redirect('/clinician/404')
                 }else {
                 
                 }
@@ -329,11 +358,13 @@ const postClinicianPatientNotesInput = async (req, res, next) => {
 // render support message for clinician
 const getClinicianPatientSupport = async (req, res, next) => {
     
-    var patientID = req.user.select_patient
+    var patientID = req.user.select_patients
     const patient = await Patient.findById(patientID).lean()
 
     if (patient) {
         var message = patient.clinician_message
+    } else {
+        return res.redirect('/clinician/404')
     }
 
     return res.render('clinicianSupportPatient', { clinicianItem: req.user.toJSON(), patientItem: patient, messageItem: message})
@@ -342,13 +373,10 @@ const getClinicianPatientSupport = async (req, res, next) => {
 // post support message for clinician
 const postClinicianPatientSupport = async (req, res, next) => {
 
-
-    var patientID = req.user.select_patient
+    var patientID = req.user.select_patients
     const patient = await Patient.findById(patientID).lean()
 
-
-    // clinician sends new clinician notes
-    //const newNote = new Note({note_content: req.body.note, note_date: new Date()})
+    // clinician sends new support message for patient
     if (req.body.message) {
         // pushes this input_data into the patient in mongoDB
         Patient.updateOne({ _id: patientID},
@@ -357,7 +385,7 @@ const postClinicianPatientSupport = async (req, res, next) => {
             {safe: true, upsert: true, new: true},
             function(err, doc) {
                 if(err) {
-                    //return res.redirect('/clinician/404')
+                    return res.redirect('/clinician/404')
                 }else {
                 
                 }
@@ -365,7 +393,97 @@ const postClinicianPatientSupport = async (req, res, next) => {
         )
     }
 
+
+
     return res.redirect('/clinician/clinicianSupportPatient')
+}
+
+// render support message for clinician
+const getClinicianPatientThresholdInput = async (req, res, next) => {
+    
+    var patientID = req.user.select_patients
+    const patient = await Patient.findById(patientID).lean()
+
+    if (patient) {
+        var threshold = patient.threshold_list
+        //console.log(threshold)
+    } else {
+        return res.redirect('/clinician/404')
+    }
+
+    return res.render('clinicianThresholdPatient', { clinicianItem: req.user.toJSON(), patientItem: patient, thresholdItem: threshold})
+}
+
+// post support message for clinician
+const postClinicianPatientThresholdInput = async (req, res, next) => {
+
+    var patientID = req.user.select_patients
+    const patient = await Patient.findById(patientID).lean()
+    thresh_list = []
+    //console.log(req.body)
+
+    //th_required: req.body.glucose_required
+
+    if (req.body.glucose_required) {
+        const glucose_th = new Threshold({type: "glucose", high: req.body.glucose_high, low: req.body.glucose_low});
+        thresh_list.push(glucose_th)
+    } else {
+        const glucose_th = new Threshold({type: "glucose", high: req.body.glucose_high, low: req.body.glucose_low, th_required: false});
+        thresh_list.push(glucose_th)
+    }
+
+    if (req.body.steps_required) {
+        const steps_th = new Threshold({type: "steps", high: req.body.steps_high, low: req.body.steps_low}); 
+        thresh_list.push(steps_th)
+    } else {
+        const steps_th = new Threshold({type: "steps", high: req.body.steps_high, low: req.body.steps_low, th_required:false}); 
+        thresh_list.push(steps_th)
+    }
+
+    if (req.body.weight_required) {
+        const weight_th = new Threshold({type: "weight", high: req.body.weight_high, low: req.body.weight_low}); 
+        thresh_list.push(weight_th)
+    } else {
+        const weight_th = new Threshold({type: "weight", high: req.body.weight_high, low: req.body.weight_low, th_required: false}); 
+        thresh_list.push(weight_th)
+    }
+
+    if (req.body.insulin_required) {
+        const insulin_th = new Threshold({type: "insulin", high: req.body.insulin_high, low: req.body.insulin_low});
+        thresh_list.push(insulin_th)
+    } else {
+        const insulin_th = new Threshold({type: "insulin", high: req.body.insulin_high, low: req.body.insulin_low, th_required: false});
+        thresh_list.push(insulin_th)
+    }
+
+
+    //thresh_list = [glucose_th, steps_th, weight_th, insulin_th]
+    // change order of this later, steps will be last
+    //console.log(thresh_list)
+
+    // clinician updates patient threshold
+    // pushes this thresh_list into the patient in mongoDB
+    Patient.updateOne({ _id: patientID},
+        {$set: {threshold_list: thresh_list}},
+
+        {safe: true, upsert: true, new: true},
+        function(err, doc) {
+            if(err) {
+                return res.redirect('/clinician/404')
+            }else {
+                
+            }
+        }
+    )
+    
+
+    return res.redirect('/clinician/clinicianViewPatient')
+}
+
+
+// Function to retrieve patient's error page
+const getErrorPage = (req,res)=>{
+    return res.render('404')
 }
 
 // exports an object, which contain functions imported by router
@@ -387,6 +505,9 @@ module.exports = {
     postClinicianPatientNotesInput,
     getClinicianPatientSupport,
     postClinicianPatientSupport,
+    getClinicianPatientThresholdInput,
+    postClinicianPatientThresholdInput,
+    getErrorPage,
 }
 
 

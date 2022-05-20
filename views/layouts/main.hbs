@@ -1,42 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/css/stylesClinician.css">
-<!-- <link rel="stylesheet" href="/css/style.css"> -->
-
-<!-- main layout for clinician UI -->
-<title>DexTrack-Clinician</title>
+<head> 
+    <meta charset="UTF-8"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Clinician App</title>
+    <link rel="stylesheet" id="stylesheet" href="/css/stylesClinician.css">
 </head>
-<body>
-    <header>
-    </header>
-    <main>
-        {{{body}}}
-    </main>
-    <footer>
-        <h4>© 2022 DexTrack, all rights reserved</h4>
+<body> 
+    <header> 
+    </header> 
+
+    <main> 
+
+        {{{body}}} 
+
+    </main> 
+
+    <!-- Footer with copyright claim to the product -->
+    <footer> 
+        <h6> © 2022 DexTrack, all rights reserved</h6> 
     </footer>
-    <script>
-    // Script for accordion
-    var acc = document.getElementsByClassName("accordion");
-    var i;
 
-    for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-            panel.style.display = "none";
-
-        } else {
-            panel.style.display = "block";
-        }
-    });
-    }
-    </script>
-    
 </body>
+<script src="/javascript/accordion.js"></script>
+<script src="/javascript/splash.js"></script>
+<script src="/javascript/theme.js"></script>
+<script src="/javascript/modal.js"></script>
 </html>

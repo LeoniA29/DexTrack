@@ -5,7 +5,10 @@
     <div class="dropdown">
         <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}} <img src="/chevron-down.png"></button>
         <div class="dropdown-content">
-             <a href="/clinician/patientComments">Patient comments</a>
+            <a href="/clinician/patientComments">Patient comments</a>
+            <form action="/clinician/logout" method="POST">
+                <button id="sign-out">Sign out</button>
+            </form>
         </div>
     </div>
     <div class="icons">
@@ -34,12 +37,17 @@
                 <div class="prev-msg"><strong>Previous message:<br></strong>No previous message</div>
             {{/if}}
 
-            <form action="/clinician/clinicianSupportPatient" method="POST">
-            
-                <input id="notes" type="text" name="message" rows="5" placeholder="New message here."/>
-                <!-- <textarea type="text" placeholder="New message here." rows="5"></textarea> -->
-                <button class="orange-button" id="send">Send</button>
-
+            <form action="/clinician/clinicianSupportPatient" method="POST" name="form">
+                <textarea type="text" id="test" name="message" placeholder="New message here." rows="5" required></textarea>
+                <button class="orange-button" id="send" onclick="openPopup()">Send</a></button>
+                <div class="popup-bg" id="popup-bg">
+                    <div class="popup" id="popup">
+                        <img src="/tick.png">
+                        <h3>Sent!</h3>
+                        <p>Your message has been successfully sent.</p>
+                        <button class="orange-button" id="ok-button" onclick="closePopup()">OK</button>
+                    </div>
+                </div>
             </form>
             
             

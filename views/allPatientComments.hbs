@@ -6,13 +6,16 @@
         <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}} <img src="/chevron-down.png"></button>
         <div class="dropdown-content">
             <a href="/clinician/patientComments">Patient comments</a>
+            <form action="/clinician/logout" method="POST">
+                <button id="sign-out">Sign out</button>
+            </form>
         </div>
     </div>
     <div class="icons">
         <a href="/clinician/dashboard"><img src="/house-solid.svg" id="icon" class="change-color"></a>
-        <a href="#"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
+        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
         <a><img src="/Line.png" id="nav-line"></a>
-        <a href="#"><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
+        <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
     </div>
 </div>
 
@@ -30,27 +33,25 @@
                 {{#if commentsList}}
                     {{#each commentsList}}
                         {{#each this.[1]}}
-                            <button class="entry accordion">
+                            <button class="accordion">
+                                {{#with (showDate this.data_date)}}
+                                    <div class="data" id="overflow"><span class="attribute">Date/Time</span><br><strong>{{this.[2].value}} {{this.[4].value}}, {{this.[8].value}}:{{this.[10].value}}</strong></div>
+                                {{/with}}
 
-                            {{#with (showDate this.data_date)}}
-                                <div class="data"><span class="attribute">Date/Time</span><br><strong>{{this.[2].value}} {{this.[4].value}}, {{this.[8].value}}:{{this.[10].value}}</strong></div>
-                            {{/with}}
-
-                            <div class="data" id="overflow"><span class="attribute">Patient</span><br><strong>{{../[0].first_name}} {{../[0].last_name}}</strong></div>
-                            <div class="data" id="overflow"><span class="attribute">Comment</span><br><strong>I feel bloated.</strong></div>
-                            <img src="/chevron-down-solid.svg" height="30px">
+                                <div class="data" id="overflow"><span class="attribute">Patient</span><br><strong>{{../[0].first_name}} {{../[0].last_name}}</strong></div>
+                                <div class="data hide" id="overflow"><span class="attribute">Comment</span><br><strong>{{this.data_comment}}</strong></div>
+                                <img src="/chevron-down-solid.svg">
                             </button>
                             <div class="entry panel">
                                 <p><span class="attribute">Comment</span><br><strong>{{this.data_comment}}</strong></p>
                                 <form action="/clinician/clinicianViewPatient" method="POST">
-                                    <button>
-                                        view profile
+                                    <button class="button-go">
+                                        Go to patient
                                         <input type="hidden" name="patient" value={{../[0]._id}}/>
                                         <input type="hidden" type="submit"/>
                                     </button>
                                 </form>
                             </div>
-
                         {{/each}}
                     {{/each}}
                 {{else}}

@@ -1,10 +1,237 @@
 {{!< main}}
-let us test if this works
+<!-- Navigation bar at top of webpage -->
+<div class="navbar">
+    <div class="dropdown">
+        <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}} <img src="/chevron-down.png"></button>
+        <div class="dropdown-content">
+            <a href="/clinician/patientComments">Patient comments</a>
+            <form action="/clinician/logout" method="POST">
+                <button id="sign-out">Sign out</button>
+            </form>
+        </div>
+    </div>
+    <div class="icons">
+        <a href="/clinician/dashboard"><img src="/house-solid.svg" id="icon" class="change-color"></a>
+        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
+        <a><img src="/Line.png" id="nav-line"></a>
+        <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
+    </div>
+</div>
 
 {{#with patientItem}}
+    <ul class="breadcrumb">
+      <li><a href="/clinician/dashboard">Patient list</a></li>
+      <li>{{this.first_name}} {{this.last_name}}</li>
+    </ul>
 
-{{first_name}} {{last_name}}
+    <div class="sections">
+
+         <!-- Each section corresponds to each segment of the patient information in the webpage -->
+        <section class="profile">
+            <div class="col">
+                <div><span class="attribute">Sex</span><br><strong>{{this.sex}}</strong></div>
+                <div><span class="attribute"><br>Occupation</span><br><strong>{{this.occupation}}</strong></div>
+            </div>
+            <div class="col">
+                <div><span class="attribute">Date of birth</span><br><strong>{{this.dob}}</strong></div>
+                <!--<div><span class="attribute"><br>Insurance</span><br><strong>{{this.insurance}}</strong></div>-->
+            </div>
+            <div class="col">
+                <div><span class="attribute">Registered on</span><br><strong>{{this.regisDate}}</strong></div>
+                <div><span class="attribute"><br>Address</span><br><strong>{{this.address}}</strong></div>
+            </div>
+            <div class="col">
+                <div><span class="attribute">Phone number</span><br><strong>{{this.phone}}</strong></div>
+                <div><span class="attribute"><br>Postcode</span><br><strong>{{this.postcode}}</strong></div>
+            </div>
+            <div class="col">
+                <!--<div><span class="attribute">Marital state</span><br><strong>{{this.marital}}</strong></div>-->
+                <div><span class="attribute"><br>Email</span><br><strong>{{this.email}}</strong></div>
+            </div>
+        </section>
 {{/with}}
-<button class="orange-button" onclick="location.href='/clinician/clinicianNotesPatient'">View notes</button>
 
-<button class="orange-button" onclick="location.href='/clinician/clinicianSupportPatient'">Send support</button>
+    <section class="buttons">
+        <button class="view" id="clinician-notes" onclick="location.href='/clinician/clinicianNotesPatient'"> 
+            <h3>View Clinician Notes</h3>
+        </button>
+        <button class="view" id="send-message" onclick="location.href='/clinician/clinicianSupportPatient'"> 
+            <h3>Send Message to Patient</h3>
+        </button>
+    </section>
+
+    <section class="segment">
+        <div class="sticky-bar">
+            <h3>Patient logs</h3>
+        </div>
+        <div class="date">
+            <h4><strong>20</strong><br>MON</h4>
+            <div class="entries">
+                <button class="accordion" id="glucose">
+                    <div class="data" id="overflow">
+                        <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
+                    </div>
+                    <div class="data" id="overflow">
+                        <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
+                    </div>
+                    <div class="data">
+                        <a href="#"><img src="/chevron-down-solid.svg"></a>
+                    </div>
+                </button>
+                <div class="panel" id="glucose">
+                    <p><span class="attribute">Comment</span><br><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit</strong></p>
+                </div>
+
+                <button class="accordion" id="weight">
+                    <div class="data" id="overflow">
+                        <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
+                    </div>
+                    <div class="data" id="overflow">
+                        <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
+                    </div>
+                    <div class="data">
+                        <a href="#"><img src="/chevron-down-solid.svg"></a>
+                    </div>
+                </button>
+                <div class="panel" id="weight">
+                    <p><span class="attribute">Comment</span><br><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit</strong></p>
+                </div>
+
+                <button class="accordion" id="exercise">
+                    <div class="data" id="overflow">
+                        <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
+                    </div>
+                    <div class="data" id="overflow">
+                        <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
+                    </div>
+                    <div class="data">
+                        <a href="#"><img src="/chevron-down-solid.svg"></a>
+                    </div>
+                </button>
+                <div class="panel" id="exercise">
+                    <p><span class="attribute">Comment</span><br><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit</strong></p>
+                </div>
+
+                <button class="accordion" id="insulin">
+                    <div class="data" id="overflow">
+                        <span class="attribute">Date/time</span><br><strong>20 March, 11 am</strong>
+                    </div>
+                    <div class="data" id="overflow">
+                        <span class="attribute">Blood glucose level</span><br><strong>100 nmol/L</strong>
+                    </div>
+                    <div class="data">
+                        <a href="#"><img src="/chevron-down-solid.svg"></a>
+                    </div>
+                </button>
+                <div class="panel" id="insulin">
+                    <p><span class="attribute">Comment</span><br><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, consectetur adipisicing elit</strong></p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{{#with thresholdItem}}
+    <section class="segment" id="thresholds">
+        <h3>Patient thresholds</h3>
+        <div class="threshold">
+            <h4 id="glucose_text">Blood glucose level</h4>
+            <div class="container" id="glucose">
+                <div class="upper">
+                    {{#if this.[0].high}}
+                        <span class="attribute">Upper bound</span><br><strong>{{this.[0].high}} mol/L</strong>
+                    {{else}}
+                        <span class="attribute">Upper bound</span><br><strong>Not set</strong>
+                    {{/if}}
+                </div>
+                <div class="lower">
+                    {{#if this.[0].low}}
+                        <span class="attribute">Lower bound</span><br><strong>{{this.[0].low}} mol/L</strong>
+                    {{else}}
+                        <span class="attribute">Lower bound</span><br><strong>Not set</strong>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        
+        <div class="threshold">
+            <h4 id="weight_text">Weight</h4>
+            <div class="container" id="weight">
+                <div class="upper">
+                    {{#if this.[2].high}}
+                        <span class="attribute">Upper bound</span><br><strong>{{this.[2].high}} kg</strong>
+                    {{else}}
+                        <span class="attribute">Upper bound</span><br><strong>Not set</strong>
+
+                    {{/if}}
+                </div>
+                <div class="lower">
+                    {{#if this.[2].low}}
+                        <span class="attribute">Lower bound</span><br><strong>{{this.[2].low}} kg</strong>
+                    {{else}}
+                        <span class="attribute">Lower bound</span><br><strong>Not set</strong>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        
+        <div class="threshold">
+            <h4 id="insulin_text">Dose of insulin</h4>
+            <div class="container" id="insulin">
+                <div class="upper">
+                    {{#if this.[3].high}}
+                        <span class="attribute">Upper bound</span><br><strong>{{this.[3].high}} dose</strong>
+                    {{else}}
+                        <span class="attribute">Upper bound</span><br><strong>Not set</strong>
+                    {{/if}}
+                </div>
+                <div class="lower">
+                    {{#if this.[3].low}}
+                        <span class="attribute">Lower bound</span><br><strong>{{this.[3].low}} dose</strong>
+                    {{else}}
+                        <span class="attribute">Lower bound</span><br><strong>Not set</strong>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        
+        <div class="threshold">
+            <h4 id="exercise_text">Exercise</h4>
+            <div class="container" id="exercise">
+                <div class="upper">
+                    {{#if this.[1].high}}
+                        <span class="attribute">Upper bound</span><br><strong>{{this.[1].high}} steps</strong>
+                    {{else}}
+                        <span class="attribute">Upper bound</span><br><strong>Not set</strong>
+                    {{/if}}
+                </div>
+                <div class="lower">
+                    {{#if this.[1].low}}
+                        <span class="attribute">Lower bound</span><br><strong>{{this.[1].low}} steps</strong>
+                    {{else}}
+                        <span class="attribute">Lower bound</span><br><strong>Not set</strong>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        
+        <button ><a href="/clinician/clinicianThresholdPatient">Edit</a></button>
+    </section>
+{{/with}}
+
+    <section class="segment" id="graphs">
+        <div class="row">
+            <div class="card" id="glucose">
+            </div>
+            <div class="card" id="right-weight">
+            </div>
+        </div>
+        <div class="row">
+            <div class="card" id="exercise">
+            </div>
+            <div class="card" id="right-insulin">
+            </div>
+        </div>
+    </section >
+
+ </div>
