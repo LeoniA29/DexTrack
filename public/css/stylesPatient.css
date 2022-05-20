@@ -589,7 +589,6 @@ img[id="logo"] {
 .logContainer {
 	display: flex;
 	flex-direction: column;
-
 }
 
 .singleLog {
@@ -610,7 +609,7 @@ img[id="logo"] {
 .logBox {
 	min-width: 250px;
     width: 90%;
-	height: 30px;
+	height: fit-content;
 	background: #E4EFFE;
 	border-radius: 25px;
 	white-space: nowrap;
@@ -640,6 +639,16 @@ img[id="logo"] {
 	font-size: 16px;
 	display: inline-block;
 	margin: 0px;
+}
+
+
+#logComment {
+    color:  #2c68ad;
+	padding-left: 15px;
+	font-size: 16px;
+	margin: 0px;
+    white-space: initial;
+    font-weight: 200;
 }
 
 @media (min-width: 1024px) {
