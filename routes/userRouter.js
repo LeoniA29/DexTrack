@@ -4,7 +4,7 @@ const express = require('express')
 // create our Router object
 const userRouter = express.Router()
 
-// import patient controller functions
+// import user controller functions
 const userController = require('../controllers/userController')
 
 // Passport Authentication middleware

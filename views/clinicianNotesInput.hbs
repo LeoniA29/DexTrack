@@ -51,6 +51,10 @@
      </section>
 </div>
 
-{{#each flash}}
-<p class="alert">{{this.msg}}</p>
-{{/each}}
+<div class="alert">
+    {{#each flash}}
+        <div class="alertBox">
+            <li>{{this}}</li>
+        </div>
+    {{/each}}
+</div>

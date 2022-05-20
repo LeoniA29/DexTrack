@@ -32,8 +32,7 @@ const compareDates = (clinicianDate)=> {
 
 
 // add Express-Validator
-const {validationResult, check } = require('express-validator');
-const { ObjectId } = require('bson');
+const {validationResult, check } = require('express-validator')
 
 // function which renders patient's login page 
 const getClinicianLoginPage = (req,res)=> {

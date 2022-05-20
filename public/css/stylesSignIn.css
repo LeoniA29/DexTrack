@@ -31,6 +31,10 @@ img[id="cloud"] {
     margin-left: 20px;
 }
 
+textarea{
+    resize: none;
+}
+
 .nav_bar, .nav_pages {
     display: flex;
     justify-content: space-between;
@@ -128,7 +132,7 @@ button:hover {
     display: flex;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 121px;
+    margin-top: 40px;
 }
 
 /* error pages */
@@ -284,6 +288,20 @@ input[type=email], [type=password] {
     cursor: pointer;
     margin-bottom: 20px;
 }
+
+#saveButton {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    width: 40%;
+    max-width: 400px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid var(--darkBlue); 
+    background-color: var(--darkBlue);
+    color: var(--white);
+    height: 30px;
+    font-size: 20px;
+}
     
 .submit-btn:hover, .cancel-btn:hover, .as-patient img:hover, .as-clinician img:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
@@ -318,6 +336,78 @@ input[type=email], [type=password] {
 .as-clinician {
     margin-left: 50px;
 }
+
+/* modal popup */
+
+.popup-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.7s opacity 1s;
+}
+
+.bg-active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup {
+    width: 280px;
+    background: white;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: black;
+    visibility: hidden;
+    transition: transform 0.3s, top 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 3, 0.2);
+}
+
+.open-popup {
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup img {
+    width: 100px;
+    margin-top: -50px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.popup h3 {
+    font-size: 38px;
+    margin: 30px 0px 10px;
+    color: #2C68AD;
+}
+
+.popup p {
+    font-size: 18px;
+}
+
+#ok-button.orange-button {
+    width: 100%;
+    padding: 10px 60px;
+    border: 0;
+    outline: none;
+    font-size: 20px;
+    border-radius: 20px;
+}
+
+
     
 /* [on small screen] */
 @media (max-width: 1000px) {
@@ -402,3 +492,37 @@ input[type=email], [type=password] {
     }
 }
 
+/* alert flash */
+
+.alert {
+    padding: 5px 5px 5px 5px;
+    color:#E4EFFE;
+    width: 300px;
+    height: fit-content;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 15px;
+    position: absolute;
+    left: 50%;
+    top: 15%;
+    transform: translate(-50%, -50%);
+}
+
+.alertBox{
+    background-color: #8b0000;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 3, 0.2);
+    margin: 10px 0px;
+    padding: 8px 5px;
+}
+
+.alertBox li{
+    color: white;
+}
+
+@media (max-width: 375px) {
+    .alert {
+        font-size: 14px;
+        width: 220px;
+    }
+}

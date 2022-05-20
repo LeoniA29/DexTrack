@@ -4,7 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Lexend Deca' rel='stylesheet'>
     <title>Sign In</title>
-    <link rel="stylesheet" href="/css/sign-in-styles.css">
+    <link rel="stylesheet" href="/css/stylesSignIn.css">
+    <script src="/javascript/menu.js" defer></script>
 </head>
 <body>
     <!-- Navigation bar at top of webpage -->
@@ -54,11 +55,14 @@
             </div>
         </section>
     </main> 
-    
+
+    <div class="alert">
+    {{#each flash}}
+        <div class="alertBox">
+            <li>{{this}}</li>
+        </div>
+    {{/each}}
+
+</div>
 </body>
-<script src="/javascript/menu.js"></script>
 
-
-{{#each flash}}
-<p class="alert">{{this}}</p>
-{{/each}}

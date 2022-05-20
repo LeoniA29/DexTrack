@@ -1,3 +1,28 @@
+/* set mode */
+
+:root {
+    --bg-color: #FFFFFF;
+    --text-color: black;
+    --bar-color: #F2F2F2;
+    --footer-color: #2C68AD;
+    --white-color: white;
+    --subtitle-color: #2C68AD;
+    --content-color: #F2F2F2;
+    --content-diabetes: #C4D9ED;
+}
+
+.dark-theme {
+    --bg-color: #050F1C;
+    --text-color: #FEFEFE;
+    --bar-color: #5C636E;
+    --footer-color: #272727;
+    --white-color: #E4E5E6;
+    --content-color: #5C636E;
+    --subtitle-color: #E4E5E6;
+    --content-diabetes: #162945;
+    --content-header: #FB6E59;
+}
+
 /* body structure */
 
 header, body, footer {
@@ -9,7 +34,7 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    background-color: #FFFFFF;
+    background-color: var(--bg-color);
     overflow-x: hidden;
 }
 
@@ -18,10 +43,6 @@ section {
     padding-bottom: 50px;
 }
 
-.sections div {
-    /* for blob behind navbar logo */
-    z-index: 2;
-}
 
 /* navigation bar */
 
@@ -36,14 +57,12 @@ img[id="logo"] {
     margin-left: 20px;
 }
 
-img[id="blob1"] {
-    position: absolute;
-    width: 75%;
-    height: auto;
-    z-index: 1;
-    margin-top: 100px;
-    margin-left: -350px;
+img[id="themeToggle"]{
+    z-index:2;
+    width: auto;
+    height: 50px;
 }
+
 
 .nav_bar, .nav_pages, .about_info, .about_products {
     display: flex;
@@ -52,12 +71,16 @@ img[id="blob1"] {
     z-index: 2;
 }
 
+.nav_bar{
+    background-color: var(--bar-color);
+}
+
 .nav_pages {
     list-style: none;
 }
 
 .nav_item {
-    margin-left: 5rem;
+    margin-left: 10px;
 }
 
 .nav_pages li, .nav_pages button { 
@@ -68,7 +91,7 @@ img[id="blob1"] {
 
 li, a, button {
     font-family: Lexend Deca;
-    color: black;
+    color: var(--text-color);
     text-decoration: none;
 }
 
@@ -82,6 +105,7 @@ li, a, button {
 }
 
 .menu {
+    z-index: 99;
     display: none;
 }
 
@@ -92,7 +116,8 @@ li, a, button {
     margin: 5px auto;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
-    background-color: #101010;
+    background-color:  var(--bar-color);
+    z-index: 99;
 }
 
 /* overlap between the 2 html */
@@ -106,13 +131,14 @@ button {
     font-size: 2vh;
     background-color: #FB6E59;
     padding: 10px 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 p {
     text-align: left;
     font-size: 2.5vh;
     line-height: 25px;
-    color: black;
+    color: var(--text-color);
 }
 
 /* About Diabetes*/
@@ -131,8 +157,9 @@ p {
 /* specific section css */
 
 .content_1 {
-    background-color: #F2F2F2;
+    background-color: var(--content-color);
 }
+
 
 .content_1 .texttitle {
     padding-right: 50px;
@@ -152,10 +179,15 @@ p {
     padding-top: 180px;
     padding-bottom: 180px;
     background-size: contain;
-    background-color: #C4D9ED;
+    background-color: var(--content-diabetes);
     background-repeat: no-repeat;
     background-position: center;
     height: auto;
+}
+
+.myths_facts {
+    padding-top: 100px;
+    padding-bottom: 100px;
 }
 
 /* bg image for specific sections */
@@ -177,6 +209,7 @@ p {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
+  
 }
 
 .video_content video {
@@ -218,10 +251,11 @@ p {
 .titlestart {
     font-style: bold;
     font-size: 3.3vh;
+    color: var(--content-header);
 }
 
 .subtitle {
-    color: #2D68AD;
+    color: var(--subtitle-color);
     text-align: left;
     font-size: 2.8vh;
 }
@@ -336,14 +370,14 @@ p {
 footer {
     padding: 2em;
     text-align: center;
-    background-color:#2C68AD;
-    color: #FFFFFF;
+    background-color: var(--footer-color);
+    color: var(--white-color);
     margin-top: auto;
     margin-bottom: auto;
 }
 
 footer p {
-    color: #FFFFFF;
+    color: var(--white-color);
 }
 
 /* headings */
@@ -373,6 +407,7 @@ h3 {
     word-spacing: 2px;
     padding: 5px 0px;
     text-justify: inter-word;
+    color: var(--text-color);
 }
 
 /* hovers */
@@ -413,16 +448,15 @@ button:hover {
 
 /* media screens */
 
-@media screen and (max-width: 1380px) {
+@media screen and (max-width: 1280px) {
+     /* navbar */
     
-    /* navbar */
-
-    .nav_pages {
+     .nav_pages {
         position: fixed;
         right: -110%;
         top: 4rem;
         flex-direction: column;
-        background-color: #fff;
+        background-color: var(--content-color);
         width: 100%;
         border-radius: 10px;
         text-align: center;
@@ -437,7 +471,7 @@ button:hover {
     }
         
     .nav_item {
-        margin: 2.5rem 0;
+        margin: 2rem 0;
     }
 
     .menu {
@@ -450,12 +484,12 @@ button:hover {
         border-radius: 20px;
         position: fixed;
         background-color: #FB6E59;
+        z-index: 99;
     }
 
     img[id="logo"] {
         margin-top: -10px;
     }
-
 
     .menu.active .bar:nth-child(2) {
         opacity: 0;
@@ -473,11 +507,17 @@ button:hover {
         padding-top: 75px;
         padding-bottom: 75px;
     }
+}
+
+@media screen and (max-width: 1024px) {
+    
 
     /* About DexTrack */
     
     .about_info, .about_products {
-        margin: auto 50px;
+        margin-left: 50px;
+        margin-right: 50px;
+        margin-bottom: -200px;
         flex-direction: column-reverse;
     }
 
@@ -499,7 +539,17 @@ button:hover {
     }
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 400px) {
+
+    img[id="logo"] {
+        padding-left: 0;
+        height: 50px;
+        top: 0;
+    }
+
+    section {
+        padding-bottom: -50px;
+    }
 
     img[id="logo"] {
         padding-left: 0;
@@ -581,6 +631,7 @@ button:hover {
 
     .about_info, .about_products{
         margin: auto -20px 50px;
+        margin-bottom: -200px;
     }
 
     .product_vector img {
