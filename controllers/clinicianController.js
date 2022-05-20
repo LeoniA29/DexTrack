@@ -296,7 +296,9 @@ const getClinicianPatientNotes = async (req, res, next) => {
     var notesList = []
 
     if (patient) {
-        for (i in patient.clinician_notes) {
+
+        // sort inputs in descending order according to date
+        for (var i = patient.clinician_notes.length - 1; i>=0; i--){
             notesList.push(patient.clinician_notes[i])
         }
         //console.log(notesList)
@@ -685,7 +687,7 @@ const getStepsData = async (req, res, next) => {
         const inputs = patient.input_data
         // sort inputs in descending order according to date
         for (var i = inputs.length - 1; i>=0; i--){
-            
+
             var date = formatter.formatToParts(inputs[i].set_date)
             var dataDate = date[4].value.toString() + " " + date[2].value.toString()
             //console.log(dataDate)
