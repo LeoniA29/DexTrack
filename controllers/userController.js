@@ -15,11 +15,11 @@ const getAboutDexTrack = (req,res) => {
 
     if (req.user.role == "patient") {
         /// patient is logged in, so show "Dashboard" and "Sign Out" button
-        return res.render('aboutDexTrack', {logged: true, role: "patient"})
+        return res.render('aboutDextrack', {logged: true, role: "patient"})
     }
     else {
         // clinician is logged in, so show "Dashboard" and "Sign Out" button
-        return res.render('aboutDexTrack', {logged: true, role: "clinician"})
+        return res.render('aboutDextrack', {logged: true, role: "clinician"})
     }
 }
 

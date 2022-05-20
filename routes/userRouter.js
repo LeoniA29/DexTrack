@@ -21,7 +21,7 @@ const isLoggedDiabetes = (req, res, next) => {
 const isLoggedDextrack = (req, res, next) => {
     // If user is not logged in, redirect to About-Dextrack page
     if (!req.isAuthenticated()) {
-        return res.render('aboutDexTrack', {logged: false})
+        return res.render('aboutDextrack', {logged: false})
     }
     // Otherwise, go to dashboard
     return next()
