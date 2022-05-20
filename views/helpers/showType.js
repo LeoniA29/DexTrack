@@ -1,7 +1,7 @@
 module.exports = function(handlebars) {
     return function(arr) {
         if (arr[0] == "glucose"){
-            return ({link: "/Glucose_Level.png", unit: "nmol/L" , data: arr[1], comment: arr[3]})
+            return ({link: "/Glucose_Level.png", unit: "mmol/L" , data: arr[1], comment: arr[3]})
         }
 
         else if (arr[0] == "insulin"){
