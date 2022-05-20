@@ -552,12 +552,12 @@ const getGlucoseData = async (req, res, next) => {
         // sort inputs in descending order according to date
         for (var i = inputs.length - 1; i>=0; i--){
 
+            var date = formatter.formatToParts(inputs[i].set_date)
+            var dataDate = date[4].value.toString() + " " + date[2].value.toString()
+            //console.log(dataDate)
+
             if (inputs.length >= 7) {
                 if ((inputs.length-7) <= i) {
-
-                    date = formatter.formatToParts(inputs[i].set_date)
-                    dataDate = date[4].value.toString() + " " + date[2].value.toString()
-                    //console.log(dataDate)
 
                     if (inputs[i].glucose_data) {
                         glucoseGraph.push([dataDate, inputs[i].glucose_data.data_entry])
@@ -597,12 +597,12 @@ const getWeightData = async (req, res, next) => {
         // sort inputs in descending order according to date
         for (var i = inputs.length - 1; i>=0; i--){
 
+            var date = formatter.formatToParts(inputs[i].set_date)
+            var dataDate = date[4].value.toString() + " " + date[2].value.toString()
+            //console.log(dataDate)
+
             if (inputs.length >= 7) {
                 if ((inputs.length-7) <= i) {
-
-                    date = formatter.formatToParts(inputs[i].set_date)
-                    dataDate = date[4].value.toString() + " " + date[2].value.toString()
-                    //console.log(dataDate)
 
                     if (inputs[i].weight_data) {
                         weightGraph.push([dataDate, inputs[i].weight_data.data_entry])
@@ -642,12 +642,12 @@ const getInsulinData = async (req, res, next) => {
         // sort inputs in descending order according to date
         for (var i = inputs.length - 1; i>=0; i--){
 
+            var date = formatter.formatToParts(inputs[i].set_date)
+            var dataDate = date[4].value.toString() + " " + date[2].value.toString()
+            //console.log(dataDate)
+
             if (inputs.length >= 7) {
                 if ((inputs.length-7) <= i) {
-
-                    date = formatter.formatToParts(inputs[i].set_date)
-                    dataDate = date[4].value.toString() + " " + date[2].value.toString()
-                    //console.log(dataDate)
 
                     if (inputs[i].insulin_data) {
                         insulinGraph.push([dataDate, inputs[i].insulin_data.data_entry])
@@ -685,13 +685,14 @@ const getStepsData = async (req, res, next) => {
         const inputs = patient.input_data
         // sort inputs in descending order according to date
         for (var i = inputs.length - 1; i>=0; i--){
+            
+            var date = formatter.formatToParts(inputs[i].set_date)
+            var dataDate = date[4].value.toString() + " " + date[2].value.toString()
+            //console.log(dataDate)
 
             if (inputs.length >= 7) {
                 if ((inputs.length-7) <= i) {
 
-                    date = formatter.formatToParts(inputs[i].set_date)
-                    dataDate = date[4].value.toString() + " " + date[2].value.toString()
-                    //console.log(dataDate)
 
                     if (inputs[i].steps_data) {
                         stepsGraph.push([dataDate, inputs[i].steps_data.data_entry])
