@@ -90,7 +90,6 @@ Fonts:
 To get a local copy up and running follow these simple example steps.
 
 
-  ```
 ### Installation
 
 1. Clone the repo
