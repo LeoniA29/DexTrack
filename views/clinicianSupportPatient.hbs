@@ -1,11 +1,14 @@
 {{!< main}}
-
 <!-- Navigation bar at top of webpage -->
 <div class="navbar">
     <div class="dropdown">
         <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}} <img src="/chevron-down.png"></button>
         <div class="dropdown-content">
             <a href="/clinician/patientComments">Patient comments</a>
+            <a href="/about-diabetes">About Diabetes</a>
+            <a href="/about-dextrack">About DexTrack</a>
+            <a href="/clinician/change-password">Update password</a>
+
             <form action="/clinician/logout" method="POST">
                 <button id="sign-out">Sign out</button>
             </form>
@@ -13,7 +16,7 @@
     </div>
     <div class="icons">
         <a href="/clinician/dashboard"><img src="/house-solid.svg" id="icon" class="change-color"></a>
-        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
+        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color nightmode"></a>
         <a><img src="/Line.png" id="nav-line"></a>
         <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
     </div>
@@ -38,13 +41,13 @@
             {{/if}}
 
             <form action="/clinician/clinicianSupportPatient" method="POST" name="form">
-                <textarea type="text" id="test" name="message" placeholder="New message here." rows="5" required></textarea>
+                <textarea type="text" id="notes" name="message" placeholder="New message here." rows="5" required></textarea>
                 <button class="orange-button" id="send" onclick="openPopup()">Send</a></button>
                 <div class="popup-bg" id="popup-bg">
                     <div class="popup" id="popup">
-                        <img src="/tick.png">
-                        <h3>Sent!</h3>
-                        <p>Your message has been successfully sent.</p>
+                        <img src="/Loading-dots.gif">
+                        <h3>Processing...</h3>
+                        <p>Press the button to begin data review.</p>
                         <button class="orange-button" id="ok-button" onclick="closePopup()">OK</button>
                     </div>
                 </div>
@@ -54,3 +57,7 @@
      </section>
 
 </div>
+
+{{#each flash}}
+<p class="alert">{{this.msg}}</p>
+{{/each}}

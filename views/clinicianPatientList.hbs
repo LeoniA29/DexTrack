@@ -1,11 +1,14 @@
 {{!< main}}
-    <!-- Navigation bar at top of webpage -->
-    
+<!-- Navigation bar at top of webpage -->
 <div class="navbar">
     <div class="dropdown">
         <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}} <img src="/chevron-down.png"></button>
         <div class="dropdown-content">
             <a href="/clinician/patientComments">Patient comments</a>
+            <a href="/about-diabetes">About Diabetes</a>
+            <a href="/about-dextrack">About DexTrack</a>
+            <a href="/clinician/change-password">Update password</a>
+
             <form action="/clinician/logout" method="POST">
                 <button id="sign-out">Sign out</button>
             </form>
@@ -13,7 +16,7 @@
     </div>
     <div class="icons">
         <a href="/clinician/dashboard"><img src="/house-solid.svg" id="icon" class="change-color"></a>
-        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
+        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color nightmode"></a>
         <a><img src="/Line.png" id="nav-line"></a>
         <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
     </div>
@@ -36,6 +39,7 @@
     <section class="patientList">
         <div class="sticky-bar">
             <button class="orange-button" onclick="location.href='/clinician/registerPatient'">Add New Patient</button>
+            <!-- Place to run sort and search functions (future extension)
             <form action="/clinician/searchPatient" method="POST">  
                 <div class="blue-button" id="sort">
                     <button class="dropbtn">Sort by <img src="/chevron-down.png"></button>
@@ -49,6 +53,7 @@
                     <input type="text" placeholder="Search" name="search">
                 </div>
             </form>  
+            -->
         </div>
 
         <!-- Iterate through testData to correctly load patient list of clinician -->
@@ -66,9 +71,9 @@
 
                                 <!-- Checks if data should be highlighted because it exceeds threshold -->
                                 {{#if (exceedThreshold this.[2] this.[1].glucose_data) }}
-                                    <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong id="threshold-check">{{this.[1].glucose_data.data_entry}} nmol/L</strong></div>
+                                    <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong id="threshold-check">{{this.[1].glucose_data.data_entry}} mmol/L</strong></div>
                                 {{else}}
-                                    <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong>{{this.[1].glucose_data.data_entry}} nmol/L</strong></div>
+                                    <div class="col"><span class="attribute">Blood Glucose Level</span><br><strong>{{this.[1].glucose_data.data_entry}} mmol/L</strong></div>
                                 {{/if}}
                                 
                             {{else}}

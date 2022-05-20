@@ -45,7 +45,7 @@ patientRouter.post('/dashboard', patientController.patientLogout)
 patientRouter.get('/insertGlucose', isAuthenticated, hasRole('patient'), patientController.getGlucosePage)
 patientRouter.post('/insertGlucose', isAuthenticated, 
 
-    body('data_entry', 'invalid glucose data entered').isFloat({min: 0, max: 10000}).escape(), // glucose data must numeric, not negative and not too large
+    body('data_entry', 'invalid glucose data entered').isFloat({min: 0, max: 1000}).escape(), // glucose data must numeric, not negative and not too large
     body('data_comment', 'comment cannot exceed 260 characters').isLength({max: 250}).blacklist('$<>&{}'), // comment can't exceed 250 characters
 
     patientController.insertPatientData)
@@ -62,7 +62,7 @@ patientRouter.post('/insertInsulin', isAuthenticated,
 patientRouter.get('/insertSteps', isAuthenticated, hasRole('patient'), patientController.getStepsPage)
 patientRouter.post('/insertSteps', isAuthenticated, 
 
-    body('data_entry', 'invalid steps data entered').isFloat({min: 0, max: 50000}).escape(), // steps data must be numeric, not negative and not too large
+    body('data_entry', 'invalid steps data entered').isFloat({min: 0, max: 100000}).escape(), // steps data must be numeric, not negative and not too large
     body('data_comment', 'comment cannot exceed 260 characters').isLength({max: 250}).blacklist('$<>&{}'),// comment can't exceed 250 characters
 
 

@@ -90,7 +90,7 @@ const insertClinician= async (req, res) => {
 // render register patient hbs
 const getRegisterPage = (req, res) => {
     
-    return res.render('patientRegister', {clinicianItem: req.user.toJSON(), flash: req.flash('errors')})
+    return res.render('clinicianRegisterPatient', {clinicianItem: req.user.toJSON(), flash: req.flash('errors')})
 }
 
 // insert new Patient into database and link to clinician
@@ -272,6 +272,11 @@ const getClinicianPatient = async (req, res, next) => {
     try {
         const sortedInputs = []
         const graphInputs = []
+        const glucoseGraph = []
+        const weightGraph = []
+        const insulinGraph = []
+        const stepsGraph = []
+
         const inputs = patient.input_data
         // sort inputs in descending order according to date
         for (var i = inputs.length - 1; i>=0; i--){
@@ -279,17 +284,70 @@ const getClinicianPatient = async (req, res, next) => {
 
             if (inputs.length >= 7) {
                 //console.log(inputs.length)
-                if ((inputs.length-7) < i) {
-                    graphInputs.push(inputs[i])
+                if ((inputs.length-7) <= i) {
+
+                    date = formatter.formatToParts(inputs[i].set_date)
+                    dataDate = date[4].value.toString() + " " + date[2].value.toString()
+                    //console.log(dataDate)
+ 
+                    if (inputs[i].glucose_data) {
+                    
+                        glucoseGraph.push([dataDate, inputs[i].glucose_data.data_entry])
+                    } else {
+                        glucoseGraph.push([dataDate, inputs[i].glucose_data])
+                    }
+
+                    if (inputs[i].weight_data) {
+                        weightGraph.push([dataDate, inputs[i].weight_data.data_entry])
+                    } else {
+                        weightGraph.push([dataDate, inputs[i].weight_data])
+                    }
+
+                    if (inputs[i].insulin_data) {
+                        insulinGraph.push([dataDate, inputs[i].insulin_data.data_entry])
+                    } else {
+                        insulinGraph.push([dataDate, inputs[i].insulin_data])
+                    }
+
+                    if (inputs[i].steps_data) {
+                        stepsGraph.push([dataDate, inputs[i].steps_data.data_entry])
+                    } else {
+                        stepsGraph.push([dataDate, inputs[i].steps_data])
+                    }
+
                 }
 
             } else {
-                graphInputs.push(inputs[i])
+
+                if (inputs[i].glucose_data) {
+                    
+                    glucoseGraph.push([dataDate, inputs[i].glucose_data.data_entry])
+                } else {
+                    glucoseGraph.push([dataDate, inputs[i].glucose_data])
+                }
+
+                if (inputs[i].weight_data) {
+                    weightGraph.push([dataDate, inputs[i].weight_data.data_entry])
+                } else {
+                    weightGraph.push([dataDate, inputs[i].weight_data])
+                }
+
+                if (inputs[i].insulin_data) {
+                    insulinGraph.push([dataDate, inputs[i].insulin_data.data_entry])
+                } else {
+                    insulinGraph.push([dataDate, inputs[i].insulin_data])
+                }
+
+                if (inputs[i].steps_data) {
+                    stepsGraph.push([dataDate, inputs[i].steps_data.data_entry])
+                } else {
+                    stepsGraph.push([dataDate, inputs[i].steps_data])
+                }
             }
         }
-        //console.log(sortedInputs)
+        //console.log(stepsGraph)
 
-        return res.render('clinicianViewPatient', { clinicianItem: req.user.toJSON(), patientItem: patient, thresholdItem: threshold, dataItem: sortedInputs, graphItem: graphInputs})
+        return res.render('clinicianViewPatient', { clinicianItem: req.user.toJSON(), patientItem: patient, thresholdItem: threshold, dataItem: sortedInputs, glucoseItem: glucoseGraph, weightItem: weightGraph, insulinItem: insulinGraph, stepsItem: stepsGraph})
 
     } catch(err) {
         // error detected, renders patient error page
@@ -298,7 +356,20 @@ const getClinicianPatient = async (req, res, next) => {
 
 }
 
+/** 
+// Middleware to compare full dates (date, month, year)
+// Returns boolean to see if date of inputted data is same as today's date
+const compareDates = (patientDate)=> {
 
+    patientDate = melbDate.formatToParts(patientDate); // convert from UTC -> Melb
+
+    const sameDate = patientDate[2].value == todaysDate[2].value // check for same day
+    const sameMonth = patientDate[4].value == todaysDate[4].value // check for same month
+    const sameYear = patientDate[6].value == todaysDate[6].value // check for same year
+
+    return ( (sameDate) && (sameMonth) && (sameYear) )
+}
+*/
 
 // render patient notes for clinician
 const getClinicianPatientNotes = async (req, res, next) => {
@@ -326,11 +397,22 @@ const getClinicianPatientNotesInput = async (req, res, next) => {
     const patient = await Patient.findById(patientID).lean()
 
     // redirects back to clinician home page
-    return res.render('clinicianNotesInput', { clinicianItem: req.user.toJSON(), patientItem: patient, date: todaysDate})
+    return res.render('clinicianNotesInput', { clinicianItem: req.user.toJSON(), patientItem: patient, date: todaysDate, flash: req.flash('errors')})
 }
 
-// render patient notes input for clinician
+// posts patient notes input for clinician
+// checks if inputs are valid
 const postClinicianPatientNotesInput = async (req, res, next) => {
+
+    // checks if input is valid
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        const errorsFound = validationResult(req).array()
+        // console.log(errorsFound)
+        req.flash('errors', errorsFound);
+        return res.redirect('/clinician/clinicianNotesPatientInput')
+        // return res.send(errors) // if validation errors, do not process data
+    }
     
     var patientID = req.user.select_patients
     const patient = await Patient.findById(patientID).lean()
@@ -369,11 +451,22 @@ const getClinicianPatientSupport = async (req, res, next) => {
         return res.redirect('/clinician/404')
     }
 
-    return res.render('clinicianSupportPatient', { clinicianItem: req.user.toJSON(), patientItem: patient, messageItem: message})
+    return res.render('clinicianSupportPatient', { clinicianItem: req.user.toJSON(), patientItem: patient, messageItem: message, flash: req.flash('errors')})
 }
 
 // post support message for clinician
+// checks if input is valid
 const postClinicianPatientSupport = async (req, res, next) => {
+
+    // checks if input is valid
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        const errorsFound = validationResult(req).array()
+        // console.log(errorsFound)
+        req.flash('errors', errorsFound);
+        return res.redirect('/clinician/clinicianSupportPatient')
+        // return res.send(errors) // if validation errors, do not process data
+    }
 
     var patientID = req.user.select_patients
     const patient = await Patient.findById(patientID).lean()
@@ -413,11 +506,21 @@ const getClinicianPatientThresholdInput = async (req, res, next) => {
         return res.redirect('/clinician/404')
     }
 
-    return res.render('clinicianThresholdPatient', { clinicianItem: req.user.toJSON(), patientItem: patient, thresholdItem: threshold})
+    return res.render('clinicianThresholdPatient', { clinicianItem: req.user.toJSON(), patientItem: patient, thresholdItem: threshold, flash: req.flash('errors')})
 }
 
-// post support message for clinician
+// post threshold data for patient set by clinician
 const postClinicianPatientThresholdInput = async (req, res, next) => {
+
+    // checks if input is valid
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        const errorsFound = validationResult(req).array()
+        // console.log(errorsFound)
+        req.flash('errors', errorsFound);
+        return res.redirect('/clinician/clinicianThresholdPatient')
+        // return res.send(errors) // if validation errors, do not process data
+    }
 
     var patientID = req.user.select_patients
     const patient = await Patient.findById(patientID).lean()
@@ -457,11 +560,6 @@ const postClinicianPatientThresholdInput = async (req, res, next) => {
         const insulin_th = new Threshold({type: "insulin", high: req.body.insulin_high, low: req.body.insulin_low, th_required: false});
         thresh_list.push(insulin_th)
     }
-
-
-    //thresh_list = [glucose_th, steps_th, weight_th, insulin_th]
-    // change order of this later, steps will be last
-    //console.log(thresh_list)
 
     // clinician updates patient threshold
     // pushes this thresh_list into the patient in mongoDB

@@ -1,11 +1,14 @@
 {{!< main}}
-
 <!-- Navigation bar at top of webpage -->
 <div class="navbar">
     <div class="dropdown">
         <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}} <img src="/chevron-down.png"></button>
         <div class="dropdown-content">
             <a href="/clinician/patientComments">Patient comments</a>
+            <a href="/about-diabetes">About Diabetes</a>
+            <a href="/about-dextrack">About DexTrack</a>
+            <a href="/clinician/change-password">Update password</a>
+
             <form action="/clinician/logout" method="POST">
                 <button id="sign-out">Sign out</button>
             </form>
@@ -13,7 +16,7 @@
     </div>
     <div class="icons">
         <a href="/clinician/dashboard"><img src="/house-solid.svg" id="icon" class="change-color"></a>
-        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
+        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color nightmode"></a>
         <a><img src="/Line.png" id="nav-line"></a>
         <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
     </div>
@@ -27,20 +30,20 @@
 
 <div class="sections">
     {{#with thresholdItem}}
-        <form action="/clinician/clinicianThresholdPatient" method="POST">
+        <form action="/clinician/clinicianThresholdPatient" method="POST" name="form">
         
             <!-- Each section corresponds to each segment of the patient information in the webpage -->
             <section class="segment" id="threshold-form">
                 <div class="threshold">
-                    <h4 id="glucose_text">Blood glucose level</h4>
+                    <h4 id="glucose_text">Glucose level (mmol/L)</h4>
                     <div class="container" id="glucose">
                         <div class="upper">
                             <label for="upper">Upper bound</label>
-                            <input type="text" placeholder=" mol/L" name="glucose_high" value='{{this.[0].high}}'/>
+                            <input type="text" placeholder=" mmol/L" name="glucose_high" value='{{this.[0].high}}'/>
                         </div>
                         <div class="lower">
                             <label for="lower">Lower bound</label>
-                            <input type="text" placeholder=" mol/L" name="glucose_low" value='{{this.[0].low}}'/>
+                            <input type="text" placeholder=" mmol/L" name="glucose_low" value='{{this.[0].low}}'/>
                         </div>
                         <div class="required">
                             <label for="required"><span class="attribute">Set as required</span></label>
@@ -49,7 +52,7 @@
                     </div>
                 </div>
                 <div class="threshold">
-                    <h4 id="weight_text">Weight</h4>
+                    <h4 id="weight_text">Weight (kg)</h4>
                     <div class="container" id="weight">
                         <div class="upper">
                             <label for="upper">Upper bound</label> 
@@ -66,7 +69,7 @@
                     </div>
                 </div>
                 <div class="threshold">
-                    <h4 id="insulin_text">Dose of insulin</h4>
+                    <h4 id="insulin_text">Dose of insulin (dose)</h4>
                     <div class="container" id="insulin">
                         <div class="upper">
                             <label for="upper">Upper bound</label>
@@ -83,7 +86,7 @@
                     </div>
                 </div>
                 <div class="threshold">
-                    <h4 id="exercise_text">Exercise</h4>
+                    <h4 id="exercise_text">Exercise (steps)</h4>
                     <div class="container" id="exercise">
                         <div class="upper">
                             <label for="upper">Upper bound</label>
@@ -99,14 +102,15 @@
                         </div>
                     </div>
                 </div>
+                <input id="notes" type="hidden" value="done"/>
                 <input type="hidden" type="submit">
                     <button class="orange-button" onclick="openPopup()">Save</button>
                 </input>
                 <div class="popup-bg" id="popup-bg">
                     <div class="popup" id="popup">
-                        <img src="/tick.png">
-                        <h3>Saved!</h3>
-                        <p>New thresholds have been successfully saved.</p>
+                        <img src="/Loading-dots.gif">
+                        <h3>Processing...</h3>
+                        <p>Press the button to begin data review.</p>
                         <button class="orange-button" id="ok-button" onclick="closePopup()">OK</button>
                     </div>
                 </div>
@@ -115,3 +119,6 @@
     {{/with}}
 </div>
 
+{{#each flash}}
+<p class="alert">{{this.msg}}</p>
+{{/each}}

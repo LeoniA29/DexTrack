@@ -65,13 +65,34 @@ clinicianRouter.post('/clinicianViewPatient', isAuthenticated, hasRole('clinicia
 
 clinicianRouter.get('/clinicianNotesPatient', isAuthenticated, hasRole('clinician'), clinicianController.getClinicianPatientNotes)
 clinicianRouter.get('/clinicianNotesPatientInput', isAuthenticated, hasRole('clinician'), clinicianController.getClinicianPatientNotesInput)
-clinicianRouter.post('/clinicianNotesPatientInput', isAuthenticated, hasRole('clinician'), clinicianController.postClinicianPatientNotesInput)
+clinicianRouter.post('/clinicianNotesPatientInput', isAuthenticated, hasRole('clinician'), 
+
+    body('note', 'Note cannot exceed 10000 characters').isLength({max: 10000}).blacklist('$<>&{}'), // notes can't exceed 10000 characters
+
+    clinicianController.postClinicianPatientNotesInput)
 
 clinicianRouter.get('/clinicianSupportPatient', isAuthenticated, hasRole('clinician'), clinicianController.getClinicianPatientSupport)
-clinicianRouter.post('/clinicianSupportPatient', isAuthenticated, hasRole('clinician'), clinicianController.postClinicianPatientSupport)
+clinicianRouter.post('/clinicianSupportPatient', isAuthenticated, hasRole('clinician'), 
+
+    body('message', 'Message cannot exceed 250 characters').isLength({max: 250}).blacklist('$<>&{}'), // notes can't exceed 10000 characters
+
+    clinicianController.postClinicianPatientSupport)
+
+
 
 clinicianRouter.get('/clinicianThresholdPatient', isAuthenticated, hasRole('clinician'), clinicianController.getClinicianPatientThresholdInput)
-clinicianRouter.post('/clinicianThresholdPatient', isAuthenticated, hasRole('clinician'), clinicianController.postClinicianPatientThresholdInput)
+clinicianRouter.post('/clinicianThresholdPatient', isAuthenticated, hasRole('clinician'), 
+    
+    body('glucose_high', 'invalid glucose threshold entered').isFloat({min: 0, max: 1000}).escape().optional({ nullable: true, checkFalsy: true }), // threshold data must be numeric, 
+    body('glucose_low', 'invalid glucose threshold entered').isFloat({min: 0, max: 1000}).escape().optional({ nullable: true, checkFalsy: true }), //not negative and not too large, can be null too as default
+    body('weight_high', 'invalid weight threshold entered').isFloat({min: 0, max: 1000}).escape().optional({ nullable: true, checkFalsy: true }), 
+    body('weight_low', 'invalid weight threshold entered').isFloat({min: 0, max: 1000}).escape().optional({ nullable: true, checkFalsy: true }), 
+    body('insulin_high', 'invalid insulin threshold entered').isFloat({min: 0, max: 1000}).escape().optional({ nullable: true, checkFalsy: true }), 
+    body('insulin_low', 'invalid insulin threshold entered').isFloat({min: 0, max: 1000}).escape().optional({ nullable: true, checkFalsy: true }), 
+    body('steps_high', 'invalid exercise threshold entered').isFloat({min: 0, max: 100000}).escape().optional({ nullable: true, checkFalsy: true }), 
+    body('steps_low', 'invalid exercise threshold entered').isFloat({min: 0, max: 100000}).escape().optional({ nullable: true, checkFalsy: true }), 
+
+    clinicianController.postClinicianPatientThresholdInput)
 
 clinicianRouter.get('/404', isAuthenticated, hasRole('clinician'), clinicianController.getErrorPage)
 

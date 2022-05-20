@@ -5,6 +5,10 @@
         <button class="dropbtn">Dr. {{clinicianItem.first_name}} {{clinicianItem.last_name}} <img src="/chevron-down.png"></button>
         <div class="dropdown-content">
             <a href="/clinician/patientComments">Patient comments</a>
+            <a href="/about-diabetes">About Diabetes</a>
+            <a href="/about-dextrack">About DexTrack</a>
+            <a href="/clinician/change-password">Update password</a>
+
             <form action="/clinician/logout" method="POST">
                 <button id="sign-out">Sign out</button>
             </form>
@@ -12,7 +16,7 @@
     </div>
     <div class="icons">
         <a href="/clinician/dashboard"><img src="/house-solid.svg" id="icon" class="change-color"></a>
-        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color"></a>
+        <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="icon" class="change-color nightmode"></a>
         <a><img src="/Line.png" id="nav-line"></a>
         <a><img src="/circle-user-regular.svg" id="icon" class="change-color"></a>
     </div>
@@ -36,18 +40,16 @@
                 {{#with (showDate this.dob)}}
                     <div><span class="attribute">Date of birth</span><br><strong>{{this.[2].value}} {{this.[4].value}} {{this.[6].value}}</strong></div>
                 {{/with}}
-                <!--<div><span class="attribute"><br>Insurance</span><br><strong>{{this.insurance}}</strong></div>-->
+                <div><span class="attribute"><br>Address</span><br><strong>{{this.address}}</strong></div>
             </div>
             <div class="col">
-                <div><span class="attribute">Registered on</span><br><strong>do not forget{{this.regisDate}}</strong></div>
-                <div><span class="attribute"><br>Address</span><br><strong>{{this.address}} dfwfhjwf wefihukf wjehbdajsbd edjkwbfkjwbqf wjfhbwjkf</strong></div>
-            </div>
-            <div class="col">
-                <div><span class="attribute">Phone number</span><br><strong>{{this.phone}}</strong></div>
+                {{#with (showDate this.registered_date)}}
+                    <div><span class="attribute">Registered on</span><br><strong>{{this.[2].value}} {{this.[4].value}} {{this.[6].value}}</strong></div>
+                {{/with}}
                 <div><span class="attribute"><br>Postcode</span><br><strong>{{this.postcode}}</strong></div>
             </div>
             <div class="col">
-                <!--<div><span class="attribute">Marital state</span><br><strong>{{this.marital}}</strong></div>-->
+                <div><span class="attribute">Phone number</span><br><strong>{{this.phone}}</strong></div>
                 <div><span class="attribute"><br>Email</span><br><strong>{{this.email}}</strong></div>
             </div>
         </section>
@@ -89,9 +91,9 @@
 
                                 <div class="data" id="overflow">
                                     {{#if (checkThreshLog @root.thresholdItem this.[1] "glucose")}}
-                                        <span class="attribute">Blood glucose level</span><br><strong id="threshold-check">{{this.[1]}} nmol/L</strong>
+                                        <span class="attribute">Blood glucose level</span><br><strong id="threshold-check">{{this.[1]}} mmol/L</strong>
                                     {{else}}
-                                        <span class="attribute">Blood glucose level</span><br><strong>{{this.[1]}} nmol/L</strong>
+                                        <span class="attribute">Blood glucose level</span><br><strong>{{this.[1]}} mmol/L</strong>
                                     {{/if}}
                                 </div>
 
@@ -273,18 +275,33 @@
 {{/with}}
 
     <section class="segment" id="graphs">
+        <h3>Charts</h3>
         <div class="row">
             <div class="card" id="glucose">
+                <figure class="highcharts-figure">
+                    <div id="container1"></div>
+                </figure>
             </div>
             <div class="card" id="right-weight">
+                <figure class="highcharts-figure">
+                    <div id="container2"></div>
+                </figure>
             </div>
         </div>
         <div class="row">
-            <div class="card" id="exercise">
+            <div class="card" id="insulin">
+                <figure class="highcharts-figure">
+                    <div id="container3"></div>
+                </figure>
             </div>
-            <div class="card" id="right-insulin">
+            <div class="card" id="right-exercise">
+                <figure class="highcharts-figure">
+                    <div id="container4"></div>
+                </figure>
             </div>
         </div>
     </section >
 
  </div>
+
+

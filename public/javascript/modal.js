@@ -14,11 +14,9 @@ function required() {
 }
 
 function openPopup() {  
-    if (required()) {
     popup.classList.add("open-popup");
     bg.classList.add("bg-active");
     event.preventDefault();
-    }
 
 }
 
