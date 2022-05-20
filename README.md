@@ -65,7 +65,7 @@ Languages in this project:
 * Handlebars
 * CSS
 * JS
-- 
+
 
 Fonts:
 * Lexend Deca from Google Fonts
