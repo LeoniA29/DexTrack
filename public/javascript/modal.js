@@ -5,7 +5,6 @@ function required() {
     var empt = document.querySelector("form[name='form']>textarea.req-fill").value;
 
     if (empt == "") {
-        alert("Please input a Value");
         return false;
     }
     else {

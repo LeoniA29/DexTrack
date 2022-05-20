@@ -10,7 +10,6 @@ function required() {
 
 
     if ((fname == "")||(lname == "")||(email == "")||(email == "")||(dob == "")||(phone == "")||(occup == "")||(address == "")||(postcode == "")) {
-        alert("Please input a Value");
         return false;
     } else {
         return true;
