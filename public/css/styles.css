@@ -54,6 +54,7 @@ body {
     padding: 0;
     width: 100%;
     background-color: var(--bg-color);
+    transition: 0.3s;
 }
 
 .navbar {
@@ -133,6 +134,7 @@ button.entry:active {
     height: 660px;
     border-radius: 36px;
     border: 0px;
+    overflow: hidden;
 }
 
 .segment h3 {
@@ -161,6 +163,7 @@ button.entry:active {
 .accordion img {
     height: 30px;
     float: right;
+    position: relative;
 }
 
 .panel {
@@ -263,6 +266,7 @@ button {
     border-radius: 22px;
     font-size: 16px;
     text-decoration: underline;
+    overflow: hidden;
 }
 
 #clinician-notes.view {
@@ -550,6 +554,7 @@ span.attribute {
     margin-right: 20px;
     margin-bottom: 20px;
     padding-right: 50px;
+    overflow: auto;
 }
 
 
@@ -575,7 +580,8 @@ span.attribute {
     float: left;
     margin-right: 60px;
     width: 49%;
-    height: 50px;
+    height: fit-content;
+    overflow: auto;
 }
 
 #right-weight.card {
@@ -584,10 +590,20 @@ span.attribute {
     border-color: #6F62D0;
 }
 
-#right-insulin.card {
+#right-exercise.card {
     margin-right: 0px;
     float: right;
-    border-color: #FF9D47
+    border-color: #55B48B;
+}
+
+.highcharts-figure {
+  min-width: 360px;
+  max-width: 800px;
+  margin: 1em auto;
+}
+
+#container1, #container2, #container3, #container4 {
+    border-radius: 20px;
 }
 
 
@@ -603,6 +619,7 @@ span.attribute {
     width: 25%;
     margin-bottom: 30px;
     font-size: 18px;
+    overflow: auto;
 }
 
 .threshold h4 {
@@ -619,6 +636,7 @@ span.attribute {
     border-radius: 30px;
     margin-right: 20px;
     font-size: 22px;
+    overflow: auto;
 }
 
 #exercise.container {
