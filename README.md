@@ -43,8 +43,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#contribors">Contributors</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -155,11 +154,11 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Aaron Johannes - ajohannes@student.unimelb.edu.au
-Khadiza Refry - khadizarefry@gmail.com
-Leoni Angela - leoniangelaaa29@gmail.com
-Nadya Aurelia Herryyanto - nadyaaureliah@gmail.com
-Vincent Kurniawan - vincent.k.782@gmail.com
+- Aaron Johannes - ajohannes@student.unimelb.edu.au
+- Khadiza Refry - khadizarefry@gmail.com
+- Leoni Angela - leoniangelaaa29@gmail.com
+- Nadya Aurelia Herryyanto - nadyaaureliah@gmail.com
+- Vincent Kurniawan - vincent.k.782@gmail.com
 
 Project Link: [https://github.com/LeoniA29/Dextrack](https://github.com/LeoniA29/Dextrack)
 
