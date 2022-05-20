@@ -199,11 +199,18 @@
                         <span class="attribute">Upper bound</span><br><strong>Not set</strong>
                     {{/if}}
                 </div>
-                <div class="lower">
+                <div class="upper">
                     {{#if this.[0].low}}
                         <span class="attribute">Lower bound</span><br><strong>{{this.[0].low}} mol/L</strong>
                     {{else}}
                         <span class="attribute">Lower bound</span><br><strong>Not set</strong>
+                    {{/if}}
+                </div>
+                <div class="lower">
+                    {{#if this.[0].th_required}}
+                        <span class="attribute">Required</span><br><strong>Yes</strong>
+                    {{else}}
+                        <span class="attribute">Required</span><br><strong>No</strong>
                     {{/if}}
                 </div>
             </div>
@@ -220,11 +227,18 @@
 
                     {{/if}}
                 </div>
-                <div class="lower">
+                <div class="upper">
                     {{#if this.[2].low}}
                         <span class="attribute">Lower bound</span><br><strong>{{this.[2].low}} kg</strong>
                     {{else}}
                         <span class="attribute">Lower bound</span><br><strong>Not set</strong>
+                    {{/if}}
+                </div>
+                <div class="lower">
+                    {{#if this.[2].th_required}}
+                        <span class="attribute">Required</span><br><strong>Yes</strong>
+                    {{else}}
+                        <span class="attribute">Required</span><br><strong>No</strong>
                     {{/if}}
                 </div>
             </div>
@@ -240,11 +254,18 @@
                         <span class="attribute">Upper bound</span><br><strong>Not set</strong>
                     {{/if}}
                 </div>
-                <div class="lower">
+                <div class="upper">
                     {{#if this.[3].low}}
                         <span class="attribute">Lower bound</span><br><strong>{{this.[3].low}} dose</strong>
                     {{else}}
                         <span class="attribute">Lower bound</span><br><strong>Not set</strong>
+                    {{/if}}
+                </div>
+                <div class="lower">
+                    {{#if this.[3].th_required}}
+                        <span class="attribute">Required</span><br><strong>Yes</strong>
+                    {{else}}
+                        <span class="attribute">Required</span><br><strong>No</strong>
                     {{/if}}
                 </div>
             </div>
@@ -260,11 +281,18 @@
                         <span class="attribute">Upper bound</span><br><strong>Not set</strong>
                     {{/if}}
                 </div>
-                <div class="lower">
+                <div class="upper">
                     {{#if this.[1].low}}
                         <span class="attribute">Lower bound</span><br><strong>{{this.[1].low}} steps</strong>
                     {{else}}
                         <span class="attribute">Lower bound</span><br><strong>Not set</strong>
+                    {{/if}}
+                </div>
+                <div class="lower">
+                    {{#if this.[1].th_required}}
+                        <span class="attribute">Required</span><br><strong>Yes</strong>
+                    {{else}}
+                        <span class="attribute">Required</span><br><strong>No</strong>
                     {{/if}}
                 </div>
             </div>
@@ -275,7 +303,7 @@
 {{/with}}
 
     <section class="segment" id="graphs" >
-        <h3>Charts</h3>
+        <h3><br>Charts</h3>
         <div class="row">
             <div onmouseover="loadGraphGlucose()" class="card" id="glucose">
                 <figure class="highcharts-figure">
