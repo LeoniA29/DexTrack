@@ -1035,3 +1035,38 @@ footer h6 {
     font-size: 15px;
     font-weight: 400;
 }
+
+/* alert flash */
+
+.alert {
+    padding: 5px 5px 5px 5px;
+    color:#E4EFFE;
+    width: 300px;
+    height: fit-content;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 15px;
+    position: absolute;
+    left: 50%;
+    top: 15%;
+    transform: translate(-50%, -50%);
+}
+
+.alertBox{
+    background-color: #8b0000;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 3, 0.2);
+    margin: 10px 0px;
+    padding: 8px 5px;
+}
+
+.alertBox li{
+    color: white;
+}
+
+@media (max-width: 375px) {
+    .alert {
+        font-size: 14px;
+        width: 220px;
+    }
+}

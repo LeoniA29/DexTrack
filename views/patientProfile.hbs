@@ -45,15 +45,15 @@
             </h2>
             <h2 class="updateShortBioText">Update Short Bio</h2>
             <form method="POST" name="form">
-                <textarea type="text" id="shortBio" placeholder="Update bio..." class="testBio req-fill" name="short_bio" required></textarea>
+                <textarea type="text" id="shortBio" placeholder="Update bio..." class="req-fill" name="short_bio" required></textarea>
                 <input type="submit" id="saveButton" value="Click to Save!" onclick="openPopup()"></input>
                 <div class="popup-bg" id="popup-bg">
                     <div class="popup" id="popup">
-                        <img src="/tick.png">
-                        <h3>Updated!</h3>
-                        <p>Your bio has been successfully updated.</p>
-                        <button class="orange-button" id="ok-button" onclick="closePopup()">OK</button>
-                    </div>
+                    <img src="/Loading-dots.gif">
+                    <h3>Processing...</h3>
+                    <p>Press the button to begin data review.</p>
+                    <button class="orange-button" id="ok-button" onclick="closePopup()">Review</button>
+                </div>
                 </div>
             </form>
         </div>
@@ -61,8 +61,11 @@
    
 {{/with}}
 
-{{#each flash}}
-<p class="alert">{{this.msg}}</p>
-{{/each}}
-
+<div class="alert">
+    {{#each flash}}
+        <div class="alertBox">
+            <li>{{this.msg}}</li>
+        </div>
+    {{/each}}
+</div>
  

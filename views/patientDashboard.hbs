@@ -1,6 +1,11 @@
 {{!< patientLayout}}
-{{!  }}
-{{! displays today's date information and patient's first name }}
+
+<!-- Splash screen -->
+<div class="intro">
+    <h1 class="logo-header">
+        <img class="dextrack-logo" src="/dextrack_logo.png">
+    </h1>
+</div>
 
 <div class="dashboardInformation">
     {{! Day, Date, Month, Year }}
@@ -14,8 +19,13 @@
         
         <div class="slides fade" id="engagementSlide">
             <div class="engagementScore">
+                {{#if (getBadge score)}}
                 <img src="/Upper-badge.png" id="badgeImage">
                 <h2 id="engagementScoreValue">{{score}}</h2>
+                {{else}}
+                <img src="/Lower-badge.png" id="badgeImage">
+                <h2 id="engagementScoreValue">{{score}}</h2>
+                {{/if}}
             </div>
 
             <div class="engagementDescription"> 
@@ -49,26 +59,9 @@
         <span class="dot" onclick="currentSlide(2)"></span>
     </div>
 
-
-<!--
-    <h1 id ="welcome">
-        ES: {{score}}
-    </h1>
-    -->
-
     {{#if (getBadge score)}}
         <h2 id="date">Display Badge Here</h2>
     {{/if}}
-
-<!--
-    <h2 id="date">
-        {{#with (checkNote note)}}
-            {{this}}
-        {{/with}}
-        -->
-    </h2>
-</div>
-    
 
 
     <div class="inputContainer">
@@ -129,6 +122,4 @@
         </div>
 
     </div>
-
-
-    
+   

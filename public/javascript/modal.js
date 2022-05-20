@@ -11,6 +11,7 @@ function required() {
     else {
         return true;
     }
+    
 }
 
 function openPopup() {  

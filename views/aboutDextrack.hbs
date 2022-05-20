@@ -6,7 +6,7 @@
         <meta name ="viewport" content="width=device-width, initial-scale=1.0">
         <title>About DexTrack</title>
         <link href='https://fonts.googleapis.com/css?family=Lexend Deca' rel='stylesheet'>
-        <link href="/css/style.css" rel="stylesheet">
+        <link href="/css/stylesStatic.css" rel="stylesheet">
 
     </head>
 
@@ -28,7 +28,9 @@
                         <li class="nav_item">
                             <a href="/about-diabetes" class="nav_link">About Diabetes</a>
                         </li>
-
+                        <li class="nav_item">
+                            <a onclick="toggleDark()"><img src="/circle-half-stroke-solid.svg" id="themeToggle" class="nav_link"></a>
+                        </li>
                         {{#if (isPatient logged role)}}
                             <li class="nav_item">
                                 <a href="/patient/dashboard" class="nav_link"><button>Dashboard</button></a>
@@ -69,7 +71,7 @@
                         <button onClick="scrollReadMore2()">Find Out More</button>
                     </div>
                     <div class="info_vector">
-                        <img src="/vector1.png">
+                        <img id="aboutImage" src="/vector1.png" >
                     </div>
                 </div>
             </section>
@@ -146,4 +148,5 @@
     </body>
     <script src="/javascript/script.js"></script>
     <script src="/javascript/menu.js"></script>
+    <script src="/javascript/theme.js"></script>
 </html>

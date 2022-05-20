@@ -1,7 +1,5 @@
 {{!< patientLayout}}
-{{#each flash}}
-    <p class="alert">{{this.msg}} </p>
-    {{/each}}
+
 {{! displays glucose submission page for a patient}}
 {{#with patient}}
 <div class = "inputDataContainer">
@@ -13,7 +11,7 @@
     <div class ="inputDataItems"> 
 
         <form method="POST" name="form">
-            <h2 id="labelData">Blood Glucose Level (nmol/L)</h2> 
+            <h2 id="labelData">Blood Glucose Level (mmol/L)</h2> 
             <textarea type="text" class = "req-fill" id="inputData" placeholder="Enter glucose level..." name="data_entry" required></textarea>
             <h2 id="labelNotes">Notes</h2>
             <textarea type="text" id="inputNotes" placeholder="Enter comment..." name="data_comment"></textarea>
@@ -22,10 +20,10 @@
             <input type="submit" id="doneButton" value="Click to Submit!" onclick="openPopup()"></input> 
             <div class="popup-bg" id="popup-bg">
                 <div class="popup" id="popup">
-                    <img src="/tick.png">
-                    <h3>Submitted!</h3>
-                    <p>Your glcuose level has been logged!</p>
-                    <button class="orange-button" id="ok-button" onclick="closePopup()">OK</button>
+                    <img src="/Loading-dots.gif">
+                    <h3>Processing...</h3>
+                    <p>Press the button to begin data review.</p>
+                    <button class="orange-button" id="ok-button" onclick="closePopup()">Review</button>
                 </div>
             </div>
         </form>
@@ -35,7 +33,13 @@
 </div>
 {{/with}}
 
-
+<div class="alert">
+    {{#each flash}}
+        <div class="alertBox">
+            <li>{{this.msg}}</li>
+        </div>
+    {{/each}}
+</div>
 
 
 
