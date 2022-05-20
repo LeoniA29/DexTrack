@@ -83,14 +83,14 @@ clinicianRouter.post('/clinicianSupportPatient', isAuthenticated, hasRole('clini
 clinicianRouter.get('/clinicianThresholdPatient', isAuthenticated, hasRole('clinician'), clinicianController.getClinicianPatientThresholdInput)
 clinicianRouter.post('/clinicianThresholdPatient', isAuthenticated, hasRole('clinician'), 
     
-    body('glucose_high', 'invalid glucose threshold entered').isFloat({min: 0, max: 1000}).escape().optional({ nullable: true, checkFalsy: true }), // threshold data must be numeric, 
-    body('glucose_low', 'invalid glucose threshold entered').isFloat({min: 0, max: 1000}).escape().optional({ nullable: true, checkFalsy: true }), //not negative and not too large, can be null too as default
-    body('weight_high', 'invalid weight threshold entered').isFloat({min: 0, max: 1000}).escape().optional({ nullable: true, checkFalsy: true }), 
-    body('weight_low', 'invalid weight threshold entered').isFloat({min: 0, max: 1000}).escape().optional({ nullable: true, checkFalsy: true }), 
-    body('insulin_high', 'invalid insulin threshold entered').isFloat({min: 0, max: 1000}).escape().optional({ nullable: true, checkFalsy: true }), 
-    body('insulin_low', 'invalid insulin threshold entered').isFloat({min: 0, max: 1000}).escape().optional({ nullable: true, checkFalsy: true }), 
-    body('steps_high', 'invalid exercise threshold entered').isFloat({min: 0, max: 100000}).escape().optional({ nullable: true, checkFalsy: true }), 
-    body('steps_low', 'invalid exercise threshold entered').isFloat({min: 0, max: 100000}).escape().optional({ nullable: true, checkFalsy: true }), 
+    body('glucose_high', 'invalid glucose high threshold entered').isFloat({min: 0, max: 1000}).escape().optional({ nullable: true, checkFalsy: true }), // threshold data must be numeric, 
+    body('glucose_low', 'invalid glucose low threshold entered').isFloat({min: 0, max: 1000}).escape().optional({ nullable: true, checkFalsy: true }), //not negative and not too large, can be null too as default
+    body('weight_high', 'invalid weight high threshold entered').isFloat({min: 0, max: 1000}).escape().optional({ nullable: true, checkFalsy: true }), 
+    body('weight_low', 'invalid weight low threshold entered').isFloat({min: 0, max: 1000}).escape().optional({ nullable: true, checkFalsy: true }), 
+    body('insulin_high', 'invalid insulin high threshold entered').isFloat({min: 0, max: 1000}).escape().optional({ nullable: true, checkFalsy: true }), 
+    body('insulin_low', 'invalid insulin low threshold entered').isFloat({min: 0, max: 1000}).escape().optional({ nullable: true, checkFalsy: true }), 
+    body('steps_high', 'invalid exercise high threshold entered').isFloat({min: 0, max: 100000}).escape().optional({ nullable: true, checkFalsy: true }), 
+    body('steps_low', 'invalid exercise low threshold entered').isFloat({min: 0, max: 100000}).escape().optional({ nullable: true, checkFalsy: true }), 
 
     clinicianController.postClinicianPatientThresholdInput)
 
