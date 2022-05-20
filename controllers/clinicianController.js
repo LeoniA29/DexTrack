@@ -271,83 +271,14 @@ const getClinicianPatient = async (req, res, next) => {
 
     try {
         const sortedInputs = []
-        const graphInputs = []
-        const glucoseGraph = []
-        const weightGraph = []
-        const insulinGraph = []
-        const stepsGraph = []
 
         const inputs = patient.input_data
         // sort inputs in descending order according to date
         for (var i = inputs.length - 1; i>=0; i--){
             sortedInputs.push(inputs[i])
-
-            if (inputs.length >= 7) {
-                //console.log(inputs.length)
-                if ((inputs.length-7) <= i) {
-
-                    date = formatter.formatToParts(inputs[i].set_date)
-                    dataDate = date[4].value.toString() + " " + date[2].value.toString()
-                    //console.log(dataDate)
- 
-                    if (inputs[i].glucose_data) {
-                    
-                        glucoseGraph.push([dataDate, inputs[i].glucose_data.data_entry])
-                    } else {
-                        glucoseGraph.push([dataDate, inputs[i].glucose_data])
-                    }
-
-                    if (inputs[i].weight_data) {
-                        weightGraph.push([dataDate, inputs[i].weight_data.data_entry])
-                    } else {
-                        weightGraph.push([dataDate, inputs[i].weight_data])
-                    }
-
-                    if (inputs[i].insulin_data) {
-                        insulinGraph.push([dataDate, inputs[i].insulin_data.data_entry])
-                    } else {
-                        insulinGraph.push([dataDate, inputs[i].insulin_data])
-                    }
-
-                    if (inputs[i].steps_data) {
-                        stepsGraph.push([dataDate, inputs[i].steps_data.data_entry])
-                    } else {
-                        stepsGraph.push([dataDate, inputs[i].steps_data])
-                    }
-
-                }
-
-            } else {
-
-                if (inputs[i].glucose_data) {
-                    
-                    glucoseGraph.push([dataDate, inputs[i].glucose_data.data_entry])
-                } else {
-                    glucoseGraph.push([dataDate, inputs[i].glucose_data])
-                }
-
-                if (inputs[i].weight_data) {
-                    weightGraph.push([dataDate, inputs[i].weight_data.data_entry])
-                } else {
-                    weightGraph.push([dataDate, inputs[i].weight_data])
-                }
-
-                if (inputs[i].insulin_data) {
-                    insulinGraph.push([dataDate, inputs[i].insulin_data.data_entry])
-                } else {
-                    insulinGraph.push([dataDate, inputs[i].insulin_data])
-                }
-
-                if (inputs[i].steps_data) {
-                    stepsGraph.push([dataDate, inputs[i].steps_data.data_entry])
-                } else {
-                    stepsGraph.push([dataDate, inputs[i].steps_data])
-                }
-            }
         }
-        //console.log(stepsGraph)
 
-        return res.render('clinicianViewPatient', { clinicianItem: req.user.toJSON(), patientItem: patient, thresholdItem: threshold, dataItem: sortedInputs, glucoseItem: glucoseGraph, weightItem: weightGraph, insulinItem: insulinGraph, stepsItem: stepsGraph})
+        return res.render('clinicianViewPatient', { clinicianItem: req.user.toJSON(), patientItem: patient, thresholdItem: threshold, dataItem: sortedInputs})
 
     } catch(err) {
         // error detected, renders patient error page
