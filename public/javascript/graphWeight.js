@@ -1,3 +1,12 @@
+function onHoverWeight(element) {
+
+  if (element.alreadyHovered == null) {
+
+    loadGraphWeight();
+    element.alreadyHovered = true;
+  }
+}
+
 async function getDataWeight() {
 
   const data = await fetch('https://dextrack.herokuapp.com/clinician/getWeightData');

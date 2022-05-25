@@ -1,3 +1,12 @@
+function onHoverInsulin(element) {
+
+  if (element.alreadyHovered == null) {
+
+    loadGraphInsulin();
+    element.alreadyHovered = true;
+  }
+}
+
 async function getDataInsulin() {
 
   const data = await fetch('https://dextrack.herokuapp.com/clinician/getInsulinData');

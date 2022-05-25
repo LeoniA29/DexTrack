@@ -1,3 +1,12 @@
+function onHoverExercise(element) {
+
+  if (element.alreadyHovered == null) {
+
+    loadGraphExercise();
+    element.alreadyHovered = true;
+  }
+}
+
 async function getDataExercise() {
 
   const data = await fetch('https://dextrack.herokuapp.com/clinician/getStepsData');

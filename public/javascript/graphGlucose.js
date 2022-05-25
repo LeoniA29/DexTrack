@@ -1,3 +1,12 @@
+function onHoverGlucose(element) {
+
+  if (element.alreadyHovered == null) {
+
+    loadGraphGlucose();
+    element.alreadyHovered = true;
+  }
+}
+
 async function getDataGlucose() {
 
   const data = await fetch('https://dextrack.herokuapp.com/clinician/getGlucoseData');
