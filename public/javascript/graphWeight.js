@@ -1,6 +1,6 @@
 async function getDataWeight() {
 
-  const data = await fetch('http://localhost:3000/clinician/getWeightData');
+  const data = await fetch('https://dextrack.herokuapp.com/clinician/getWeightData');
   return data.json();
 }
 

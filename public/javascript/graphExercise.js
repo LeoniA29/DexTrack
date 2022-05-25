@@ -1,6 +1,6 @@
 async function getDataExercise() {
 
-  const data = await fetch('http://localhost:3000/clinician/getStepsData');
+  const data = await fetch('https://dextrack.herokuapp.com/clinician/getStepsData');
   return data.json();
 }
 async function loadGraphExercise() {

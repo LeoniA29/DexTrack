@@ -1,6 +1,6 @@
 async function getDataInsulin() {
 
-  const data = await fetch('http://localhost:3000/clinician/getInsulinData');
+  const data = await fetch('https://dextrack.herokuapp.com/clinician/getInsulinData');
   return data.json();
 }
 

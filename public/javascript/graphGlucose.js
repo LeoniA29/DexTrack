@@ -1,6 +1,6 @@
 async function getDataGlucose() {
 
-  const data = await fetch('http://localhost:3000/clinician/getGlucoseData');
+  const data = await fetch('https://dextrack.herokuapp.com/clinician/getGlucoseData');
   return data.json();
 }
 
